@@ -68,5 +68,41 @@
 		<servlet-name>memberPage</servlet-name>
 		<url-pattern>*.me</url-pattern>
 	</servlet-mapping>
+	
+	<!-- 후원꺼 -->
+	
+	<servlet>
+		<servlet-name>supportPage</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/support-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>supportPage</servlet-name>
+		<url-pattern>*.su</url-pattern>
+	</servlet-mapping>
+	
+	
+	<!-- 후원꺼 -->
+	
+	<servlet>
+		<servlet-name>boardPage</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param>
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/spring/appServlet/board-context.xml</param-value>
+		</init-param>
+		<load-on-startup>1</load-on-startup>
+	</servlet>
+		
+	<servlet-mapping>
+		<servlet-name>boardPage</servlet-name>
+		<url-pattern>*.bo</url-pattern>
+	</servlet-mapping>
+	
 
 </web-app>

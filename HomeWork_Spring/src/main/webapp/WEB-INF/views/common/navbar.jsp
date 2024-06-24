@@ -71,7 +71,7 @@
                 </div>
             </div>
             <div id="navbar">
-                <a href="${contextPath}/surpport.do">후원하기</a>
+                <a href="${contextPath}/surpport.su">후원하기</a>
                 <a href="${contextPath}/loginView.me">Login</a>
                 <a href="${contextPath}/signUp.me">회원가입</a>
                 <a href="${contextPath}/myPage.me">마이 페이지</a>
@@ -82,7 +82,7 @@
 		<div id="navbar">
 	    	<div class="logo"></div>
         	<div class="nav-links">
-	              <a href="${contextPath}/surpport.do">후원하기</a>
+	              <a href="${contextPath}/surpport.su">후원하기</a>
 	              <b>${loginUser.empName}님, 반갑습니다.</b>
 	              <a href="${contextPath}/myPage.me">마이 페이지</a>
 	              <a href="${contextPath}/logout.me">로그아웃</a>

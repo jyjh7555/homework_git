@@ -46,7 +46,7 @@
 <body >
 	
 
-A
+
 	<div id=topAndNavbar>
  		<div id="navbar-section2" onmouseover="changeBackground()" onmouseout="resetBackground()">
 	        <jsp:include page="../common/navbar.jsp" />
