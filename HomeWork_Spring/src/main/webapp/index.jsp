@@ -314,7 +314,7 @@
  		<div id="fixedBtn">
  			<jsp:include page="WEB-INF/views/common/fixedBtn.jsp"/>
  		</div>
- 		<p>hihi</p>
+ 		
  		
  		
  		
