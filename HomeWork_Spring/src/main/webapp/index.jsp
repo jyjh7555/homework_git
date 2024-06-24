@@ -311,6 +311,9 @@
         <div id="footer">
  			<jsp:include page="WEB-INF/views/common/footer.jsp"/>
  		</div>	
+ 		<div id="fixedBtn">
+ 			<jsp:include page="WEB-INF/views/common/fixedBtn.jsp"/>
+ 		</div>
  		
  		
  		
