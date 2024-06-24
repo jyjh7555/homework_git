@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE configuration PUBLIC "-//mybatis.org//DTD Config 3.0//EN" "http://mybatis.org/dtd/mybatis-3-config.dtd" >
+
+
+<configuration>
+	
+	
+	<settings>			<!-- 카멜케이스 셋팅 널 셋팅-->
+		<setting name="mapUnderscoreToCamelCase" value="true"/>
+		<setting name="jdbcTypeForNull" value="NULL"/>
+	</settings>
+
+	<typeAliases>
+		<typeAlias type="com.kh.homeWork.member.model.vo.Member" alias="Member"/>
+	</typeAliases>
+
+	<mappers>
+		<mapper resource="mappers/member-mapper.xml"></mapper>
+	</mappers>
+</configuration>

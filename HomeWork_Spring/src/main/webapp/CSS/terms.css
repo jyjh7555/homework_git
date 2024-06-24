@@ -1,0 +1,44 @@
+@charset "UTF-8";
+body {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+}
+
+/* 팝업 창 */
+.popup {
+	display: inline;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.8); 
+    padding: 24px; 
+    max-width: 400px; 
+    width: 100%; 
+}
+
+/* 팝업 헤더*/
+.popup-header {
+    display: flex;
+    align-items: center; 
+    padding-bottom: 12px; 
+    margin-bottom: 16px;
+}
+
+/* 팝업 제목*/
+.popup-title {
+    font-size: 18px; 
+    font-weight: bold; 
+}
+
+/* 팝업 내용 */
+.popup-content {
+    color: black; 
+    font-size: 14px; 
+    line-height: 1.5;
+}
+
+/* 팝업 버튼*/
+.popup-button {
+    background-color: skyblue;
+    color: white; 
+    padding: 8px 16px; 
+}
