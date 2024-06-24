@@ -312,9 +312,7 @@
  			<jsp:include page="WEB-INF/views/common/footer.jsp"/>
  		</div>	
  		
- 		<div id="heart-icon">
- 			<jsp:include page="WEB-INF/views/common/fixedBtn.jsp"/>
- 		</div>
+ 		
  		
         	
 	</div>
