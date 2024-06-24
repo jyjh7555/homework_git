@@ -6,9 +6,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 @Controller
 public class surpportController {
 	
-	@RequestMapping("surpport.do")
+	@RequestMapping("surpport.su")
 	public String sponserMain() {
-		return "../surpport/surpportMain";
+		return "surpportMain";
 	}
 	
 }
