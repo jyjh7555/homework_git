@@ -32,10 +32,14 @@ public class MemberController {
 	public String loginCheck(Member m, Model model, HttpSession session) {
 		
 		Member loginUser = mService.loginCheck(m);
-		System.out.println(loginUser);
 		if(loginUser != null) {
 			session.setAttribute("loginUser", loginUser);
-			return "../../../index";
+			System.out.println((loginUser.getIsAdmin()));
+			if(loginUser.getIsAdmin().equals("Y")) {
+				return "admin";
+			}else {
+				return "../../../index";				
+			}
 		}else {
 			model.addAttribute("msg", "로그인에 실패하였습니다."); // request.setAttribute("msg", "~~");
 			return "../common/errorPage";
