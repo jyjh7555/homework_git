@@ -79,17 +79,20 @@
      </div>
 	</c:if>
 	<c:if test="${ !empty loginUser }">
-		<div id="navbar">
-	    	<div class="logo"></div>
+		<div id="navbar-section">
+	    	<div class="logo">
+		    	<div class="logo-container">
+	                    <a href="${ contextPath }"><img id="logo-image" src="resources/image/newLogo.png" alt="로고"></a>
+	            </div>
+	    	</div>
         	<div class="nav-links">
 	              <a href="${contextPath}/surpport.su">후원하기</a>
-	              <b>${loginUser.empName}님, 반갑습니다.</b>
+	              <b>${loginUser.nickName}님, 반갑습니다.</b>
 	              <a href="${contextPath}/myPage.me">마이 페이지</a>
 	              <a href="${contextPath}/logout.me">로그아웃</a>
-         	</div>
+         	</div> 
 		</div>
 	</c:if>
-	
 	
 	
 	
