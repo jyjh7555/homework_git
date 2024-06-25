@@ -1,5 +1,8 @@
 package com.kh.homeWork.member.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -54,5 +57,12 @@ public class MemberController {
 	        session.invalidate(); // 세션 무효화
 	    }
 	    return "redirect:index.jsp";
+	}
+	
+	@RequestMapping("adminSelectMember.me")
+	public String adminSelectMember(Model model){
+		ArrayList<HashMap<String, Object>> list = mService.adminSelectMember();
+		model.addAttribute("list", list);
+		return "admin";
 	}
 }

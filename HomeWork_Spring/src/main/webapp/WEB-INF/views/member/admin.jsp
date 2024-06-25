@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -109,26 +110,24 @@
 							<th width="8%">회원번호</th>
 							<th width="10%">이름</th>
 							<th width="10%">닉네임</th>
-							<th width="10%">비밀번호</th>
 							<th width="10%">이메일</th>
 							<th width="10%">휴대폰번호</th>
 							<th width="10%">생년월일</th>
-							<th width="12%">주민등록번호</th>
 							<th width="12%">가입날짜</th>
 							<th width="10%">관리자</th>
 						</tr>
-						<tr>
-							<td>001</td>
-							<td>강건강</td>
-							<td>스트롱건강</td>
-							<td>password</td>
-							<td>gang@naver.com</td>
-							<td>010-1234-5678</td>
-							<td>94-01-01</td>
-							<td>940101</td>
-							<td>24-06-11</td>
-							<td>N</td>
-						</tr>
+						<c:forEach items="${ list }" var="m">
+							<tr>
+								<td>${ m.memberNo }</td>
+								<td>${ m.memberId }</td>
+								<td>${ m.nickName }</td>
+								<td>${ m.email }</td>
+								<td>${ m.phone }</td>
+								<td>${ m.age }</td>
+								<td>${ m.createDate }</td>
+								<td>${ m.isAdmin }</td>
+							</tr>
+						</c:forEach>
 					</table>
 				</div>
 				<div class="userUpdate hidden" id="userUpdate">
@@ -260,6 +259,7 @@
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
+				 location.href="${contextPath}/adminSelectMember.me";
 				 
 			 })
 			  document.getElementById('user2').addEventListener('click', function(){

@@ -1,5 +1,8 @@
 package com.kh.homeWork.member.model.service;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,6 +24,11 @@ public class MemberServiceImpl implements MemberService {
 	public Member loginCheck(Member m) {
 		Member loginUser = mDAO.loginCheck(sqlSession, m);
 		return loginUser;
+	}
+
+	@Override
+	public ArrayList<HashMap<String, Object>> adminSelectMember() {
+		return mDAO.adminSelectMember(sqlSession);
 	}
 	
 	
