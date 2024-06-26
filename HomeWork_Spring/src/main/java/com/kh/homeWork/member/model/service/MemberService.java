@@ -9,6 +9,5 @@ public interface MemberService{
 
 	Member loginCheck(Member m);
 
-	ArrayList<HashMap<String, Object>> adminSelectMember();
 
 }

@@ -7,8 +7,4 @@
 		where member_id = #{memberId} and status = 'Y'
 	</select>
 	
-	<select id="adminSelectMember" resultType="member">
-		select *
-		from member
-	</select>
 </mapper>

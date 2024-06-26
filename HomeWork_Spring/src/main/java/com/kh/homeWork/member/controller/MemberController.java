@@ -30,7 +30,6 @@ public class MemberController {
 	}
 	
 	
-	
 	@RequestMapping("loginCheck.me")
 	public String loginCheck(Member m, Model model, HttpSession session) {
 		
@@ -58,12 +57,6 @@ public class MemberController {
 	    return "redirect:index.jsp";
 	}
 	
-	@RequestMapping("adminSelectMember.me")
-	public String adminSelectMember(Model model){
-		ArrayList<HashMap<String, Object>> list = mService.adminSelectMember();
-		model.addAttribute("list", list);
-		return "admin";
-	}
 	@RequestMapping("signUp.me")
 	public String signUp() {
 		return "signUp";
@@ -75,5 +68,4 @@ public class MemberController {
 	}
 	
 	
->>>>>>> branch 'main' of https://github.com/jyjh7555/homework_git.git
 }

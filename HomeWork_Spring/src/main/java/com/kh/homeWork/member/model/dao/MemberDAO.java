@@ -15,8 +15,5 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.loginCheck", m);
 	}
 
-	public ArrayList<HashMap<String, Object>> adminSelectMember(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("memberMapper.adminSelectMember");
-	}
 
 }
