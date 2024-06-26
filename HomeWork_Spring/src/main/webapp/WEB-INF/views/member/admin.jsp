@@ -7,6 +7,25 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
+ .logo {
+       display: flex;
+       align-items: center;
+   }
+	.logo-container {
+       width: 130px;
+       height: 130px;
+       background-image: inherit; 
+       background-size: cover;
+       background-position: center;
+       position: relative;
+       margin-bottom: 15px;
+       margin-left:50px;
+   }
+   .logo-container img {
+       width: 100%;
+       height: 100%;
+       object-fit: contain;
+   }
 	#topAndNavbar {
 		background-image:linear-gradient(
 	        rgba(0, 0, 0, 0.2),
@@ -69,7 +88,12 @@
 
 </head>
 <body>
-	<H1 align="center"> 어드민 </H1>
+	<div class="logo">
+       <div class="logo-container">
+           <a href="${ contextPath }"><img id="logo-image" src="resources/image/newLogo.png" alt="로고"></a>
+        </div>
+    </div>
+	<h1 align="center"> 관리자페이지 </h1>
 	
 	<div id="container">
 		<div align="center" id=adminMenu>

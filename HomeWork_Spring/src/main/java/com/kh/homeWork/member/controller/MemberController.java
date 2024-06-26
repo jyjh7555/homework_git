@@ -36,18 +36,17 @@ public class MemberController {
 		
 		Member loginUser = mService.loginCheck(m);
 		if(loginUser != null) {
-			session.setAttribute("loginUser", loginUser);
-			System.out.println((loginUser.getIsAdmin()));
-			if(loginUser.getIsAdmin().equals("Y")) {
-				return "admin";
-			}else {
-				return "../../../index";				
-			}
+			session.setAttribute("loginUser", loginUser);			
+			return "../../../index";				
 		}else {
 			model.addAttribute("msg", "로그인에 실패하였습니다."); // request.setAttribute("msg", "~~");
 			return "../common/errorPage";
 		
 		}
+	}
+	@RequestMapping("admin.me")
+	public String adminPage(@ModelAttribute Member m) {
+		return "admin";
 	}
 	
 	@RequestMapping("logout.me")

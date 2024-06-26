@@ -88,6 +88,9 @@
         	<div class="nav-links">
 	              <a href="${contextPath}/surpport.su">후원하기</a>
 	              <b>${loginUser.nickName}님, 반갑습니다.</b>
+	              <c:if test='${ loginUser.isAdmin ==  "Y"}'>
+		              <a href="${contextPath}/admin.me">관리자 페이지</a>
+	              </c:if>
 	              <a href="${contextPath}/myPage.me">마이 페이지</a>
 	              <a href="${contextPath}/logout.me">로그아웃</a>
          	</div> 
