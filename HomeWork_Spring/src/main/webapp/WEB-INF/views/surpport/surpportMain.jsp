@@ -8,17 +8,24 @@
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
 <style>
-#topAndNavbar {
-		background-image:linear-gradient(
-	        rgba(0, 0, 0, 0.2),
-	        rgba(0, 0, 0, 0.2)
-	      )
-	      ,url('resources/image/topImage.png');
-	    background-size: cover; 
-	    background-position: center;
-	    background-repeat: no-repeat;
-	    transition: background-color 0.5s ease;
-	}
+	#topAndNavbar {
+			background-image:linear-gradient(
+		        rgba(0, 0, 0, 0.2),
+		        rgba(0, 0, 0, 0.2)
+		      )
+		      ,url('resources/image/topImage.png');
+		    background-size: cover; 
+		    background-position: center;
+		    background-repeat: no-repeat;
+		    transition: background-color 0.5s ease;
+		}
+	@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+}
+	
 </style>
 </head>
 <body>
@@ -38,7 +45,7 @@
 	
 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3 " >
 		<div class="d-flex flex-column justify-content-center mb-3 border border-3 w-50 mt-3 ">
-		   	<h1 class="title ms-3">후원정보</h1>
+		   	<h1 class="title ms-3" style="font-family:'Pretendard-Regular'"><b>후원정보d?</b></h1>
 	        <div class="field mb-3">
 	            <label class="label me-3 ms-4">후원주기</label>
 	            <button class="button selected  btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">정기</button>

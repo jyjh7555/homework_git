@@ -48,7 +48,7 @@
 <body>
 	<div class=volunteerWrap>
 		<ul id="volunteer">
-			<li class="domestic">
+			<li class="domestic" style="border: 10px solid black;">
 				<a href="domestic01.in">국내자원봉사(디자인수정)</a>
 			</li>
 			<li class="golobal">
