@@ -55,4 +55,16 @@ public class MemberController {
 	    }
 	    return "redirect:index.jsp";
 	}
+	
+	@RequestMapping("signUp.me")
+	public String signUp() {
+		return "signUp";
+	}
+	
+	@RequestMapping("myPage.me")
+	public String myPage() {
+		return null;
+	}
+	
+	
 }
