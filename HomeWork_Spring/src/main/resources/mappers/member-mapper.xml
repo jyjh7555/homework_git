@@ -6,4 +6,5 @@
 		from member
 		where member_id = #{memberId} and status = 'Y'
 	</select>
+	
 </mapper>
