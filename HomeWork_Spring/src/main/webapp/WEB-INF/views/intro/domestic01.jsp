@@ -215,8 +215,8 @@
 		
 	</div>
 	<div id="footer">
- 			<jsp:include page="../common/footer.jsp"/>
- 		</div>	
+		<jsp:include page="../common/footer.jsp"/>
+	</div>	
  		
  		
  		<Script>
