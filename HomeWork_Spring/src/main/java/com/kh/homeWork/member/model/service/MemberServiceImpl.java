@@ -20,12 +20,12 @@ public class MemberServiceImpl implements MemberService {
 	@Autowired
 	private MemberDAO mDAO;
 
+	@Override
+	public Member loginCheck(Member m) {
+		Member loginUser = mDAO.loginCheck(sqlSession, m);
+		return loginUser;
 	}
 
-	@Override
-	public ArrayList<HashMap<String, Object>> adminSelectMember() {
-		return mDAO.adminSelectMember(sqlSession);
-	}
 	
 	
 }
