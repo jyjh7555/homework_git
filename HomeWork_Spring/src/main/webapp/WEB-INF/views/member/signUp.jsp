@@ -32,14 +32,13 @@
 	    
 	}
 	
-	.custom-form-control {
-            background-color: #f0f8ff; /* 배경색 변경 */
-            }
+	.inline-btn {
+		display:inline-block;
+		}
 	
-	.custom-form-control:focus {
-            border-color: ksyblue; /* 포커스 시 테두리 색상 변경 */
-            box-shadow: 0 0 5px rgba(0, 123, 255, 0.5); /* 포커스 시 그림자 추가 */
-            }
+	/* .custom-form-control:focus {
+            border: 10px solid; 
+            } */
 
 
 </style>
@@ -68,20 +67,43 @@
 
 
 	
-	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3 " >
-		<div class="d-flex flex-column justify-content-center mb-3 border border-5 w-50 mt-3 ">
-			
-	        <label> 회원가입 할거야 기다려</label>
-	        <label>ID</label><input class="form-control w-50 m-4" type="text" placeholder="ID">
-	        <input class="custum-form-control" type="password" placeholder="PW">
-	        <input class="form-control" type="text" placeholder="이름">
-	        <input class="form-control" type="number" placeholder="주민등록 번호">
-	        <input class="form-control" type="text" placeholder="이메일">
-	        <input class="form-control" type="text" placeholder="주소">
-	        <input class="form-control" type="number" placeholder="번호">
-	        <input class="form-control" type="number" placeholder="휴대폰 번호">
-	        <button onclick="showPage('main-page')">완료</button>
-	        <button onclick="showPage('main-page')">처음으로</button>
+	<div align="center" >
+		<div class="row d-flex flex-column justify-content-center mb-3 border border-5 w-50 mt-3 " align="center">
+			<form align="left" action="${contextPath }/insertMember.me" method="post">
+		        <label style="margin:25px; font-size:25px;"> 회원가입 글자는? </label>
+		        <input class="form-control w-50 m-4" type="text" name="memberId" placeholder="아이디를 입력해주세요">
+		        <input class="form-control w-50 m-4" type="password" name="memberPwd" placeholder="비밀번호를 입력해주세요">
+	  			<div class="col-12 ml-4">
+					<input class="form-check-input " style="margin-left:25px;"  type="radio"  name="gender" id="man" value="M">
+		  			<label class="form-check-label " for="man">남자</label>
+					<input class="form-check-input "  type="radio" name="gender" id="woman" value="F">
+		  			<label class="form-check-label" for="woman">여자</label>  
+				</div>
+	
+		        <input class="form-control w-50 m-4" type="text" placeholder="닉네임" name="nickName">
+		        <div class="col-12">
+		        	<label style="margin-left:25px; ">휴대폰 번호 입력</label><br>
+		        	
+		        	<input class="form-control m-4 mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" placeholder="010">-
+		        	<input class="form-control m-3 mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" placeholder="0000">-
+		        	<input class="form-control m-3 mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" placeholder="9999">
+		        </div>
+		        <br>
+		        <div class="col-12">
+		        	<label style="margin-left:25px; ">이메일  입력</label><br>
+		        	<input class="form-control mt-1 mb-1" style="margin-left:25px; margin-right:5px;width:20%; display:inline-block;" name="emailId"type="text" placeholder="이메일">@
+		        	<input class="form-control mt-1 mb-1" style="width:26%; display:inline-block;" type="text" name="emailDomain" placeholder="">
+		        	<select class="form-control mt-1 mb-1" style="width:20%; display:inline-block;" name="emailDomainHelp">
+		        		<option>직접입력</option>
+						<option>naver.com</option>
+						<option>gmail.com</option>
+						<option>hanmail.net</option>
+					</select>
+		        </div>
+		        <input type="date" class="form-control w-25 m-4" >
+		        <input class="form-control w-50 m-4" type="text" name="address" placeholder="주소 입력">
+		        <button class="btn btn-secondary btn-lg w-25 m-4 btn-primary">가입하기</button>
+	        </form>
 		</div>	        
 	</div>
 	
@@ -90,6 +112,18 @@
 	<div id="footer">
 		<jsp:include page="../common/footer.jsp"/>
 	</div>	
+	
+	<script>
+		window.onload =()=>{
+			document.getElementById('datepicker').datepicker({
+                format: 'yyyy-mm-dd',
+                autoclose: true
+            });
+			
+		}
+	
+	
+	</script>
 	
 </body>
 </html>
