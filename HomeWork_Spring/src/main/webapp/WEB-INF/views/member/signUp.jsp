@@ -72,6 +72,7 @@
 			<form align="left" action="${contextPath }/insertMember.me" method="post">
 		        <label style="margin:25px; font-size:25px;"> 회원가입 글자는? </label>
 		        <input class="form-control w-50 m-4" type="text" name="memberId" placeholder="아이디를 입력해주세요">
+		        <input class="form-control w-50 m-4" type="text" name="memberName" placeholder="성함을 입력해주세요">
 		        <input class="form-control w-50 m-4" type="password" name="memberPwd" placeholder="비밀번호를 입력해주세요">
 	  			<div class="col-12 ml-4">
 					<input class="form-check-input " style="margin-left:25px;"  type="radio"  name="gender" id="man" value="M">
