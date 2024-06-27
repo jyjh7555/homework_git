@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -18,6 +19,10 @@ import com.kh.homeWork.member.model.vo.Member;
 
 @Controller
 public class MemberController {
+	
+	
+	@Autowired
+	private BCryptPasswordEncoder bcrypt;
 	
 	
 	@Autowired
@@ -35,15 +40,16 @@ public class MemberController {
 	public String loginCheck(Member m, Model model, HttpSession session) {
 		
 		Member loginUser = mService.loginCheck(m);
-		if(loginUser != null) {
+		if(bcrypt.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
 			session.setAttribute("loginUser", loginUser);			
 			return "../../../index";				
 		}else {
 			model.addAttribute("msg", "로그인에 실패하였습니다."); // request.setAttribute("msg", "~~");
-			return "../common/errorPage";
-		
+			return "login";
 		}
 	}
+	
+	
 	@RequestMapping("admin.me")
 	public String adminPage(@ModelAttribute Member m) {
 		return "admin";
@@ -80,14 +86,9 @@ public class MemberController {
 		}
 		m.setEmail(email);
 		m.setPhone(phone.replace(",", "-"));
-		
+		m.setMemberPwd(bcrypt.encode(m.getMemberPwd()));	//암호화 시작
 		int result = mService.insertMember(m);
 		
-		
-		System.out.println(m);
-		System.out.println(emailId);
-		System.out.println(emailDomain);
-		System.out.println(phone);
 		return "redirect:index.jsp";
 	}
 	
