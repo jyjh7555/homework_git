@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <style>
 	body {
 		font-family: "Nanum Gothic", sans-serif;
@@ -84,23 +84,23 @@
 		        <div class="col-12">
 		        	<label style="margin-left:25px; ">휴대폰 번호 입력</label><br>
 		        	
-		        	<input class="form-control m-4 mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" placeholder="010">-
-		        	<input class="form-control m-3 mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" placeholder="0000">-
-		        	<input class="form-control m-3 mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" placeholder="9999">
+		        	<input class="form-control m-4 mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" value="010" readonly >-
+		        	<input class="form-control m-3 mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" maxlength="4" placeholder="0000">-
+		        	<input class="form-control m-3 mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" maxlength="4" placeholder="9999">
 		        </div>
 		        <br>
 		        <div class="col-12">
 		        	<label style="margin-left:25px; ">이메일  입력</label><br>
 		        	<input class="form-control mt-1 mb-1" style="margin-left:25px; margin-right:5px;width:20%; display:inline-block;" name="emailId"type="text" placeholder="이메일">@
 		        	<input class="form-control mt-1 mb-1" style="width:26%; display:inline-block;" type="text" name="emailDomain" placeholder="">
-		        	<select class="form-control mt-1 mb-1" style="width:20%; display:inline-block;" name="emailDomainHelp">
-		        		<option>직접입력</option>
+		        	<select class="form-control mt-1 mb-1" style="width:20%; display:inline-block;" id="emailDomainHelp">
+		        		<option value="">직접입력</option>
 						<option>naver.com</option>
 						<option>gmail.com</option>
 						<option>hanmail.net</option>
 					</select>
 		        </div>
-		        <input type="date" class="form-control w-25 m-4" name="age" >
+		        <input type="date" class="form-control w-25 m-4" value="2004-01-01" name="age" >
 		        <input class="form-control w-50 m-4" type="text" name="address" placeholder="주소 입력">
 		        <button class="btn btn-secondary btn-lg w-25 m-4 btn-primary">가입하기</button>
 	        </form>
@@ -115,10 +115,67 @@
 	
 	<script>
 		window.onload =()=>{
-			document.getElementById('datepicker').datepicker({
+			
+			const emailDomain = document.getElementById('emailDomainHelp');
+			
+			emailDomain.addEventListener('change',function(){
+				//console.log(this.value);
+				const domain = this.value;
+				
+				this.previousElementSibling.value = domain;
+			})
+			
+			
+			/* document.getElementById('datepicker').datepicker({
                 format: 'yyyy-mm-dd',
                 autoclose: true
-            });
+            }); */
+			
+			/* const phones = document.getElementsByName('phone')
+			for(const i of phones){
+				i.addEventListener('keyup',function(){
+					const regex = /^[0-9]{1,4}$/;
+					//console.log(regex.test(i.value));
+					if(regex.test(i.value)){
+						
+					}
+				})
+			} */
+			
+			
+			/* document.getElementById('memberId').addEventListener('focusout', function(){
+				const value = this.value;
+				//const targetTd= this.parentElement.parentElement.nextElementSibling.children[0];
+				if(value.trim() == ''){
+					
+				}else{
+					$.ajax({
+						url:'${contextPath}/checkEmpNo.me',			//무조건 들어가야 하는 객체키와값
+						data:{value:value}, // 키 값엔 파라미터명 : 넣을데이터 // 앞 value는 내가 지정한 파라미터명이고 뒤는 변수 value를 집어넣엇다.차이 확인
+						success: (data) =>{	// '서버'에서 보낸 값을 받아온 data 
+							//console.log(data, typeof data);
+							if(data.trim()== '0'){
+								targetTd.innerText = '사용 가능한 사원 번호입니다';
+								targetTd.style.color='green';
+								
+							}else if(data.trim()=='1'){
+								targetTd.innerText = '중복된 사원 번호입니다';
+								targetTd.style.color='red';
+								
+							}
+							targetTd.style.fontSize = '12px';
+							
+						},
+						error: data =>console.log(data)
+						
+						
+					});	//타입도넣을수잇는데,생략하면get방식				//제이쿼리안에 에이작스함수
+				}
+				
+			}) */
+			
+			
+			
 			
 		}
 	
