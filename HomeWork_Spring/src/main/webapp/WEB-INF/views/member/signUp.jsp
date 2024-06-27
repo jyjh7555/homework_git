@@ -100,7 +100,7 @@
 						<option>hanmail.net</option>
 					</select>
 		        </div>
-		        <input type="date" class="form-control w-25 m-4" >
+		        <input type="date" class="form-control w-25 m-4" name="age" >
 		        <input class="form-control w-50 m-4" type="text" name="address" placeholder="주소 입력">
 		        <button class="btn btn-secondary btn-lg w-25 m-4 btn-primary">가입하기</button>
 	        </form>

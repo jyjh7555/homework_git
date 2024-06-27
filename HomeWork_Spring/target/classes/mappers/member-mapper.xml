@@ -7,4 +7,24 @@
 		where member_id = #{memberId} and status = 'Y'
 	</select>
 	
+	
+	<insert id="insertMember">
+		insert into member values(
+			seq_member.nextval,
+        	#{memberId},
+        	#{memberPwd},
+        	#{gender},
+        	#{nickName},
+        	#{phone},
+	        #{email},
+	        #{age},
+	        #{address},
+	        'N',
+	        'Y',
+	        sysdate
+		
+		)
+		
+	
+	</insert>
 </mapper>
