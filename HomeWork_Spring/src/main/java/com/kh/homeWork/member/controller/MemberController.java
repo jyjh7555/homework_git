@@ -11,6 +11,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import com.kh.homeWork.member.model.service.MemberService;
 import com.kh.homeWork.member.model.vo.Member;
@@ -65,6 +66,29 @@ public class MemberController {
 	@RequestMapping("myPage.me")
 	public String myPage() {
 		return null;
+	}
+	
+	@RequestMapping("insertMember.me")
+	public String insertMember(@ModelAttribute Member m,
+							  @RequestParam("emailId") String emailId,
+							  @RequestParam("emailDomain") String emailDomain,
+							  @RequestParam("phone") String phone) {
+		
+		String email = null;
+		if(!emailId.equals("")) {
+			email = emailId + "@" + emailDomain;
+		}
+		m.setEmail(email);
+		m.setPhone(phone.replace(",", "-"));
+		
+		int result = mService.insertMember(m);
+		
+		
+		System.out.println(m);
+		System.out.println(emailId);
+		System.out.println(emailDomain);
+		System.out.println(phone);
+		return "redirect:index.jsp";
 	}
 	
 	
