@@ -69,13 +69,13 @@
 	
 	<div align="center" >
 		<div class="row d-flex flex-column justify-content-center mb-3 border border-5 w-50 mt-3 " align="center">
-			<form align="left" action="${contextPath }/findId.me" method="post">
+			<form align="left" action="selectId.me" method="post">
 		        <label style="margin:25px; font-size:25px;"> 아이디찾기 </label>
 		        <input class="form-control w-50 m-4" type="text" name="findName" placeholder="이름을 입력해주세요">
 		        <input class="form-control w-50 m-4" type="password" name="findEmail" placeholder="이메일을 입력해주세요">
-		        <input class="form-control w-50 m-4" type="text" name="phone" placeholder="휴대폰번호를 입력해주세요">
+		        <input class="form-control w-50 m-4" type="text" name="findPhone" placeholder="휴대폰번호를 입력해주세요">
 		        
-		        <button class="btn btn-secondary btn-lg w-25 m-4 btn-primary">아이디 찾기</button>
+		        <button class="btn btn-secondary btn-lg w-25 m-4 btn-primary" onclick="findIdInfo()">아이디 찾기</button>
 	        </form>
 		</div>	        
 	</div>
@@ -87,7 +87,13 @@
 	</div>	
 	
 	<script>
-		
+		function findIdInfo(){
+			if('${findId}'!=null){
+				alert("찾으시는 아이디는 "'${findId}' 입니다");
+			}else{
+				alert("아이디가 없습니다.")
+			}
+		}
 	
 	
 	</script>

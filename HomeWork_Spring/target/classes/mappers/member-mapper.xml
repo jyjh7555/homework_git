@@ -28,7 +28,7 @@
 	
 	</insert>
 	
-	<select id="findId" resultType="String">
+	<select id="selectId" resultType="String">
 		select member_id
 		from member
 		where member_name = #{findName}
