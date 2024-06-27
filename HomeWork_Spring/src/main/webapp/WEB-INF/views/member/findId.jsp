@@ -73,7 +73,7 @@
 		        <label style="margin:25px; font-size:25px;"> 아이디찾기 </label>
 		        <input class="form-control w-50 m-4" type="text" name="findName" placeholder="이름을 입력해주세요">
 		        <input class="form-control w-50 m-4" type="password" name="findEmail" placeholder="이메일을 입력해주세요">
-		        <input class="form-control w-50 m-4" type="text" name="phone" placeholder="번호를 입력해주세요">
+		        <input class="form-control w-50 m-4" type="text" name="phone" placeholder="휴대폰번호를 입력해주세요">
 		        
 		        <button class="btn btn-secondary btn-lg w-25 m-4 btn-primary">아이디 찾기</button>
 	        </form>
