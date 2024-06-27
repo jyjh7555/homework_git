@@ -1,5 +1,8 @@
 package com.kh.homeWork.member.controller;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
@@ -27,24 +30,22 @@ public class MemberController {
 	}
 	
 	
-	
 	@RequestMapping("loginCheck.me")
 	public String loginCheck(Member m, Model model, HttpSession session) {
 		
 		Member loginUser = mService.loginCheck(m);
 		if(loginUser != null) {
-			session.setAttribute("loginUser", loginUser);
-			System.out.println((loginUser.getIsAdmin()));
-			if(loginUser.getIsAdmin().equals("Y")) {
-				return "admin";
-			}else {
-				return "../../../index";				
-			}
+			session.setAttribute("loginUser", loginUser);			
+			return "../../../index";				
 		}else {
 			model.addAttribute("msg", "로그인에 실패하였습니다."); // request.setAttribute("msg", "~~");
 			return "../common/errorPage";
 		
 		}
+	}
+	@RequestMapping("admin.me")
+	public String adminPage(@ModelAttribute Member m) {
+		return "admin";
 	}
 	
 	@RequestMapping("logout.me")

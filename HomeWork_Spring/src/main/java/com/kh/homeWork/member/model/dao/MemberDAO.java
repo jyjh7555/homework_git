@@ -1,5 +1,8 @@
 package com.kh.homeWork.member.model.dao;
 
+import java.util.ArrayList;
+import java.util.HashMap;
+
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
@@ -11,5 +14,6 @@ public class MemberDAO {
 	public Member loginCheck(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.selectOne("memberMapper.loginCheck", m);
 	}
+
 
 }

@@ -75,12 +75,12 @@
 	        <form action="loginCheck.me">
 	        <input type="text" name="memberId" id="id" style="width:400px" placeholder="아이디"><br><br>
 	        <input type="password" name="memberPwd" style="width:400px" id="login-password" placeholder="패스워드">
-	        <button style="width:400px">로그인</button>>
+	        <button style="width:400px">로그인</button>
+	        <button style="width:400px" onclick="showPage('qr-code-page')">QR코드 로그인</button>
+	        <button style="width:400px" onclick="showPage('signup-page')">회원가입</button>
+	        <button style="width:400px" onclick="showPage('id-find-page')">아이디 찾기</button>
+	        <button style="width:400px" onclick="showPage('pw-find-page')">비밀번호 찾기</button>
 	        </form>
-	        <!-- <a href="#" onclick="showPage('qr-code-page')">QR코드 로그인</a>
-	        <a href="#" onclick="showPage('signup-page')">회원가입</a>
-	        <a href="#" onclick="showPage('id-find-page')">아이디 찾기</a>
-	        <a href="#" onclick="showPage('pw-find-page')">비밀번호 찾기</a> -->
 	    </div>
 	    
 	    <div class="container" id="id-find-page" style="display:none;">
