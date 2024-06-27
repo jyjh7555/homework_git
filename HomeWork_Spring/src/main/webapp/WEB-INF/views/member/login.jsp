@@ -76,11 +76,12 @@
 	        <input type="text" name="memberId" id="id" style="width:400px" placeholder="아이디"><br><br>
 	        <input type="password" name="memberPwd" style="width:400px" id="login-password" placeholder="패스워드">
 	        <button style="width:400px">로그인</button>
-	        <button style="width:400px" onclick="showPage('qr-code-page')">QR코드 로그인</button>
-	        <button style="width:400px" onclick="showPage('signup-page')">회원가입</button>
-	        <button style="width:400px" onclick="showPage('id-find-page')">아이디 찾기</button>
-	        <button style="width:400px" onclick="showPage('pw-find-page')">비밀번호 찾기</button>
 	        </form>
+	        <button style="width:400px" onclick="showPage('qr-code-page')">QR코드 로그인</button>
+	        <button style="width:400px" onclick="signUp()">회원가입</button>
+	        <button style="width:400px" onclick="findId()">아이디 찾기</button>
+	        <button style="width:400px" onclick="showPage('pw-find-page')">비밀번호 찾기</button>
+	        
 	    </div>
 	    
 	    <div class="container" id="id-find-page" style="display:none;">
@@ -153,6 +154,12 @@
             } else {
                 alert('비밀번호 재설정 가능');
             }
+        }
+        function signUp(){
+        	location.href = "${contextPath}/signUp.me";
+        }
+        function findId() {
+            location.href = "${contextPath}/findId.me";
         }
         </script>
   </body>

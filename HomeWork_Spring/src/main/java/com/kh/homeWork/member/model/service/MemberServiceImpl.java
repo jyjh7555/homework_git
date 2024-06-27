@@ -28,7 +28,13 @@ public class MemberServiceImpl implements MemberService {
 
 	@Override
 	public int insertMember(Member m) {
-		return mDAO.insertMember(sqlSession,m);
+		return mDAO.insertMember(sqlSession, m);
+	}
+
+
+	@Override
+	public String selectId(HashMap<String, String> map) {
+		return mDAO.selectId(sqlSession, map);
 	}
 
 

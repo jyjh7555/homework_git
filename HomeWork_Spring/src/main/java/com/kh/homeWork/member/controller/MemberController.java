@@ -90,6 +90,22 @@ public class MemberController {
 		System.out.println(phone);
 		return "redirect:index.jsp";
 	}
+	@RequestMapping("findId.me")
+	public String findId() {
+		return "findId";
+	}
 	
-	
+	@RequestMapping("selectId.me")
+	public String findId(@RequestParam("findName") String findName,
+						 @RequestParam("findEmail") String findEmail,
+						 @RequestParam("findPhone") String findPhone,
+						 Member m, HttpSession session) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("findName", findName);
+		map.put("findEmail", findEmail);
+		map.put("findPhone", findPhone);
+		String findId = mService.selectId(map);
+		session.setAttribute("findId", findId);
+		return "login";
+	}
 }

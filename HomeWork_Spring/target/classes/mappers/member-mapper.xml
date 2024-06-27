@@ -27,4 +27,13 @@
 		
 	
 	</insert>
+	
+	<select id="findId" resultType="String">
+		select member_id
+		from member
+		where member_name = #{findName}
+		and email = #{findEmail}
+		and phone = #{findPhone}
+	</select>
+	
 </mapper>

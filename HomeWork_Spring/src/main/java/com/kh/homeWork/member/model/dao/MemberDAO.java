@@ -20,4 +20,9 @@ public class MemberDAO {
 	}
 
 
+	public String selectId(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("memberMapper.selectId", map);
+	}
+
+
 }
