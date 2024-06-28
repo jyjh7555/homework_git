@@ -39,15 +39,15 @@
 	
 	
    .hidden {
-        visibility: hidden;
+        visibility: inherit;
         opacity: 0;
-        transition: visibility 1s linear, opacity 0.5s linear;
+        transition: visibility 0.3s linear, opacity 0.3s linear;
     }
 
     .visible {
         visibility: visible;
         opacity: 1;
-        transition: visibility 1s linear, opacity 0.5s linear;
+        transition: visibility 0.3s linear, opacity 0.3s linear;
     }
 	
 	
@@ -85,7 +85,9 @@
 			<li class="domestic" >
 				<!-- <a href="domestic01.in" style="border:5px solid black; width:250px;">국내자원봉사</a> -->
 				<button id="test1"class="btn btn-lg volunteerB" style="color:#373A40;background: #EEEEEE; border:3px solid rgba(0, 0, 0, 0.1);" onclick="location.href='domestic01.in'"><b>국내봉사</b></button>
-				<div class ="hidden"style="height:150px; width:210%; background:#EEEEEE;"></div>
+				<div class ="hidden"style="height:150px; width:210%; background:#EEEEEE;">
+					
+				</div>
 			</li>
 			<li style="margin-right:-33%; margin-left:-33%;" class="global">
 				<!-- <a href="global01.in">해외자원봉사</a> -->
@@ -120,6 +122,14 @@
 		        });
 				
 			}
+			/* 
+			const lis = document.getElementById('volunteer').querySelectorAll('li');
+			for(const li of lis){
+				li.addEventListener('mouseover', function(){
+					console.log(this);
+				})
+			} */
+			
 		}
 	
 	
