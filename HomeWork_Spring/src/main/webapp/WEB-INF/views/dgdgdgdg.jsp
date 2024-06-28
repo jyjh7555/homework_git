@@ -7,6 +7,6 @@
 <title>Insert title here</title>
 </head>
 <body>
-
+	잘 전달받았습니다
 </body>
 </html>
