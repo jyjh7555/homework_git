@@ -18,8 +18,8 @@
 	}
 	#topAndNavbar {
 		background-image:linear-gradient(
-	        rgba(0, 0, 0, 0.2),
-	        rgba(0, 0, 0, 0.2)
+	        rgba(0, 0, 0, 0.5),
+	        rgba(0, 0, 0, 0.5)
 	      )
 	      ,url('resources/image/topImage.png');
 	    background-size: cover; 
@@ -204,9 +204,9 @@
 		    <div id="top-section">
 		        <jsp:include page="WEB-INF/views/common/top.jsp" />
 		    </div>
- 		</div>
  		<div id="voulnteer2">
  			<jsp:include page="WEB-INF/views/common/volunteer.jsp"/>
+ 		</div>
  		</div>
 	    <div id="content">
         	<div class="introduce1">
