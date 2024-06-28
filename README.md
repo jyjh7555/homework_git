@@ -13,3 +13,7 @@
 3.signup.jsp 페이지에 memberName을 받는 인풋 추가
 
 -재영님 작업할때 Member DB 바뀌는게 겹칠수있어 태그만 추가했습니다
+
+6월 28일 
+아이디찾기 기능 추가
+-DB에 MEMBER_NAME추가하시면 정상작동합니다
