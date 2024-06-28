@@ -73,14 +73,14 @@
 	    <div class="container" id="main-page">
 	        <h2>로그인</h2>
 	        <form action="loginCheck.me">
-	        <input type="text" name="memberId" id="id" style="width:400px" placeholder="아이디"><br><br>
-	        <input type="password" name="memberPwd" style="width:400px" id="login-password" placeholder="패스워드">
-	        <button style="width:400px">로그인</button>
+		        <input type="text" name="memberId" id="id" style="width:400px" placeholder="아이디"><br><br>
+		        <input type="password" name="memberPwd" style="width:400px" id="login-password" placeholder="패스워드">
+		        <button style="width:400px">로그인</button>
+	        </form>
 	        <button style="width:400px" onclick="showPage('qr-code-page')">QR코드 로그인</button>
 	        <button style="width:400px" onclick="showPage('signup-page')">회원가입</button>
-	        <button style="width:400px" onclick="showPage('id-find-page')">아이디 찾기</button>
+	        <button style="width:400px" onclick="findId()">아이디 찾기</button>
 	        <button style="width:400px" onclick="showPage('pw-find-page')">비밀번호 찾기</button>
-	        </form>
 	    </div>
 	    
 	    <div class="container" id="id-find-page" style="display:none;">
@@ -146,14 +146,10 @@
             }
         }
 
-        function findPassword() {
-            const id = document.getElementById('find-id').value;
-            if (id !== 'homework') {
-                alert('틀린 아이디입니다.');
-            } else {
-                alert('비밀번호 재설정 가능');
-            }
+        function findId(){
+        	location.href="findId.me";
         }
+        
         </script>
   </body>
   </html>

@@ -19,5 +19,9 @@ public class MemberDAO {
 		return sqlSession.insert("memberMapper.insertMember",m);
 	}
 
+	public String selectId(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.selectOne("memberMapper.selectId", map);
+	}
+
 
 }
