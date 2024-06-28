@@ -38,6 +38,19 @@
 	}
 	
 	
+   .hidden {
+        visibility: hidden;
+        opacity: 0;
+        transition: visibility 1s linear, opacity 0.5s linear;
+    }
+
+    .visible {
+        visibility: visible;
+        opacity: 1;
+        transition: visibility 1s linear, opacity 0.5s linear;
+    }
+	
+	
 	/* .volunteerWrap > ul > li {
     position: relative;
     padding: 0 20px; 
@@ -71,19 +84,45 @@
 		<ul id="volunteer">
 			<li class="domestic" >
 				<!-- <a href="domestic01.in" style="border:5px solid black; width:250px;">국내자원봉사</a> -->
-				<button id="test1"class="btn btn-lg" style="background: #B0D342;" onclick="location.href='domestic01.in'">국내봉사</button>
+				<button id="test1"class="btn btn-lg volunteerB" style="color:#373A40;background: #EEEEEE; border:3px solid rgba(0, 0, 0, 0.1);" onclick="location.href='domestic01.in'"><b>국내봉사</b></button>
+				<div class ="hidden"style="height:150px; width:210%; background:#EEEEEE;"></div>
 			</li>
-			<li style="margin-right:-33%; margin-left:-33%;" class="golobal">
+			<li style="margin-right:-33%; margin-left:-33%;" class="global">
 				<!-- <a href="global01.in">해외자원봉사</a> -->
-				<button class="btn btn-lg" style="background: #61B85A;" onclick="location.href='global01.in'">해외봉사</button>
+				<button class="btn btn-lg volunteerB" style="color:#DDDDDD;background: #686D76; border:3px solid rgba(0, 0, 0, 0.2);" onclick="location.href='global01.in'">해외봉사</button>
+				<div class ="hidden"style="height:150px; width:210%; background:#686D76;"></div>
 			</li>
 			<li class="golobal">
 				<!-- <a href="global01.in">해외자원봉사</a> -->
-				<button class="btn btn-lg" style="background:#3F8E70;" onclick="location.href='volunteer.bo'">봉사신청</button>
+				<button class="btn btn-lg volunteerB" style="color:#EEEEEE;background:#373A40; border:3px solid rgba(0, 0, 0, 0.3);" onclick="location.href='volunteer.bo'">봉사신청</button>
+				<div class ="hidden"style="height:150px; width:210%; background:#373A40;"></div>
 			</li>
 		</ul>
-		<Br><Br>
+		
+		
 	</div>
 	<br>
+	<script>
+		window.onload =()=>{
+			const btns = document.getElementsByClassName('volunteerB');
+			/* const btns= document.getElementById('domestic')
+			 */
+			
+			for(const btn of btns){
+				btn.addEventListener('mouseover', function() {
+		                this.nextElementSibling.classList.remove('hidden');
+		                this.nextElementSibling.classList.add('visible');
+		        });
+				
+				btn.addEventListener('mouseout', function() {
+		                this.nextElementSibling.classList.remove('visible');
+		                this.nextElementSibling.classList.add('hidden');
+		        });
+				
+			}
+		}
+	
+	
+	</script>
 </body>
 </html>
