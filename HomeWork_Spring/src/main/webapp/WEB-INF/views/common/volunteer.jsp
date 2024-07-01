@@ -34,20 +34,22 @@
 	}
 	
 	.volunteerWrap>ul button:hover{
-		z-index:1;
+		z-index:2;
 	}
 	
 	
    .hidden {
-        visibility: inherit;
+        visibility: none;
         opacity: 0;
-        transition: visibility 0.3s linear, opacity 0.3s linear;
+        transition: visibility 0.2s linear, opacity 0.2s linear;
+        z-index:1;
     }
 
     .visible {
         visibility: visible;
         opacity: 1;
-        transition: visibility 0.3s linear, opacity 0.3s linear;
+        transition: visibility 0.2s linear, opacity 0.2s linear;
+        z-index:1;
     }
 	
 	
@@ -85,24 +87,34 @@
 			<li class="domestic" >
 				<!-- <a href="domestic01.in" style="border:5px solid black; width:250px;">국내자원봉사</a> -->
 				<button id="test1"class="btn btn-lg volunteerB" style="color:#373A40;background: #EEEEEE; border:3px solid rgba(0, 0, 0, 0.1);" onclick="location.href='domestic01.in'"><b>국내봉사</b></button>
-				<div class ="hidden"style="height:150px; width:210%; background:#EEEEEE;">
-					
+				
+				
+				<div class ="hidden"style="margin-left:1px;margin-top:-24px; margin-bottom:-25px;height:150px; border:3px solid rgba(0, 0, 0, 0.1);width:208%; background:#EEEEEE;">
+					<br>
+					<ul>
+						<li><a href="domestic01.in">집짓기</a></li>
+						<li><a href="domestic02.in">환경개선</a></li>
+						<li><a href="domestic03.in">긴급/재난</a></li>
+						
+					</ul>
 				</div>
 			</li>
 			<li style="margin-right:-33%; margin-left:-33%;" class="global">
 				<!-- <a href="global01.in">해외자원봉사</a> -->
-				<button class="btn btn-lg volunteerB" style="color:#DDDDDD;background: #686D76; border:3px solid rgba(0, 0, 0, 0.2);" onclick="location.href='global01.in'">해외봉사</button>
-				<div class ="hidden"style="height:150px; width:210%; background:#686D76;"></div>
+				<button class="btn btn-lg volunteerB" style="color:#000000;background: rgb(249,197,67); border:3px solid rgba(0, 0, 0, 0.2);" onclick="location.href='global01.in'"><b>해외봉사</b></button>
+				<div class ="hidden"style="margin-left:1px;margin-top:-24px; margin-bottom:-25px;height:150px; width:208%; background:rgb(249,197,67);"></div>
 			</li>
 			<li class="golobal">
 				<!-- <a href="global01.in">해외자원봉사</a> -->
-				<button class="btn btn-lg volunteerB" style="color:#EEEEEE;background:#373A40; border:3px solid rgba(0, 0, 0, 0.3);" onclick="location.href='volunteer.bo'">봉사신청</button>
-				<div class ="hidden"style="height:150px; width:210%; background:#373A40;"></div>
+				<button class="btn btn-lg volunteerB" style="color:#000000;background:rgb(214,164,32); border:3px solid rgba(0, 0, 0, 0.3);" onclick="location.href='volunteer.bo'"><b>봉사신청</b></b></button>
+				<div class ="hidden"style="margin-left:1px;margin-top:-24px; margin-bottom:-25px;height:150px; width:208%; background:rgb(214,164,32);"></div>
 			</li>
 		</ul>
 		
 		
 	</div>
+	
+	
 	<br>
 	<script>
 		window.onload =()=>{
@@ -112,13 +124,14 @@
 			
 			for(const btn of btns){
 				btn.addEventListener('mouseover', function() {
-		                this.nextElementSibling.classList.remove('hidden');
-		                this.nextElementSibling.classList.add('visible');
+					console.log(this);
+	                this.nextElementSibling.classList.remove('hidden');
+	                this.nextElementSibling.classList.add('visible');
 		        });
 				
 				btn.addEventListener('mouseout', function() {
-		                this.nextElementSibling.classList.remove('visible');
-		                this.nextElementSibling.classList.add('hidden');
+	                this.nextElementSibling.classList.remove('visible');
+	                this.nextElementSibling.classList.add('hidden');
 		        });
 				
 			}
