@@ -43,5 +43,9 @@ public class HomeController {
 		return "domestic03";
 	}
 	
+	@RequestMapping("global01.in")
+	public String global01() {
+		return "global01";
+	}
 	
 }
