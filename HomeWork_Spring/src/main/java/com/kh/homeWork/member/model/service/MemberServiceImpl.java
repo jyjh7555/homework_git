@@ -36,6 +36,12 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.selectId(sqlSession, map);
 	}
 
+	@Override
+	public int updateTempPwd(HashMap<String, String> map) {
+		return mDAO.updateTempPwd(sqlSession, map);
+	}
+
+
 
 	
 }

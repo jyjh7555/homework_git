@@ -13,5 +13,8 @@ public interface MemberService{
 
 	String selectId(HashMap<String, String> map);
 
+	int updateTempPwd(HashMap<String, String> map);
+
+
 
 }

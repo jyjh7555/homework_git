@@ -23,5 +23,10 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.selectId", map);
 	}
 
+	public int updateTempPwd(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.update("memberMapper.updateTempPwd", map);
+	}
+
+
 
 }

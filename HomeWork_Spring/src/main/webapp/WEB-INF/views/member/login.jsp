@@ -80,24 +80,9 @@
 	        <button style="width:400px" onclick="showPage('qr-code-page')">QR코드 로그인</button>
 	        <button style="width:400px" onclick="showPage('signup-page')">회원가입</button>
 	        <button style="width:400px" onclick="findId()">아이디 찾기</button>
-	        <button style="width:400px" onclick="showPage('pw-find-page')">비밀번호 찾기</button>
+	        <button style="width:400px" onclick="findPwd()">비밀번호 찾기</button>
 	    </div>
 	    
-	    <div class="container" id="id-find-page" style="display:none;">
-	        <h2>아이디 찾기</h2>
-	        <input type="text" placeholder="이름">
-	        <input type="number" placeholder="생년월일 (숫자만)">
-	        <input type="number" placeholder="휴대폰 번호">
-	        <button onclick="showPage('main-page')">처음으로</button>
-	    </div>
-	
-	    <div class="container" id="pw-find-page" style="display:none;">
-	        <h2>비밀번호 찾기</h2>
-	        <input type="text" id="find-id" placeholder="아이디 입력">
-	        <button onclick="findPassword()">다음</button>
-	        <a href="#" onclick="showPage('id-find-page')">아이디 찾기</a>
-	    </div>
-	
 	    <div class="container qr-code" id="qr-code-page" style="display:none;">
 	        <h2>QR코드 로그인</h2>
 	        <div>
@@ -150,6 +135,9 @@
         	location.href="findId.me";
         }
         
+        function findPwd(){
+        	location.href="findPwd.me";
+        }
         </script>
   </body>
   </html>

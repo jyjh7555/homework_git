@@ -1,6 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,7 +18,7 @@
 		color:skyblue;
 		font-weight:bold;
 	}
-    
+
 	#topAndNavbar {
 		background-image:linear-gradient(
 	        rgba(0, 0, 0, 0.2),
@@ -40,12 +39,6 @@
 	/* .custom-form-control:focus {
             border: 10px solid; 
             } */
-            
-    .button{
-    	background-color: #b0d342;
-    	align: center;
-    }
-    
 
 
 </style>
@@ -76,29 +69,15 @@
 	
 	<div align="center" >
 		<div class="row d-flex flex-column justify-content-center mb-3 border border-5 w-50 mt-3 " align="center">
-			<c:if test="${ type eq 1 }">
-				<c:if test="${!empty findId}">
-					<label style="margin:25px; font-size:25px;"> ${ findName }님의 찾으시는 아이디는 : ${ findId }</label>
-				</c:if>
-				<c:if test = "${empty findId}">
-					<label style="margin:25px; font-size:25px;"> ${ findName }님의 찾으시는 아이디가 없습니다.</label>
-				</c:if>
-			</c:if>
-			<c:if test="${type eq 2}">
-		    	<c:if test="${ !empty tempPwd}">
-			        <c:if test="${tempPwd != null}">
-			            <label style="margin:25px; font-size:25px;">${findName}님의 임시비밀번호입니다. : ${tempPwd}</label>
-			            <label style="margin:25px; font-size:25px;">임시 비밀번호로 로그인해주세요.</label>
-			        </c:if>
-			       <c:if test="${empty tempPwd}">
-			            <label style="margin:25px; font-size:25px;">${findName}님의 계정이 없습니다.</label>
-			        </c:if>
-			    </c:if>
-			</c:if>
-
-				<div style="text-align: center;">
-					<button class="btn btn-primary btn-md mb-3" onclick="home()"> 로그인화면으로 돌아가기</button>
-				</div>
+			<form align="left" action="selectPwd.me" method="post" onsubmit="return checkForm()">
+		        <label style="margin:25px; font-size:25px;"> 비밀번호찾기 </label>
+		        <input class="form-control w-50 m-4" type="text" name="findId" id="findId" placeholder="아이디를 입력해주세요">
+		        <input class="form-control w-50 m-4" type="text" name="findName" id="findName" placeholder="이름을 입력해주세요">
+		        <input class="form-control w-50 m-4" type="text" name="findEmail" id="findEmail" placeholder="이메일을 입력해주세요">
+		        <input class="form-control w-50 m-4" type="text" name="findPhone" id="findPhone" placeholder="휴대폰번호를 입력해주세요">
+		        
+		        <button type="submit" class="btn btn-secondary btn-lg w-50 m-4 btn-primary" >비밀번호 찾기</button>
+	        </form>
 		</div>	        
 	</div>
 	
@@ -109,11 +88,19 @@
 	</div>	
 	
 	<script>
-	 	function home(){
-	 		location.href="loginView.me";
-	 	}
+	 function checkForm() {
+		 	var findId = document.getElementById("findId").value
+	        var findName = document.getElementById("findName").value;
+	        var findEmail = document.getElementById("findEmail").value;
+	        var findPhone = document.getElementById("findPhone").value;
 
+	        if (findId.trim() === ''|| findName.trim() === '' || findEmail.trim() === '' || findPhone.trim() === '') {
+	            alert("모든 필드를 입력해주세요.");
+	            return false;
+	        }
 
+	        return true; 
+	    }
 	
 	
 	</script>

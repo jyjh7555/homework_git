@@ -36,4 +36,15 @@
 		and phone = #{findPhone}
 	</select>
 	
+	<update id="updateTempPwd">
+		update member
+		set member_pwd = #{tempPwd}
+		where member_id = #{findId} 
+		and member_name = #{findName}
+		and email = #{findEmail}
+		and phone = #{findPhone}
+	</update>
+	
+	
+	
 </mapper>
