@@ -18,7 +18,7 @@
 		color:skyblue;
 		font-weight:bold;
 	}
-
+    
 	#topAndNavbar {
 		background-image:linear-gradient(
 	        rgba(0, 0, 0, 0.2),
@@ -39,6 +39,12 @@
 	/* .custom-form-control:focus {
             border: 10px solid; 
             } */
+            
+    .button{
+    	background-color: #b0d342;
+    	align: center;
+    }
+    
 
 
 </style>
@@ -69,13 +75,10 @@
 	
 	<div align="center" >
 		<div class="row d-flex flex-column justify-content-center mb-3 border border-5 w-50 mt-3 " align="center">
-			<form align="left" action="selectId.me" method="post" onsubmit="return checkForm()">
-		        <label style="margin:25px; font-size:25px;"> 아이디찾기 </label>
-		        <input class="form-control w-50 m-4" type="text" name="findName" id="findName" placeholder="이름을 입력해주세요">
-		        <input class="form-control w-50 m-4" type="text" name="findEmail" id="findEmail" placeholder="이메일을 입력해주세요">
-		        <input class="form-control w-50 m-4" type="text" name="findPhone" id="findPhone" placeholder="휴대폰번호를 입력해주세요">
-		        <button type="submit" class="btn btn-secondary btn-lg w-25 m-4 btn-primary" >아이디 찾기</button>
-	        </form>
+			<label style="margin:25px; font-size:25px;"> ${ findName }님의 찾으시는 아이디는 : ${ findId }</label>
+			<div style="text-align: center;">
+				<button class="btn btn-primary btn-md mb-3" onclick="home()"> 로그인화면으로 돌아가기</button>
+			</div>
 		</div>	        
 	</div>
 	
@@ -86,18 +89,9 @@
 	</div>	
 	
 	<script>
-	 function checkForm() {
-	        var findName = document.getElementById("findName").value;
-	        var findEmail = document.getElementById("findEmail").value;
-	        var findPhone = document.getElementById("findPhone").value;
-
-	        if (findName.trim() === '' || findEmail.trim() === '' || findPhone.trim() === '') {
-	            alert("모든 필드를 입력해주세요.");
-	            return false;
-	        }
-
-	        return true; 
-	    }
+	 	function home(){
+	 		location.href="loginView.me";
+	 	}
 
 
 	
