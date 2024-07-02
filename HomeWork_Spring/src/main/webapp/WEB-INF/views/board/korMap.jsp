@@ -27,7 +27,7 @@
 	        rgba(0, 0, 0, 0.2),
 	        rgba(0, 0, 0, 0.2)
 	      )
-	      ,url('image/topImage.png');
+	      ,url('resources/image/topImage.png');
 	    background-size: cover; 
 	    background-position: center;
 	    background-repeat: no-repeat;
@@ -62,10 +62,10 @@
 	    <div id="top-section">
 	        <jsp:include page="../common/top.jsp" />
 	    </div>
- 	</div>
 	<div id="voulnteer2">
 		<jsp:include page="../common/volunteer.jsp"/>
 	</div>	
+ 	</div>
 
 
  	<div align="center" >
