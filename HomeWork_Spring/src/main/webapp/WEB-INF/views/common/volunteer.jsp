@@ -38,7 +38,7 @@
 	} 
 	
 	
-   .hidden {
+   /* .hidden {
         visibility: hidden;
         opacity: 0;
         transition: visibility 0s linear, opacity 0.0s linear;
@@ -50,7 +50,7 @@
         opacity: 1;
         transition: visibility 0s linear, opacity 0.0s linear;
         z-index:0;
-    }
+    } */
 	
 	
 	/* .volunteerWrap > ul > li {
