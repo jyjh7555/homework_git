@@ -21,7 +21,8 @@
 	        #{address},
 	        'N',
 	        'Y',
-	        sysdate
+	        sysdate,
+	        #{memberName}
 		
 		)
 		
