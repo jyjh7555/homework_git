@@ -227,7 +227,7 @@
 			<div class="welcome-section">
 	            <h5><strong>김기룡</strong> 회원님 환영합니다!</h5>
 	            <div class="mdfbtn">
-	            	<a href="updateUser.me">회원정보 수정&nbsp;&nbsp;&nbsp; ></a>
+	            	<a href="updateMemberPage.me">회원정보 수정&nbsp;&nbsp;&nbsp; ></a>
 	            	<a href="https://donate.habitat.or.kr/habitat/mypage/login" onclick="gtag('event', '버튼클릭', {'event_category': '기부금영수증','event_label': 'mypage기부금영수증'});">기부금 영수증&nbsp;&nbsp;&nbsp; ></a>
 	            </div>
 	            

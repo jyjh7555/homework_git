@@ -87,7 +87,6 @@
 		        <input class="form-control w-50 m-4" type="text" placeholder="닉네임" required name="nickName">
 		        <div class="col-12">
 		        	<label style="margin-left:25px; ">휴대폰 번호 입력</label><br>
-		        	
 		        	<input class="form-control m-4 mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" value="010" readonly >-
 		        	<input class="form-control m-3 mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" maxlength="4" placeholder="0000">-
 		        	<input class="form-control m-3 mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" maxlength="4" placeholder="9999">
