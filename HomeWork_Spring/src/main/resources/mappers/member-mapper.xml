@@ -21,7 +21,8 @@
 	        #{address},
 	        'N',
 	        'Y',
-	        sysdate
+	        sysdate,
+	        #{memberName}
 		
 		)
 		
@@ -45,6 +46,16 @@
 		and phone = #{findPhone}
 	</update>
 	
+	<select id="checkMemberId" resultType="_int">
+		select count(*)
+		from member
+		where member_Id = #{id} 
+	</select>
 	
+	<select id="checkMemberNickName" resultType="_int">
+		select count(*)
+		from member
+		where nickName = #{nickName} 
+	</select>
 	
 </mapper>
