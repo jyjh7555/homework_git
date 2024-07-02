@@ -27,6 +27,14 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.updateTempPwd", map);
 	}
 
+	public int checkMemberId(SqlSessionTemplate sqlSession, String id) {
+		return sqlSession.selectOne("memberMapper.checkMemberId",id);
+	}
+
+	public int checkMemberNickName(SqlSessionTemplate sqlSession, String nickName) {
+		return sqlSession.selectOne("memberMapper.checkMemberNickName",nickName);
+	}
+
 
 
 }
