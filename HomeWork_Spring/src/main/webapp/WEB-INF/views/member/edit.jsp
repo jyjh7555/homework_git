@@ -57,20 +57,19 @@
 			<div style="margin-left: 350px; margin-right: 350px;">
 				<form class="needs-validation" action="${ contextPath }/updateMember.me" method="POST">
 					<div class="row g-3">
-						<div class="col-12">
-							<label for="id" class="form-label">ID</label>
+						<div class="col-12 form-floating mb-3">
 							<input type="text" class="form-control" id="id" name="id" readonly value="${ loginUser.memberId }">
+							<label for="id" class="form-label">ID</label>
 						</div>
 												
-						<div class="col-12">
-							<label for="name" class="form-label">NAME</label>
+						<div class="col-12 form-floating mb-3">	
 							<input type="text" class="form-control" id="name" name="name" required value="${ loginUser.memberName }">
+							<label for="name" class="form-label">NAME</label>
 						</div>
 						
-						<div class="col-12">
-							<label for="nickName" class="form-label">NICKNAME</label>
+						<div class="col-12 form-floating mb-3">
 							<input type="text" class="form-control" id="nickName" name="nickName" required value="${ loginUser.nickName }">
-							<label id="nickNameCheckResult">닉네임을 확인해주세요.</label>
+							<label for="nickName" class="form-label">NICKNAME</label>
 						</div>
 
 						<div class="col-12">

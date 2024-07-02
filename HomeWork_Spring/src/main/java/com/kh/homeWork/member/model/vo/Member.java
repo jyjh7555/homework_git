@@ -27,5 +27,6 @@ public class Member {
 	private String isAdmin;
 	private String status;
 	private Date createDate;
-	
+	private String memberName;
+
 }

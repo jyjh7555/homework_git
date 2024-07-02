@@ -36,6 +36,10 @@
 	    
 	}
 	
+	#voulnteer2 {
+		height: 200px;
+	}
+	
 	.inline-btn {
 		display:inline-block;
 		}
@@ -61,16 +65,17 @@
 	    <div id="top-section">
 	        <jsp:include page="../common/top.jsp" />
 	    </div>
+	    <div id="voulnteer2">
+			<jsp:include page="../common/volunteer.jsp"/>
+		</div>	
  	</div>
-	<div id="voulnteer2">
-		<jsp:include page="../common/volunteer.jsp"/>
-	</div>	
+	
 
 
 
 	
 	<div align="center" >
-		<div class="row d-flex flex-column justify-content-center mb-3 border border-5 w-50 mt-3 " align="center">
+		<div class="row d-flex flex-column justify-content-center mb-3 border border-5 w-50 mt-5 " align="center">
 	        <label style="margin:20px; margin-left:15px; font-size:48px;"><b>Home Work</b> </label>
 			<form align="left" action="${contextPath }/insertMember.me" method="post">
 		        <input class="form-control w-50 m-4" type="text" name="memberId"  required placeholder="아이디를 입력해주세요">

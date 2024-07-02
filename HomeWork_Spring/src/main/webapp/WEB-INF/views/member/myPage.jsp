@@ -198,24 +198,32 @@
 	        rgba(0, 0, 0, 0.2),
 	        rgba(0, 0, 0, 0.2)
 	      )
-	      ,url('image/topImage.png');
+	      ,url('resources/image/topImage.png');
 	    background-size: cover; 
 	    background-position: center;
 	    background-repeat: no-repeat;
 	    transition: background-color 0.5s ease;
+	    
+	}
+	
+	#voulnteer2 {
+		height: 200px;
 	}
 </style>
 </head>
 <body>
-	<div id="container">
- 		<div id=topAndNavbar >
+	<div id=topAndNavbar >
 	 		<div id="navbar-section2" onmouseover="changeBackground()" onmouseout="resetBackground()">
 		        <jsp:include page="../common/navbar.jsp" />
 		    </div>    
 		    <div id="top-section">
 		        <jsp:include page="../common/top.jsp" />
 		    </div>
+		    <div id="voulnteer2">
+				<jsp:include page="../common/volunteer.jsp"/>
+			</div>	
  		</div>
+	<div id="container">
  		<div align="center">
 		<ul id="categoryMypageContainer">
 			<li class=categoryMyPage><a  href="#">마이홈</a></li>

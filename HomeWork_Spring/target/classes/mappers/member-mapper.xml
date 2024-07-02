@@ -21,11 +21,12 @@
 	        #{address},
 	        'N',
 	        'Y',
-	        sysdate
+	        sysdate,
+	        #{memberName}
 		
 		)
 	</insert>
-	
+
 	<update id="updateMember">
 		update member
 		set	nickname = #{nickName},
@@ -36,5 +37,25 @@
 			address = #{address}
 		where member_id = #{memberId}
 	</update>
+
+	<select id="selectId" resultType="String">
+		select member_id
+		from member
+		where member_name = #{findName}
+		and email = #{findEmail}
+		and phone = #{findPhone}
+	</select>
+	
+	<update id="updateTempPwd">
+		update member
+		set member_pwd = #{tempPwd}
+		where member_id = #{findId} 
+		and member_name = #{findName}
+		and email = #{findEmail}
+		and phone = #{findPhone}
+	</update>
+	
+	
+
 	
 </mapper>

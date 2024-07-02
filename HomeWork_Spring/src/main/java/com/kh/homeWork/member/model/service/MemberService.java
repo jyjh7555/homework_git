@@ -11,9 +11,14 @@ public interface MemberService{
 
 	int insertMember(Member m);
 
+
 	int updateMember(Member m);
 
 	
+	String selectId(HashMap<String, String> map);
+
+	int updateTempPwd(HashMap<String, String> map);
+
 
 
 }
