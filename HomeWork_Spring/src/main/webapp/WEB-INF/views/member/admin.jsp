@@ -84,6 +84,10 @@
     }
     .selectState{background: lightgray;}
 	.unselectState{background: none;}
+	 .form-container {
+            display: flex;
+            justify-content: flex-end;
+        }
 </style>
 
 
@@ -127,8 +131,15 @@
 			검색정보 입력 : <input type="text" placeholder="검색정보 입력" style="width:55%"><br>
 			</div>
 			<div align="center" id=adminContent>
-				
-				
+				<div class="form-container">
+					<form id="statusMemberForm" action="#" method="post">
+						 <select>
+				   			    <option>전체 사용자</option>
+								<option>활동중인 사용자</option>
+								<option>탈퇴한 사용자</option>
+						 </select>
+					</form>
+				</div>
 				 <div class="userInfo hidden" id=userInfo>
 					<c:forEach items="${ list }" var="m">
 				    	<table id="memberList">
@@ -238,6 +249,7 @@
 						</tr>
 					</table>
 				</div>
+				<%-- 
 			<div class="regularSupportPage hidden" id="regularSupportList">
 					<table id="regulartSupportTable">
 						<tr>
@@ -262,7 +274,7 @@
 						</tr>
 					</table>
 				</div>
-				
+			--%>			
 			</div>
 		</div>
 	</div>
