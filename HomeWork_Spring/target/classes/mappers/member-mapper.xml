@@ -21,7 +21,8 @@
 	        #{address},
 	        'N',
 	        'Y',
-	        sysdate
+	        sysdate,
+	        #{memberName}
 		
 		)
 		
@@ -45,6 +46,15 @@
 		and phone = #{findPhone}
 	</update>
 	
+	<select id="adminSelectMember" resultType="Member">
+		select *
+		from member
+	</select>
 	
+	<update id="adminDelete">
+		update member
+		set status = 'N'
+		where member_no = #{memberNo}
+	</update>
 	
 </mapper>

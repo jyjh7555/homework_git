@@ -1,5 +1,6 @@
 package com.kh.homeWork.member.controller;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
@@ -11,10 +12,10 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.homeWork.member.model.service.MemberService;
 import com.kh.homeWork.member.model.vo.Member;
@@ -53,9 +54,11 @@ public class MemberController {
 	
 	
 	@RequestMapping("admin.me")
-	public String adminPage(@ModelAttribute Member m) {
-		
+	public String adminPage(@ModelAttribute Member m, Model model) {
+		ArrayList<Member> list = mService.adminSelectMember();
+		model.addAttribute("list", list);
 		return "admin";
+
 	}
 	
 	@RequestMapping("logout.me")
@@ -162,7 +165,12 @@ public class MemberController {
 		return "findResult";
 	}
 	
-	
+	@RequestMapping("adminDelete.me")
+	@ResponseBody
+	public String adminDelete(@RequestParam("mNo") int mNo) {
+		int result = mService.adminDelete(mNo);
+		return result == 1? "success" : "fail";
+	}
 
 
 

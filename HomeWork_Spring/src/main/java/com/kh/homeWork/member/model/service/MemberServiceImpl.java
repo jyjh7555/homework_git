@@ -41,6 +41,16 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.updateTempPwd(sqlSession, map);
 	}
 
+	@Override
+	public ArrayList<Member> adminSelectMember() {
+		return mDAO.adminSelectMember(sqlSession);
+	}
+
+	@Override
+	public int adminDelete(int mNo) {
+		return mDAO.adminDelete(sqlSession, mNo);
+	}
+
 
 
 	

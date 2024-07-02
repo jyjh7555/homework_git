@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <style>
  .logo {
        display: flex;
@@ -129,85 +130,93 @@
 				
 				
 				 <div class="userInfo hidden" id=userInfo>
-			    	<table id="memberList">
-						<tr>
-							<th width="8%">회원번호</th>
-							<th width="10%">이름</th>
-							<th width="10%">닉네임</th>
-							<th width="10%">이메일</th>
-							<th width="10%">휴대폰번호</th>
-							<th width="10%">생년월일</th>
-							<th width="12%">가입날짜</th>
-							<th width="10%">관리자</th>
-						</tr>
-						<c:forEach items="${ list }" var="m">
+					<c:forEach items="${ list }" var="m">
+				    	<table id="memberList">
+							<tr>
+								<th width="8%">회원번호</th>
+								<th width="10%">이름</th>
+								<th width="10%">닉네임</th>
+								<th width="10%">이메일</th>
+								<th width="10%">휴대폰번호</th>
+								<th width="10%">생년월일</th>
+								<th width="12%">가입날짜</th>
+								<th width="6%">활동여부</th>
+								<th width="6%">관리자</th>
+							</tr>
+								<tr>
+									<td>${ m.memberNo }</td>
+									<td>${ m.memberName }</td>
+									<td>${ m.nickName }</td>
+									<td>${ m.email }</td>
+									<td>${ m.phone }</td>
+									<td>${ m.age }</td>
+									<td>${ m.createDate }</td>
+									<td>${ m.status }</td>
+									<td>${ m.isAdmin }</td>
+								</tr>
+							</c:forEach>
+						</table>
+					</div>
+				<div class="userUpdate hidden" id="userUpdate">
+					<c:forEach items="${ list }" var="m">
+						<table id="memberUpdate">
+							<tr>
+								<th width="6%">회원번호</th>
+								<th width="10%">이름</th>
+								<th width="10%">닉네임</th>
+								<th width="10%">비밀번호</th>
+								<th width="10%">이메일</th>
+								<th width="10%">휴대폰번호</th>
+								<th width="10%">관리자여부</th>
+								<th width="12%">정보변경</th>
+							</tr>
+							<tr>
+								<td><input type="text" value="${ m.memberNo }" readonly></td>
+	            				<td><input type="text" value="${ m.memberName }"></td>
+					            <td><input type="text" value="${ m.nickName }"></td>
+					            <td><input type="password" value="${ m.memberPwd }"></td>
+					            <td><input type="email" value="${ m.email }"></td>
+					            <td><input type="tel" value="${ m.phone }"></td>
+					            <td>
+					            <c:if test="${ m.isAdmin =='Y' }">
+					            	<button class="adminStatus selectState">Y</button>
+					            	<button class="adminStatus">N</button>
+					            </c:if>
+					            <c:if test="${ m.isAdmin =='N' }">
+					            	<button class="adminStatus">Y</button>
+					            	<button class="adminStatus selectState">N</button>
+					            </c:if>
+					            </td>
+					            <td><button id="updateUserButton">정보 수정</button></td>
+							</tr>
+						</table>
+					</c:forEach>
+				</div>
+				<div class="userDelete hidden" id="userDelete">
+					<c:forEach items="${ list }" var="m">
+						<table id="memberDelete">
+							<tr>
+								<th width="10%">회원번호</th>
+								<th width="10%">이름</th>
+								<th width="10%">닉네임</th>
+								<th width="10%">이메일</th>
+								<th width="10%">휴대폰번호</th>
+								<th width="10%">생년월일</th>
+								<th width="12%">가입날짜</th>
+								<th width="10%">탈퇴</th>
+							</tr>
 							<tr>
 								<td>${ m.memberNo }</td>
-								<td>${ m.memberId }</td>
+								<td>${ m.memberName }</td>
 								<td>${ m.nickName }</td>
 								<td>${ m.email }</td>
 								<td>${ m.phone }</td>
 								<td>${ m.age }</td>
 								<td>${ m.createDate }</td>
-								<td>${ m.isAdmin }</td>
+								<td><button id="deleteUserButton" onclick="deleteMember(${ m.memberNo })">회원탈퇴</button></td>
 							</tr>
-						</c:forEach>
-					</table>
-				</div>
-				<div class="userUpdate hidden" id="userUpdate">
-					<table id="memberUpdate">
-						<tr>
-							<th width="6%">회원번호</th>
-							<th width="10%">이름</th>
-							<th width="10%">닉네임</th>
-							<th width="10%">비밀번호</th>
-							<th width="10%">이메일</th>
-							<th width="10%">휴대폰번호</th>
-							<th width="10%">관리자여부</th>
-							<th width="12%">정보변경</th>
-						</tr>
-						<tr>
-							<td><input type="text" value="001" readonly></td>
-            				<td><input type="text" value="강건강"></td>
-				            <td><input type="text" value="스트롱건강"></td>
-				            <td><input type="password" value="password"></td>
-				            <td><input type="email" value="gang@naver.com"></td>
-				            <td><input type="tel" value="010-1234-5678"></td>
-				            <td>
-				            <div class="adminStatus">Y</div>
-				            <div class="adminStatus selectState">N</div>
-				            </td>
-				            <td><button id="updateUserButton">정보 수정</button></td>
-						</tr>
-					</table>
-				</div>
-				<div class="userDelete hidden" id="userDelete">
-					<table id="memberUpdate">
-						<tr>
-							<th width="10%">회원번호</th>
-							<th width="10%">이름</th>
-							<th width="10%">닉네임</th>
-							<th width="10%">비밀번호</th>
-							<th width="10%">이메일</th>
-							<th width="10%">휴대폰번호</th>
-							<th width="10%">생년월일</th>
-							<th width="10%">주민등록번호</th>
-							<th width="12%">가입날짜</th>
-							<th width="10%">탈퇴</th>
-						</tr>
-						<tr>
-							<td>001</td>
-							<td>강건강</td>
-							<td>스트롱건강</td>
-							<td>password</td>
-							<td>gang@naver.com</td>
-							<td>010-1234-5678</td>
-							<td>94-01-01</td>
-							<td>940101</td>
-							<td>24-06-11</td>
-							<td><button id="deleteUserButton">회원탈퇴</button></td>
-						</tr>
-					</table>
+						</table>
+					</c:forEach>
 				</div>
 			<div class="supportPage hidden" id="supportList">
 					<table id="supportTable">
@@ -334,6 +343,19 @@
 		            }
 		        });
 			 
+		}
+		
+		function deleteMember(memberNo){			
+				$.ajax({
+					url: '${contextPath}/adminDelete.me',
+					data: {mNo:memberNo},
+					success: data =>{
+						console.log(data)
+					},
+					error: data => console.log(data)
+					
+				})
+			
 		}
 	
 	</script>
