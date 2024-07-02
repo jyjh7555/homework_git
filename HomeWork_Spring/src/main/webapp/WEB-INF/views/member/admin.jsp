@@ -283,7 +283,6 @@
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
-				 location.href="${contextPath}/adminSelectMember.me";
 				 
 			 })
 			  document.getElementById('user2').addEventListener('click', function(){
