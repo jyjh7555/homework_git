@@ -1,7 +1,8 @@
 package com.kh.homeWork.member.controller;
 
-import java.util.ArrayList;
+import java.util.Date;
 import java.util.HashMap;
+import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -10,6 +11,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -52,6 +54,7 @@ public class MemberController {
 	
 	@RequestMapping("admin.me")
 	public String adminPage(@ModelAttribute Member m) {
+		
 		return "admin";
 	}
 	
@@ -91,6 +94,77 @@ public class MemberController {
 		
 		return "redirect:index.jsp";
 	}
+	@RequestMapping("findId.me")
+	public String findId() {
+		return "findId";
+	}
 	
+	
+	@RequestMapping("selectId.me")
+	public String findId(@RequestParam("findName") String findName,
+						 @RequestParam("findEmail") String findEmail,
+						 @RequestParam("findPhone") String findPhone,
+						 Member m, Model model) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("findName", findName);
+		map.put("findEmail", findEmail);
+		map.put("findPhone", findPhone);
+		String findId = mService.selectId(map);
+		model.addAttribute("findName", findName);
+		model.addAttribute("findId", findId);
+		model.addAttribute("type", 1);
+		return "findResult";
+	}
+	
+	@RequestMapping("findPwd.me")
+	public String findPwd() {
+		return "findPwd";
+	}
+	
+	private final char[] randomString = new char[]{
+		    '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
+		    'a', 'b', 'c', 'd', 'e', 'f', 'g', 'h', 'i', 'j', 'k', 'l', 'm',
+		    'n', 'o', 'p', 'q', 'r', 's', 't', 'u', 'v', 'w', 'x', 'y', 'z',
+		};
+
+	public String RandomPassword(int size) {
+	    StringBuilder sb = new StringBuilder();
+	    Random rnd = new Random(new Date().getTime());
+	    int len = randomString.length;
+	    
+	    for (int i = 0; i < size; i++) {
+	        sb.append(randomString[rnd.nextInt(len)]);
+	    }
+
+	    return sb.toString();
+	}
+	
+	@RequestMapping("selectPwd.me")
+	public String findId(@RequestParam("findId") String findId,
+						 @RequestParam("findName") String findName,
+						 @RequestParam("findEmail") String findEmail,
+						 @RequestParam("findPhone") String findPhone,
+						 Member m, Model model) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("findId", findId);
+		map.put("findName", findName);
+		map.put("findEmail", findEmail);
+		map.put("findPhone", findPhone);
+		
+		String temp = RandomPassword(10);	// 임시 비밀번호
+		
+		map.put("tempPwd", bcrypt.encode(temp));
+		int result = mService.updateTempPwd(map); // 현재 비밀번호 임시 비밀번호로 변경
+		
+		model.addAttribute("findName", findName);
+		model.addAttribute("tempPwd", temp);
+		model.addAttribute("type", 2);
+		return "findResult";
+	}
+	
+	
+
+
+
 	
 }
