@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
@@ -73,9 +73,9 @@
 		<div class="row d-flex flex-column justify-content-center mb-3 border border-5 w-50 mt-3 " align="center">
 	        <label style="margin:20px; margin-left:15px; font-size:48px;"><b>Home Work</b> </label>
 			<form align="left" action="${contextPath }/insertMember.me" method="post">
-		        <input class="form-control w-50 m-4" type="text" name="memberId"  required placeholder="아이디를 입력해주세요">
+		        <input class="form-control w-50 m-4" type="text" id="id"name="memberId"  required placeholder="아이디를 입력해주세요">
 		        <input class="form-control w-50 m-4" type="text" name="memberName" required placeholder="성함을 입력해주세요">
-		        <input class="form-control w-50 m-4" type="password" name="memberPwd" required placeholder="비밀번호를 입력해주세요">
+		        <input class="form-control w-50 m-4" type="password" id="password"name="memberPwd" required placeholder="비밀번호를 입력해주세요">
 		        <input class="form-control w-50 m-4" type="password" id="passwordCheck" required placeholder="비밀번호 확인">
 	  			<div class="col-12 ml-4">
 					<input class="form-check-input " checked style="margin-left:25px;"  type="radio"  name="gender" id="man" value="M">
@@ -84,7 +84,7 @@
 		  			<label class="form-check-label" for="woman">여자</label>  
 				</div>
 	
-		        <input class="form-control w-50 m-4" type="text" placeholder="닉네임" required name="nickName">
+		        <input class="form-control w-50 m-4" type="text" placeholder="닉네임" required id="nickName" name="nickName">
 		        <div class="col-12">
 		        	<label style="margin-left:25px; ">휴대폰 번호 입력</label><br>
 		        	
@@ -107,10 +107,10 @@
 		        <input type="date" class="form-control w-25 m-4" value="2004-01-01" name="age" >
 		        <!-- <input class="form-control w-50 m-4" type="text" name="address" placeholder="주소 입력"> -->
 		        <div class=col-12>
-			        <input class="form-control w-25 m-4 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_postcode" placeholder="우편번호" readonly>
+			        <input name="address" class="form-control w-25 m-4 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_postcode" placeholder="우편번호" readonly>
 			        <input class="btn btn-outline-secondary btn-sm" type="button" class="btn btn-outline-secondary btn-sm" style="display:inline-block;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-			        <input class="form-control w-50 m-4 mt-1 mb-1" type="text"  id="sample6_address" placeholder="주소" readonly>
-					<input class="form-control w-50 m-4 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_detailAddress" placeholder="상세주소">
+			        <input name="address" class="form-control w-50 m-4 mt-1 mb-1" type="text"  id="sample6_address" placeholder="주소" readonly>
+					<input name="address" class="form-control w-50 m-4 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_detailAddress" placeholder="상세주소">
 					
 		        </div>
 		        <button class="btn btn-secondary btn-lg w-25 m-4 btn-primary">가입하기</button>
@@ -208,41 +208,60 @@
 					}
 				})
 			} */
-			
-			
-			/* document.getElementById('memberId').addEventListener('focusout', function(){
-				const value = this.value;
-				//const targetTd= this.parentElement.parentElement.nextElementSibling.children[0];
-				if(value.trim() == ''){
-					
-				}else{
-					$.ajax({
-						url:'${contextPath}/checkEmpNo.me',			//무조건 들어가야 하는 객체키와값
-						data:{value:value}, // 키 값엔 파라미터명 : 넣을데이터 // 앞 value는 내가 지정한 파라미터명이고 뒤는 변수 value를 집어넣엇다.차이 확인
-						success: (data) =>{	// '서버'에서 보낸 값을 받아온 data 
-							//console.log(data, typeof data);
-							if(data.trim()== '0'){
-								targetTd.innerText = '사용 가능한 사원 번호입니다';
-								targetTd.style.color='green';
-								
-							}else if(data.trim()=='1'){
-								targetTd.innerText = '중복된 사원 번호입니다';
-								targetTd.style.color='red';
-								
-							}
-							targetTd.style.fontSize = '12px';
+			document.getElementById('id').addEventListener('blur',function(){		//인풋태그id값 ajax
+				$.ajax({
+					url:'${contextPath}/checkMemberId.me',
+					data:{id:this.value.trim()},
+					success:(data)=>{
+						if(this.value.trim()==''){
 							
-						},
-						error: data =>console.log(data)
-						
-						
-					});	//타입도넣을수잇는데,생략하면get방식				//제이쿼리안에 에이작스함수
+						}else if(data == 'yes'){
+							this.style.border ="2px solid red";
+						}else{
+							this.style.border ="2px solid rgb(107,236,98)";
+						}
+					},
+					error:data=>console.log(data)
+				});
+			});
+			
+			//중복패스워드칸 초기화하기
+			document.getElementById('password').addEventListener('focus',function(){
+				this.nextElementSibling.value = '';
+				this.nextElementSibling.style.border = '1px solid #ced4da';
+			});
+			
+			
+			//인풋태그pwd 중복체크
+			document.getElementById('passwordCheck').addEventListener('blur',function(){
+				const pwd = this.previousElementSibling.value.trim();
+				console.log(pwd);
+				console.log(this.value);
+				if(pwd == this.value.trim()  && pwd != ''){
+					this.style.border ='2px solid rgb(107,236,98)';
+				}else{
+					this.style.border ='2px solid red';
+					
 				}
-				
-			}) */
+			});	
 			
 			
-			
+			document.getElementById('nickName').addEventListener('blur',function(){		//인풋태그닉네임값 ajax
+				$.ajax({
+					url:'${contextPath}/checkMemberNickName.me',
+					data:{nickName:this.value.trim()},
+					success:(data)=>{
+						if(this.value.trim()==''){
+							
+						}else if(data == 'yes'){
+							this.style.border ="2px solid red";
+						}else{
+							this.style.border ="2px solid rgb(107,236,98)";
+						}
+					},
+					error:data=>console.log(data)
+				});
+			});
 			
 		}
 	
