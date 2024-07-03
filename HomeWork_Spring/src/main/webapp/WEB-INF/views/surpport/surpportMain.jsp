@@ -5,8 +5,9 @@
 <head>
 <meta charset="UTF-8">
 <title>후원정보</title>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> -->
+<script src="https://cdn.iamport.kr/v1/iamport.js"></script>
 <style>
 	#topAndNavbar {
 			background-image:linear-gradient(
@@ -36,10 +37,10 @@
 	    <div id="top-section">
 	        <jsp:include page="../common/top.jsp" />
 	    </div>
- 	</div>
 	<div id="voulnteer2">
 		<jsp:include page="../common/volunteer.jsp"/>
 	</div>	
+ 	</div>
 
 
 	
@@ -70,10 +71,13 @@
 	            <label class="label me-3 ms-4 mb-3">직접 입력</label>
 	            <input type="number" id="customAmountInput" class="form-control-sm  border border-2" placeholder="금액을 입력하세요" min="10000" step="1000">원
 	        </div>
+	        	<button class ="btn btm-lg w-25 btn-success m-5" onclick="requestPay()">후원</button>
 		</div>
 	     
 	</div>
     <br><br>
+    
+    <%-- 
     <div class="container-fluid">
         <div class="grid grid-cols-1 md:grid-cols-2">
             <div id="credit-card-section">
@@ -159,14 +163,54 @@
         <button class="submit payInfo" onclick="submitDonation()">후원하기</button>
     </div>
 	
+	 --%>
 	<div id="footer">
  			<jsp:include page="../common/footer.jsp"/>
-	</div>	
+	</div>
 	
-	<script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+		
+	<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
+    		//포트원 api
+    	
+    		
+	    IMP.init("imp25707021");
+    	
+    	const now = new Date();
+		
+    	const year = now.getFullYear();
+    	
+    	const month = (now.getMonth() + 1).toString().padStart(2, '0'); // 월은 0부터 시작하므로 1을 더함
+    	const day = now.getDate().toString().padStart(2, '0');
+    	const hours = now.getHours().toString().padStart(2, '0');
+    	const minutes = now.getMinutes().toString().padStart(2, '0');
+    	const seconds = now.getSeconds().toString().padStart(2, '0');
+
+    	const formattedTime = year+month+day+hours+minutes+seconds;
+    	console.log(formattedTime);
+    	console.log('${ loginUser.phone}');
+    	
+	    function requestPay() {
+	    	const money = document.getElementById('customAmountInput').value;
+	    	console.log(money);
+	        IMP.request_pay({
+		        pg: "html5_inicis.INIpayTest",
+		        pay_method: "card",
+		        merchant_uid: formattedTime,
+		        name: "크테스트후원결제",
+		        amount: money,
+		        buyer_tel: "${ loginUser.phone}",
+		        m_redirect_url: "www.naver.com",
+	      });
+	        console.log(success);
+	    }
+    
+    
+    
+    
+    
 	    function toggleButtonColor(button) {
 	        var buttons = button.parentNode.querySelectorAll('.button');
 	        buttons.forEach(function(btn) {

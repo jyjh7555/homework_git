@@ -7,8 +7,8 @@
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
-<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script>
+<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-rbsA2VBKQhggwzxH7pPCaAqO46MgnOM80zW1RWuH61DGLwZJEdK2Kadq2F9CUG65" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-kenU1KFdBIe4zVF0s0G1M5b4hcpxyD9F7jL+jjXkk+Q2h455rYXK/7HAuoJl+0I4" crossorigin="anonymous"></script> -->
 <!-- 카카오 주소 api -->
 <style>
 	body {
@@ -61,9 +61,9 @@
 	    <div id="top-section">
 	        <jsp:include page="../common/top.jsp" />
 	    </div>
-	<div id="voulnteer2">
-		<jsp:include page="../common/volunteer.jsp"/>
-	</div>	
+		<div id="voulnteer2">
+			<jsp:include page="../common/volunteer.jsp"/>
+		</div>	
  	</div>
 
 
@@ -73,18 +73,34 @@
 		<div class="row d-flex flex-column justify-content-center mb-3 border border-5 w-50 mt-3 " align="center">
 	        <label style="margin:20px; margin-left:15px; font-size:48px;"><b>Home Work</b> </label>
 			<form align="left" action="${contextPath }/insertMember.me" method="post">
+				<div class="form-floating">
 		        <input class="form-control w-50 m-4" type="text" id="id"name="memberId"  required placeholder="아이디를 입력해주세요">
-		        <input class="form-control w-50 m-4" type="text" name="memberName" required placeholder="성함을 입력해주세요">
-		        <input class="form-control w-50 m-4" type="password" id="password"name="memberPwd" required placeholder="비밀번호를 입력해주세요">
-		        <input class="form-control w-50 m-4" type="password" id="passwordCheck" required placeholder="비밀번호 확인">
+				  <label class="m-4 mt-0" style="color:#ced4da" for="id">아이디</label>
+				</div>
+				
+				<div class="form-floating">
+			        <input class="form-control w-50 m-4" type="text" id="memberName"name="memberName" required placeholder="성함을 입력해주세요">
+					<label class="m-4 mt-0" style="color:#ced4da" for="memberName">성함</label>
+				</div>
+				
+				<div class="form-floating">
+		        	<input class="form-control w-50 m-4" type="password" id="password"name="memberPwd" required placeholder="비밀번호를 입력해주세요">
+		        	<label class="m-4 mt-0" style="color:#ced4da" for="password">비밀번호</label>
+		        </div>
+		        <div class="form-floating">
+			        <input class="form-control w-50 m-4" type="password" id="passwordCheck" required placeholder="비밀번호 확인">
+			        <label class="m-4 mt-0" style="color:#ced4da" for="passwordCheck">비밀번호 확인</label>
+		        </div>
 	  			<div class="col-12 ml-4">
 					<input class="form-check-input " checked style="margin-left:25px;"  type="radio"  name="gender" id="man" value="M">
 		  			<label class="form-check-label " for="man">남자</label>
 					<input class="form-check-input "  type="radio" name="gender" id="woman" value="F">
 		  			<label class="form-check-label" for="woman">여자</label>  
 				</div>
-	
-		        <input class="form-control w-50 m-4" type="text" placeholder="닉네임" required id="nickName" name="nickName">
+				<div class="form-floating">
+		        	<input class="form-control w-50 m-4" type="text" placeholder="닉네임" required id="nickName" name="nickName">
+		        	<label class="m-4 mt-0" style="color:#ced4da" for="cinkName">닉네임</label>
+		        </div>
 		        <div class="col-12">
 		        	<label style="margin-left:25px; ">휴대폰 번호 입력</label><br>
 		        	
@@ -226,15 +242,18 @@
 			});
 			
 			//중복패스워드칸 초기화하기
-			document.getElementById('password').addEventListener('focus',function(){
-				this.nextElementSibling.value = '';
-				this.nextElementSibling.style.border = '1px solid #ced4da';
+			const password = document.getElementById('password')
+			const passwordCheck = document.getElementById('passwordCheck')
+			password.addEventListener('focus',function(){
+				
+				passwordCheck.value = '';
+				passwordCheck.style.border = '1px solid #ced4da';
 			});
 			
 			
 			//인풋태그pwd 중복체크
-			document.getElementById('passwordCheck').addEventListener('blur',function(){
-				const pwd = this.previousElementSibling.value.trim();
+			passwordCheck.addEventListener('blur',function(){
+				const pwd = password.value.trim();
 				console.log(pwd);
 				console.log(this.value);
 				if(pwd == this.value.trim()  && pwd != ''){
