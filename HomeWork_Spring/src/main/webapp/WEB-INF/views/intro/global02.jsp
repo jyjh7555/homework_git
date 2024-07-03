@@ -24,6 +24,10 @@
 	    transition: background-color 0.5s ease;
 	}
 	
+	#voulnteer2 {
+		height: 200px;
+	}
+	
 	body {
 		font-family: "Nanum Gothic", sans-serif;
   		font-weight: 400;
@@ -57,10 +61,11 @@
 	    <div id="top-section">
 	        <jsp:include page="../common/top.jsp" />
 	    </div>
+	    <div id="voulnteer2">
+			<jsp:include page="../common/volunteer.jsp"/>
+		</div>	
  	</div>
-	<div id="voulnteer2">
-		<jsp:include page="../common/volunteer.jsp"/>
-	</div>	
+	
 
 	<br><br>
 	

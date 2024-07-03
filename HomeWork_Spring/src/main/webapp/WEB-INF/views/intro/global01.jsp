@@ -5,27 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-
-<link href="${ contextPath }/CSS/domestic2.css" rel="stylesheet" type="text/css">
+<link href="${ contextPath }/CSS/global1.css" rel="stylesheet" type="text/css">
+</head>
 <style>
-
-	.categoryDomestic{display: inline-block;  margin-right: 2px; 
-		width:400px; line-height:50px; margin-left:-11px;  text-align:center;
-		}
-	
-	body {
-		font-family: "Nanum Gothic", sans-serif;
-  		font-weight: 400;
-  		font-style: normal;
-	}
-	
-	em{
-		font-size:30px;
-		color:skyblue;
-		font-weight:bold;
-	}
-
-	#topAndNavbar {
+		#topAndNavbar {
 		background-image:linear-gradient(
 	        rgba(0, 0, 0, 0.2),
 	        rgba(0, 0, 0, 0.2)
@@ -36,17 +19,10 @@
 	    background-repeat: no-repeat;
 	    transition: background-color 0.5s ease;
 	    
-	}
 	
-	
-	
-
+	}	
 </style>
-</head>
 <body >
-	
-
-
 	<div id=topAndNavbar>
  		<div id="navbar-section2" onmouseover="changeBackground()" onmouseout="resetBackground()">
 	        <jsp:include page="../common/navbar.jsp" />
@@ -54,37 +30,46 @@
 	    <div id="top-section">
 	        <jsp:include page="../common/top.jsp" />
 	    </div>
+	    <div id="voulnteer2">
+			<jsp:include page="../common/volunteer.jsp"/>
+		</div>	
  	</div>
-	<div id="voulnteer2">
-		<jsp:include page="../common/volunteer.jsp"/>
-	</div>	
+	
 
 	<br><br>
 	
-	<div align="center">
+	<div id="global-container" align="center">
 		<ul>
-			<li class=categoryDomestic><a style=" border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="global01.in">집짓기</a></li>
-			<li class=categoryDomestic><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #00AFD7;border-bottom:3px solid #00AFD7;" href="global02.in">주거환경개선</a></li>
-			<li class=categoryDomestic><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:2px solid #EEEEEE;border-bottom:3px solid #00AFD7;" href="global03.in">긴급/재난</a></li>
+			<li class=categoryDomestic><a style=" border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="global01.in">주거환경 개선</a></li>
+			<li class=categoryDomestic><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #00AFD7;border-bottom:3px solid #00AFD7;" href="global02.in">식수 위생</a></li>
+			<li class=categoryDomestic><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:2px solid #EEEEEE;border-bottom:3px solid #00AFD7;" href="global03.in">도시슬럼 지원</a></li>
 		</ul>
 	</div>
-	<p align="center"style="font-size:42px;"><b>집짓기</b></p>
-	<p align="center" style="font-size:30px;"> 여러분의 땀과 열정으로 집과 희망을 짓습니다.</p>
-	
-	<br>
-	
+	<div class="sub-tit text-center mt-5">
+		<h3 class="fs-2 fw-bold">주거환경 개선</h3>
+		<br>
+	 	<h4>소박하지만 안전한 주거환경에서 거주할 수 있도록 새로운 주택을 건축하거나,주택을 보수합니다.</h4>
+	</div>
 	<div align="center">
 		
-		<div class="domeMainImage" align="center" style="background-image:url('resources/image/dome01Image1.jpg');">
-			<div style="color:white; font-size:48px; padding:100px; font-weight:bold;">희망의 집짓기!</div>
+		<div class="global-image1 d-flex justify-content-center mt-5 " style="background-image:url('resources/image/global1-1.jpg');">
+			<h3 class="align-self-center lh-lg fw-semibold">Home Work는 농촌 지역과 도시 지역의 주거빈곤을 극복하기 위해 <br> 주거환경개선사업을 수행합니다</h3>
 		</div>
 		<div class="content" align="left" >
-		<br><br><br><br><br> 
-			<div align="left" style="display:inline-block; border-left: 10px solid #e3e3e3; margin-left:100px; padding:10px;width:500px;">
-			<h1>희망의 집짓기</h1>
-			<h3>국내 주거환경의 개선을 위해 <br>
-				새로운 주택을 짓습니다.</h3>
+			<div class="text-container1 d-flex justify-content-evenly mt-n5 ">
+				<div class="align-self-center mt-15 w-25">
+					<h3 class="fs-5 fw-semibold">주택 신축 사업</h3>
+					<h4 class="fs-6">각국에는 해비타트의 표준 주택모델이 있습니다.<br>
+						지역에서 조달가능한 자재를 활용하여 적정주택을 제공합니다.<br>
+						지역정부 및 마을 대표와 함께 논의하여 신축 사업의 대상자를<br>
+						선정합니다.
+					</h4>
+				</div>
+				<div class="global-image2" style="background-image:url('resources/image/global1-2.PNG');">
+				</div>
 			</div>
+			
+			<hr>
 			
 			<div style="display:inline-block; width:500px; margin-left:100px;padding:10px;">
 			<p>home work가짓는 주택은 입주가정의 자립과 건강한 공동체의 기반이 됩니다.
@@ -93,7 +78,7 @@
 			<br>
 			
 			
-			<hr>
+			
 			
 			<div style="margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
 				<div class="imageDiv" align="center" ><img src="resources/image/dome01Image2.jpg"/></div>

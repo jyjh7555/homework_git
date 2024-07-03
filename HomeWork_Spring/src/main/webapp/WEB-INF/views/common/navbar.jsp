@@ -11,57 +11,57 @@
 <title>Insert title here</title>
 <style>
 	   #navbar{
-     display: flex;
-     flex-direction:row;
-      justify-content:end;
-      margin-left:500px;
-      white-space: nowrap;
+     	display: flex;
+    	 flex-direction:row;
+      	justify-content:end;
+      	margin-left:500px;
+      	white-space: nowrap;
       
 
-   }
-   #navbar a {
-       color: white; /* White text color */
-      text-decoration: none;
-      margin: 0 50px;
-      font-weight: bold;
-      transition: color 0.5s ease;
-      font-size: 18px;
-   
-   }
-   #navbar>a:hover{font-weight: bold; text-decoration: underline;}
-   
-   .logo {
-       display: flex;
-       align-items: center;
-   }
-
-   .logo-container {
-       width: 130px;
-       height: 130px;
-       background-image: inherit; 
-       background-size: cover;
-       background-position: center;
-       position: relative;
-       margin-bottom: 15px;
-       margin-left:50px;
-   }
-
-   .logo-container img {
-       width: 100%;
-       height: 100%;
-       object-fit: contain;
-   }
-   
-   #navbar-section {
-         background-color: transparent; /* transparent background */
-          display: flex;
-          align-items: center;
-          justify-content: space-around;
-          padding: 10px 20px;
-          transition: background-color 0.5s ease;
-         border-bottom: 0.5px solid lightgray;
-         height:80px;
-   }
+	   }
+	   #navbar a {
+	       color: white; /* White text color */
+	      text-decoration: none;
+	      margin: 0 50px;
+	      font-weight: bold;
+	      transition: color 0.5s ease;
+	      font-size: 18px;
+	   
+	   }
+	   #navbar>a:hover{font-weight: bold; text-decoration: underline;}
+	   
+	   .logo {
+	       display: flex;
+	       align-items: center;
+	   }
+	
+	   .logo-container {
+	       width: 130px;
+	       height: 130px;
+	       background-image: inherit; 
+	       background-size: cover;
+	       background-position: center;
+	       position: relative;
+	       margin-bottom: 15px;
+	       margin-left:50px;
+	   }
+	
+	   .logo-container img {
+	       width: 100%;
+	       height: 100%;
+	       object-fit: contain;
+	   }
+	   
+	   #navbar-section {
+	         background-color: transparent; /* transparent background */
+	          display: flex;
+	          align-items: center;
+	          justify-content: space-around;
+	          padding: 10px 20px;
+	          transition: background-color 0.5s ease;
+	         border-bottom: 0.5px solid lightgray;
+	         height:80px;
+	   }
 
 </style>
 </head>

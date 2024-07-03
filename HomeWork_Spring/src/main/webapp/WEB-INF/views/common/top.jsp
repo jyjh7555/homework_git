@@ -34,9 +34,7 @@
 	<div id="top">
 		 <h2> HOME WORK</h2> 
 		 <br>
-		<em>기적을 짓는 시간과 땀의 헌신</em>
-		
-		
+		 <em>기적을 짓는 시간과 땀의 헌신</em>
 	</div>
 </body>
 </html>
