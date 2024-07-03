@@ -8,23 +8,23 @@
 <title>Insert title here</title>
 <style>
 	   h2{
-   color: white;
-   text-decoration: none;
-   font-size: 30px;
-   }
-   h2>em {
-   color: white;
-   text-decoration: none;
-   font-size:16px;
-   
-   }
-   
-   #top {
-        text-align: center;
-        padding: 20px;
-        height:100px;
-      
-    }
+		   color: white;
+		   text-decoration: none;
+		   font-size: 100px;
+		 }
+	   em {
+		   color: white;
+		   text-decoration: none;
+		   font-size:30px;
+	   
+	   }
+	   
+	   #top {
+	        text-align: center;
+	        padding: 20px;
+	        height:100px;
+	      
+	    }
     
  
 </style>
@@ -32,10 +32,9 @@
 <body>
 	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope = "application"></c:set>
 	<div id="top">
-		 <h2> HOME WORK <br>
-		<em>기적을 짓는 시간과 땀의 헌신</em>
-		</h2>
-		
+		 <h2> HOME WORK</h2> 
+		 <br>
+		 <em>기적을 짓는 시간과 땀의 헌신</em>
 	</div>
 </body>
 </html>
