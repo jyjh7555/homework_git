@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -169,6 +170,13 @@ public class MemberController {
 	@ResponseBody
 	public String adminDelete(@RequestParam("mNo") int mNo) {
 		int result = mService.adminDelete(mNo);
+		return result == 1? "success" : "fail";
+	}
+	
+	@RequestMapping("adminUpdate.me")
+	@ResponseBody
+	public String adminUpdate(@RequestBody Member mInfo) {
+		int result = mService.adminUpdate(mInfo);
 		return result == 1? "success" : "fail";
 	}
 

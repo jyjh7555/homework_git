@@ -57,4 +57,12 @@
 		where member_no = #{memberNo}
 	</update>
 	
+	<update id="adminUpdate">
+		update member
+		set member_name = #{memberName}
+			and nickname = #{nickName}
+			and member_pwd = #{member_pwd}
+			and email = #{email}
+		where member_no = #{memberNo}
+	</update>
 </mapper>

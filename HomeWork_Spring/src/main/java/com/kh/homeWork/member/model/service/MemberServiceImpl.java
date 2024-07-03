@@ -51,6 +51,11 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.adminDelete(sqlSession, mNo);
 	}
 
+	@Override
+	public int adminUpdate(Member mInfo) {
+		return 0;
+	}
+
 
 
 	

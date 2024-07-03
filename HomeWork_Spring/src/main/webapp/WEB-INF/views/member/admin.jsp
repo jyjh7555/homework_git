@@ -77,13 +77,18 @@
         width: 100%;
         box-sizing: border-box;
     }
-    .adminStatus{
+    .adminYN{
     	display: inline-block;
     	border: 1px solid black;
     	padding: 5px 10px;
     }
-    .selectState{background: lightgray;}
-	.unselectState{background: none;}
+    .adminYN.selectState {
+    background: lightgreen;
+	}
+	
+	.adminYN.unselectState {
+	    background: none;
+	}
 	 .form-container {
             display: flex;
             justify-content: flex-end;
@@ -134,26 +139,26 @@
 				<div class="form-container">
 					<form id="statusMemberForm" action="#" method="post">
 						 <select>
-				   			    <option>전체 사용자</option>
-								<option>활동중인 사용자</option>
-								<option>탈퇴한 사용자</option>
+				   			    <option value="all">전체 사용자</option>
+								<option value="Y">활동중인 사용자</option>
+								<option value="N">탈퇴한 사용자</option>
 						 </select>
 					</form>
 				</div>
 				 <div class="userInfo hidden" id=userInfo>
-					<c:forEach items="${ list }" var="m">
-				    	<table id="memberList">
-							<tr>
-								<th width="8%">회원번호</th>
-								<th width="10%">이름</th>
-								<th width="10%">닉네임</th>
-								<th width="10%">이메일</th>
-								<th width="10%">휴대폰번호</th>
-								<th width="10%">생년월일</th>
-								<th width="12%">가입날짜</th>
-								<th width="6%">활동여부</th>
-								<th width="6%">관리자</th>
-							</tr>
+					<c:forEach items="${ list }" var="m">					
+				    		<table id="memberList">
+								<tr>
+									<th width="8%">회원번호</th>
+									<th width="10%">이름</th>
+									<th width="10%">닉네임</th>
+									<th width="10%">이메일</th>
+									<th width="10%">휴대폰번호</th>
+									<th width="10%">생년월일</th>
+									<th width="12%">가입날짜</th>
+									<th width="6%">활동여부</th>
+									<th width="6%">관리자</th>
+								</tr>
 								<tr>
 									<td>${ m.memberNo }</td>
 									<td>${ m.memberName }</td>
@@ -165,44 +170,44 @@
 									<td>${ m.status }</td>
 									<td>${ m.isAdmin }</td>
 								</tr>
-							</c:forEach>
-						</table>
+							</table>
+						</c:forEach>
 					</div>
-				<div class="userUpdate hidden" id="userUpdate">
-					<c:forEach items="${ list }" var="m">
-						<table id="memberUpdate">
-							<tr>
-								<th width="6%">회원번호</th>
-								<th width="10%">이름</th>
-								<th width="10%">닉네임</th>
-								<th width="10%">비밀번호</th>
-								<th width="10%">이메일</th>
-								<th width="10%">휴대폰번호</th>
-								<th width="10%">관리자여부</th>
-								<th width="12%">정보변경</th>
-							</tr>
-							<tr>
-								<td><input type="text" value="${ m.memberNo }" readonly></td>
-	            				<td><input type="text" value="${ m.memberName }"></td>
-					            <td><input type="text" value="${ m.nickName }"></td>
-					            <td><input type="password" value="${ m.memberPwd }"></td>
-					            <td><input type="email" value="${ m.email }"></td>
-					            <td><input type="tel" value="${ m.phone }"></td>
-					            <td>
-					            <c:if test="${ m.isAdmin =='Y' }">
-					            	<button class="adminStatus selectState">Y</button>
-					            	<button class="adminStatus">N</button>
-					            </c:if>
-					            <c:if test="${ m.isAdmin =='N' }">
-					            	<button class="adminStatus">Y</button>
-					            	<button class="adminStatus selectState">N</button>
-					            </c:if>
-					            </td>
-					            <td><button id="updateUserButton">정보 수정</button></td>
-							</tr>
-						</table>
-					</c:forEach>
-				</div>
+					<div class="userUpdate hidden" id="userUpdate">
+						<c:forEach items="${ list }" var="m">
+							<table id="memberUpdate">
+								<tr>
+									<th width="6%">회원번호</th>
+									<th width="10%">이름</th>
+									<th width="10%">닉네임</th>
+									<th width="10%">비밀번호</th>
+									<th width="10%">이메일</th>
+									<th width="10%">휴대폰번호</th>
+									<th width="10%">관리자여부</th>
+									<th width="12%">정보변경</th>
+								</tr>
+								<tr>
+									<td><input type="text" class="updateNo" value="${ m.memberNo }" readonly></td>
+		            				<td><input type="text" class="updateName" value="${ m.memberName }"></td>
+						            <td><input type="text" class="updateNickName" value="${ m.nickName }"></td>
+						            <td><input type="password" class="updatePwd" value="${ m.memberPwd }"></td>
+						            <td><input type="email" class="updateEmail" value="${ m.email }"></td>
+						            <td><input type="tel" class="updatePhone" value="${ m.phone }"></td>
+						            <td>
+						            <c:if test="${ m.isAdmin =='Y' }">
+							            <div class="adminYN ${m.isAdmin == 'Y' ? 'selectState' : 'unselectState'}" onclick="toggleAdmin('Y','${ m.memberNo}')">Y</div>
+										<div class="adminYN ${m.isAdmin == 'N' ? 'selectState' : 'unselectState'}" onclick="toggleAdmin('N','${ m.memberNo}')">N</div>
+						            </c:if>
+						            <c:if test="${ m.isAdmin =='N' }">
+						            	<div class="adminYN ${m.isAdmin == 'Y' ? 'selectState' : 'unselectState'}" onclick="toggleAdmin('Y','${ m.isAdmin}','${ m.memberNo}')">Y</div>
+										<div class="adminYN ${m.isAdmin == 'N' ? 'selectState' : 'unselectState'}" onclick="toggleAdmin('N','${ m.isAdmin}, '${ m.memberNo}')'">N</div>
+						            </c:if>
+						            </td>
+						            <td><button id="updateUserButton" onclick="updateMember(${ m.memberNo })">정보 수정</button></td>
+								</tr>
+							</table>
+						</c:forEach>
+					</div>
 				<div class="userDelete hidden" id="userDelete">
 					<c:forEach items="${ list }" var="m">
 						<table id="memberDelete">
@@ -249,7 +254,6 @@
 						</tr>
 					</table>
 				</div>
-				<%-- 
 			<div class="regularSupportPage hidden" id="regularSupportList">
 					<table id="regulartSupportTable">
 						<tr>
@@ -274,7 +278,6 @@
 						</tr>
 					</table>
 				</div>
-			--%>			
 			</div>
 		</div>
 	</div>
@@ -282,7 +285,6 @@
 	<script>
 		window.onload =() =>{
 			const mainCate = document.getElementsByClassName('mainCate');
-			console.log(mainCate);
 			 mainCate[0].addEventListener('click', function() {
 	                this.nextElementSibling.classList.toggle('hidden');
 	                
@@ -322,11 +324,7 @@
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 
 			 })
-			 document.getElementById('updateUserButton').addEventListener('click', function() {
-		            if (confirm("정보를 수정하시겠습니까?")) {
-		                alert("수정되었습니다.");
-		            }
-		        });
+			
 			 document.getElementById('deleteUserButton').addEventListener('click', function() {
 		            if (confirm("정말 탈퇴하시겠습니까?")) {
 		                alert("탈퇴되었습니다.");
@@ -349,11 +347,7 @@
 				 document.getElementById('supportList').classList.add('hidden');
 				 
 			 })
-			 document.getElementById('supportCancle').addEventListener('click', function() {
-		            if (confirm("정기후원을 취소합니까?")) {
-		                alert("후원이 취소되었습니다.\n후원해주셔서 감사합니다.");
-		            }
-		        });
+			
 			 
 		}
 		
@@ -369,8 +363,42 @@
 				})
 			
 		}
-	
-	</script>
 		
+		function updateMember(memberNo){
+			var memberName = $('.updateName').val();
+		    var nickName = $('.updateNickName').val();
+		    var memberPwd = $('.updatePwd').val();
+		    var email = $('.updateEmail').val();
+		    var phone = $('.updatePhone').val();
+
+	        var mInfo = {
+	                memberNo: memberNo,
+	                memberName: memberName,
+	                nickName: nickName,
+	                memberPwd: memberPwd,
+	                email: email,
+	                phone: phone,
+	            };
+	        console.log(mInfo);
+	        $.ajax({
+	        	url: '${contextPath}/adminUpdate.me',
+	        	type: 'POST',
+	        	data: mInfo, 
+	        		success: data =>{
+	        			console.log(data)
+	        		},
+	        		error: data => console.log(data)
+	        })
+		}
+		
+		function toggleAdmin(isAdmin, memberNo) {
+		    if (isAdmin == 'N') {
+		        alert('회원번호 ' + memberNo  +'님의 관리자 권한을 해제합니다.');
+		    } else {
+		        alert('회원번호 ' + memberNo  +'님의 관리자 권한을 부여합니다.');
+		    }
+		}
+		
+	</script>
 </body>
 </html>

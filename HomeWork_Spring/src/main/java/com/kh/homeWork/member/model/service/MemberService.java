@@ -19,6 +19,8 @@ public interface MemberService{
 
 	int adminDelete(int mNo);
 
+	int adminUpdate(Member mInfo);
+
 
 
 }
