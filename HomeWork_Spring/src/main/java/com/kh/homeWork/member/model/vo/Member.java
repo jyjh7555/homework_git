@@ -22,10 +22,11 @@ public class Member {
 	private String nickName;
 	private String phone;
 	private String email;
-	private Date age;
+	private String age;
 	private String address;
 	private String isAdmin;
 	private String status;
 	private Date createDate;
 	private String memberName;
+
 }

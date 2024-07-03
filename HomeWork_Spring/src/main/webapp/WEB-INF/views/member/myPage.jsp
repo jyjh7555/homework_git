@@ -198,24 +198,32 @@
 	        rgba(0, 0, 0, 0.2),
 	        rgba(0, 0, 0, 0.2)
 	      )
-	      ,url('image/topImage.png');
+	      ,url('resources/image/topImage.png');
 	    background-size: cover; 
 	    background-position: center;
 	    background-repeat: no-repeat;
 	    transition: background-color 0.5s ease;
+	    
+	}
+	
+	#voulnteer2 {
+		height: 200px;
 	}
 </style>
 </head>
 <body>
-	<div id="container">
- 		<div id=topAndNavbar >
+	<div id=topAndNavbar >
 	 		<div id="navbar-section2" onmouseover="changeBackground()" onmouseout="resetBackground()">
 		        <jsp:include page="../common/navbar.jsp" />
 		    </div>    
 		    <div id="top-section">
 		        <jsp:include page="../common/top.jsp" />
 		    </div>
+		    <div id="voulnteer2">
+				<jsp:include page="../common/volunteer.jsp"/>
+			</div>	
  		</div>
+	<div id="container">
  		<div align="center">
 		<ul id="categoryMypageContainer">
 			<li class=categoryMyPage><a  href="#">마이홈</a></li>
@@ -227,7 +235,7 @@
 			<div class="welcome-section">
 	            <h5><strong>김기룡</strong> 회원님 환영합니다!</h5>
 	            <div class="mdfbtn">
-	            	<a href="updateUser.me">회원정보 수정&nbsp;&nbsp;&nbsp; ></a>
+	            	<a href="updateMemberPage.me">회원정보 수정&nbsp;&nbsp;&nbsp; ></a>
 	            	<a href="https://donate.habitat.or.kr/habitat/mypage/login" onclick="gtag('event', '버튼클릭', {'event_category': '기부금영수증','event_label': 'mypage기부금영수증'});">기부금 영수증&nbsp;&nbsp;&nbsp; ></a>
 	            </div>
 	            

@@ -16,6 +16,9 @@
         height:200px;
         flex-direction:row;
         align-items: flex-start;
+        margin-right:0;
+        margin-left:0;
+        margin-top:30px;
 	}
 	
 	#footer-logo {
