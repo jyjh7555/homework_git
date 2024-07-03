@@ -175,8 +175,22 @@ public class MemberController {
 	
 	@RequestMapping("adminUpdate.me")
 	@ResponseBody
-	public String adminUpdate(@RequestBody Member mInfo) {
-		int result = mService.adminUpdate(mInfo);
+	public String adminUpdate(@RequestParam int memberNo,
+							  @RequestParam String memberName,
+                              @RequestParam String nickName,
+                              @RequestParam String memberPwd,
+                              @RequestParam String email,
+                              @RequestParam String phone
+                              ) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		map.put("memberNo", memberNo);
+		map.put("memberName", memberName);
+		map.put("nickName", nickName);
+		map.put("memberPwd", bcrypt.encode(memberPwd));
+		map.put("email", email);
+		map.put("phone", phone);
+		System.out.println(map);
+		int result = mService.adminUpdate(map);
 		return result == 1? "success" : "fail";
 	}
 

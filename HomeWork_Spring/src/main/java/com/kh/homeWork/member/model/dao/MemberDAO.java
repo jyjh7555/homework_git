@@ -35,8 +35,8 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.adminDelete", mNo);
 	}
 
-	public int adminUpdate(SqlSessionTemplate sqlSession, Member mInfo) {
-		return sqlSession.update("memberMapper.adminUpdate", mInfo);
+	public int adminUpdate(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
+		return sqlSession.update("memberMapper.adminUpdate", map);
 	}
 
 

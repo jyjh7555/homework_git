@@ -203,7 +203,7 @@
 										<div class="adminYN ${m.isAdmin == 'N' ? 'selectState' : 'unselectState'}" onclick="toggleAdmin('N','${ m.isAdmin}, '${ m.memberNo}')'">N</div>
 						            </c:if>
 						            </td>
-						            <td><button id="updateUserButton" onclick="updateMember(${ m.memberNo })">정보 수정</button></td>
+						            <td><button id="updateUserButton" onclick="updateMember(${m.memberNo}, '${m.memberName}', '${m.nickName}', '${m.memberPwd}', '${m.email}', '${m.phone}')">정보 수정</button></td>
 								</tr>
 							</table>
 						</c:forEach>
@@ -364,28 +364,25 @@
 			
 		}
 		
-		function updateMember(memberNo){
-			var memberName = $('.updateName').val();
-		    var nickName = $('.updateNickName').val();
-		    var memberPwd = $('.updatePwd').val();
-		    var email = $('.updateEmail').val();
-		    var phone = $('.updatePhone').val();
-
-	        var mInfo = {
-	                memberNo: memberNo,
-	                memberName: memberName,
-	                nickName: nickName,
-	                memberPwd: memberPwd,
-	                email: email,
-	                phone: phone,
-	            };
-	        console.log(mInfo);
+		function updateMember(memberNo, memberName, nickName, memberPwd, email, phone){
 	        $.ajax({
 	        	url: '${contextPath}/adminUpdate.me',
 	        	type: 'POST',
-	        	data: mInfo, 
+	        	data: {
+	        		memberNo:memberNo,
+	                memberName:memberName,
+	                nickName:nickName,
+	                memberPwd:memberPwd,
+	                email:email,
+	                phone:phone
+		            },
 	        		success: data =>{
-	        			console.log(data)
+	        			if (data === "success") {
+	                        alert("회원 정보가 성공적으로 업데이트되었습니다.");
+	                        location.reload();
+	                    } else {
+	                        alert("회원 정보 업데이트에 실패했습니다.");
+	                    }
 	        		},
 	        		error: data => console.log(data)
 	        })

@@ -52,8 +52,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int adminUpdate(Member mInfo) {
-		return 0;
+	public int adminUpdate(HashMap<String, Object> map) {
+		return mDAO.adminUpdate(sqlSession, map);
 	}
 
 

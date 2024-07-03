@@ -59,10 +59,11 @@
 	
 	<update id="adminUpdate">
 		update member
-		set member_name = #{memberName}
-			and nickname = #{nickName}
-			and member_pwd = #{member_pwd}
-			and email = #{email}
+		set member_name = #{memberName},
+			nickname = #{nickName},
+			member_pwd = #{memberPwd},
+			email = #{email},
+			phone = #{phone},
 		where member_no = #{memberNo}
 	</update>
 </mapper>
