@@ -48,6 +48,16 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.updateTempPwd(sqlSession, map);
 	}
 
+	@Override
+	public int checkMemberId(String id) {
+		return mDAO.checkMemberId(sqlSession,id);
+	}
+
+	@Override
+	public int checkMemberNickName(String nickName) {
+		return mDAO.checkMemberNickName(sqlSession,nickName);
+	}
+
 
 	
 }

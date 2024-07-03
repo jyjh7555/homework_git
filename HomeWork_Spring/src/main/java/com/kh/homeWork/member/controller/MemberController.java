@@ -15,6 +15,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.homeWork.member.model.service.MemberService;
 import com.kh.homeWork.member.model.vo.Member;
@@ -197,8 +198,31 @@ public class MemberController {
 	}
 	
 	
+	@RequestMapping("checkMemberId.me")
+	@ResponseBody
+	public String checkMemberId(@RequestParam("id") String id) {
+		int result = mService.checkMemberId(id);
+		System.out.println(result);
+		if(result>0) {	//존재하면 중복
+			return "yes";
+		}else {			//0이면 중복아님
+			return "no";
+		}
+		
+	}
 
-
+	@RequestMapping("checkMemberNickName.me")
+	@ResponseBody
+	public String checkMemberNickName(@RequestParam("nickName") String nickName) {
+		int result = mService.checkMemberNickName(nickName);
+		System.out.println(result);
+		if(result>0) {	//존재하면 중복
+			return "yes";
+		}else {			//0이면 중복아님
+			return "no";
+		}
+		
+	}
 
 	
 }

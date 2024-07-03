@@ -57,11 +57,11 @@
 	    <div id="top-section">
 	        <jsp:include page="../common/top.jsp" />
 	    </div>
-	    <div id="voulnteer2">
+		<div id="voulnteer2">
+
 			<jsp:include page="../common/volunteer.jsp"/>
 		</div>	
  	</div>
-	
 
 	<br><br>
 	

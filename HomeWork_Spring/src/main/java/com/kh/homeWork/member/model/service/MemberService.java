@@ -19,6 +19,10 @@ public interface MemberService{
 
 	int updateTempPwd(HashMap<String, String> map);
 
+	int checkMemberId(String id);
+
+	int checkMemberNickName(String nickName);
+
 
 
 }
