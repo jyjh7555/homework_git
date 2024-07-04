@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -43,38 +44,90 @@
  	</div>
 
 
+	<form action="${contextPath}" method="post">
+		<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
+			<div class="d-flex flex-column justify-content-center mb-3 border border-3 w-50 mt-3 ">
+			   	<h1 class="title ms-3 m-4" style="font-family:'Pretendard-Regular'"><b>후원 정보</b></h1>
+		        <div class="field mb-3">
+		            <label class="label me-3 ms-4">후원주기</label>
+		            <button class="button selected  btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">정기</button>
+		            <button class="button btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">일시</button>
+		        </div>
+		        <div class="field mb-3">
+		                <label class="label me-3 ms-4">후원분야</label>
+		                <button class="button selected btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">국내 건축 후원</button>
+		                <button class="button btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">해외 건축 후원</button>
+		        </div>
+		        <div class="field mb-3">
+		            <label class="label me-3 ms-4 text-nowrap">후원금액</label>
+		            
+		                <button class="button selected btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 20000)">20,000원</button>
+		                <button class="button btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 30000)">30,000원</button>
+		                <button class="button btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 50000)">50,000원</button>
+		                <button class="button btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 100000)">100,000원</button>
+		                <button class="button btn btn-outline-secondary btn-sm" name="money" onclick="showCustomAmountField()">직접입력</button>
 	
-	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3 " >
-		<div class="d-flex flex-column justify-content-center mb-3 border border-3 w-50 mt-3 ">
-		   	<h1 class="title ms-3" style="font-family:'Pretendard-Regular'"><b>후원정보d?</b></h1>
-	        <div class="field mb-3">
-	            <label class="label me-3 ms-4">후원주기</label>
-	            <button class="button selected  btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">정기</button>
-	            <button class="button btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">일시</button>
-	        </div>
-	        <div class="field mb-3">
-	                <label class="label me-3 ms-4">후원분야</label>
-	                <button class="button selected btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">국내 건축 후원</button>
-	                <button class="button btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">해외 건축 후원</button>
-	        </div>
-	        <div class="field mb-3">
-	            <label class="label me-3 ms-4 text-nowrap">후원금액</label>
-	            
-	                <button class="button selected btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 20000)">20,000원</button>
-	                <button class="button btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 30000)">30,000원</button>
-	                <button class="button btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 50000)">50,000원</button>
-	                <button class="button btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 100000)">100,000원</button>
-	                <button class="button btn btn-outline-secondary btn-sm" name="money" onclick="showCustomAmountField()">직접입력</button>
-
-	        </div>
-	        <div id="customAmountField" class="field d-none">
-	            <label class="label me-3 ms-4 mb-3">직접 입력</label>
-	            <input type="number" id="customAmountInput" class="form-control-sm  border border-2" placeholder="금액을 입력하세요" min="10000" step="1000">원
-	        </div>
-	        	<button class ="btn btm-lg w-25 btn-success m-5" onclick="requestPay()">후원</button>
+		        </div>
+		        <div id="customAmountField" class="field d-none">
+		            <label class="label me-3 ms-4 mb-3">직접 입력</label>
+		            <input type="number" id="customAmountInput" class="form-control-sm  border border-2" placeholder="금액을 입력하세요" min="10000" step="1000">원
+		        </div>
+			</div>
 		</div>
-	     
-	</div>
+		
+		<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3 " >
+			<div class="d-flex flex-column justify-content-center mb-3 border border-3 w-50 mt-3 ">
+			   	<h1 class="title ms-3 m-4" style="font-family:'Pretendard-Regular'"><b>후원자 정보</b></h1>
+		        <div class="row mb-3 m-4">
+				    <label class="col-sm-2 col-form-label" style="align:center;">성함</label>
+	   		        <input class="form-control w-25" type="text" id="name"name="memberName" <c:if test="${!empty loginUser}">value="${loginUser.memberName }"</c:if> placeholder="이름">
+				</div>
+		        <div class="row mb-3 m-4">
+	                <label class="col-sm-2 col-form-label">생년월일</label>
+	                <input type="date" class="form-control w-25" name="age" >
+		        </div>
+		        <div class="col-12 mb-3 m-4">
+		            <label class="col-sm-2 col-form-label" style="margin-left:10px; margin-right:-25px;">성별</label>
+		             <input class="form-check-input " style="margin-top:12px" <c:if test="${loginUser.gender=='M'}">checked</c:if> type="radio"  name="gender" id="man" value="M">
+			  		 <label class="form-check-label " for="man">남자</label>
+					 <input class="form-check-input " style="margin-top:12px" <c:if test="${loginUser.gender=='F'}">checked</c:if> type="radio" name="gender" id="woman" value="F">
+			  		 <label class="form-check-label" for="woman">여자</label>
+		        </div>
+		        
+				<div class="row mb-3 m-4 mt-1">
+		        	<label class="col-sm-2 col-form-label">휴대폰 번호</label>
+		        	<input class="form-control mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" value="010" readonly >
+		        	<span class="col-1" style="width:12px; margin-top:9px;">-</span>
+		        	<input class="form-control m-3 mt-1 mb-1" style="width:75px; display:inline-block;" <c:if test="${!empty loginUser}">value="${midPhone}"</c:if> type="text" name="phone" maxlength="4" placeholder="0000">
+		        	<span class="col-1" style="width:12px; margin-top:9px;">-</span>
+		        	<input class="form-control m-3 mt-1 mb-1" style="width:75px; display:inline-block;" <c:if test="${!empty loginUser}">value="${lastPhone}"</c:if> type="text" name="phone" maxlength="4" placeholder="9999">
+			    </div>
+		        
+		        
+		        <div class="row mb-3 m-4">
+		        	<label class="col-sm-2 col-form-label">이메일  입력</label><br>
+		        	<input class="form-control mt-1 mb-1" style=" margin-right:5px;width:20%; display:inline-block;" <c:if test="${!empty loginUser}">value="${loginUser.email.split('@')[0]}"</c:if>name="emailId"type="text" placeholder="이메일">
+		        	<span class="col-1" style="margin-top:9px; margin-left:-15px; margin-right:-25px;">@</span>
+		        	<input class="form-control mt-1 mb-1" style="width:26%; display:inline-block;" type="text" <c:if test="${!empty loginUser}">value="${loginUser.email.split('@')[1]}"</c:if>name="emailDomain" placeholder="">
+		        	<select class="form-control mt-1 mb-1" style="width:20%; display:inline-block;" id="emailDomainHelp">
+		        		<option value="">직접입력</option>
+						<option>naver.com</option>
+						<option>gmail.com</option>
+						<option>hanmail.net</option>
+					</select>
+			    </div>
+			        
+			       
+			</div>
+		</div>
+			<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
+	        	<button class ="btn btm-lg btn-success m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="requestPay()">후원</button>
+			</div>
+	        	<button class ="btn btm-lg btn-success m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="test()">테스트</button>
+	</form>
+	
+	
+	
     <br><br>
     
     <%-- 
@@ -193,20 +246,52 @@
     	console.log('${ loginUser.phone}');
     	
 	    function requestPay() {
-	    	const money = document.getElementById('customAmountInput').value;
-	    	console.log(money);
-	        IMP.request_pay({
-		        pg: "html5_inicis.INIpayTest",
-		        pay_method: "card",
-		        merchant_uid: formattedTime,
-		        name: "크테스트후원결제",
-		        amount: money,
-		        buyer_tel: "${ loginUser.phone}",
-		        m_redirect_url: "www.naver.com",
-	      });
-	        console.log(success);
+	    	//const money = document.getElementById('customAmountInput').value;
+			
+	    	
+	    	
+	    	
+	    	
+	    	/* if(money >=1000){ */  //테스트 중에만 주석, 실제입력은 다르게!
+		    	IMP.request_pay({
+			        pg: "html5_inicis.INIpayTest",
+			        pay_method: "card",
+			        merchant_uid: formattedTime,
+			        name: "크테스트후원결제",
+			        amount: money,
+			        buyer_tel: "${ loginUser.phone}",
+			        m_redirect_url: "www.naver.com",
+		    	},function(response){
+		    	  console.log(response);
+		    	  console.log(response.success);
+		    	  if(response.success){
+		    		  alert('결제 성공');
+		    		  console.log(response);
+		    		  
+		    		  
+		    	  }else{
+		    		  alert('결제 실패하였습니다');
+		    		  alert(response.error_msg);
+		    	  }
+		     	});
+	    	/* }else{
+	    		alert('후원 최소 금액은 1,000원입니다');
+	    	} */
 	    }
-    
+	    
+		function test(){
+			form.action = '${contextPath}';
+	    	form.submit();
+		}
+    	
+	    const emailDomain = document.getElementById('emailDomainHelp');
+		
+		emailDomain.addEventListener('change',function(){
+			//console.log(this.value);
+			const domain = this.value;
+			
+			this.previousElementSibling.value = domain;
+		});
     
     
     
