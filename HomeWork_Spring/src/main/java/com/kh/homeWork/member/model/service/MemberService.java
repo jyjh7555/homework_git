@@ -25,6 +25,8 @@ public interface MemberService{
 
 	int updateStatus(Member m);
 
+	int updateAdmin(Member m);
+
 
 
 }

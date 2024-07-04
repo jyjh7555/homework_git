@@ -199,13 +199,13 @@
 							<table id="memberUpdate">
 								<tr>
 									<th width="6%">회원번호</th>
-									<th width="10%">이름</th>
+									<th width="6%">이름</th>
 									<th width="10%">닉네임</th>
-									<th width="10%">이메일</th>
+									<th width="12%">이메일</th>
 									<th width="10%">휴대폰번호</th>
 									<th width="10%">활동여부</th>
 									<th width="10%">관리자여부</th>
-									<th width="12%">정보변경</th>
+									<th width="10%">정보변경</th>
 								</tr>
 								<tr>
 									<td><input type="text" class="updateNo" value="${ m.memberNo }" readonly></td>
@@ -214,24 +214,41 @@
 						            <td><input type="email" class="updateEmail" value="${ m.email }"></td>
 						            <td><input type="tel" class="updatePhone" value="${ m.phone }"></td>
 						            <td>
-							            <c:if test="${ m.status =='Y' }">
-								            <div class="statusYN ${m.status == 'Y' ? 'selectState' : 'unselectState'}" onclick="toggleStatus(this,'Y','${ m.memberNo}')">Y</div>
-											<div class="statusYN ${m.status == 'N' ? 'selectState' : 'unselectState'}" onclick="toggleStatus(this,'N','${ m.memberNo}')">N</div>
-							            </c:if>
-							            <c:if test="${m.status == 'N'}">
-										    <div class="statusYN ${m.status == 'Y' ? 'selectState' : 'unselectState'}" onclick="toggleStatus(this,'Y','${m.memberNo}')">Y</div>
-										    <div class="statusYN ${m.status == 'N' ? 'selectState' : 'unselectState'}" onclick="toggleStatus(this,'N','${m.memberNo}')">N</div>
-										</c:if>
-						            </td>
-						            <td>
-						            <c:if test="${ m.isAdmin =='Y' }">
-							            <div class="adminYN ${m.isAdmin == 'Y' ? 'selectState' : 'unselectState'}" onclick="toggleAdmin('Y','${ m.memberNo}')">Y</div>
-										<div class="adminYN ${m.isAdmin == 'N' ? 'selectState' : 'unselectState'}" onclick="toggleAdmin('N','${ m.memberNo}')">N</div>
-						            </c:if>
-						            <c:if test="${ m.isAdmin =='N' }">
-						            	<div class="adminYN ${m.isAdmin == 'Y' ? 'selectState' : 'unselectState'}" onclick="toggleAdmin('Y','${ m.memberNo}')">Y</div>
-										<div class="adminYN ${m.isAdmin == 'N' ? 'selectState' : 'unselectState'}" onclick="toggleAdmin('N','${ m.memberNo}')'">N</div>
-						            </c:if>
+							            <c:if test="${m.status == 'Y'}">
+									            <label>
+									                <input type="radio" name="status_${m.memberNo}" value="Y" checked="checked" onclick="toggleStatus('Y','${m.memberNo}')"> Y
+									            </label>
+									            <label>
+									                <input type="radio" name="status_${m.memberNo}" value="N" onclick="toggleStatus('N','${m.memberNo}')"> N
+									            </label>
+									        </c:if>
+									        <c:if test="${m.status == 'N'}">
+									            <label>
+									                <input type="radio" name="status_${m.memberNo}" value="Y" onclick="toggleStatus('Y','${m.memberNo}')"> Y
+									            </label>
+									            <label>
+									                <input type="radio" name="status_${m.memberNo}" value="N" checked="checked" onclick="toggleStatus('N','${m.memberNo}')"> N
+									            </label>
+									        </c:if>
+									</td>
+									<td>
+								        <c:if test="${m.isAdmin == 'Y'}">
+									            <label>
+									                <input type="radio" name="admin_${m.memberNo}" value="Y" checked="checked" onclick="toggleAdmin('Y','${m.memberNo}')"> Y
+									            </label>
+									            <label>
+									                <input type="radio" name="admin_${m.memberNo}" value="N" onclick="toggleAdmin('N','${m.memberNo}')"> N
+									            </label>
+									        </c:if>
+									        <c:if test="${m.isAdmin == 'N'}">
+									            <label>
+									                <input type="radio" name="admin_${m.memberNo}" value="Y" onclick="toggleAdmin('Y','${m.memberNo}')"> Y
+									            </label>
+									            <label>
+									                <input type="radio" name="admin_${m.memberNo}" value="N" checked="checked" onclick="toggleAdmin('N','${m.memberNo}')"> N
+									            </label>
+									        </c:if>
+									</td>
 						            </td>
 						            <td><button class="updateUserButton" onclick="updateMember('${m.memberNo}')">정보 수정</button></td>
 								</tr>
@@ -399,9 +416,6 @@
 			var nickName = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updateNickName').val()
 			var email = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updateEmail').val()
 			var phone = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updatePhone').val()
-			
-			
-			
 			$.ajax({
 	        	url: '${contextPath}/adminUpdate.me',
 	        	type: 'POST',
@@ -425,26 +439,18 @@
 	        
 		}
 		
-		function toggleStatus(element, status, memberNo) {
-			var oppositeStatus = (status === 'Y') ? 'N' : 'Y';
-		    var oppositeElement = $(element).siblings('.statusYN.' + oppositeStatus);
-		    
-		    
-		    
+		function toggleStatus(status, memberNo) {
+			console.log(status)
+			console.log(memberNo)
 			$.ajax({
 				url:'${contextPath}/updateStatus.me',
 				data: {status:status, memberNo:memberNo},
 				success: data => {
 					if (status == 'Y') {
-		                oppositeElement.removeClass('selectState').addClass('unselectState');
-		                $(element).removeClass('unselectState').addClass('selectState');
 		                alert('회원번호 ' + memberNo + '님의 활동 권한을 부여합니다.');
 		            } else {
-		                oppositeElement.removeClass('unselectState').addClass('selectState');
-		                $(element).removeClass('selectState').addClass('unselectState');
 		                alert('회원번호 ' + memberNo + '님의 활동 권한을 해제합니다.');
 		            }		
-					 window.location.reload();
 				},
 				error: data => console.log(data)
 			})
@@ -452,11 +458,18 @@
 		}
 		
 		function toggleAdmin(isAdmin, memberNo) {
-		    if (isAdmin == 'N') {
-		        alert('회원번호 ' + memberNo  +'님의 관리자 권한을 해제합니다.');
-		    } else {
-		        alert('회원번호 ' + memberNo  +'님의 관리자 권한을 부여합니다.');
-		    }
+			$.ajax({
+				url:'${contextPath}/updateAdmin.me',
+				data: {isAdmin:isAdmin, memberNo:memberNo},
+				success: data => {
+					if (isAdmin == 'Y') {
+		                alert('회원번호 ' + memberNo + '님의 관리자 권한을 부여합니다.');
+		            } else {
+		                alert('회원번호 ' + memberNo + '님의 관리자 권한을 해제합니다.');
+		            }		
+				},
+				error: data => console.log(data)
+			})
 		}
 		
 		function searchMember() {
@@ -476,7 +489,6 @@
 				
 			})
 		}
-		});
 	</script>
 </body>
 </html>

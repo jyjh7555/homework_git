@@ -68,13 +68,18 @@
 	<select id="searchMember" resultType="Member">
 		select *
 		from member
-		where #{type} = #{text}
+		where #{type} = '%'||#{text}||'%'
 	</select>
 	
 	<update id="updateStatus">
 		update member
 		set status = #{status}
 		where member_no = #{memberNo}
-		
+	</update>
+	
+	<update id="updateAdmin">
+		update member
+		set isAdmin = #{isAdmin}
+		where member_no = #{memberNo}
 	</update>
 </mapper>

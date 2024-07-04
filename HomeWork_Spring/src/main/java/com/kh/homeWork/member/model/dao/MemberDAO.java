@@ -47,6 +47,10 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.updateStatus", m);
 	}
 
+	public int updateAdmin(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateAdmin", m);
+	}
+
 
 
 }
