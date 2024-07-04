@@ -26,7 +26,6 @@
 		
 		)
 		
-	
 	</insert>
 	
 	<select id="selectId" resultType="String">
@@ -61,9 +60,21 @@
 		update member
 		set member_name = #{memberName},
 			nickname = #{nickName},
-			member_pwd = #{memberPwd},
 			email = #{email},
-			phone = #{phone},
+			phone = #{phone}
 		where member_no = #{memberNo}
+	</update>
+	
+	<select id="searchMember" resultType="Member">
+		select *
+		from member
+		where #{type} = #{text}
+	</select>
+	
+	<update id="updateStatus">
+		update member
+		set status = #{status}
+		where member_no = #{memberNo}
+		
 	</update>
 </mapper>

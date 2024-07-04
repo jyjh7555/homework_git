@@ -19,7 +19,11 @@ public interface MemberService{
 
 	int adminDelete(int mNo);
 
-	int adminUpdate(HashMap<String, Object> map);
+	int adminUpdate(Member m);
+
+	ArrayList<Member> searchMember(HashMap<String, String> map);
+
+	int updateStatus(Member m);
 
 
 

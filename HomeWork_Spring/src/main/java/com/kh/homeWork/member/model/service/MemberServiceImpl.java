@@ -52,8 +52,18 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int adminUpdate(HashMap<String, Object> map) {
-		return mDAO.adminUpdate(sqlSession, map);
+	public int adminUpdate(Member m) {
+		return mDAO.adminUpdate(sqlSession, m);
+	}
+
+	@Override
+	public ArrayList<Member> searchMember(HashMap<String, String> map) {
+		return mDAO.searchMember(sqlSession, map);
+	}
+
+	@Override
+	public int updateStatus(Member m) {
+		return mDAO.updateStatus(sqlSession, m);
 	}
 
 

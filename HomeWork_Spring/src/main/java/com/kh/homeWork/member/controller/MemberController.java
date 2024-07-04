@@ -1,11 +1,13 @@
 package com.kh.homeWork.member.controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,11 +15,13 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.homeWork.member.model.service.MemberService;
 import com.kh.homeWork.member.model.vo.Member;
 
@@ -166,35 +170,53 @@ public class MemberController {
 		return "findResult";
 	}
 	
-	@RequestMapping("adminDelete.me")
+	@RequestMapping("/adminDelete.me")
 	@ResponseBody
 	public String adminDelete(@RequestParam("mNo") int mNo) {
 		int result = mService.adminDelete(mNo);
 		return result == 1? "success" : "fail";
 	}
 	
-	@RequestMapping("adminUpdate.me")
+	@RequestMapping("/adminUpdate.me")
 	@ResponseBody
-	public String adminUpdate(@RequestParam int memberNo,
-							  @RequestParam String memberName,
-                              @RequestParam String nickName,
-                              @RequestParam String memberPwd,
-                              @RequestParam String email,
-                              @RequestParam String phone
-                              ) {
-		HashMap<String, Object> map = new HashMap<String, Object>();
-		map.put("memberNo", memberNo);
-		map.put("memberName", memberName);
-		map.put("nickName", nickName);
-		map.put("memberPwd", bcrypt.encode(memberPwd));
-		map.put("email", email);
-		map.put("phone", phone);
-		System.out.println(map);
-		int result = mService.adminUpdate(map);
+	public String adminUpdate(@ModelAttribute Member m) {
+		int result = mService.adminUpdate(m);
 		return result == 1? "success" : "fail";
 	}
-
-
+	
+	
+	
+	@RequestMapping("/updateStatus.me")
+	@ResponseBody
+	public String updateStatus(@ModelAttribute Member m ) {
+		int result = mService.updateStatus(m);
+		return result == 1? "success" : "fail";
+	}
+	
+	
+	@RequestMapping("searchMember.me")
+	@ResponseBody
+	public String searchMember(@RequestParam("type") String type,
+							   @RequestParam("text") String text,
+							   HttpServletResponse response) {
+		HashMap<String, String> map = new HashMap<String, String>();
+		map.put("type", type);
+		map.put("text", text);
+		ArrayList<Member> list = mService.searchMember(map);
+		GsonBuilder gb = new GsonBuilder();
+		if (list != null && !list.isEmpty()) {
+			Gson gson = gb.create();
+			response.setContentType("application/json; charset=UTF-8");
+			try {
+				gson.toJson(list, response.getWriter());
+			} catch (JsonIOException e) {
+				e.printStackTrace();
+			} catch (IOException e) {
+				e.printStackTrace();
+			}
+		}
+		return list != null? " success" : "fail";
+	}
 
 	
 }
