@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <style>
  .logo {
        display: flex;
@@ -76,13 +77,36 @@
         width: 100%;
         box-sizing: border-box;
     }
-    .adminStatus{
+    .statusYN.selectState{
+    	background: lightgreen;
     	display: inline-block;
     	border: 1px solid black;
     	padding: 5px 10px;
-    }
-    .selectState{background: lightgray;}
-	.unselectState{background: none;}
+	}
+	
+	.statusYN.unselectState{
+	    background: gray;
+	    display: inline-block;
+    	border: 1px solid black;
+    	padding: 5px 10px;
+	}
+	.adminYN.selectState{
+    	background: lightgreen;
+    	display: inline-block;
+    	border: 1px solid black;
+    	padding: 5px 10px;
+	}
+	
+	.adminYN.unselectState{
+	    background: gray;
+	    display: inline-block;
+    	border: 1px solid black;
+    	padding: 5px 10px;
+	}
+	 .form-container {
+            display: flex;
+            justify-content: flex-end;
+        }
 </style>
 
 
@@ -123,91 +147,122 @@
 				
 		<div id=selectDiv>
 			<div style="border:2px solid #CCCCCC; height:30px">
-			검색정보 입력 : <input type="text" placeholder="검색정보 입력" style="width:55%"><br>
+			<form id="searchForm">
+   				 <select id="searchType">
+					<option value="member_name">회원이름</option> 
+					<option value="nickName">닉네임</option> 
+				</select>
+				<input type="text" placeholder="검색정보 입력" style="width:35%" id="searchText">
+				<button type="button" onclick="searchMember()")>검색</button><br>
+			</form>
 			</div>
 			<div align="center" id=adminContent>
-				
-				
+				<div class="form-container">
+					<form id="statusMemberForm" action="#" method="post">
+						 <select>
+				   			    <option value="all">전체 사용자</option>
+								<option value="Y">활동중인 사용자</option>
+								<option value="N">탈퇴한 사용자</option>
+						 </select>
+					</form>
+				</div>
 				 <div class="userInfo hidden" id=userInfo>
-			    	<table id="memberList">
-						<tr>
-							<th width="8%">회원번호</th>
-							<th width="10%">이름</th>
-							<th width="10%">닉네임</th>
-							<th width="10%">이메일</th>
-							<th width="10%">휴대폰번호</th>
-							<th width="10%">생년월일</th>
-							<th width="12%">가입날짜</th>
-							<th width="10%">관리자</th>
-						</tr>
+					<c:forEach items="${ list }" var="m">					
+				    		<table id="memberList">
+								<tr>
+									<th width="8%">회원번호</th>
+									<th width="10%">이름</th>
+									<th width="10%">닉네임</th>
+									<th width="10%">이메일</th>
+									<th width="10%">휴대폰번호</th>
+									<th width="10%">생년월일</th>
+									<th width="12%">가입날짜</th>
+									<th width="6%">활동여부</th>
+									<th width="6%">관리자</th>
+								</tr>
+								<tr>
+									<td>${ m.memberNo }</td>
+									<td>${ m.memberName }</td>
+									<td>${ m.nickName }</td>
+									<td>${ m.email }</td>
+									<td>${ m.phone }</td>
+									<td>${ m.age }</td>
+									<td>${ m.createDate }</td>
+									<td>${ m.status }</td>
+									<td>${ m.isAdmin }</td>
+								</tr>
+							</table>
+						</c:forEach>
+					</div>
+					<div class="userUpdate hidden" id="userUpdate">
 						<c:forEach items="${ list }" var="m">
+							<table id="memberUpdate">
+								<tr>
+									<th width="6%">회원번호</th>
+									<th width="10%">이름</th>
+									<th width="10%">닉네임</th>
+									<th width="10%">이메일</th>
+									<th width="10%">휴대폰번호</th>
+									<th width="10%">활동여부</th>
+									<th width="10%">관리자여부</th>
+									<th width="12%">정보변경</th>
+								</tr>
+								<tr>
+									<td><input type="text" class="updateNo" value="${ m.memberNo }" readonly></td>
+		            				<td><input type="text" class="updateName" value="${ m.memberName }"></td>
+						            <td><input type="text" class="updateNickName" value="${ m.nickName }"></td>
+						            <td><input type="email" class="updateEmail" value="${ m.email }"></td>
+						            <td><input type="tel" class="updatePhone" value="${ m.phone }"></td>
+						            <td>
+							            <c:if test="${ m.status =='Y' }">
+								            <div class="statusYN ${m.status == 'Y' ? 'selectState' : 'unselectState'}" onclick="toggleStatus(this,'Y','${ m.memberNo}')">Y</div>
+											<div class="statusYN ${m.status == 'N' ? 'selectState' : 'unselectState'}" onclick="toggleStatus(this,'N','${ m.memberNo}')">N</div>
+							            </c:if>
+							            <c:if test="${m.status == 'N'}">
+										    <div class="statusYN ${m.status == 'Y' ? 'selectState' : 'unselectState'}" onclick="toggleStatus(this,'Y','${m.memberNo}')">Y</div>
+										    <div class="statusYN ${m.status == 'N' ? 'selectState' : 'unselectState'}" onclick="toggleStatus(this,'N','${m.memberNo}')">N</div>
+										</c:if>
+						            </td>
+						            <td>
+						            <c:if test="${ m.isAdmin =='Y' }">
+							            <div class="adminYN ${m.isAdmin == 'Y' ? 'selectState' : 'unselectState'}" onclick="toggleAdmin('Y','${ m.memberNo}')">Y</div>
+										<div class="adminYN ${m.isAdmin == 'N' ? 'selectState' : 'unselectState'}" onclick="toggleAdmin('N','${ m.memberNo}')">N</div>
+						            </c:if>
+						            <c:if test="${ m.isAdmin =='N' }">
+						            	<div class="adminYN ${m.isAdmin == 'Y' ? 'selectState' : 'unselectState'}" onclick="toggleAdmin('Y','${ m.memberNo}')">Y</div>
+										<div class="adminYN ${m.isAdmin == 'N' ? 'selectState' : 'unselectState'}" onclick="toggleAdmin('N','${ m.memberNo}')'">N</div>
+						            </c:if>
+						            </td>
+						            <td><button class="updateUserButton" onclick="updateMember('${m.memberNo}')">정보 수정</button></td>
+								</tr>
+							</table>
+						</c:forEach>
+					</div>
+				<div class="userDelete hidden" id="userDelete">
+					<c:forEach items="${ list }" var="m">
+						<table id="memberDelete">
+							<tr>
+								<th width="10%">회원번호</th>
+								<th width="10%">이름</th>
+								<th width="10%">닉네임</th>
+								<th width="10%">이메일</th>
+								<th width="10%">휴대폰번호</th>
+								<th width="10%">생년월일</th>
+								<th width="12%">가입날짜</th>
+								<th width="10%">탈퇴</th>
+							</tr>
 							<tr>
 								<td>${ m.memberNo }</td>
-								<td>${ m.memberId }</td>
+								<td>${ m.memberName }</td>
 								<td>${ m.nickName }</td>
 								<td>${ m.email }</td>
 								<td>${ m.phone }</td>
 								<td>${ m.age }</td>
 								<td>${ m.createDate }</td>
-								<td>${ m.isAdmin }</td>
+								<td><button id="deleteUserButton" onclick="deleteMember(${ m.memberNo })">회원탈퇴</button></td>
 							</tr>
-						</c:forEach>
-					</table>
-				</div>
-				<div class="userUpdate hidden" id="userUpdate">
-					<table id="memberUpdate">
-						<tr>
-							<th width="6%">회원번호</th>
-							<th width="10%">이름</th>
-							<th width="10%">닉네임</th>
-							<th width="10%">비밀번호</th>
-							<th width="10%">이메일</th>
-							<th width="10%">휴대폰번호</th>
-							<th width="10%">관리자여부</th>
-							<th width="12%">정보변경</th>
-						</tr>
-						<tr>
-							<td><input type="text" value="001" readonly></td>
-            				<td><input type="text" value="강건강"></td>
-				            <td><input type="text" value="스트롱건강"></td>
-				            <td><input type="password" value="password"></td>
-				            <td><input type="email" value="gang@naver.com"></td>
-				            <td><input type="tel" value="010-1234-5678"></td>
-				            <td>
-				            <div class="adminStatus">Y</div>
-				            <div class="adminStatus selectState">N</div>
-				            </td>
-				            <td><button id="updateUserButton">정보 수정</button></td>
-						</tr>
-					</table>
-				</div>
-				<div class="userDelete hidden" id="userDelete">
-					<table id="memberUpdate">
-						<tr>
-							<th width="10%">회원번호</th>
-							<th width="10%">이름</th>
-							<th width="10%">닉네임</th>
-							<th width="10%">비밀번호</th>
-							<th width="10%">이메일</th>
-							<th width="10%">휴대폰번호</th>
-							<th width="10%">생년월일</th>
-							<th width="10%">주민등록번호</th>
-							<th width="12%">가입날짜</th>
-							<th width="10%">탈퇴</th>
-						</tr>
-						<tr>
-							<td>001</td>
-							<td>강건강</td>
-							<td>스트롱건강</td>
-							<td>password</td>
-							<td>gang@naver.com</td>
-							<td>010-1234-5678</td>
-							<td>94-01-01</td>
-							<td>940101</td>
-							<td>24-06-11</td>
-							<td><button id="deleteUserButton">회원탈퇴</button></td>
-						</tr>
-					</table>
+						</table>
+					</c:forEach>
 				</div>
 			<div class="supportPage hidden" id="supportList">
 					<table id="supportTable">
@@ -253,7 +308,6 @@
 						</tr>
 					</table>
 				</div>
-				
 			</div>
 		</div>
 	</div>
@@ -261,7 +315,6 @@
 	<script>
 		window.onload =() =>{
 			const mainCate = document.getElementsByClassName('mainCate');
-			console.log(mainCate);
 			 mainCate[0].addEventListener('click', function() {
 	                this.nextElementSibling.classList.toggle('hidden');
 	                
@@ -301,11 +354,7 @@
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 
 			 })
-			 document.getElementById('updateUserButton').addEventListener('click', function() {
-		            if (confirm("정보를 수정하시겠습니까?")) {
-		                alert("수정되었습니다.");
-		            }
-		        });
+			
 			 document.getElementById('deleteUserButton').addEventListener('click', function() {
 		            if (confirm("정말 탈퇴하시겠습니까?")) {
 		                alert("탈퇴되었습니다.");
@@ -328,15 +377,106 @@
 				 document.getElementById('supportList').classList.add('hidden');
 				 
 			 })
-			 document.getElementById('supportCancle').addEventListener('click', function() {
-		            if (confirm("정기후원을 취소합니까?")) {
-		                alert("후원이 취소되었습니다.\n후원해주셔서 감사합니다.");
-		            }
-		        });
+			
 			 
 		}
-	
-	</script>
 		
+		function deleteMember(memberNo){			
+				$.ajax({
+					url: '${contextPath}/adminDelete.me',
+					data: {mNo:memberNo},
+					success: data =>{
+						console.log(data)
+					},
+					error: data => console.log(data)
+					
+				})
+			
+		}
+		
+		function updateMember(memberNo){
+			var memberName = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updateName').val()
+			var nickName = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updateNickName').val()
+			var email = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updateEmail').val()
+			var phone = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updatePhone').val()
+			
+			
+			
+			$.ajax({
+	        	url: '${contextPath}/adminUpdate.me',
+	        	type: 'POST',
+	        	data: {
+	        		memberNo:memberNo,
+	                memberName:memberName,
+	                nickName:nickName,
+	                email:email,
+	                phone:phone
+		            },
+	        		success: data =>{
+	        			console.log(data)
+	        			if (data === "success") {
+	                        alert("회원 정보가 성공적으로 업데이트되었습니다.");
+	                    } else {
+	                        alert("회원 정보 업데이트에 실패했습니다.");
+	                    }
+	        		},
+	        		error: data => console.log(data)
+	        })
+	        
+		}
+		
+		function toggleStatus(element, status, memberNo) {
+			var oppositeStatus = (status === 'Y') ? 'N' : 'Y';
+		    var oppositeElement = $(element).siblings('.statusYN.' + oppositeStatus);
+		    
+		    
+		    
+			$.ajax({
+				url:'${contextPath}/updateStatus.me',
+				data: {status:status, memberNo:memberNo},
+				success: data => {
+					if (status == 'Y') {
+		                oppositeElement.removeClass('selectState').addClass('unselectState');
+		                $(element).removeClass('unselectState').addClass('selectState');
+		                alert('회원번호 ' + memberNo + '님의 활동 권한을 부여합니다.');
+		            } else {
+		                oppositeElement.removeClass('unselectState').addClass('selectState');
+		                $(element).removeClass('selectState').addClass('unselectState');
+		                alert('회원번호 ' + memberNo + '님의 활동 권한을 해제합니다.');
+		            }		
+					 window.location.reload();
+				},
+				error: data => console.log(data)
+			})
+            
+		}
+		
+		function toggleAdmin(isAdmin, memberNo) {
+		    if (isAdmin == 'N') {
+		        alert('회원번호 ' + memberNo  +'님의 관리자 권한을 해제합니다.');
+		    } else {
+		        alert('회원번호 ' + memberNo  +'님의 관리자 권한을 부여합니다.');
+		    }
+		}
+		
+		function searchMember() {
+	        var searchType = document.getElementById('searchType').value;
+	        var searchText = document.getElementById('searchText').value;
+	        console.log(searchType);
+	        console.log(searchText);
+	        $.ajax({
+				url: '${contextPath}/searchMember.me',
+				data: {type:searchType,
+					   text:searchText	
+				},
+				success: data =>{
+					console.log(data)
+				},
+				error: data => console.log(data)
+				
+			})
+		}
+		});
+	</script>
 </body>
 </html>

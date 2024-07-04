@@ -15,6 +15,16 @@ public interface MemberService{
 
 	int updateTempPwd(HashMap<String, String> map);
 
+	ArrayList<Member> adminSelectMember();
+
+	int adminDelete(int mNo);
+
+	int adminUpdate(Member m);
+
+	ArrayList<Member> searchMember(HashMap<String, String> map);
+
+	int updateStatus(Member m);
+
 
 
 }
