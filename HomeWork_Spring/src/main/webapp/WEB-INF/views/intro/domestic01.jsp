@@ -221,6 +221,9 @@
 	<div id="footer">
 		<jsp:include page="../common/footer.jsp"/>
 	</div>	
+	<div id="fixedBtn">
+ 		<jsp:include page="../common/fixedBtn.jsp"/>
+ 	</div>	
  		
  		
  		<Script>

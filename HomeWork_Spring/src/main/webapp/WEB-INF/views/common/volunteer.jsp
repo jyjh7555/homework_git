@@ -99,9 +99,9 @@
 				<!-- <a href="global01.in">해외자원봉사</a> -->
 				<button id="global"class="btn btn-lg" aria-expanded="false"data-bs-toggle="dropdown" style="color:#000000;background: rgb(249,197,67); border:3px solid rgba(0, 0, 0, 0.2);"><b>해외봉사</b></button>
 				<ul class="dropdown-menu" aria-labelledby="global" style="width:13%; background: rgb(249,197,67);">
-			      <li><a class="dropdown-item" style="color:gray;" href="global01.in">다른거</a></li>
-			      <li><a class="dropdown-item" style="color:gray;" href="global02.in">뭐지</a></li>
-			      <li><a class="dropdown-item" style="color:gray;" href="global03.in">재난</a></li>
+			      <li><a class="dropdown-item" style="color:gray;" href="global01.in">주거환경개선</a></li>
+			      <li><a class="dropdown-item" style="color:gray;" href="global02.in">식수지원</a></li>
+			      <li><a class="dropdown-item" style="color:gray;" href="global03.in">도시슬럼 지원</a></li>
 		    	</ul>
 			</li>
 			<li class="board">

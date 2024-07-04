@@ -9,29 +9,33 @@
 <style>
 	#heart-container {
 		  margin: 20px;
-		  width: 100px;
-		  height: 100px;
+		  width: 150px;
+		  height: 150px;
 		  text-align:center;
 		  background:skyblue;
 		  border-radius: 50%;
 		  position: fixed; /* 추가 */
-		  bottom: 10px; /* 페이지 하단으로부터 20px */
-		  right: 0; /* 페이지 오른쪽으로부터 20px */
+		  bottom: 300px; /* 페이지 하단으로부터 20px */
+		  right: 100px; /* 페이지 오른쪽으로부터 20px */
 		  z-index: 1000; /* 다른 요소 위에 고정 */
 	}
+	
+	#heart-container:hover {
+		cursor:pointer;
+	}
 	#heart-icon {
-	   width: 60px;
-	   height: 60px;
+	   width: 100px;
+	   height: 100px;
 	   margin-top:10px;
 	  
 	}
 	#heart-text {
 	  font-family: Arial, sans-serif;
 	  font-weight: 500;
-	  font-size: 15px;
+	  font-size: 20px;
 	  font-weight:bold;
 	  color:white;
-	  margin-top:-10px;
+	  
 	}
 		
 </style>
@@ -51,20 +55,33 @@
 	</div>	
     <script src="https://cdn.jsdelivr.net/npm/progressbar.js/dist/progressbar.min.js"></script>;
 	<script>
+	  window.onload = () => {
+		   	  var bar = new ProgressBar.Path('#heart-path', {
+		   	  easing: 'easeInOut',
+		   	  duration: 1400
+		   	 });
+		
+		   	function animate() {
+		   	  bar.set(0);
+		   	  bar.animate(1.0, function() {
+		   	    setTimeout(animate, 1000);  // 1초 후에 애니메이션을 다시 시작
+		   	  });
+		   	}
+		
+		   	animate();  // 첫 번째 애니메이션 시작
+		   	
+		   	const fixedBtn = document.getElementById("heart-container");
+		   	
+		   	fixedBtn.addEventListener('click',function(){
+		   		
+		   		location.href='${contextPath}/surpport.su';
+		   	})
+		  
+	  }
 	
-	  var bar = new ProgressBar.Path('#heart-path', {
-   	  easing: 'easeInOut',
-   	  duration: 1400
-   	});
-
-   	function animate() {
-   	  bar.set(0);
-   	  bar.animate(1.0, function() {
-   	    setTimeout(animate, 1000);  // 1초 후에 애니메이션을 다시 시작
-   	  });
-   	}
-
-   	animate();  // 첫 번째 애니메이션 시작
+	 
+   	
+   	
 	</script>
 </body>
 

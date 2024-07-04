@@ -20,7 +20,11 @@
 	
 	ul{ list-style: none;}
 	
-	.content{position:flex; width:90%; ; flex-direction: row;}
+	hr {
+		margin:0;
+	}
+	
+	.content{width:70%; margin:auto;}
 	
 	.headMenu{display: inline-block;  margin-right: 5px; border:1px solid black;
 		width:120px; line-height:40px; margin-left:-10px; text-align:center;}
@@ -32,6 +36,12 @@
 	.domeCon{display: flex; flex-direction: column; justify-content: center;}
 	.imageDiv{border:1px groove #888888; width:550px; height:301px;}
 	.border{border-bottom: 1px groove #888888;}
+	
+	.semi-title {
+		text-decoration: underline;
+		text-underline-offset: 15px;
+	}
+
 	.global-image1{
 					background-size: cover; 
 					height:300px; 
@@ -39,25 +49,53 @@
 	}
 	
 	.global-image2{
-					
-					background-size: cover;  
-					background-repeat: no-repeat;
+		background-size:cover;
+		width:300px;
 
+	}
+	
+	.global-image2-1{
+					background-size: cover; 
+					height:300px; 
+					background-repeat: no-repeat;
+	}
+	
+	.global-image2-1>h3 {
+		color:white;
+	}
+	
+	.global-image2-2{
+					background-size: cover; 
+					height:300px; 
+					background-repeat: no-repeat;
+	}
+	
+	.global-image2-2>h3 {
+		color:white;
 	}
 
 	.global-image1>h3 {
 		color:white;
 	}
 	.text-container1 {
-		height:500px;
+		height:50vh;
+		width:70%;
+	}
+	.text-container2 {
+		height:30vh;
+		width:50%;
 	}
 	
+	.text-container2-2 {
+		height:50vh;
+		width:70%;
+	}
 	
-
 	a{display:block; color:#555555; font-size: 17px; text-decoration: none;}
-		#global-container>h1,h3,h4,em,p {
+	
+	#global-container>h1,h3,h4,em,p,.text-box1 {
 		font-family:GowunBatang-Regular;
-	}
+    }
 	#voulnteer2 {
 		height: 200px;
 	}
