@@ -193,6 +193,13 @@ public class MemberController {
 		return result == 1? "success" : "fail";
 	}
 	
+	@RequestMapping("/updateAdmin.me")
+	@ResponseBody
+	public String updateAdmin(@ModelAttribute Member m ) {
+		int result = mService.updateAdmin(m);
+		return result == 1? "success" : "fail";
+	}
+	
 	
 	@RequestMapping("searchMember.me")
 	@ResponseBody
