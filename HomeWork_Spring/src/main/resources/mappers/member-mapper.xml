@@ -68,7 +68,7 @@
 	<select id="searchMember" resultType="Member">
 		select *
 		from member
-		where #{type} = #{text}
+		where #{type} = '%'||#{text}||'%'
 	</select>
 	
 	<update id="updateStatus">
