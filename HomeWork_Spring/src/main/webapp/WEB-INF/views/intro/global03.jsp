@@ -5,15 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${ contextPath }/CSS/domestic2.css" rel="stylesheet" type="text/css">
+<link href="${ contextPath }/CSS/global1.css" rel="stylesheet" type="text/css">
+</head>
 <style>
-
-
-	.categoryDomestic{display: inline-block;  margin-right: 2px; 
-		width:400px; line-height:50px; margin-left:-11px;  text-align:center;
-		}
-
-	#topAndNavbar {
+		#topAndNavbar {
 		background-image:linear-gradient(
 	        rgba(0, 0, 0, 0.2),
 	        rgba(0, 0, 0, 0.2)
@@ -23,28 +18,10 @@
 	    background-position: center;
 	    background-repeat: no-repeat;
 	    transition: background-color 0.5s ease;
-	}
+	    
 	
-	#voulnteer2 {
-		height: 200px;
-	}
-	
-	body {
-		font-family: "Nanum Gothic", sans-serif;
-  		font-weight: 400;
-  		font-style: normal;
-	}
-	
-	em{
-		font-size:30px;
-		color:skyblue;
-		font-weight:bold;
-	}
-	
-	
-
+	}	
 </style>
-</head>
 <body >
 	<div id=topAndNavbar>
  		<div id="navbar-section2" onmouseover="changeBackground()" onmouseout="resetBackground()">
@@ -61,112 +38,126 @@
 
 	<br><br>
 	
-
-	
-	
-	<div align="center">
+	<div id="global-container" align="center">
 		<ul>
-			<li class=categoryDomestic><a style="border-left:2px solid #EEEEEE; border-top:2px solid #EEEEEE;border-bottom:3px solid #00AFD7" href="global01.in">집짓기</a></li>
-			<li class=categoryDomestic><a style="border-left:2px solid #EEEEEE; border-top:2px solid #EEEEEE;border-right:3px solid #00AFD7; border-bottom:3px solid #00AFD7" href="global02.in">주거환경개선</a></li>
-			<li class=categoryDomestic><a style="border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="global03.in">긴급/재난</a></li>
+			<li class=categoryDomestic><a style="border-left:2px solid #EEEEEE; border-top:2px solid #EEEEEE;border-bottom:3px solid #00AFD7" href="global01.in">주거환경 개선</a></li>
+			<li class=categoryDomestic><a style="border-left:2px solid #EEEEEE; border-top:2px solid #EEEEEE;border-right:3px solid #00AFD7; border-bottom:3px solid #00AFD7;" href="global02.in">식수 위생</a></li>
+			<li class=categoryDomestic><a style="border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7" href="global03.in">도시슬럼 지원</a></li>
 		</ul>
 	</div>
-	<p align="center"style="font-size:42px;"><b> 긴급/재난</b><p>
-	<p align="center" style="font-size:30px;"> 재난과 재해로 거처를 잃은 이웃들을 위한 이동식 주택을 짓습니다.</p>
-	
-	<br>
-	
-	<div align="center">
-		
-		<div class="domeMainImage" align="center" style="background-image:url('resources/image/dome03image1.jpg');">
-			<div style="color:white; font-size:48px; padding:100px; font-weight:bold;">재난 구조</div>
+	<div class="sub-tit text-center mt-5">
+		<h3 class="semi-title fs-1 fw-bold">도시슬럼 지원</h3>
+		<br>
+	 	<h4>슬럼화된 도시의 주거환경을 안전하고 쾌적하게 보수하고, 공공 식수 시설과 화장실을 제공합니다.</h4>
+	</div>
+	<div class="global-container"align="center">
+		<div class="global-image2-1 d-flex justify-content-center mt-5 " style="background-image:url('resources/image/global3-1.jpg');">
+			<h3 class="align-self-center lh-lg fw-semibold">주거권 확보는 불안정성에서 벗어나<br>
+															내일을 꿈꾸고 빈곤에서 벗어나 자립할 수 있도록 돕습니다.												
+		    </h3>
+		</div>
+	<div class="content">
+		<div class="text-box1 d-flex  justify-content-center flex-column mt-4 ">
+			<span class="tit d-flex justify-content-center lh-base fw-bold fs-2 mb-3">
+				전 세계에 10억명이 넘는 인구가 도시 슬럼가에 거주하고 있습니다.
+			</span>
+			<div class="txt d-flex align-items-center flex-column mx-auto lh-lg fs-4">
+				 <p>
+				 	 전 세계에 10억명이 넘는 인구가 도시 슬럼가에 거주하고 있습니다. 도시의 주거비가 상승함에 따라, 
+  					 <br>
+				 </p>
+				 <p>				 	
+           			  저소득층은 공공 인프라가 부족하고, 주택이 밀집되어 있는 지역, 슬럼가로 몰리게 됩니다. 해비타트는 기후에 적합하고, 재난시에도 안전한 주택으로
+            		 <br>
+           			 보수하고, 공공 식수시설과 화장실을 제공합니다. 강제 이주의 두려움속에 사는 주민들을 위해 주거권을 옹호하고, 안정된 삶의 지속성을 높이도록 돕습니다 
+           			 <br> 
+           			 홍수 등 재난에도 범람하지 않는 화장실을 구축하여 수인성질병의 확산을 방지하고, 창문이 생긴 안락한 주택 덕분에 호흡기 질환이 개선되어 건강이 증진됩니다.
+           			 <br>
+           			 밀집된 주거지의 화재발생 및 인명피해를 예방하기 위해 화재 방지 및 모의 대피훈련을 실시합니다. 
+           			 <br>
+           			 주거 취약계층의 거주권 확보는 불안정성에서 벗어나 내일을 꿈꾸고 빈곤에서 벗어나 자립하도록 하는 중요한 기반입니다.
+				 </p>
+			</div>	
+		</div>
+		<hr>
+		<div class="text-container2-2 d-flex justify-content-center gap-5  ">
+			<div class="align-self-center w-35  ">
+				<h3 class="fs-2 fw-semibold mb-3">공공식수위생시설 지원</h3>
+				<h4 class="fs-5 lh-base">
+                	안전한 식수 이용이 가능하도록 <br>
+                	공용 화장실과 식수펌프를 설치합니다.	
+				</h4>
+			</div>
+			<div class="global-image2-2 w-75 h-75 mt-5 mb-2" style="background-image:url('resources/image/global3-2.jpg');">
+			</div>
 		</div>
 		
-		<div class="content" align="left" >
-		<br><br><br><br><br> 
-			<div align="left" style="display:inline-block; border-left: 10px solid #e3e3e3; margin-left:100px; padding:10px;width:500px;">
-			<h1>긴급/재난</h1>
-			<h3>재난,재해 등 긴급한 주거 구호 활동을 위한 <br>
-				이동식 주택 집짓기 활동을 전개하고 있습니다</h3>
+		<hr>
+		
+		<div class="text-container2-2 d-flex justify-content-center gap-5  ">
+			<div class="global-image2-2 w-75 h-75 mt-5" style="background-image:url('resources/image/global3-3.jpg');"></div>
+			<div class="align-self-center w-35  ">
+				<h3 class="fs-2 fw-semibold mb-3">보도건축 및 배수로 개선</h3>
+				<h4 class="fs-5 lh-base">
+              							 우기에도 길이 침수되지 않고 아이들과 주민들이 
+             							 <br>
+             							 안전하게 이동할 수 있도록 슬럼 내 보도를 건축하고
+             							 <br>
+             							 배수로를 정비합니다.
+             							 
+				</h4>
 			</div>
-			
-			<div style="display:inline-block; width:500px; margin-left:100px;padding:10px;">
-			<p>home work는 국내에 재난피해가 발생했을 때 도움이 필요한 사람들에게
-				봉사자와 함께 임시거처를 만들어줍니다. 긴급지원이 필요한 경우 자원봉사자들은
-				이동식 주택 집짓기 봉사활동에 참여할 수 있습니다.</p>
-			</div>
-			<br>
-			
-			
-			<hr>
-			
-			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
-				<img src="resources/image/dome03image2.jpg"></img>
-				<div align="center" style="display:flex;flex-direction: column; width:500px; margin-left:50px; justify-content: center;">
-					<em>밤새워 집을 ‘배달’하다
-						수해지역 사랑의 집짓기</em>
-						<div class="border"></div>
-					
-					<p>2006년 홍수로 피해를 입은 강원도 인제와 평창지역에
-						50채의 이동식 주택을 전달하였습니다.</p>
-				 </div>
-			</div>
-			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
-				<div align="center" style="display:flex;flex-direction: column; width:500px; margin-right:50px; justify-content: center;">
-					<em>이동식 결핵 병실,
-						배에 실려 북으로 향하다</em>
-					<div class="border"></div>
-					<p>2009년 북한의 결핵 환자들 요양 시설로 6채의 이동식 주택을
-						전달하였습니다.</p>
-				 </div>
-				
-				<img src="resources/image/dome03image3.jpg"></img>
-				
-			</div>
-			
-			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
-				<img src="resources/image/dome03image4.jpg"></img>
-				<div align="center" style="display:flex;flex-direction: column; width:500px; margin-left:50px; justify-content: center;">
-					<em>희망의 집은 내일을 살아가는
-						든든한 힘이 됩니다.</em>
-					<div class="border"></div>
-					<p>2011년 서울광장에서 경북 영양 흙집에 살았던
-						혜진이네 4남매에게 이동식 주택을 전달하였습니다.</p>
-				 </div>
-			</div>
-			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
-				<div align="center" style="display:flex;flex-direction: column; width:500px; margin-right:50px; justify-content: center;">
-					<em>산불피해 이재민 지원</em>
-					<div class="border"></div>
-					
-					<p>2019년 산불로 피해를 입은 강원도 고성에 12채의
-						이동식 주택을 전달하였습니다.</p>
-				 </div>
-				
-				<img src="resources/image/dome03image5.jpg"></img>
-				
-			</div>
-			
-			
-			<jsp:include page="../common/volunteerBanner.jsp"/>
-			<!-- <div class ="volunteerBanner" align="center" >
-				<a href="volunteer.do"style="margin:-10px; text-decoration: none;">
-					<br><br>
-					<span style="color: white; font-size:48px; font-weight:bold;">봉사 활동 신청/목록 보기</span>
-					<br><br>
-					<span style="border-bottom:2px solid white; color:white;">More view</span>
-					
-					<br><br>
-			
-				</a>
-			</div> -->
 		</div>
+		
+		<hr>
+		
+		<div class="text-container2-2 d-flex justify-content-center gap-5  ">
+			<div class="align-self-center w-35  ">
+				<h3 class="fs-2 fw-semibold mb-3">폐기물 처리 인식 증진</h3>
+				<h4 class="fs-5 lh-base">
+                	       깨끗한 마을 환경 조성을 위해서는 폐기물 처리에 대한  <br>
+                		   인식증진이 필수적입니다. 올바른 폐기법을 안내하고 <br>
+                		   관리할 수 있는 역량을 증진하여 마을의 환경을 개선합니다.
+            
+				</h4>
+			</div>
+			<div class="global-image2-2 w-75 h-75 mt-5 mb-2" style="background-image:url('resources/image/global3-4.jpg');">
+			</div>
+		</div>
+		
+		
+		
+		<jsp:include page="../common/volunteerBanner.jsp"/>
+		<!-- <div class ="volunteerBanner" align="center" >
+			<a href="volunteer.do"style="margin:-10px; text-decoration: none;">
+				<br><br>
+				<span style="color: white; font-size:48px; font-weight:bold;">봉사 활동 신청/목록 보기</span>
+				<br><br>
+				<span style="border-bottom:2px solid white; color:white;">More view</span>
+				
+				
+		
+			</a>
+		</div> -->
+		
+		
+		
 		
 	</div>
-	
+		
+	</div>
 	<div id="footer">
- 			<jsp:include page="../common/footer.jsp"/>
- 		</div>	
-	
+		<jsp:include page="../common/footer.jsp"/>
+	</div>	
+	<div id="fixedBtn">
+ 		<jsp:include page="../common/fixedBtn.jsp"/>
+ 	</div>	
+ 		
+ 		
+ 		<Script>
+ 			const volunteer = () =>{
+ 				
+ 			}
+ 		</Script>
 </body>
 </html>

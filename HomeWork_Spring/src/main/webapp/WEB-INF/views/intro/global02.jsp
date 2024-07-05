@@ -5,14 +5,10 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${ contextPath }/CSS/domestic2.css" rel="stylesheet" type="text/css">
+<link href="${ contextPath }/CSS/global1.css" rel="stylesheet" type="text/css">
+</head>
 <style>
-
-	.categoryDomestic{display: inline-block;  margin-right: 2px; 
-		width:400px; line-height:50px; margin-left:-11px;  text-align:center;
-		}
-
-	#topAndNavbar {
+		#topAndNavbar {
 		background-image:linear-gradient(
 	        rgba(0, 0, 0, 0.2),
 	        rgba(0, 0, 0, 0.2)
@@ -22,37 +18,10 @@
 	    background-position: center;
 	    background-repeat: no-repeat;
 	    transition: background-color 0.5s ease;
-	}
+	    
 	
-	#voulnteer2 {
-		height: 200px;
-	}
-	
-	body {
-		font-family: "Nanum Gothic", sans-serif;
-  		font-weight: 400;
-  		font-style: normal;
-	}
-	
-	em{
-		font-size:30px;
-		color:skyblue;
-		font-weight:bold;
-	}
-	
-	.volunteerBanner{
-			background-image:url('${ contextPath }/image/volunteerBanner.jpg');
-			
-			
-            
-			border: 8px solid #E3E3E3;
-			padding : 10px;
-			
-				
-	}
-
+	}	
 </style>
-</head>
 <body >
 	<div id=topAndNavbar>
  		<div id="navbar-section2" onmouseover="changeBackground()" onmouseout="resetBackground()">
@@ -69,94 +38,104 @@
 
 	<br><br>
 	
-
-
-	
-	
-	<div align="center">
+	<div id="global-container" align="center">
 		<ul>
-			<li class=categoryDomestic><a style="border-left:2px solid #EEEEEE; border-top:2px solid #EEEEEE;border-right:3px solid #00AFD7; border-bottom:3px solid #00AFD7" href="global01.in">집짓기</a></li>
-			<li class=categoryDomestic><a style="border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="global02.in">주거환경개선</a></li>
-			<li class=categoryDomestic><a style="border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #00AFD7; border-bottom:3px solid #00AFD7" href="global03.in">긴급/재난</a></li>
+			<li class=categoryDomestic><a style="border-left:2px solid #EEEEEE; border-top:2px solid #EEEEEE;border-right:3px solid #00AFD7; border-bottom:3px solid #00AFD7" href="global01.in">주거환경 개선</a></li>
+			<li class=categoryDomestic><a style="border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="global02.in">식수 위생</a></li>
+			<li class=categoryDomestic><a style="border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #00AFD7; border-bottom:3px solid #00AFD7" href="global03.in">도시슬럼 지원</a></li>
 		</ul>
 	</div>
-	<p align="center"style="font-size:42px;"><b>주거환경개선</b></p>
-	<p align="center" style="font-size:30px;"> 짧은 시간에 이웃에게 꼭 필요한 최소한의 주거환경을 조성합니다.</p>
-	
-	<br>
-	
-	<div align="center">
+	<div class="sub-tit text-center mt-5">
+		<h3 class="semi-title fs-1 fw-bold">식수위생</h3>
+		<br>
+	 	<h4>깨끗한 식수와 안전한 위생시설 그리고 위생습관에 대한 인식개선 교육을 제공합니다.</h4>
+	</div>
+	<div class="global-container"align="center">
+		<div class="global-image2-1 d-flex justify-content-center mt-5 " style="background-image:url('resources/image/global2-1.jpg');">
+			<h3 class="align-self-center lh-lg fw-semibold">식수위생시설은 콜레라와 같은 수인성 질병의 확산을 방지하고 <br> 건강한 삶을 유지하는데 필수적입니다</h3>
+		</div>
+	<div class="content">
+		<div class="text-box1 d-flex  justify-content-center flex-column mt-4 ">
+			<span class="tit d-flex justify-content-center lh-base fw-bold fs-2 mb-3">
+				HomeWork는 지역사회에 깨끗한 식수와 안전한 위생시설을 제공합니다
+			</span>
+			<div class="txt d-flex align-items-center flex-column mx-auto  fs-4 lh-lg">
+				 <p>				 	
+           			 식수위생시설은 콜레라와 같은 수인성 질병의 확산을 방지하고 건강한 삶을 유지하는 데 필수적입니다. 
+            		 <br>
+           			 HomeWork는 지역사회에 깨끗한 식수와 안전한 위생시설을 제공하고, 주민 대상으로 안전한 식수와 위생습관에 대한 인식개선 교육도 제공합니다 
+           			 <br> 
+           			 깨끗한 식수를 이용하며 콜레라, 피부병과 같은 수인성 질환이 감소하고, 영유아 사망의 주원인인 설사병이 감소합니다.
+           			 <br>
+           			 여성과 아이들은 먼 거리에서 물을 길어오지 않게 되어 잠재적 성폭력의 위험에서 벗어나고, 교육에 집중할 수 있습니다.
+           			 <br>
+           			 안전한 물 관리, 위생습관에 대한 인식개선 교육을 통해 지역사회에 나타난 변화가 지속됩니다.
+				 </p>
+			 	 <p>가정은 새로운 주거환경에서 자립하게 되고, 자립하는 가정을 통해 지역사회는 함께 지속가능한 변화를 경험합니다.</p>
+			</div>	
+		</div>
+		<hr>
+		<div class="text-container2-2 d-flex justify-content-center gap-5  ">
+			<div class="align-self-center w-35">
+				<h3 class="fs-2 fw-semibold mb-3">식수개선사업</h3>
+				<h4 class="fs-5 lh-base">
+                	깨끗한 식수 시설을 설치해<br>
+					지역주민들의 깨끗한 물에 대한 접근성을 향상시키고<br>
+					수인성 질병의 발병률을 낮춥니다.
+				</h4>
+			</div>
+			<div class="global-image2-2 w-75 h-75 mt-5" style="background-image:url('resources/image/global2-2.jpg');">
+			</div>
+		</div>
 		
-		<div class="domeMainImage" align="center" style="background-image:url('resources/image/dome02Image1.jpg');">
-			<div style="color:white; font-size:48px; padding:100px; font-weight:bold;">주거환경개선</div>
+		<hr>
+		
+		<div class="text-container2-2 d-flex justify-content-center gap-5  ">
+			<div class="global-image2-2 w-75 h-75 mt-5" style="background-image:url('resources/image/global2-3.jpg');"></div>
+			<div class="align-self-center w-35  ">
+				<h3 class="fs-2 fw-semibold mb-3">위생증진사업</h3>
+				<h4 class="fs-5 lh-base">
+             							 
+              							 안전하고 위생적인 화장실을 구축하고, 
+             							 <br>
+             							 수인성질병을 예방할 수 있는 식수위생에 대한 인식을 개선합니다.
+				</h4>
+			</div>
 		</div>
-		<div class="content" align="left" >
-		<br><br><br><br><br> 
-			<div align="left" style="display:inline-block; border-left: 10px solid #e3e3e3; margin-left:100px; padding:10px;width:500px;">
-			<h1>주거환경개선</h1>
-			<h3>열악한 주거환경에 처해있는 소외계층과
-				저소득층의 집과 시설을 개선하고 있습니다.</h3>
-			</div>
-			
-			<div style="display:inline-block; width:500px; margin-left:100px;padding:10px;">
-			<p>home work가 고치는 집은 더 적은 비용으로 더 많은 가정이 더 나은 환경에서 살게 합니다.
-				자원봉사자들은 주거환경개선 현장에서 짧은 시간 안에
-				직접 주거환경을 바꿀 수 있습니다.</p>
-			</div>
-			<br>
-			
-			
-			<hr>
-			
-			<div style="margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
-				<div class="imageDiv" align="center" ><img src="resources/image/dome02Image3.jpg" style="width:550px; height:300px;"/></div>
-				<div class="domeCon" align="left" style="width:500px; margin-left:50px;">
-					<em>만드는 즐거움, 그 안에 담긴 정성, 소중한 나눔</em>
-					<div class="border"></div>
-					
-					<p>가족, 친구 등 봉사자들이 한자리에 모여 집과 관련된 가구 및 소품을
-						D.I.Y(Do It Yourself)로 제작하고, 완성된 물품은 지역아동센터 등 필요한 곳에 기부 할 수 있습니다.</p>
-				 </div>
-			</div>
-			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
-				<div class="domeCon" align="right" style="width:500px; margin-right:50px;">
-					<em>주거취약가정에게 기쁨을.</em>
-					<div class="border"></div>
-					
-					<p>위생적이고 안전한 환경에서 지낼 수 있도록 침수 피해를 예방하기 위한 창호, 방수 설비 설치 등 변화를 줄 수 있습니다</p>
-				 </div>
-				<div class="imageDiv" align="center" >
-					<img src="resources/image/dome02Image02.png" style="width:550px; height:300px;"></img>
-				</div>
-			</div>
-			
-			
-			
-			
-			<jsp:include page="../common/volunteerBanner.jsp"/>
-			<!-- <div class ="volunteerBanner" align="center" >
-				<a href="volunteer.do"style="margin:-10px; text-decoration: none;">
-					<br><br>
-					<span style="color: white; font-size:48px; font-weight:bold;">봉사 활동 신청/목록 보기</span>
-					<br><br>
-					<span style="border-bottom:2px solid white; color:white;">More view</span>
-					
-					<br><br>
-			
-				</a>
-			</div> -->
-			
-			
-			
-			
-			
-		</div>
+		
+		
+		
+		<jsp:include page="../common/volunteerBanner.jsp"/>
+		<!-- <div class ="volunteerBanner" align="center" >
+			<a href="volunteer.do"style="margin:-10px; text-decoration: none;">
+				<br><br>
+				<span style="color: white; font-size:48px; font-weight:bold;">봉사 활동 신청/목록 보기</span>
+				<br><br>
+				<span style="border-bottom:2px solid white; color:white;">More view</span>
+				
+				
+		
+			</a>
+		</div> -->
+		
+		
+		
 		
 	</div>
-	
+		
+	</div>
 	<div id="footer">
- 			<jsp:include page="../common/footer.jsp"/>
- 		</div>	
-	
+		<jsp:include page="../common/footer.jsp"/>
+	</div>	
+	<div id="fixedBtn">
+ 		<jsp:include page="../common/fixedBtn.jsp"/>
+ 	</div>	
+ 		
+ 		
+ 		<Script>
+ 			const volunteer = () =>{
+ 				
+ 			}
+ 		</Script>
 </body>
 </html>

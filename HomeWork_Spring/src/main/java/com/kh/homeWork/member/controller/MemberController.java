@@ -41,6 +41,7 @@ public class MemberController {
 	public String loginCheck(Member m, Model model, HttpSession session) {
 		
 		Member loginUser = mService.loginCheck(m);
+		System.out.println(loginUser.getAge());
 		if(bcrypt.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
 			session.setAttribute("loginUser", loginUser);			
 			return "../../../index";				

@@ -264,9 +264,12 @@
             </ul>
         </div>
 		
- 		<div id="footer">
- 			<jsp:include page="../common/footer.jsp"/>
- 		</div>	
+		<div id="footer">
+			<jsp:include page="../common/footer.jsp"/>
+		</div>
+		<div id="fixedBtn">
+			<jsp:include page="../common/fixedBtn.jsp"/>
+		</div>		
  	</div>
  	
  	<script>
