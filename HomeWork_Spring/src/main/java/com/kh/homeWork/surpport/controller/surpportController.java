@@ -41,12 +41,10 @@ public class surpportController {
 							 @RequestParam(value="emailId",defaultValue="null") String emailId,
 							 @RequestParam(value="emailDomain",defaultValue="") String emailDomain
 							 ) {
-		System.out.println(success);
-		System.out.println(phone);
-		System.out.println(emailId);
+		
+		
 		System.out.println(pay);
-		
-		
+		System.out.println(pay.getMemberNo());
 		
 		if(success) {
 			String email = null;
@@ -57,6 +55,14 @@ public class surpportController {
 			pay.setBuyerTel(phone.replace(',', '-'));
 			
 			int result = pService.insertPay(pay);
+			if(result>0){
+				return "redirect:domestic01.in";
+			}else {
+				System.out.println("데이터 저장 실패");
+			}
+			
+		}else {
+			System.out.println("에러페이지 적용하기");
 		}
 		
 		return "terms";
