@@ -1,0 +1,42 @@
+package com.kh.homeWork.board.Controller;
+
+import java.util.ArrayList;
+
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+
+import com.kh.homeWork.board.sevice.BoardService;
+import com.kh.homeWork.common.Pagination;
+import com.kh.homeWork.member.model.vo.Board;
+import com.kh.homeWork.member.model.vo.PageInfo;
+
+@Controller
+public class BoardController {
+	
+	@Autowired
+	private BoardService bService;
+	
+	@RequestMapping("list.bo")
+	public String selectBoardList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
+		int listCount = bService.getListCount(1);
+		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 5);		
+		ArrayList<Board> list = bService.selectBoardList(pi,1);
+		
+		if(list !=null) {
+			model.addAttribute("list",list);
+			model.addAttribute("pi",pi);
+			return "boardList";
+		} else {
+			throw new BoardException("게시글 조회를 실패하였습니다.");
+		}
+	}
+	
+	@RequestMapping("volunteer.bo")
+	public String test() {
+		return "korMap";
+	}
+}

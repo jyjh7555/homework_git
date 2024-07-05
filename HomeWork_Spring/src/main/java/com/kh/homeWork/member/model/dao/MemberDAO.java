@@ -32,6 +32,30 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.updateTempPwd", map);
 	}
 
+	public ArrayList<Member> adminSelectMember(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("memberMapper.adminSelectMember");
+	}
+
+	public int adminDelete(SqlSessionTemplate sqlSession, int mNo) {
+		return sqlSession.update("memberMapper.adminDelete", mNo);
+	}
+
+	public int adminUpdate(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.adminUpdate", m);
+	}
+
+	public ArrayList<Member> searchMember(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return (ArrayList)sqlSession.selectList("memberMapper.searchMember", map);
+	}
+
+	public int updateStatus(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateStatus", m);
+	}
+
+	public int updateAdmin(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("memberMapper.updateAdmin", m);
+	}
+
 	public int checkMemberId(SqlSessionTemplate sqlSession, String id) {
 		return sqlSession.selectOne("memberMapper.checkMemberId",id);
 	}
