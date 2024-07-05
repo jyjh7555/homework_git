@@ -85,14 +85,17 @@
 		set member_name = #{memberName},
 			nickname = #{nickName},
 			email = #{email},
-			phone = #{phone}
+			phone = #{phone},
+			address = #{address}
 		where member_no = #{memberNo}
 	</update>
 	
 	<select id="searchMember" resultType="Member">
 		select *
 		from member
-		where #{type} = '%'||#{text}||'%'
+		<if test="type=='member_No' or type=='member_name' or type=='nickName'">
+		where ${type} like '%' || #{text} || '%'
+   		</if>
 	</select>
 	
 	<update id="updateStatus">
