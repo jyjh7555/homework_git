@@ -10,6 +10,7 @@ import org.springframework.stereotype.Service;
 
 import com.kh.homeWork.member.model.dao.MemberDAO;
 import com.kh.homeWork.member.model.vo.Member;
+import com.kh.homeWork.surpport.model.vo.Pay;
 
 @Service("mService")
 public class MemberServiceImpl implements MemberService {
@@ -86,6 +87,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int checkMemberNickName(String nickName) {
 		return mDAO.checkMemberNickName(sqlSession,nickName);
+	}
+
+	@Override
+	public ArrayList<Pay> SelectPay() {
+		return mDAO.selectPay(sqlSession);
 	}
 
 

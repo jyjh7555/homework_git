@@ -299,24 +299,30 @@
 					</c:forEach>
 				</div>
 			<div class="supportPage hidden" id="supportList">
-					<table id="supportTable">
-						<tr>
-							<th width="10%">회원번호</th>
-							<th width="10%">이름</th>
-							<th width="10%">이메일</th>
-							<th width="10%">휴대폰번호</th>
-							<th width="10%">후원날짜</th>
-							<th width="10%">후원금액(원)</th>
-						</tr>
-						<tr>
-							<td>001</td>
-							<td>강건강</td>
-							<td>gang@naver.com</td>
-							<td>010-1234-5678</td>
-							<td>24-06-11</td>
-							<td>10000원</td>
-						</tr>
-					</table>
+				<c:forEach items="${ pay }" var="p">
+						<table id="supportTable">
+							<tr>
+								<th width="6%">번호</th>
+								<th width="6%">회원번호</th>
+								<th width="10%">이름</th>
+								<th width="10%">이메일</th>
+								<th width="10%">휴대폰번호</th>
+								<th width="12%">후원분야</th>
+								<th width="12%">후원날짜</th>
+								<th width="10%">후원금액(원)</th>
+							</tr>
+							<tr>
+								<td>${ p.payNo }</td>
+								<td>${ p.memberNo }</td>
+								<td>${ p.buyerName }</td>
+								<td>${ p.buyerEmail }</td>
+								<td>${ p.buyerTel }</td>
+								<td>${ p.product }</td>
+								<td>${ p.payDate }</td>
+								<td>${ p.amount }원</td>
+							</tr>
+						</table>
+					</c:forEach>
 				</div>
 			<div class="regularSupportPage hidden" id="regularSupportList">
 					<table id="regulartSupportTable">

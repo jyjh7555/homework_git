@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
 import com.kh.homeWork.member.model.vo.Member;
+import com.kh.homeWork.surpport.model.vo.Pay;
 
 @Repository("mDAO")
 public class MemberDAO {
@@ -62,6 +63,10 @@ public class MemberDAO {
 
 	public int checkMemberNickName(SqlSessionTemplate sqlSession, String nickName) {
 		return sqlSession.selectOne("memberMapper.checkMemberNickName",nickName);
+	}
+
+	public ArrayList<Pay> selectPay(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("memberMapper.selectPay");
 	}
 
 

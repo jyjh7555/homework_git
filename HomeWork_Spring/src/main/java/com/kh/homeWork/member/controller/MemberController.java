@@ -24,6 +24,7 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.kh.homeWork.member.model.service.MemberService;
 import com.kh.homeWork.member.model.vo.Member;
+import com.kh.homeWork.surpport.model.vo.Pay;
 
 @Controller
 public class MemberController {
@@ -60,7 +61,9 @@ public class MemberController {
 	@RequestMapping("admin.me")
 	public String adminPage(@ModelAttribute Member m, Model model) {
 		ArrayList<Member> list = mService.adminSelectMember();
+		ArrayList<Pay> pay = mService.SelectPay();
 		model.addAttribute("list", list);
+		model.addAttribute("pay", pay);
 		return "admin";
 
 	}
