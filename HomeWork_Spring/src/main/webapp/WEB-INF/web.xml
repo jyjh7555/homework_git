@@ -104,6 +104,7 @@
 		<url-pattern>*.bo</url-pattern>
 	</servlet-mapping>
 	
+	
 
 
 	<!-- 한글 인코딩 -->
