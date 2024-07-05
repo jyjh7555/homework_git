@@ -81,7 +81,6 @@ public class MemberController {
 							  @RequestParam("emailId") String emailId,
 							  @RequestParam("emailDomain") String emailDomain,
 							  @RequestParam("phone") String phone) {
-		
 		String email = null;
 		if(!emailId.equals("")) {
 			email = emailId + "@" + emailDomain;
