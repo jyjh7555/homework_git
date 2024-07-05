@@ -25,6 +25,7 @@
 	        #{memberName}
 		
 		)
+
 	</insert>
 
 	<update id="updateMember">
@@ -54,7 +55,18 @@
 		and email = #{findEmail}
 		and phone = #{findPhone}
 	</update>
+
+	<select id="adminSelectMember" resultType="Member">
+		select *
+		from member
+	</select>
 	
+	<update id="adminDelete">
+		update member
+		set status = 'N'
+		where member_no = #{memberNo}
+	</update>
+
 	<select id="checkMemberId" resultType="_int">
 		select count(*)
 		from member
@@ -66,5 +78,32 @@
 		where nickName = #{nickName} 
 	</select>
 
+
 	
+	<update id="adminUpdate">
+		update member
+		set member_name = #{memberName},
+			nickname = #{nickName},
+			email = #{email},
+			phone = #{phone}
+		where member_no = #{memberNo}
+	</update>
+	
+	<select id="searchMember" resultType="Member">
+		select *
+		from member
+		where #{type} = '%'||#{text}||'%'
+	</select>
+	
+	<update id="updateStatus">
+		update member
+		set status = #{status}
+		where member_no = #{memberNo}
+	</update>
+	
+	<update id="updateAdmin">
+		update member
+		set isAdmin = #{isAdmin}
+		where member_no = #{memberNo}
+	</update>
 </mapper>
