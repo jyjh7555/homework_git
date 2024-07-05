@@ -1,6 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="boardMapper">
-
-
+ 	<select id="getListCount" resultType="_int">
+ 		select count(*)
+ 		from board
+ 		where delete_yn = 'N' and board_type = #{i}
+	</select>
+	
+ 	<select id="selectBoardList" resultType="Board">
+		select * 
+		from board
+	    join location using(location_no)
+		where delete_yn = 'N' and board_type = #{i}
+		order by board_no desc
+ 	</select>
 </mapper>
