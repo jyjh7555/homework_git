@@ -44,33 +44,34 @@
  	</div>
 
 
-	<form action="${contextPath}" method="post">
+	<form method="post" id="form">
 		<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
 			<div class="d-flex flex-column justify-content-center mb-3 border border-3 w-50 mt-3 ">
 			   	<h1 class="title ms-3 m-4" style="font-family:'Pretendard-Regular'"><b>후원 정보</b></h1>
 		        <div class="field mb-3">
 		            <label class="label me-3 ms-4">후원주기</label>
-		            <button class="button selected  btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">정기</button>
-		            <button class="button btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">일시</button>
+		            <button type="button" class="button selected  btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">정기</button>
+		            <button type="button" class="button btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">일시</button>
 		        </div>
 		        <div class="field mb-3">
 		                <label class="label me-3 ms-4">후원분야</label>
-		                <button class="button selected btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">국내 건축 후원</button>
-		                <button class="button btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">해외 건축 후원</button>
+		                <button type="button" class="button selected btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">국내 건축 후원</button>
+		                <button type="button" class="button btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">해외 건축 후원</button>
+		                <input type="hidden" name="product" value="국내건축후원하기">
 		        </div>
 		        <div class="field mb-3">
 		            <label class="label me-3 ms-4 text-nowrap">후원금액</label>
 		            
-		                <button class="button selected btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 20000)">20,000원</button>
-		                <button class="button btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 30000)">30,000원</button>
-		                <button class="button btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 50000)">50,000원</button>
-		                <button class="button btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 100000)">100,000원</button>
-		                <button class="button btn btn-outline-secondary btn-sm" name="money" onclick="showCustomAmountField()">직접입력</button>
+		                <button type="button" class="button selected btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 20000)">20,000원</button>
+		                <button type="button" class="button btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 30000)">30,000원</button>
+		                <button type="button" class="button btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 50000)">50,000원</button>
+		                <button type="button" class="button btn btn-outline-secondary btn-sm" name="money" onclick="selectAmount(this, 100000)">100,000원</button>
+		                <button type="button" class="button btn btn-outline-secondary btn-sm" name="money" onclick="showCustomAmountField()">직접입력</button>
 	
 		        </div>
 		        <div id="customAmountField" class="field d-none">
 		            <label class="label me-3 ms-4 mb-3">직접 입력</label>
-		            <input type="number" id="customAmountInput" class="form-control-sm  border border-2" placeholder="금액을 입력하세요" min="10000" step="1000">원
+		            <input type="number" name="amount"id="customAmountInput" class="form-control-sm  border border-2" placeholder="금액을 입력하세요" min="10000" step="1000">원
 		        </div>
 			</div>
 		</div>
@@ -80,27 +81,15 @@
 			   	<h1 class="title ms-3 m-4" style="font-family:'Pretendard-Regular'"><b>후원자 정보</b></h1>
 		        <div class="row mb-3 m-4">
 				    <label class="col-sm-2 col-form-label" style="align:center;">성함</label>
-	   		        <input class="form-control w-25" type="text" id="name"name="memberName" <c:if test="${!empty loginUser}">value="${loginUser.memberName }"</c:if> placeholder="이름">
+	   		        <input class="form-control w-25" type="text" id="name"name="buyerName" required <c:if test="${!empty loginUser}">value="${loginUser.memberName }"</c:if> placeholder="이름">
 				</div>
-		        <div class="row mb-3 m-4">
-	                <label class="col-sm-2 col-form-label">생년월일</label>
-	                <input type="date" class="form-control w-25" name="age" >
-		        </div>
-		        <div class="col-12 mb-3 m-4">
-		            <label class="col-sm-2 col-form-label" style="margin-left:10px; margin-right:-25px;">성별</label>
-		             <input class="form-check-input " style="margin-top:12px" <c:if test="${loginUser.gender=='M'}">checked</c:if> type="radio"  name="gender" id="man" value="M">
-			  		 <label class="form-check-label " for="man">남자</label>
-					 <input class="form-check-input " style="margin-top:12px" <c:if test="${loginUser.gender=='F'}">checked</c:if> type="radio" name="gender" id="woman" value="F">
-			  		 <label class="form-check-label" for="woman">여자</label>
-		        </div>
-		        
 				<div class="row mb-3 m-4 mt-1">
 		        	<label class="col-sm-2 col-form-label">휴대폰 번호</label>
-		        	<input class="form-control mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" value="010" readonly >
+		        	<input class="form-control mt-1 mb-1" name="phone" style="width:75px; display:inline-block;" type="text" name="phone" value="010" readonly >
+		        	<span class="col-1"  style="width:12px; margin-top:9px;">-</span>
+		        	<input class="form-control m-3 mt-1 mb-1" name="phone" style="width:75px; display:inline-block;" <c:if test="${!empty loginUser}">value="${midPhone}"</c:if> type="text" name="phone" maxlength="4" placeholder="0000">
 		        	<span class="col-1" style="width:12px; margin-top:9px;">-</span>
-		        	<input class="form-control m-3 mt-1 mb-1" style="width:75px; display:inline-block;" <c:if test="${!empty loginUser}">value="${midPhone}"</c:if> type="text" name="phone" maxlength="4" placeholder="0000">
-		        	<span class="col-1" style="width:12px; margin-top:9px;">-</span>
-		        	<input class="form-control m-3 mt-1 mb-1" style="width:75px; display:inline-block;" <c:if test="${!empty loginUser}">value="${lastPhone}"</c:if> type="text" name="phone" maxlength="4" placeholder="9999">
+		        	<input class="form-control m-3 mt-1 mb-1" name="phone" style="width:75px; display:inline-block;" <c:if test="${!empty loginUser}">value="${lastPhone}"</c:if> type="text" name="phone" maxlength="4" placeholder="9999">
 			    </div>
 		        
 		        
@@ -121,102 +110,20 @@
 			</div>
 		</div>
 			<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
-	        	<button class ="btn btm-lg btn-success m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="requestPay()">후원</button>
+	        	<button type="button" class ="btn btm-lg btn-success m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="requestPay()">후원</button>
 			</div>
-	        	<button class ="btn btm-lg btn-success m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="test()">테스트</button>
+	        	<button type="button" class ="btn btm-lg btn-success m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="test()">테스트</button>
+	        	<input type="hidden" id="payCheck"name="success">
+	        	<input type="hidden" name="merchantUid">
+	        	<input type="hidden" name="memberNo"<c:if test="${ !empty loginUser }">value="${loginUser.memberNo}"</c:if><c:if test="${ empty loginUser }">value="202"</c:if> >
 	</form>
 	
 	
 	
     <br><br>
     
-    <%-- 
-    <div class="container-fluid">
-        <div class="grid grid-cols-1 md:grid-cols-2">
-            <div id="credit-card-section">
-                <h2 class="payInfo mb">결제 정보</h2>
-                <div class="flex mb">
-                    <button class="flex-1 selectY selectX border active-tab" onclick="showCreditCardSection()">신용/체크카드</button>
-                    <button class="flex-1 selectY selectX border" onclick="showAutoTransferSection()">자동이체</button>
-                </div>
-                <form>
-                    <div class="mb">
-                        <label for="card-number" class="block">카드번호</label>
-                        <input type="text" id="card-number" class="border" placeholder="카드번호">
-                    </div>
-                    <div class="mb flex space-x-4">
-                        <div class="flex-1">
-                            <label for="expiry-month" class="block">유효기간</label>
-                            <input type="text" id="expiry-month" class="border" placeholder="MM" maxlength="2" oninput="checkValidMonth(this)">
-                        </div>
-                        <div class="flex-1">
-                            <input type="text" id="expiry-year" class="border" placeholder="YY" maxlength="2">
-                        </div>
-                    </div>
-                    <div class="mb">
-                        <label for="card-name" class="block">카드주 명</label>
-                        <input type="text" id="card-name" class="border" placeholder="카드주명">
-                    </div>
-                    <div class="mb">
-                        <label for="birth-date" class="block">생년월일</label>
-                        <input type="text" id="birth-date" class="border" placeholder="주민번호 앞 6자리">
-                    </div>
-                    <div class="mb">
-                        <label for="password" class="block">비밀번호</label>
-                        <input type="password" id="password" class="border" placeholder="비밀번호 앞 2자리">
-                    </div>
-                </form>
-            </div>
-            <div id="auto-transfer-section" class="hidden">
-                <h2 class="payInfo mb">결제 정보</h2>
-                <div class="flex mb">
-                    <button class="flex-1 selectY selectX border" onclick="showCreditCardSection()">신용/체크카드</button>
-                    <button class="flex-1 selectY selectX border active-tab" onclick="showAutoTransferSection()">자동이체</button>
-                </div>
-                <form>
-                    <div class="mb">
-                        <label for="bank-name" class="block">은행 명</label>
-                        <select id="bank-name" class="border">
-                            <option>국민은행</option>
-                            <option>농협은행</option>
-                            <option>신한은행</option>
-                            <option>우리은행</option>
-                            <option>IBK기업은행</option>
-                            <option>KEB하나은행</option>
-                            <option>카카오뱅크</option>
-                            <option>토스뱅크</option>
-                        </select>
-                    </div>
-                    <div class="mb">
-                        <label for="account-number" class="block">계좌번호</label>
-                        <input type="text" id="account-number" class="border" placeholder="계좌번호">
-                    </div>
-                    <div class="mb">
-                        <label for="account-holder" class="block">예금주 명</label>
-                        <input type="text" id="account-holder" class="border" placeholder="예금주명">
-                    </div>
-                    <div class="mb">
-                        <label for="birth-date-transfer" class="block">생년월일</label>
-                        <input type="text" id="birth-date-transfer" class="border" placeholder="주민번호 앞 6자리">
-                    </div>
-                </form>
-            </div>
-        </div>
-        <div class="mt-6 p-4 spbg border spDescript">
-            <p>* 정기후원 신청 후에 첫 후원은 7일 이내에 시도되며 이후 정기 후원일은 매월 5일입니다.</p>
-            <p>* 후원실패 시 10, 15, 20, 25, 말일에 재후원이 시도됩니다.</p>
-        </div>
-        <hr>
-        <input type="checkbox" id="agreeAll" class="termAgree" onclick="toggleAgreeAll()"> 전체 동의하기
-        <br>
-        <input type="checkbox" class="agreeTerms" onclick="toggleIndividualAgree(); showPopup('후원약관')"> 후원약관 동의<button onclick="openTerms()">[보기]</button>
-        <br>
-        <input type="checkbox" class="agreeTerms" onclick="toggleIndividualAgree(); showPopup('개인정보 이용수집 동의')"> 개인정보 이용수집 동의 <button onclick="openAgreeInfo()">보기</button>
-        <hr>
-        <button class="submit payInfo" onclick="submitDonation()">후원하기</button>
-    </div>
-	
-	 --%>
+    
+    
 	<div id="footer">
  			<jsp:include page="../common/footer.jsp"/>
 	</div>
@@ -242,11 +149,10 @@
     	const seconds = now.getSeconds().toString().padStart(2, '0');
 
     	const formattedTime = year+month+day+hours+minutes+seconds;
-    	console.log(formattedTime);
-    	console.log('${ loginUser.phone}');
+    	const form = document.getElementById('form');
     	
 	    function requestPay() {
-	    	//const money = document.getElementById('customAmountInput').value;
+	    	const money = document.getElementById('customAmountInput').value;
 			
 	    	
 	    	
@@ -266,12 +172,18 @@
 		    	  console.log(response.success);
 		    	  if(response.success){
 		    		  alert('결제 성공');
-		    		  console.log(response);
+		    		  document.getElementById('payCheck').value = response.success;
+		    		  document.getElementsByName('merchantUid')[0].value = response.merchant_uid;
+		    		  form.action = '${contextPath}/successPay.su';
+		  	    	  form.submit();
 		    		  
 		    		  
 		    	  }else{
 		    		  alert('결제 실패하였습니다');
 		    		  alert(response.error_msg);
+		    		  
+		    		  /* form.action = '${contextPath}/successPay.su';
+		  	    	  form.submit(); */
 		    	  }
 		     	});
 	    	/* }else{
@@ -279,8 +191,10 @@
 	    	} */
 	    }
 	    
+	    
 		function test(){
-			form.action = '${contextPath}';
+			document.getElementById('payCheck').value = '일단확인';
+			form.action = '${contextPath}/successPay.su';
 	    	form.submit();
 		}
     	
