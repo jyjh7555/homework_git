@@ -44,7 +44,7 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.adminUpdate", m);
 	}
 
-	public ArrayList<Member> searchMember(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+	public ArrayList<Member> searchMember(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
 		return (ArrayList)sqlSession.selectList("memberMapper.searchMember", map);
 	}
 

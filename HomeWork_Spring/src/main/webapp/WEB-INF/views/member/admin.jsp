@@ -149,6 +149,7 @@
 			<div style="border:2px solid #CCCCCC; height:30px">
 			<form id="searchForm">
    				 <select id="searchType">
+					<option value="member_No">회원번호</option>
 					<option value="member_name">회원이름</option> 
 					<option value="nickName">닉네임</option> 
 				</select>
@@ -157,27 +158,40 @@
 			</form>
 			</div>
 			<div align="center" id=adminContent>
-				<div class="form-container">
-					<form id="statusMemberForm" action="#" method="post">
-						 <select>
-				   			    <option value="all">전체 사용자</option>
-								<option value="Y">활동중인 사용자</option>
-								<option value="N">탈퇴한 사용자</option>
-						 </select>
-					</form>
-				</div>
+			
+				<div class="searchResult hidden" id=searchResult>
+		    		<table id="searchList">
+		    			<thead>
+							<tr>
+								<th width="8%">회원번호</th>
+								<th width="10%">이름</th>
+								<th width="10%">닉네임</th>
+								<th width="10%">이메일</th>
+								<th width="10%">휴대폰번호</th>
+								<th width="12%">주소</th>
+								<th width="10%">생년월일</th>
+								<th width="12%">가입날짜</th>
+							</tr>
+						</thead>
+						<tbody>
+						
+						</tbody>
+					</table>
+					</div>
+					
 				 <div class="userInfo hidden" id=userInfo>
 					<c:forEach items="${ list }" var="m">					
 				    		<table id="memberList">
 								<tr>
-									<th width="8%">회원번호</th>
+									<th width="6%">회원번호</th>
 									<th width="10%">이름</th>
 									<th width="10%">닉네임</th>
 									<th width="10%">이메일</th>
 									<th width="10%">휴대폰번호</th>
 									<th width="10%">생년월일</th>
+									<th width="12%">주소</th>
 									<th width="12%">가입날짜</th>
-									<th width="6%">활동여부</th>
+									<th width="6%">활동</th>
 									<th width="6%">관리자</th>
 								</tr>
 								<tr>
@@ -187,6 +201,7 @@
 									<td>${ m.email }</td>
 									<td>${ m.phone }</td>
 									<td>${ m.age }</td>
+									<td>${ m.address }</td>
 									<td>${ m.createDate }</td>
 									<td>${ m.status }</td>
 									<td>${ m.isAdmin }</td>
@@ -202,16 +217,18 @@
 									<th width="6%">이름</th>
 									<th width="10%">닉네임</th>
 									<th width="12%">이메일</th>
+									<th width="12%">주소</th>
 									<th width="10%">휴대폰번호</th>
-									<th width="10%">활동여부</th>
-									<th width="10%">관리자여부</th>
-									<th width="10%">정보변경</th>
+									<th width="8%">활동</th>
+									<th width="8%">관리자</th>
+									<th width="8%">정보변경</th>
 								</tr>
 								<tr>
 									<td><input type="text" class="updateNo" value="${ m.memberNo }" readonly></td>
 		            				<td><input type="text" class="updateName" value="${ m.memberName }"></td>
 						            <td><input type="text" class="updateNickName" value="${ m.nickName }"></td>
 						            <td><input type="email" class="updateEmail" value="${ m.email }"></td>
+						            <td><input type="text" class="updateAddress" value="${ m.address }"></td>
 						            <td><input type="tel" class="updatePhone" value="${ m.phone }"></td>
 						            <td>
 							            <c:if test="${m.status == 'Y'}">
@@ -250,7 +267,7 @@
 									        </c:if>
 									</td>
 						            </td>
-						            <td><button class="updateUserButton" onclick="updateMember('${m.memberNo}')">정보 수정</button></td>
+						            <td><button class="updateUserButton" onclick="updateMember('${m.memberNo}')">변경</button></td>
 								</tr>
 							</table>
 						</c:forEach>
@@ -353,6 +370,7 @@
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
+				 document.getElementById('searchResult').classList.add('hidden');
 				 
 			 })
 			  document.getElementById('user2').addEventListener('click', function(){
@@ -361,6 +379,7 @@
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
+				 document.getElementById('searchResult').classList.add('hidden');
 				 
 			 })
 			 document.getElementById('user3').addEventListener('click', function(){
@@ -369,6 +388,7 @@
 				 document.getElementById('userUpdate').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
+				 document.getElementById('searchResult').classList.add('hidden');
 				 
 			 })
 			
@@ -383,6 +403,7 @@
 				 document.getElementById('userUpdate').classList.add('hidden');
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
+				 document.getElementById('searchResult').classList.add('hidden');
 				 
 			 })
 			 
@@ -392,6 +413,7 @@
 				 document.getElementById('userUpdate').classList.add('hidden');
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
+				 document.getElementById('searchResult').classList.add('hidden');
 				 
 			 })
 			
@@ -416,6 +438,7 @@
 			var nickName = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updateNickName').val()
 			var email = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updateEmail').val()
 			var phone = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updatePhone').val()
+			var address = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updateAddress').val()
 			$.ajax({
 	        	url: '${contextPath}/adminUpdate.me',
 	        	type: 'POST',
@@ -424,7 +447,8 @@
 	                memberName:memberName,
 	                nickName:nickName,
 	                email:email,
-	                phone:phone
+	                phone:phone,
+	                address:address
 		            },
 	        		success: data =>{
 	        			console.log(data)
@@ -471,24 +495,67 @@
 				error: data => console.log(data)
 			})
 		}
+		function selectMembers(){
+			 document.getElementById('userInfo').classList.add('hidden');
+			 document.getElementById('userUpdate').classList.add('hidden');
+			 document.getElementById('userDelete').classList.add('hidden');
+			 document.getElementById('supportList').classList.add('hidden');
+			 document.getElementById('regularSupportList').classList.add('hidden');
+		}
 		
 		function searchMember() {
 	        var searchType = document.getElementById('searchType').value;
 	        var searchText = document.getElementById('searchText').value;
-	        console.log(searchType);
-	        console.log(searchText);
 	        $.ajax({
 				url: '${contextPath}/searchMember.me',
-				data: {type:searchType,
+				data: {
+					   type:searchType,
 					   text:searchText	
-				},
+						},
 				success: data =>{
-					console.log(data)
+					selectMembers()
+					document.getElementById('searchResult').classList.remove('hidden');
+					
+					const tbody = document.querySelector('tbody');
+					tbody.innerHTML = '';
+					
+					for(const s of data){
+						const tr = document.createElement('tr');
+						
+						const noTd = document.createElement('td');
+						noTd.innerText = s.memberNo;
+						const nameTd = document.createElement('td');
+						nameTd.innerText = s.memberName;
+						const nickTd = document.createElement('td');
+						nickTd.innerText = s.nickName;
+						const emailTd = document.createElement('td');
+						emailTd.innerText = s.email;
+						const phoneTd = document.createElement('td');
+						phoneTd.innerText = s.phone;
+						const addressTd = document.createElement('td');
+						addressTd.innerText = s.address;
+						const ageTd = document.createElement('td');
+						ageTd.innerText = s.age;
+						const createDateTd = document.createElement('td');
+						createDateTd.innerText = s.createDate;
+						
+						tr.append(noTd);
+						tr.append(nameTd);
+						tr.append(nickTd);
+						tr.append(emailTd);
+						tr.append(phoneTd);
+						tr.append(addressTd);
+						tr.append(ageTd);
+						tr.append(createDateTd);
+						
+						tbody.append(tr);
+					}
 				},
 				error: data => console.log(data)
 				
 			})
 		}
+		
 	</script>
 </body>
 </html>
