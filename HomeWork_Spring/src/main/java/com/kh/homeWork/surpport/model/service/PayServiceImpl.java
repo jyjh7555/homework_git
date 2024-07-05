@@ -1,0 +1,25 @@
+package com.kh.homeWork.surpport.model.service;
+
+import org.mybatis.spring.SqlSessionTemplate;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
+
+import com.kh.homeWork.surpport.model.dao.PayDAO;
+import com.kh.homeWork.surpport.model.vo.Pay;
+
+@Service("pService")
+public class PayServiceImpl implements PayService{
+	
+	@Autowired
+	private SqlSessionTemplate sqlSession;
+	
+	@Autowired
+	private PayDAO pDAO;
+	
+	
+	@Override
+	public int insertPay(Pay pay) {
+		return pDAO.insertPay(sqlSession,pay);
+	}
+
+}

@@ -86,7 +86,7 @@ public class MemberController {
 	
 	@RequestMapping("insertMember.me")
 	public String insertMember(@ModelAttribute Member m,
-							  @RequestParam("emailId") String emailId,
+							  @RequestParam(value="emailId",defaultValue="null") String emailId,
 							  @RequestParam("emailDomain") String emailDomain,
 							  @RequestParam("phone") String phone) {
 		String email = null;
@@ -238,27 +238,27 @@ public class MemberController {
 	
 	@RequestMapping("searchMember.me")
 	@ResponseBody
-	public String searchMember(@RequestParam("type") String type,
+	public void searchMember(@RequestParam("type") String type,
 							   @RequestParam("text") String text,
-							   HttpServletResponse response) {
-		HashMap<String, String> map = new HashMap<String, String>();
+							   HttpServletResponse response,
+							   Model model) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
 		map.put("type", type);
 		map.put("text", text);
-		ArrayList<Member> list = mService.searchMember(map);
-		GsonBuilder gb = new GsonBuilder();
-		if (list != null && !list.isEmpty()) {
-			Gson gson = gb.create();
-			response.setContentType("application/json; charset=UTF-8");
-			try {
-				gson.toJson(list, response.getWriter());
-			} catch (JsonIOException e) {
-				e.printStackTrace();
-			} catch (IOException e) {
-				e.printStackTrace();
-			}
+		ArrayList<Member> searchList = mService.searchMember(map);
+		System.out.println(searchList);
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		try {
+			gson.toJson(searchList, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
-		return list != null? " success" : "fail";
 	}
+	
 	@RequestMapping("checkMemberId.me")
 	@ResponseBody
 	public String checkMemberId(@RequestParam("id") String id) {

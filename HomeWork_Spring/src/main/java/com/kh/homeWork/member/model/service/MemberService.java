@@ -26,7 +26,7 @@ public interface MemberService{
 
 	int adminUpdate(Member m);
 
-	ArrayList<Member> searchMember(HashMap<String, String> map);
+	ArrayList<Member> searchMember(HashMap<String, Object> map);
 
 	int updateStatus(Member m);
 
