@@ -12,7 +12,7 @@ import lombok.ToString;
 @Setter
 @ToString
 public class Pay {
-	private int paNo;
+	private int payNo;
 	private int memberNo;
 	private String payDate;
 	private int amount;

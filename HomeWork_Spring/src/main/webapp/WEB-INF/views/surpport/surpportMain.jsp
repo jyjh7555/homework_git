@@ -81,7 +81,7 @@
 			   	<h1 class="title ms-3 m-4" style="font-family:'Pretendard-Regular'"><b>후원자 정보</b></h1>
 		        <div class="row mb-3 m-4">
 				    <label class="col-sm-2 col-form-label" style="align:center;">성함</label>
-	   		        <input class="form-control w-25" type="text" id="name"name="buyerName" <c:if test="${!empty loginUser}">value="${loginUser.memberName }"</c:if> placeholder="이름">
+	   		        <input class="form-control w-25" type="text" id="name"name="buyerName" required <c:if test="${!empty loginUser}">value="${loginUser.memberName }"</c:if> placeholder="이름">
 				</div>
 		        <div class="row mb-3 m-4">
 	                <label class="col-sm-2 col-form-label">생년월일</label>
