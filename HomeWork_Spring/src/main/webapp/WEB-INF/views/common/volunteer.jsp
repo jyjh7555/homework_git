@@ -108,7 +108,7 @@
 				<!-- <a href="global01.in">해외자원봉사</a> -->
 				<button id="board"class="btn btn-lg" aria-expanded="false"data-bs-toggle="dropdown" style="color:#EEE;background:rgb(45,45,52); border:3px solid rgba(0, 0, 0, 0.3);" ><b>봉사신청</b></b></button>
 				<ul class="dropdown-menu" aria-labelledby="board" style="width:13%; background: rgb(45,45,52); color:white;">
-			      <li><a class="dropdown-item" style="color:white;" href="{contextPath}/volunteer.bo">국내게시판</a></li>
+			      <li><a class="dropdown-item" style="color:white;" href="${contextPath}/domesticList.bo">국내게시판</a></li>
 			      <li><a class="dropdown-item" style="color:white;" href="#">해외게시판</a></li>
 			      <li><a class="dropdown-item" style="color:white;" href="#">후기게시판</a></li>
 		    	</ul>
