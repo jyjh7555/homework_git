@@ -43,26 +43,26 @@ public class surpportController {
 							 ) {
 		
 		
-		System.out.println(pay);
-		System.out.println(pay.getMemberNo());
+//		System.out.println(pay);
+//		System.out.println(pay.getMemberNo());
 		
 		if(success) {
 			String email = null;
-			if(!emailId.equals("")) {
+			if(!emailId.equals("")) {					//이메일넣기
 				email = emailId + "@" + emailDomain;
 			}
 			pay.setBuyerEmail(email);
-			pay.setBuyerTel(phone.replace(',', '-'));
+			pay.setBuyerTel(phone.replace(',', '-'));	//폰번호넣기
 			
-			int result = pService.insertPay(pay);
+			int result = pService.insertPay(pay);		//DB삽입
 			if(result>0){
-				return "redirect:domestic01.in";
+				return "redirect:domestic01.in";		//추후 메인페이지
 			}else {
-				System.out.println("데이터 저장 실패");
+				System.out.println("데이터 저장 실패");		//에러throw하기
 			}
 			
 		}else {
-			System.out.println("에러페이지 적용하기");
+			System.out.println("에러페이지 적용하기");		//에러throw하기
 		}
 		
 		return "terms";

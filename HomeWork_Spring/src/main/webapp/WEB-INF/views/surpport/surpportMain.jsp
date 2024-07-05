@@ -83,11 +83,6 @@
 				    <label class="col-sm-2 col-form-label" style="align:center;">성함</label>
 	   		        <input class="form-control w-25" type="text" id="name"name="buyerName" required <c:if test="${!empty loginUser}">value="${loginUser.memberName }"</c:if> placeholder="이름">
 				</div>
-		        <div class="row mb-3 m-4">
-	                <label class="col-sm-2 col-form-label">생년월일</label>
-	                <input type="date" class="form-control w-25" name="age" >
-		        </div>
-		        
 				<div class="row mb-3 m-4 mt-1">
 		        	<label class="col-sm-2 col-form-label">휴대폰 번호</label>
 		        	<input class="form-control mt-1 mb-1" name="phone" style="width:75px; display:inline-block;" type="text" name="phone" value="010" readonly >
@@ -154,8 +149,6 @@
     	const seconds = now.getSeconds().toString().padStart(2, '0');
 
     	const formattedTime = year+month+day+hours+minutes+seconds;
-    	console.log(formattedTime);
-    	console.log('${ loginUser.phone}');
     	const form = document.getElementById('form');
     	
 	    function requestPay() {
@@ -188,10 +181,6 @@
 		    	  }else{
 		    		  alert('결제 실패하였습니다');
 		    		  alert(response.error_msg);
-		    		  console.log(response.success);
-		    		  document.getElementById('payCheck').value = response.success;
-		    		  //document.getElementsByName('merchantUid')[0].value = response.merchant_uid;
-
 		    		  
 		    		  /* form.action = '${contextPath}/successPay.su';
 		  	    	  form.submit(); */
