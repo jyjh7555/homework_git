@@ -38,6 +38,9 @@
 	    
 	}
 	
+	#voulnteer2 {
+		height: 200px;
+	}
 	
 	
 
@@ -54,10 +57,11 @@
 	    <div id="top-section">
 	        <jsp:include page="../common/top.jsp" />
 	    </div>
+		<div id="voulnteer2">
+
+			<jsp:include page="../common/volunteer.jsp"/>
+		</div>	
  	</div>
-	<div id="voulnteer2">
-		<jsp:include page="../common/volunteer.jsp"/>
-	</div>	
 
 	<br><br>
 	
@@ -217,6 +221,9 @@
 	<div id="footer">
 		<jsp:include page="../common/footer.jsp"/>
 	</div>	
+	<div id="fixedBtn">
+ 		<jsp:include page="../common/fixedBtn.jsp"/>
+ 	</div>	
  		
  		
  		<Script>

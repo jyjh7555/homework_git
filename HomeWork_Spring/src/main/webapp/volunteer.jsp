@@ -13,7 +13,6 @@
 		/* border-bottom: 0.5px solid lightgray; */
 		padding: 10px 0;
 		width:auto;	
-		height:100px;
 		
 	}
 	.volunteerWrap>ul {
@@ -23,7 +22,6 @@
 		list-style-type: none;
 		padding: -5px;
 		margin-left:-150px;
-		margin-top: 20px;
 		
 	}
 	
@@ -88,7 +86,7 @@
 		<ul id="volunteer">
 			<li class="domestic" >
 				<!-- <a href="domestic01.in" style="border:5px solid black; width:250px;">국내자원봉사</a> -->
-				<button id="domestic"class="btn btn-lg" aria-expanded="false" data-bs-toggle="dropdown" style="color:#373A40;background: #EEEEEE; border:3px solid rgba(0, 0, 0, 0.1);" ><b>국내봉사</b></button>
+				<button id="domestic"class="btn btn-lg volunteerB" aria-expanded="false" data-bs-toggle="dropdown" style="color:#373A40;background: #EEEEEE; border:3px solid rgba(0, 0, 0, 0.1);" ><b>국내봉사</b></button>
 				<ul class="dropdown-menu" aria-labelledby="domestic"style="width:13%; background: #EEEEEE;">
 			      <li><a class="dropdown-item" href="domestic01.in">집짓기</a></li>
 			      <li><a class="dropdown-item" href="domestic02.in">환경개선</a></li>
@@ -97,18 +95,18 @@
 			</li>
 			<li style="margin-right:-33%; margin-left:-33%;" class="global">
 				<!-- <a href="global01.in">해외자원봉사</a> -->
-				<button id="global"class="btn btn-lg" aria-expanded="false"data-bs-toggle="dropdown" style="color:#000000;background: rgb(249,197,67); border:3px solid rgba(0, 0, 0, 0.2);"><b>해외봉사</b></button>
+				<button id="global"class="btn btn-lg volunteerB" aria-expanded="false"data-bs-toggle="dropdown" class="btn btn-lg volunteerB" style="color:#000000;background: rgb(249,197,67); border:3px solid rgba(0, 0, 0, 0.2);"><b>해외봉사</b></button>
 				<ul class="dropdown-menu" aria-labelledby="global" style="width:13%; background: rgb(249,197,67);">
-			      <li><a class="dropdown-item" style="color:gray;" href="global01.in">주거환경개선</a></li>
-			      <li><a class="dropdown-item" style="color:gray;" href="global02.in">식수지원</a></li>
-			      <li><a class="dropdown-item" style="color:gray;" href="global03.in">도시슬럼 지원</a></li>
+			      <li><a class="dropdown-item" style="color:gray;" href="#">다른거</a></li>
+			      <li><a class="dropdown-item" style="color:gray;" href="#">뭐지</a></li>
+			      <li><a class="dropdown-item" style="color:gray;" href="#">재난</a></li>
 		    	</ul>
 			</li>
 			<li class="board">
 				<!-- <a href="global01.in">해외자원봉사</a> -->
-				<button id="board"class="btn btn-lg" aria-expanded="false"data-bs-toggle="dropdown" style="color:#EEE;background:rgb(45,45,52); border:3px solid rgba(0, 0, 0, 0.3);" ><b>봉사신청</b></b></button>
+				<button id="board"class="btn btn-lg volunteerB" aria-expanded="false"data-bs-toggle="dropdown" class="btn btn-lg volunteerB" style="color:#EEE;background:rgb(45,45,52); border:3px solid rgba(0, 0, 0, 0.3);" ><b>봉사신청</b></b></button>
 				<ul class="dropdown-menu" aria-labelledby="board" style="width:13%; background: rgb(45,45,52); color:white;">
-			      <li><a class="dropdown-item" style="color:white;" href="{contextPath}/volunteer.bo">국내게시판</a></li>
+			      <li><a class="dropdown-item" style="color:white;" href="#">국내게시판</a></li>
 			      <li><a class="dropdown-item" style="color:white;" href="#">해외게시판</a></li>
 			      <li><a class="dropdown-item" style="color:white;" href="#">후기게시판</a></li>
 		    	</ul>

@@ -25,6 +25,10 @@
 	    transition: background-color 0.5s ease;
 	}
 	
+	#voulnteer2 {
+		height: 200px;
+	}
+	
 	body {
 		font-family: "Nanum Gothic", sans-serif;
   		font-weight: 400;
@@ -49,16 +53,11 @@
 	    <div id="top-section">
 	        <jsp:include page="../common/top.jsp" />
 	    </div>
+		<div id="voulnteer2">
+			<jsp:include page="../common/volunteer.jsp"/>
+		</div>	
  	</div>
-	<div id="voulnteer2">
-		<jsp:include page="../common/volunteer.jsp"/>
-	</div>	
-
 	<br><br>
-	
-
-	
-	
 	<div align="center">
 		<ul>
 			<li class=categoryDomestic><a style="border-left:2px solid #EEEEEE; border-top:2px solid #EEEEEE;border-bottom:3px solid #00AFD7" href="domestic01.in">집짓기</a></li>
@@ -161,7 +160,10 @@
 	
 	<div id="footer">
  			<jsp:include page="../common/footer.jsp"/>
- 		</div>	
+ 	</div>	
+ 	<div id="fixedBtn">
+ 		<jsp:include page="../common/fixedBtn.jsp"/>
+ 	</div>	
 	
 </body>
 </html>

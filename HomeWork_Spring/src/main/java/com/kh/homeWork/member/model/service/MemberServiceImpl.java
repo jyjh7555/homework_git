@@ -32,6 +32,13 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+
+	public int updateMember(Member m) {
+		return mDAO.updateMember(sqlSession, m);
+	}
+
+	
+
 	public String selectId(HashMap<String, String> map) {
 		return mDAO.selectId(sqlSession, map);
 	}
@@ -42,6 +49,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
+
 	public ArrayList<Member> adminSelectMember() {
 		return mDAO.adminSelectMember(sqlSession);
 	}
@@ -71,6 +79,14 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.updateAdmin(sqlSession, m);
 	}
 
+	public int checkMemberId(String id) {
+		return mDAO.checkMemberId(sqlSession,id);
+	}
+
+	@Override
+	public int checkMemberNickName(String nickName) {
+		return mDAO.checkMemberNickName(sqlSession,nickName);
+	}
 
 
 	

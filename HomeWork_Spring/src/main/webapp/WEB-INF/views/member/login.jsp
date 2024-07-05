@@ -18,8 +18,11 @@
 	    background-repeat: no-repeat;
 	    transition: background-color 0.5s ease;
 	}
-    	
-        
+		#voulnteer2 {
+			height: 200px;
+		}
+	
+  
         .container {
             width: 1200px;
             max-width: 1200px;
@@ -64,13 +67,13 @@
 	    <div id="top-section">
 	        <jsp:include page="../common/top.jsp" />
 	    </div>
+		<div id="voulnteer2">
+			<jsp:include page="../common/volunteer.jsp"/>
+		</div>	
  	</div>
-	<div id="voulnteer2">
-		<jsp:include page="../common/volunteer.jsp"/>
-	</div>	
 
 	<div align="center">
-	    <div class="container" id="main-page">
+	    <div class="container mt-5" id="main-page">
 	        <h2>로그인</h2>
 	        <form action="loginCheck.me">
 		        <input type="text" name="memberId" id="id" style="width:400px" placeholder="아이디"><br><br>
@@ -110,7 +113,10 @@
 	
 	<div id="footer">
  			<jsp:include page="../common/footer.jsp"/>
- 		</div>	
+ 	</div>
+ 	<div id="fixedBtn">
+ 		<jsp:include page="../common/fixedBtn.jsp"/>
+ 	</div>		
 	
     <script>
         function showPage(pageId) {

@@ -11,9 +11,14 @@ public interface MemberService{
 
 	int insertMember(Member m);
 
+
+	int updateMember(Member m);
+
+	
 	String selectId(HashMap<String, String> map);
 
 	int updateTempPwd(HashMap<String, String> map);
+
 
 	ArrayList<Member> adminSelectMember();
 
@@ -26,6 +31,11 @@ public interface MemberService{
 	int updateStatus(Member m);
 
 	int updateAdmin(Member m);
+
+	int checkMemberId(String id);
+
+	int checkMemberNickName(String nickName);
+
 
 
 

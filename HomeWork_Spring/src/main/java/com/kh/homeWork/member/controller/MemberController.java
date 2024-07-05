@@ -38,8 +38,6 @@ public class MemberController {
 	
 	@RequestMapping("loginView.me")
 	public String loginView(@ModelAttribute Member m) {
-		
-		
 		return "login";
 	}
 	
@@ -48,6 +46,7 @@ public class MemberController {
 	public String loginCheck(Member m, Model model, HttpSession session) {
 		
 		Member loginUser = mService.loginCheck(m);
+		System.out.println(loginUser.getAge());
 		if(bcrypt.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
 			session.setAttribute("loginUser", loginUser);			
 			return "../../../index";				
@@ -70,7 +69,7 @@ public class MemberController {
 	public String logout(HttpServletRequest request) {
 	    HttpSession session = request.getSession(false);
 	    if (session != null) {
-	        session.invalidate(); // 세션 무효화
+	        session.invalidate(); // �꽭�뀡 臾댄슚�솕
 	    }
 	    return "redirect:index.jsp";
 	}
@@ -82,7 +81,7 @@ public class MemberController {
 	
 	@RequestMapping("myPage.me")
 	public String myPage() {
-		return null;
+		return "myPage";
 	}
 	
 	@RequestMapping("insertMember.me")
@@ -90,14 +89,13 @@ public class MemberController {
 							  @RequestParam("emailId") String emailId,
 							  @RequestParam("emailDomain") String emailDomain,
 							  @RequestParam("phone") String phone) {
-		
 		String email = null;
 		if(!emailId.equals("")) {
 			email = emailId + "@" + emailDomain;
 		}
 		m.setEmail(email);
 		m.setPhone(phone.replace(",", "-"));
-		m.setMemberPwd(bcrypt.encode(m.getMemberPwd()));	//암호화 시작
+		m.setMemberPwd(bcrypt.encode(m.getMemberPwd()));	//�븫�샇�솕 �떆�옉
 		int result = mService.insertMember(m);
 		
 		return "redirect:index.jsp";
@@ -106,6 +104,42 @@ public class MemberController {
 	public String findId() {
 		return "findId";
 	}
+	
+	@RequestMapping("updateMemberPage.me")
+	public String updateMember() {
+		return "edit";
+	}
+	
+	@RequestMapping("updateMember.me")
+	public String updateMember(@ModelAttribute Member m,@RequestParam("id") String id, @RequestParam("emailId") String emailId, @RequestParam("emailDomain") String emailDomain,@RequestParam("phone") String phone,Model model) {
+		String email = null;
+		if(!emailId.trim().equals("")) {
+			email = emailId + "@" + emailDomain;
+		}
+		m.setEmail(email);
+		m.setPhone(phone.replace(",", "-"));
+		m.setMemberId(id);
+
+		int result = mService.updateMember(m);
+		
+		if(result > 0) {
+			model.addAttribute("loginUser",mService.loginCheck(m)); // session에 있는 정보도 수정
+			return "redirect:myPage.me";
+		} else {
+			return "redirect:index.jsp";
+		}
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping("selectId.me")
@@ -177,6 +211,7 @@ public class MemberController {
 		return result == 1? "success" : "fail";
 	}
 	
+
 	@RequestMapping("/adminUpdate.me")
 	@ResponseBody
 	public String adminUpdate(@ModelAttribute Member m) {
@@ -223,6 +258,31 @@ public class MemberController {
 			}
 		}
 		return list != null? " success" : "fail";
+	}
+	@RequestMapping("checkMemberId.me")
+	@ResponseBody
+	public String checkMemberId(@RequestParam("id") String id) {
+		int result = mService.checkMemberId(id);
+		System.out.println(result);
+		if(result>0) {	//존재하면 중복
+			return "yes";
+		}else {			//0이면 중복아님
+			return "no";
+		}
+		
+	}
+
+	@RequestMapping("checkMemberNickName.me")
+	@ResponseBody
+	public String checkMemberNickName(@RequestParam("nickName") String nickName) {
+		int result = mService.checkMemberNickName(nickName);
+		System.out.println(result);
+		if(result>0) {	//존재하면 중복
+			return "yes";
+		}else {			//0이면 중복아님
+			return "no";
+		}
+
 	}
 
 	
