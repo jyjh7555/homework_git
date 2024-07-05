@@ -86,7 +86,7 @@ public class MemberController {
 	
 	@RequestMapping("insertMember.me")
 	public String insertMember(@ModelAttribute Member m,
-							  @RequestParam("emailId") String emailId,
+							  @RequestParam(value="emailId",defaultValue="null") String emailId,
 							  @RequestParam("emailDomain") String emailDomain,
 							  @RequestParam("phone") String phone) {
 		String email = null;
