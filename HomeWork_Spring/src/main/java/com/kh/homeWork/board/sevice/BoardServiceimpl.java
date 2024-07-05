@@ -4,11 +4,13 @@ import java.util.ArrayList;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import com.kh.homeWork.board.dao.BoardDAO;
 import com.kh.homeWork.member.model.vo.Board;
 import com.kh.homeWork.member.model.vo.PageInfo;
 
+@Service("bService")
 public class BoardServiceimpl implements BoardService {
 	
 	@Autowired
@@ -19,14 +21,12 @@ public class BoardServiceimpl implements BoardService {
 	
 	@Override
 	public int getListCount(int i) {
-		// TODO Auto-generated method stub
-		return 0;
+		return bDAO.getListCount(sqlSession,i);
 	}
 
 	@Override
 	public ArrayList<Board> selectBoardList(PageInfo pi, int i) {
-		// TODO Auto-generated method stub
-		return null;
+		return bDAO.selectBoardList(sqlSession,pi,i);
 	}
 
 }

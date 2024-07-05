@@ -12,6 +12,7 @@
 
 	<typeAliases>
 		<typeAlias type="com.kh.homeWork.member.model.vo.Member" alias="Member"/>
+		<typeAlias type="com.kh.homeWork.member.model.vo.Board" alias="Board"/>
 	</typeAliases>
 
 	<mappers>

@@ -19,19 +19,22 @@ public class BoardController {
 	@Autowired
 	private BoardService bService;
 	
-	@RequestMapping("list.bo")
+	@RequestMapping("domesticList.bo")
 	public String selectBoardList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
+		System.out.println("첫번째");
 		int listCount = bService.getListCount(1);
-		
+		System.out.println("두번째");
+		System.out.println("세번째");
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 5);		
 		ArrayList<Board> list = bService.selectBoardList(pi,1);
+		System.out.println(list);
 		
 		if(list !=null) {
 			model.addAttribute("list",list);
 			model.addAttribute("pi",pi);
-			return "boardList";
+			return "domesticList";
 		} else {
-			throw new BoardException("게시글 조회를 실패하였습니다.");
+			return "korMap";
 		}
 	}
 	
