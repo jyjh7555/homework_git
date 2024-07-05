@@ -57,6 +57,7 @@
 		                <label class="label me-3 ms-4">후원분야</label>
 		                <button type="button" class="button selected btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">국내 건축 후원</button>
 		                <button type="button" class="button btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">해외 건축 후원</button>
+		                <input type="hidden" name="product" value="국내건축후원하기">
 		        </div>
 		        <div class="field mb-3">
 		            <label class="label me-3 ms-4 text-nowrap">후원금액</label>
@@ -80,7 +81,7 @@
 			   	<h1 class="title ms-3 m-4" style="font-family:'Pretendard-Regular'"><b>후원자 정보</b></h1>
 		        <div class="row mb-3 m-4">
 				    <label class="col-sm-2 col-form-label" style="align:center;">성함</label>
-	   		        <input class="form-control w-25" type="text" id="name"name="memberName" <c:if test="${!empty loginUser}">value="${loginUser.memberName }"</c:if> placeholder="이름">
+	   		        <input class="form-control w-25" type="text" id="name"name="buyerName" <c:if test="${!empty loginUser}">value="${loginUser.memberName }"</c:if> placeholder="이름">
 				</div>
 		        <div class="row mb-3 m-4">
 	                <label class="col-sm-2 col-form-label">생년월일</label>

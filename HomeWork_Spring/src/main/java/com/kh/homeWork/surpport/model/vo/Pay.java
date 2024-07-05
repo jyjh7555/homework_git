@@ -20,6 +20,6 @@ public class Pay {
 	private String buyerTel;
 	private String buyerEmail;
 	private String merchantUid;
-	private String name;
+	private String product;
 	
 }
