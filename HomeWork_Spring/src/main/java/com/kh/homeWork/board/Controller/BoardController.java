@@ -39,4 +39,10 @@ public class BoardController {
 	public String test() {
 		return "korMap";
 	}
+	
+	@RequestMapping("selectBoard.bo")
+	public String selectBoard() {
+		return "boardDetail";
+	}
+	
 }
