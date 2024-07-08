@@ -12,10 +12,9 @@
 
 	<typeAliases>
 		<typeAlias type="com.kh.homeWork.member.model.vo.Member" alias="Member"/>
-
 		<typeAlias type="com.kh.homeWork.board.model.vo.Board" alias="Board"/>
-
 		<typeAlias type="com.kh.homeWork.surpport.model.vo.Pay" alias="Pay"/>
+		<typeAlias type="com.kh.homeWork.board.model.vo.VolunteerDetail" alias="VolunteerDetail"/>
 
 	</typeAliases>
 

@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.homeWork.board.model.dao.BoardDAO;
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
+import com.kh.homeWork.board.model.vo.VolunteerDetail;
 
 @Service("bService")
 public class BoardServiceimpl implements BoardService {
@@ -27,6 +28,41 @@ public class BoardServiceimpl implements BoardService {
 	@Override
 	public ArrayList<Board> selectBoardList(PageInfo pi, int i) {
 		return bDAO.selectBoardList(sqlSession,pi,i);
+	}
+
+	@Override
+	public Board selectBoard(int bId, int memberNo) {
+		Board b = bDAO.selectBoardList(sqlSession, bId);
+		
+		if(b != null) {
+			if(memberNo != 0 && b.getMemberNo() != memberNo) {
+				int result = bDAO.updateCount(sqlSession,bId);
+				if(result>0) {
+					b.setBoardCount(b.getBoardCount()+1);
+				}
+			}
+		}
+		return b;
+	}
+
+	@Override
+	public int insertBoard(Board b) {
+		return bDAO.insertBoard(sqlSession, b);
+	}
+
+	@Override
+	public int insertVolunteer(VolunteerDetail v) {
+		return bDAO.insertVolunteer(sqlSession,v);
+	}
+
+	@Override
+	public int selectBoardNoCheck() {
+		return bDAO.selectBoardNoCheck(sqlSession);
+	}
+
+	@Override
+	public VolunteerDetail selectVolunteerDetail(int bId) {
+		return bDAO.selectVolunteerDetail(sqlSession,bId);
 	}
 
 }

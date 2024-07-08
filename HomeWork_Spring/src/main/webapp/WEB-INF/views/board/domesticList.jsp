@@ -38,15 +38,17 @@
 					<jsp:include page="../common/volunteer.jsp"/>
 				</div>	
 		 	</div>
-			<div class="bd-example w-75 d-flex justify-content-center">
+		 	
+		 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
+		<div class="d-flex flex-column justify-content-center mb-3 border border-4 w-50 mt-3 " style="width:1400px;">
 				<table class="table table-hover">
 					<thead>
 						<tr>
 							<th width="10%">글 번호</th>
 							<th width="10%">지역</th>
 							<th width="30%">글 제목</th>
-							<th width="10%">작성자</th>
-							<th width="20%">작성일자</th>
+							<th width="10%">모집인원</th>
+							<th width="20%">작성날짜</th>
 							<th width="10%">조회수</th>
 	          			</tr>
 	          		</thead>
@@ -54,9 +56,9 @@
 	         			<c:forEach items="${ list }" var="b">
 	         				<tr>
 	            			<td>${b.boardNo }</td>
-	            			<td>${b.location }</td>
+	            			<td>${b.locationNo }</td>
 	            			<td>${b.title }</td>
-	            			<td>관리자</td>
+	            			<td>몇명할까</td>
 	            			<td>${b.updateDate }</td>
 	            			<td>${b.boardCount }</td>
 	          			</tr>
@@ -64,38 +66,44 @@
 	          			
 	          		</tbody>
 	        	</table>
-	       	</div>
        		 <nav aria-label="Standard pagination example" style="float: right;">
-        		<ul class="pagination">
+        		<ul align="center"class="pagination">
         		
-	            <li class="page-item">
-	            	<c:url var="goBack" value="${ loc }">
-        			<c:param name="page" value="${ pi.currentPage -1 }"/>
-        			</c:url>
-	            	<a class="page-link" href="${ goBack }" aria-label="Previous">
-	            		<span aria-hidden="true">&laquo;</span>
-	              	</a>
-	            </li>
-	            <c:forEach begin="${pi.startPage }" end="${pi.endPage }" var="p">
-	            	<c:url var="goNum" value="${ loc }">
-	            		<c:param name="page" value="${ p }"/>
-	            	</c:url>
-	            	<li class="page-item"><a class="page-link" href="${ goNum }">${ p }</a></li>
-	            </c:forEach>
-	            <li class="page-item">
-	            	<c:url var="goNext" value="${ loc }">
-	            		<c:param name="page" value="${ pi.currentPage +1 }"/>
-	            	</c:url>
-	            	<a class="page-link" href="${ goNext }" aria-label="Next">
-	            		<span aria-hidden="true">&raquo;</span>
-	            	</a>
-	            </li>
-	    	</ul>
-        </nav>
+		            <li class="page-item">
+		            	<c:url var="goBack" value="${ loc }">
+	        			<c:param name="page" value="${ pi.currentPage -1 }"/>
+	        			</c:url>
+		            	<a class="page-link" href="${ goBack }" aria-label="Previous">
+		            		<span aria-hidden="true">&laquo;</span>
+		              	</a>
+		            </li>
+		            <c:forEach begin="${pi.startPage }" end="${pi.endPage }" var="p">
+		            	<c:url var="goNum" value="${ loc }">
+		            		<c:param name="page" value="${ p }"/>
+		            	</c:url>
+		            	<li class="page-item"><a class="page-link" href="${ goNum }">${ p }</a></li>
+		            </c:forEach>
+		            <li class="page-item">
+		            	<c:url var="goNext" value="${ loc }">
+		            		<c:param name="page" value="${ pi.currentPage +1 }"/>
+		            	</c:url>
+		            	<a class="page-link" href="${ goNext }" aria-label="Next">
+		            		<span aria-hidden="true">&raquo;</span>
+		            	</a>
+		            </li>
+	    		</ul>
+      	  </nav>
+      	  
 	<c:if test="${ !empty loginUser }">
-        	<button class="btn btn-outline-success" type="button" onclick="location.href='${ contextPath }/writeBoard.bo'">WRITE BOARD</button>
+        	<button class="btn btn-sm btn-outline-success" style="width:100px; border-radius:16px;font-size:12px;" type="button" onclick="location.href='${ contextPath }/writeBoard.bo'">글 작성</button>
         </c:if>
-
+		</div>
+      	  </div>
+      	  
+      	  
+	<div id="footer">
+		<jsp:include page="../common/footer.jsp"/>
+	</div>
 	
 	<script>
 		window.onload = ()=>{
@@ -105,7 +113,6 @@
 				td.addEventListener('click',function(){
 					const trTds = this.parentElement.querySelectorAll('td');
 					const boardId = trTds[0].innerText;
-					console.log(boardId);
 					location.href="${contextPath}/selectBoard.bo?bId=" + boardId + "&page=" + ${pi.currentPage};
 				})
 			}
