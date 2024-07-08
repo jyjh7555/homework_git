@@ -49,11 +49,6 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.updateTempPwd(sqlSession, map);
 	}
 
-	@Override
-
-	public ArrayList<Member> adminSelectMember() {
-		return mDAO.adminSelectMember(sqlSession);
-	}
 
 	@Override
 	public int adminDelete(int mNo) {
@@ -92,6 +87,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public ArrayList<Pay> SelectPay() {
 		return mDAO.selectPay(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Member> adminMemberList() {
+		return mDAO.adminMemberList(sqlSession);
 	}
 
 

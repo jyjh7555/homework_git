@@ -59,11 +59,7 @@ public class MemberController {
 	
 	
 	@RequestMapping("admin.me")
-	public String adminPage(@ModelAttribute Member m, Model model) {
-		ArrayList<Member> list = mService.adminSelectMember();
-		ArrayList<Pay> pay = mService.SelectPay();
-		model.addAttribute("list", list);
-		model.addAttribute("pay", pay);
+	public String adminPage() {
 		return "admin";
 
 	}
@@ -288,5 +284,21 @@ public class MemberController {
 
 	}
 
+	@RequestMapping("adminMemberList.me")
+	@ResponseBody
+	public void adminMemberList(HttpServletResponse response,
+							   Model model) {
+		ArrayList<Member> list = mService.adminMemberList();
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		try {
+			gson.toJson(list, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 }

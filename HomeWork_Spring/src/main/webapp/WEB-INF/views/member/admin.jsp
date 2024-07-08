@@ -180,8 +180,8 @@
 					</div>
 					
 				 <div class="userInfo hidden" id=userInfo>
-					<c:forEach items="${ list }" var="m">					
-				    		<table id="memberList">
+				    	<table id="memberList">
+				    		<thead>
 								<tr>
 									<th width="6%">회원번호</th>
 									<th width="10%">이름</th>
@@ -194,20 +194,12 @@
 									<th width="6%">활동</th>
 									<th width="6%">관리자</th>
 								</tr>
-								<tr>
-									<td>${ m.memberNo }</td>
-									<td>${ m.memberName }</td>
-									<td>${ m.nickName }</td>
-									<td>${ m.email }</td>
-									<td>${ m.phone }</td>
-									<td>${ m.age }</td>
-									<td>${ m.address }</td>
-									<td>${ m.createDate }</td>
-									<td>${ m.status }</td>
-									<td>${ m.isAdmin }</td>
-								</tr>
+							</thead>
+							<tbody>
+							
+							</tbody>
+								
 							</table>
-						</c:forEach>
 					</div>
 					<div class="userUpdate hidden" id="userUpdate">
 						<c:forEach items="${ list }" var="m">
@@ -299,30 +291,30 @@
 					</c:forEach>
 				</div>
 			<div class="supportPage hidden" id="supportList">
-				<c:forEach items="${ pay }" var="p">
-						<table id="supportTable">
-							<tr>
-								<th width="6%">번호</th>
-								<th width="6%">회원번호</th>
-								<th width="10%">이름</th>
-								<th width="10%">이메일</th>
-								<th width="10%">휴대폰번호</th>
-								<th width="12%">후원분야</th>
-								<th width="12%">후원날짜</th>
-								<th width="10%">후원금액(원)</th>
-							</tr>
+					<table id="supportTable">
+						<tr>
+							<th width="10%">번호</th>
+							<th width="10%">회원번호</th>
+							<th width="10%">이름</th>
+							<th width="10%">이메일</th>
+							<th width="10%">휴대폰번호</th>
+							<th width="10%">후원분야</th>
+							<th width="10%">후원날짜</th>
+							<th width="10%">후원금액(원)</th>
+						</tr>
+						<c:forEach items="${ pay }" var="p">
 							<tr>
 								<td>${ p.payNo }</td>
 								<td>${ p.memberNo }</td>
-								<td>${ p.buyerName }</td>
-								<td>${ p.buyerEmail }</td>
-								<td>${ p.buyerTel }</td>
+								<td>${ p.buyer_name }</td>
+								<td>${ p.buyer_email }</td>
+								<td>${ p.buyer_tel }</td>
 								<td>${ p.product }</td>
 								<td>${ p.payDate }</td>
-								<td>${ p.amount }원</td>
+								<td>${ p.amount }</td>
 							</tr>
-						</table>
-					</c:forEach>
+						</c:forEach>
+					</table>
 				</div>
 			<div class="regularSupportPage hidden" id="regularSupportList">
 					<table id="regulartSupportTable">
@@ -378,7 +370,59 @@
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
 				 
+				 $.ajax({
+						url: '${contextPath}/adminMemberList.me',
+						success: data =>{
+							document.getElementById('memberList').classList.remove('hidden');
+							const memberList = document.getElementById('memberList');
+							const tbody = memberList.querySelector('tbody');
+							tbody.innerHTML = '';
+							
+							for(const m of data){
+								const tr = document.createElement('tr');
+								
+								const noTd = document.createElement('td');
+								noTd.innerText = m.memberNo;
+								const nameTd = document.createElement('td');
+								nameTd.innerText = m.memberName;
+								const nickTd = document.createElement('td');
+								nickTd.innerText = m.nickName;
+								const emailTd = document.createElement('td');
+								emailTd.innerText = m.email;
+								const phoneTd = document.createElement('td');
+								phoneTd.innerText = m.phone;
+								const addressTd = document.createElement('td');
+								addressTd.innerText = m.address;
+								const ageTd = document.createElement('td');
+								ageTd.innerText = m.age;
+								const createDateTd = document.createElement('td');
+								createDateTd.innerText = m.createDate;
+								const statusTd = document.createElement('td');
+								statusTd.innerText = m.status;
+								const adminTd = document.createElement('td');
+								adminTd.innerText = m.isAdmin;
+								
+								tr.append(noTd);
+								tr.append(nameTd);
+								tr.append(nickTd);
+								tr.append(emailTd);
+								tr.append(phoneTd);
+								tr.append(ageTd);
+								tr.append(addressTd);
+								tr.append(createDateTd);
+								tr.append(statusTd);
+								tr.append(adminTd);
+								
+								
+								tbody.append(tr);
+							}
+						},
+						error: data => console.log(data)
+						
+					})
+				 
 			 })
+			 
 			  document.getElementById('user2').addEventListener('click', function(){
 				 document.getElementById('userUpdate').classList.toggle('hidden');
 				 document.getElementById('userInfo').classList.add('hidden');
@@ -521,8 +565,8 @@
 				success: data =>{
 					selectMembers()
 					document.getElementById('searchResult').classList.remove('hidden');
-					
-					const tbody = document.querySelector('tbody');
+					const searchResult = document.getElementById('searchResult');
+					const tbody = searchResult.querySelector('tbody');
 					tbody.innerHTML = '';
 					
 					for(const s of data){

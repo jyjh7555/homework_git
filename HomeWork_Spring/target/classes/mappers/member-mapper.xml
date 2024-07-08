@@ -56,10 +56,6 @@
 		and phone = #{findPhone}
 	</update>
 
-	<select id="adminSelectMember" resultType="Member">
-		select *
-		from member
-	</select>
 	
 	<update id="adminDelete">
 		update member
@@ -113,5 +109,10 @@
 	<select id="selectPay" resultType="Pay">
 		select *
 		from pay
+	</select>
+	
+	<select id="adminMemberList" resultType="Member">
+		select *
+		from member
 	</select>
 </mapper>

@@ -33,9 +33,6 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.updateTempPwd", map);
 	}
 
-	public ArrayList<Member> adminSelectMember(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("memberMapper.adminSelectMember");
-	}
 
 	public int adminDelete(SqlSessionTemplate sqlSession, int mNo) {
 		return sqlSession.update("memberMapper.adminDelete", mNo);
@@ -67,6 +64,10 @@ public class MemberDAO {
 
 	public ArrayList<Pay> selectPay(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectPay");
+	}
+
+	public ArrayList<Member> adminMemberList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("memberMapper.adminMemberList");
 	}
 
 
