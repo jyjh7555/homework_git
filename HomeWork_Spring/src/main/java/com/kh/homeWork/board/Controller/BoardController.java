@@ -8,10 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kh.homeWork.board.sevice.BoardService;
+import com.kh.homeWork.board.model.service.BoardService;
+import com.kh.homeWork.board.model.vo.Board;
+import com.kh.homeWork.board.model.vo.PageInfo;
 import com.kh.homeWork.common.Pagination;
-import com.kh.homeWork.member.model.vo.Board;
-import com.kh.homeWork.member.model.vo.PageInfo;
 
 @Controller
 public class BoardController {
