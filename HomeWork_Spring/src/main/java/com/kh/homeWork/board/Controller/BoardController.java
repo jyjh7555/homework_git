@@ -42,6 +42,8 @@ public class BoardController {
 	
 	@RequestMapping("selectBoard.bo")
 	public String selectBoard() {
+			
+		
 		return "boardDetail";
 	}
 	
