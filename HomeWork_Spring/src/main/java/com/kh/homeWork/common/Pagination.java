@@ -1,6 +1,6 @@
 package com.kh.homeWork.common;
 
-import com.kh.homeWork.member.model.vo.PageInfo;
+import com.kh.homeWork.board.model.vo.PageInfo;
 
 public class Pagination {
 	public static PageInfo getPageInfo(int currentPage, int listCount, int boardLimit) {
