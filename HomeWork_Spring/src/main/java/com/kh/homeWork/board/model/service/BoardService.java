@@ -1,9 +1,9 @@
-package com.kh.homeWork.board.sevice;
+package com.kh.homeWork.board.model.service;
 
 import java.util.ArrayList;
 
-import com.kh.homeWork.member.model.vo.Board;
-import com.kh.homeWork.member.model.vo.PageInfo;
+import com.kh.homeWork.board.model.vo.Board;
+import com.kh.homeWork.board.model.vo.PageInfo;
 
 public interface BoardService {
 

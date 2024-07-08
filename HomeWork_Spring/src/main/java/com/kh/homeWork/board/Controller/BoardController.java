@@ -8,10 +8,10 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
-import com.kh.homeWork.board.sevice.BoardService;
+import com.kh.homeWork.board.model.service.BoardService;
+import com.kh.homeWork.board.model.vo.Board;
+import com.kh.homeWork.board.model.vo.PageInfo;
 import com.kh.homeWork.common.Pagination;
-import com.kh.homeWork.member.model.vo.Board;
-import com.kh.homeWork.member.model.vo.PageInfo;
 
 @Controller
 public class BoardController {
@@ -21,10 +21,7 @@ public class BoardController {
 	
 	@RequestMapping("domesticList.bo")
 	public String selectBoardList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
-		System.out.println("첫번째");
 		int listCount = bService.getListCount(1);
-		System.out.println("두번째");
-		System.out.println("세번째");
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 5);		
 		ArrayList<Board> list = bService.selectBoardList(pi,1);
 		System.out.println(list);
@@ -42,4 +39,12 @@ public class BoardController {
 	public String test() {
 		return "korMap";
 	}
+	
+	@RequestMapping("selectBoard.bo")
+	public String selectBoard() {
+			
+		
+		return "boardDetail";
+	}
+	
 }

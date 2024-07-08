@@ -213,16 +213,16 @@
 </head>
 <body>
 	<div id=topAndNavbar >
-	 		<div id="navbar-section2" onmouseover="changeBackground()" onmouseout="resetBackground()">
-		        <jsp:include page="../common/navbar.jsp" />
-		    </div>    
-		    <div id="top-section">
-		        <jsp:include page="../common/top.jsp" />
-		    </div>
-		    <div id="voulnteer2">
-				<jsp:include page="../common/volunteer.jsp"/>
-			</div>	
- 		</div>
+ 		<div id="navbar-section2" onmouseover="changeBackground()" onmouseout="resetBackground()">
+	        <jsp:include page="../common/navbar.jsp" />
+	    </div>    
+	    <div id="top-section">
+	        <jsp:include page="../common/top.jsp" />
+	    </div>
+	    <div id="voulnteer2">
+			<jsp:include page="../common/volunteer.jsp"/>
+		</div>	
+ 	</div>
 	<div id="container">
  		<div align="center">
 		<ul id="categoryMypageContainer">

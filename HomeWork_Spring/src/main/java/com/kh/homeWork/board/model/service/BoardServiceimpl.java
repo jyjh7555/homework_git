@@ -1,4 +1,4 @@
-package com.kh.homeWork.board.sevice;
+package com.kh.homeWork.board.model.service;
 
 import java.util.ArrayList;
 
@@ -6,9 +6,9 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.homeWork.board.dao.BoardDAO;
-import com.kh.homeWork.member.model.vo.Board;
-import com.kh.homeWork.member.model.vo.PageInfo;
+import com.kh.homeWork.board.model.dao.BoardDAO;
+import com.kh.homeWork.board.model.vo.Board;
+import com.kh.homeWork.board.model.vo.PageInfo;
 
 @Service("bService")
 public class BoardServiceimpl implements BoardService {

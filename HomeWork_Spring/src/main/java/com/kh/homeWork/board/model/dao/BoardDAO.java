@@ -1,4 +1,4 @@
-package com.kh.homeWork.board.dao;
+package com.kh.homeWork.board.model.dao;
 
 import java.util.ArrayList;
 
@@ -6,8 +6,8 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
-import com.kh.homeWork.member.model.vo.Board;
-import com.kh.homeWork.member.model.vo.PageInfo;
+import com.kh.homeWork.board.model.vo.Board;
+import com.kh.homeWork.board.model.vo.PageInfo;
 
 @Repository("bDAO")
 public class BoardDAO {
