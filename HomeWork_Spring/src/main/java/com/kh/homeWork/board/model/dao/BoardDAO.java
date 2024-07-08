@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
+import com.kh.homeWork.board.model.vo.VolunteerDetail;
 
 @Repository("bDAO")
 public class BoardDAO {
@@ -29,6 +30,18 @@ public class BoardDAO {
 
 	public int updateCount(SqlSessionTemplate sqlSession, int bId) {
 		return sqlSession.update("boardMapper.updateCount",bId);
+	}
+
+	public int insertBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertBoard",b);
+	}
+
+	public int insertVolunteer(SqlSessionTemplate sqlSession, VolunteerDetail v) {
+		return sqlSession.insert("boardMapper.insertVolunteer",v);
+	}
+
+	public int selectBoardNoCheck(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("boardMapper.selectBoardNoCheck");
 	}
 
 }

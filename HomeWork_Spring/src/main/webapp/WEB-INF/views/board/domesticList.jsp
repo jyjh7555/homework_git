@@ -56,7 +56,7 @@
 	         			<c:forEach items="${ list }" var="b">
 	         				<tr>
 	            			<td>${b.boardNo }</td>
-	            			<td>${b.location }</td>
+	            			<td>${b.locationNo }</td>
 	            			<td>${b.title }</td>
 	            			<td>몇명할까</td>
 	            			<td>${b.updateDate }</td>
@@ -99,6 +99,11 @@
         </c:if>
 		</div>
       	  </div>
+      	  
+      	  
+	<div id="footer">
+		<jsp:include page="../common/footer.jsp"/>
+	</div>
 	
 	<script>
 		window.onload = ()=>{

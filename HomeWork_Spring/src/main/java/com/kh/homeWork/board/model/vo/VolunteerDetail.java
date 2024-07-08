@@ -30,4 +30,6 @@ public class VolunteerDetail {
 	private Date recruitEnd;
 	private Date startDate;
 	private Date endDate;
+	private String startTime;
+	private String endTime;
 }
