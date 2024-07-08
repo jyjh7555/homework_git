@@ -103,7 +103,7 @@
 					<input class="form-check-input " checked style="margin-left:25px;"  type="radio"  name="gender" id="man" value="M">
 		  			<label class="form-check-label " for="man">남자</label>
 					<input class="form-check-input "  type="radio" name="gender" id="woman" value="F">
-		  			<label class="form-check-label" for="woman">여자</label>  
+		  			<label class="form-check-label" for="woman">여자</label> 
 				</div>
 				<div class="form-floating">
 		        	<input class="form-control w-50 m-4" type="text" placeholder="닉네임" required id="nickName" name="nickName">

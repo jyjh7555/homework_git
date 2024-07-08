@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
+import com.kh.homeWork.board.model.vo.VolunteerDetail;
 
 @Repository("bDAO")
 public class BoardDAO {
@@ -21,6 +22,30 @@ public class BoardDAO {
 		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
 		
 		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardList",i,rowBounds);
+	}
+
+	public Board selectBoardList(SqlSessionTemplate sqlSession, int bId) {
+		return sqlSession.selectOne("boardMapper.selectBoard",bId);
+	}
+
+	public int updateCount(SqlSessionTemplate sqlSession, int bId) {
+		return sqlSession.update("boardMapper.updateCount",bId);
+	}
+
+	public int insertBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("boardMapper.insertBoard",b);
+	}
+
+	public int insertVolunteer(SqlSessionTemplate sqlSession, VolunteerDetail v) {
+		return sqlSession.insert("boardMapper.insertVolunteer",v);
+	}
+
+	public int selectBoardNoCheck(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("boardMapper.selectBoardNoCheck");
+	}
+
+	public VolunteerDetail selectVolunteerDetail(SqlSessionTemplate sqlSession, int bId) {
+		return sqlSession.selectOne("boardMapper.selectVolunteerDetail",bId);
 	}
 
 }

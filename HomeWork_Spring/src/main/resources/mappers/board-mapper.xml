@@ -14,4 +14,65 @@
 		where delete_yn = 'N' and board_type = #{i}
 		order by board_no desc
  	</select>
+ 	<select id="selectBoard" resultType="Board">
+ 		select *
+ 		from board
+ 		where delete_yn ='N' and board_No = #{bId}
+ 	</select>
+ 	<update id="updateCount">
+ 		update board
+ 		set board_count = board_count + 1
+ 		where board_No = #{bId}
+ 	</update>
+ 	
+ 	<insert id="insertBoard">
+ 		insert into board values(
+ 			seq_board.nextval,
+ 			${locationNo},
+ 			#{title},
+ 			#{content},
+ 			'N',
+ 			sysdate,
+ 			sysdate,
+ 			#{memberNo},
+ 			#{boardType},
+ 			0
+ 		)
+ 	</insert>
+ 	<insert id="insertVolunteer">
+		insert into volunteer_detail values(
+			seq_vol.nextval,
+			#{memberCount},
+			#{boardNo},
+			#{category},
+			#{groupYn},
+			#{address},
+			#{mgr},
+			#{mgrPhone},
+			sysdate,
+			sysdate,
+			#{memberNo},
+			#{recruitStart},
+			#{recruitEnd},
+			#{startDate},
+			#{endDate},
+			#{startTime},
+			#{endTime}
+		) 		
+ 	</insert>
+ 	
+ 	<select id="selectBoardNoCheck" resultType="_int">
+ 		select *
+		from (
+		select board_no
+		from board
+		order by board_no desc)
+		where rownum = 1
+ 	</select>
+ 	
+ 	<select id="selectVolunteerDetail" resultType="VolunteerDetail">
+ 		select *
+ 		from volunteer_Detail
+ 		where board_no = #{bId}
+ 	</select>
 </mapper>

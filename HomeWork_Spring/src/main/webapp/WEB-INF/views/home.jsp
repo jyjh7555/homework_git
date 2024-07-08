@@ -204,13 +204,13 @@
  	<div id="container">
  		<div id=topAndNavbar>
 	 		<div id="navbar-section2" onmouseover="changeBackground()" onmouseout="resetBackground()">
-		        <jsp:include page="${contextPath}/WEB-INF/views/common/navbar.jsp" />
+		        <jsp:include page="common/navbar.jsp" />
 		    </div>    
 		    <div id="top-section">
-		        <jsp:include page="${contextPath}/WEB-INF/views/common/top.jsp" />
+		        <jsp:include page="common/top.jsp" />
 		    </div>
  		<div id="voulnteer2">
- 			<jsp:include page="${contextPath}/WEB-INF/views/common/volunteer.jsp"/>
+ 			<jsp:include page="common/volunteer.jsp"/>
  		</div>
  		</div>
 	    <div id="content">
@@ -314,10 +314,10 @@
 	
 			</ul>
         <div id="footer">
- 			<jsp:include page="${contextPath}/WEB-INF/views/common/footer.jsp"/>
+ 			<jsp:include page="common/footer.jsp"/>
  		</div>	
  		<div id="fixedBtn">
- 			<jsp:include page="${contextPath}/WEB-INF/views/common/fixedBtn.jsp"/>
+ 			<jsp:include page="common/fixedBtn.jsp"/>
  		</div>
  		
  		
