@@ -44,4 +44,8 @@ public class BoardDAO {
 		return sqlSession.selectOne("boardMapper.selectBoardNoCheck");
 	}
 
+	public VolunteerDetail selectVolunteerDetail(SqlSessionTemplate sqlSession, int bId) {
+		return sqlSession.selectOne("boardMapper.selectVolunteerDetail",bId);
+	}
+
 }

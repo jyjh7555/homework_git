@@ -69,4 +69,10 @@
 		order by board_no desc)
 		where rownum = 1
  	</select>
+ 	
+ 	<select id="selectVolunteerDetail" resultType="VolunteerDetail">
+ 		select *
+ 		from volunteer_Detail
+ 		where board_no = #{bId}
+ 	</select>
 </mapper>

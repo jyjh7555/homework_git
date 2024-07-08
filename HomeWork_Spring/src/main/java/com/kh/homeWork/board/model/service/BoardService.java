@@ -19,5 +19,7 @@ public interface BoardService {
 	int insertVolunteer(VolunteerDetail v);
 
 	int selectBoardNoCheck();
+
+	VolunteerDetail selectVolunteerDetail(int bId);
 	
 }

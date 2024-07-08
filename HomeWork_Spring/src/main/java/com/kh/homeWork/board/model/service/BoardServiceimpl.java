@@ -60,4 +60,9 @@ public class BoardServiceimpl implements BoardService {
 		return bDAO.selectBoardNoCheck(sqlSession);
 	}
 
+	@Override
+	public VolunteerDetail selectVolunteerDetail(int bId) {
+		return bDAO.selectVolunteerDetail(sqlSession,bId);
+	}
+
 }

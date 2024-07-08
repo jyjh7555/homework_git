@@ -58,7 +58,9 @@ public class BoardController {
 		}
 		
 		Board b = bService.selectBoard(bId,memberNo);
+		VolunteerDetail v = bService.selectVolunteerDetail(bId);
 		model.addAttribute("b",b);
+		model.addAttribute("v",v);
 		model.addAttribute("page",page);
 		
 		
@@ -76,11 +78,8 @@ public class BoardController {
 		int result = bService.insertBoard(b);
 		if(result>0) {
 			int bNo = bService.selectBoardNoCheck();
-			System.out.println(bNo);
 			v.setBoardNo(bNo);
-			System.out.println(v.getBoardNo());
 			int result2 = bService.insertVolunteer(v);
-			System.out.println("잘들어갔습니다");
 		}
 		return "redirect:domesticList.bo";
 	}

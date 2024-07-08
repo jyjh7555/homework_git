@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+    <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -53,37 +54,40 @@
 	            <table class="table" >
 	            	<tr>
 	            		<td style="background:#E3E3E3;width:120px">봉사구분</td>
-	            		<td width="">집짓	기()</td>
+	            		<td width="">${b.title }</td>
 	            		<td style="background:#E3E3E3;width:120px">국내/해외</td>
-	            		<td>국내()</td>
+	            		<td>
+		            		<c:if test="${b.boardType == 1 }">국내</c:if>
+		            		<c:if test="${b.boardType == 2 }">해외</c:if>
+	            		</td>
 	            	</tr>
 	            	<tr>
 	            		<td style="background:#E3E3E3;width:120px">봉사기간</td>
-	            		<td>날짜 두개 삽입</td>
+	            		<td>${v.startDate} ~ ${v.endDate}</td>
 	            		<td style="background:#E3E3E3;width:120px">봉사시간</td>
-	            		<td>시분초로 두개 나타내기</td>
+	            		<td>${v.startTime} ~ ${v.endTime} </td>
 	            	</tr>
 	            	<tr>
 	            		<td style="background:#E3E3E3;width:120px">모집기간</td>
-	            		<td>날짜 두개 삽입</td>
+	            		<td>${v.recruitStart}</td>
 	            		<td style="background:#E3E3E3;width:120px">단체여부</td>
-	            		<td>y/n체크 실게시판은'단체가능'스트링</td>
+	            		<td>${v.groupYn}</td>
 	            	</tr>
 	            	<tr>
 	            		<td style="background:#E3E3E3;width:120px">모집인원</td>
-	            		<td>인원수</td>
+	            		<td>${v.memberCount }</td>
 	            		<td style="background:#E3E3E3;width:120px">신청인원</td>
-	            		<td>count하기</td>
+	            		<td>미구현멤버인원vo노생성</td>
 	            	</tr>
 	            	<tr>
 	            		<td style="background:#E3E3E3;width:120px">담당자</td>
-	            		<td>인원수</td>
+	            		<td>${v.mgr}</td>
 	            		<td style="background:#E3E3E3;width:120px">담당자번호</td>
-	            		<td>count하기</td>
+	            		<td>${v.mgrPhone }</td>
 	            	</tr>
 	            	<tr>
 	            		<td style="background:#E3E3E3;width:120px">봉사주소</td>
-	            		<td colspan="3">서울시 노어ㅜㄴ구 상계1동</td>
+	            		<td colspan="3">${v.address }</td>
 	            	</tr>
 	            	
 	            </table>
