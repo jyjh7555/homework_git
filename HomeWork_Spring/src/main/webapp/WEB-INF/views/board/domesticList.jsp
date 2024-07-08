@@ -105,7 +105,6 @@
 				td.addEventListener('click',function(){
 					const trTds = this.parentElement.querySelectorAll('td');
 					const boardId = trTds[0].innerText;
-					console.log(boardId);
 					location.href="${contextPath}/selectBoard.bo?bId=" + boardId + "&page=" + ${pi.currentPage};
 				})
 			}

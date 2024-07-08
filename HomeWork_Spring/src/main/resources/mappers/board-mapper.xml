@@ -14,4 +14,14 @@
 		where delete_yn = 'N' and board_type = #{i}
 		order by board_no desc
  	</select>
+ 	<select id="selectBoard" resultType="Board">
+ 		select *
+ 		from board
+ 		where delete_yn ='N' and board_No = #{bId}
+ 	</select>
+ 	<update id="updateCount">
+ 		update board
+ 		set board_count = board_count + 1
+ 		where board_No = #{bId}
+ 	</update>
 </mapper>

@@ -29,4 +29,23 @@ public class BoardServiceimpl implements BoardService {
 		return bDAO.selectBoardList(sqlSession,pi,i);
 	}
 
+	@Override
+	public Board selectBoard(int bId, int memberNo) {
+		Board b = bDAO.selectBoardList(sqlSession, bId);
+		
+		System.out.println("임플검사");
+		if(b != null) {
+			System.out.println("여기까찐되어야함");
+			System.out.println(b.getBoardNo() + " , " + memberNo);
+			if(memberNo != 0 && b.getMemberNo() != memberNo) {
+				System.out.println("여기되는지파아갛기");
+				int result = bDAO.updateCount(sqlSession,bId);
+				if(result>0) {
+					b.setBoardCount(b.getBoardCount()+1);
+				}
+			}
+		}
+		return b;
+	}
+
 }

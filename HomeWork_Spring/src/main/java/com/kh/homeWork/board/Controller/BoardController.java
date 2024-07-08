@@ -2,6 +2,8 @@ package com.kh.homeWork.board.Controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -12,6 +14,7 @@ import com.kh.homeWork.board.model.service.BoardService;
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
 import com.kh.homeWork.common.Pagination;
+import com.kh.homeWork.member.model.vo.Member;
 
 @Controller
 public class BoardController {
@@ -41,10 +44,30 @@ public class BoardController {
 	}
 	
 	@RequestMapping("selectBoard.bo")
-	public String selectBoard() {
-			
+	public String selectBoard(@RequestParam("bId") int bId,
+							  @RequestParam("page") int page,
+							  HttpSession session,
+							  Model model) {
+		Member loginUser = (Member)session.getAttribute("loginUser");
+		int memberNo = 0;
+		
+		if(loginUser != null) {
+			memberNo = loginUser.getMemberNo();
+		}
+		
+		Board b = bService.selectBoard(bId,memberNo);
+		System.out.println("이거확인해보기");
+		System.out.println(b);
+		model.addAttribute("b",b);
+		model.addAttribute("page",page);
+		
 		
 		return "boardDetail";
+	}
+	
+	@RequestMapping("writeBoard.bo")
+	public String writeBoard() {
+		return "writeBoard";
 	}
 	
 }

@@ -22,5 +22,6 @@ public class Board {
 	private int boardCount;
 	private Date createDate;
 	private Date updateDate;
+	private int memberNo;
 	private int boardType;
 }
