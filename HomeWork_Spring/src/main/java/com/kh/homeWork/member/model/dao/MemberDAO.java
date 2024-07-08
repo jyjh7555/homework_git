@@ -70,6 +70,10 @@ public class MemberDAO {
 		return (ArrayList)sqlSession.selectList("memberMapper.adminMemberList");
 	}
 
+	public ArrayList<Member> adminStatusMember(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("memberMapper.adminStatusMember");
+	}
+
 
 
 

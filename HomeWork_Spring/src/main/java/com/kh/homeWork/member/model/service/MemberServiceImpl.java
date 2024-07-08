@@ -94,6 +94,11 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.adminMemberList(sqlSession);
 	}
 
+	@Override
+	public ArrayList<Member> adminStatusMember() {
+		return mDAO.adminStatusMember(sqlSession);
+	}
+
 
 	
 }

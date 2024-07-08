@@ -202,7 +202,6 @@
 							</table>
 					</div>
 					<div class="userUpdate hidden" id="userUpdate">
-						<c:forEach items="${ list }" var="m">
 							<table id="memberUpdate">
 								<tr>
 									<th width="6%">회원번호</th>
@@ -215,6 +214,8 @@
 									<th width="8%">관리자</th>
 									<th width="8%">정보변경</th>
 								</tr>
+								<c:forEach items="${ list }" var="m">
+								
 								<tr>
 									<td><input type="text" class="updateNo" value="${ m.memberNo }" readonly></td>
 		            				<td><input type="text" class="updateName" value="${ m.memberName }"></td>
@@ -258,15 +259,14 @@
 									            </label>
 									        </c:if>
 									</td>
-						            </td>
 						            <td><button class="updateUserButton" onclick="updateMember('${m.memberNo}')">변경</button></td>
 								</tr>
+							</c:forEach>
 							</table>
-						</c:forEach>
 					</div>
 				<div class="userDelete hidden" id="userDelete">
-					<c:forEach items="${ list }" var="m">
 						<table id="memberDelete">
+						<thead>
 							<tr>
 								<th width="10%">회원번호</th>
 								<th width="10%">이름</th>
@@ -277,18 +277,12 @@
 								<th width="12%">가입날짜</th>
 								<th width="10%">탈퇴</th>
 							</tr>
-							<tr>
-								<td>${ m.memberNo }</td>
-								<td>${ m.memberName }</td>
-								<td>${ m.nickName }</td>
-								<td>${ m.email }</td>
-								<td>${ m.phone }</td>
-								<td>${ m.age }</td>
-								<td>${ m.createDate }</td>
-								<td><button id="deleteUserButton" onclick="deleteMember(${ m.memberNo })">회원탈퇴</button></td>
-							</tr>
+						</thead>
+						<tbody>
+													
+							<td><button id="deleteUserButton" onclick="deleteMember(${ m.memberNo })">회원탈퇴</button></td>
+						</tbody>
 						</table>
-					</c:forEach>
 				</div>
 			<div class="supportPage hidden" id="supportList">
 					<table id="supportTable">
@@ -431,6 +425,9 @@
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
 				 
+				 
+				 
+				 
 			 })
 			 document.getElementById('user3').addEventListener('click', function(){
 				 document.getElementById('userDelete').classList.toggle('hidden');
@@ -440,13 +437,61 @@
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
 				 
+				 $.ajax({
+						url: '${contextPath}/adminStatusMember.me',
+						success: data =>{
+							document.getElementById('memberDelete').classList.remove('hidden');
+							const memberDelete = document.getElementById('memberDelete');
+							const tbody = memberDelete.querySelector('tbody');
+							tbody.innerHTML = '';
+							
+							for(const m of data){
+								const tr = document.createElement('tr');
+								
+								const noTd = document.createElement('td');
+								noTd.innerText = m.memberNo;
+								const nameTd = document.createElement('td');
+								nameTd.innerText = m.memberName;
+								const nickTd = document.createElement('td');
+								nickTd.innerText = m.nickName;
+								const emailTd = document.createElement('td');
+								emailTd.innerText = m.email;
+								const phoneTd = document.createElement('td');
+								phoneTd.innerText = m.phone;
+								const ageTd = document.createElement('td');
+								ageTd.innerText = m.age;
+								const createDateTd = document.createElement('td');
+								createDateTd.innerText = m.createDate;
+								
+								const deleteButtonTd = document.createElement('td');
+				                const deleteButton = document.createElement('button');
+				                deleteButton.innerText = '회원탈퇴';
+
+				                deleteButton.addEventListener('click', function() {
+				                    deleteMember(m.memberNo);
+				                });
+
+				                deleteButtonTd.appendChild(deleteButton);
+								
+								tr.append(noTd);
+								tr.append(nameTd);
+								tr.append(nickTd);
+								tr.append(emailTd);
+								tr.append(phoneTd);
+								tr.append(ageTd);
+								tr.append(createDateTd);
+								tr.append(deleteButtonTd);
+								
+								
+								tbody.appendChild(tr);
+							}
+						},
+						error: data => console.log(data)
+						
+					})
+				 
 			 })
 			
-			 document.getElementById('deleteUserButton').addEventListener('click', function() {
-		            if (confirm("정말 탈퇴하시겠습니까?")) {
-		                alert("탈퇴되었습니다.");
-		            }
-		        });
 			 document.getElementById('support1').addEventListener('click', function(){
 				 document.getElementById('supportList').classList.toggle('hidden');
 				 document.getElementById('userInfo').classList.add('hidden');
@@ -470,7 +515,10 @@
 			 
 		}
 		
-		function deleteMember(memberNo){			
+		function deleteMember(memberNo){
+			if (confirm("정말 탈퇴하시겠습니까?")) {
+                alert("탈퇴되었습니다.");
+            }
 				$.ajax({
 					url: '${contextPath}/adminDelete.me',
 					data: {mNo:memberNo},

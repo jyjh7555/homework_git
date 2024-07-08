@@ -39,6 +39,8 @@ public interface MemberService{
 
 	ArrayList<Member> adminMemberList();
 
+	ArrayList<Member> adminStatusMember();
+
 
 
 

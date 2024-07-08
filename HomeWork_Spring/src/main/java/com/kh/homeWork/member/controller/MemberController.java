@@ -301,4 +301,21 @@ public class MemberController {
 		}
 	}
 	
+	@RequestMapping("adminStatusMember.me")
+	@ResponseBody
+	public void adminStatusMember(HttpServletResponse response,
+							   Model model) {
+		ArrayList<Member> list = mService.adminStatusMember();
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		try {
+			gson.toJson(list, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 }

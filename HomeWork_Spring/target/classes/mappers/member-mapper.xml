@@ -114,5 +114,13 @@
 	<select id="adminMemberList" resultType="Member">
 		select *
 		from member
+		order by member_no
+	</select>
+	
+	<select id="adminStatusMember" resultType="Member">
+		select *
+		from member
+		where status = 'Y'
+		order by member_no
 	</select>
 </mapper>
