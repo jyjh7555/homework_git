@@ -214,6 +214,7 @@ public class MemberController {
 	@RequestMapping("/adminUpdate.me")
 	@ResponseBody
 	public String adminUpdate(@ModelAttribute Member m) {
+		System.out.println(m);
 		int result = mService.adminUpdate(m);
 		return result == 1? "success" : "fail";
 	}
@@ -222,7 +223,11 @@ public class MemberController {
 	
 	@RequestMapping("/updateStatus.me")
 	@ResponseBody
-	public String updateStatus(@ModelAttribute Member m ) {
+	public String updateStatus(@RequestParam("status") String status,
+							   @RequestParam("memberNo") String memberNo) {
+		HashMap<String, String> m = new HashMap<String, String>();
+		m.put("status", status);
+		m.put("memberNo", memberNo);
 		int result = mService.updateStatus(m);
 		return result == 1? "success" : "fail";
 	}
@@ -311,6 +316,23 @@ public class MemberController {
 		response.setContentType("application/json; charset=UTF-8");
 		try {
 			gson.toJson(list, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("adminPayList.me")
+	@ResponseBody
+	public void adminPayList(HttpServletResponse response,
+							   Model model) {
+		ArrayList<Pay> payList = mService.adminPayList();
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		try {
+			gson.toJson(payList, response.getWriter());
 		} catch (JsonIOException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

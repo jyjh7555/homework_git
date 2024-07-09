@@ -66,7 +66,7 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public int updateStatus(Member m) {
+	public int updateStatus(HashMap<String, String> m) {
 		return mDAO.updateStatus(sqlSession, m);
 	}
 
@@ -98,6 +98,13 @@ public class MemberServiceImpl implements MemberService {
 	public ArrayList<Member> adminStatusMember() {
 		return mDAO.adminStatusMember(sqlSession);
 	}
+
+	@Override
+	public ArrayList<Pay> adminPayList() {
+		return mDAO.adminPayList(sqlSession);
+	}
+
+	
 
 
 	

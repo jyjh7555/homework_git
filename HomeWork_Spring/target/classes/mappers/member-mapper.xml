@@ -95,14 +95,36 @@
 	</select>
 	
 	<update id="updateStatus">
-		update member
-		set status = #{status}
-		where member_no = #{memberNo}
+	    update member
+	    set status = 
+	        <choose>
+	            <when test='status == "Y"'>
+	                'N'
+	            </when>
+	            <when test='status == "N"'>
+	                'Y'
+	            </when>
+	            <otherwise>
+	                #{status}
+	            </otherwise>
+	        </choose>
+	    where member_no = #{memberNo}
 	</update>
 	
 	<update id="updateAdmin">
 		update member
-		set isAdmin = #{isAdmin}
+		set isAdmin = 
+			<choose>
+				<when test='isAdmin == "Y"'>
+					'N'
+				</when>
+				<when test='isAdmin == "N"'>
+					'Y'
+				</when>
+				<otherwise>
+					#{isAdmin}
+				</otherwise>
+			</choose>
 		where member_no = #{memberNo}
 	</update>
 	
@@ -122,5 +144,11 @@
 		from member
 		where status = 'Y'
 		order by member_no
+	</select>
+	
+	<select id="adminPayList" resultType="Pay">
+		select *
+		from pay
+		order by pay_no
 	</select>
 </mapper>

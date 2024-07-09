@@ -203,65 +203,22 @@
 					</div>
 					<div class="userUpdate hidden" id="userUpdate">
 							<table id="memberUpdate">
-								<tr>
-									<th width="6%">회원번호</th>
-									<th width="6%">이름</th>
-									<th width="10%">닉네임</th>
-									<th width="12%">이메일</th>
-									<th width="12%">주소</th>
-									<th width="10%">휴대폰번호</th>
-									<th width="8%">활동</th>
-									<th width="8%">관리자</th>
-									<th width="8%">정보변경</th>
-								</tr>
-								<c:forEach items="${ list }" var="m">
+								<thead>
+									<tr>
+										<th width="6%">회원번호</th>
+										<th width="6%">이름</th>
+										<th width="10%">닉네임</th>
+										<th width="12%">이메일</th>
+										<th width="12%">주소</th>
+										<th width="10%">휴대폰번호</th>
+										<th width="8%">활동</th>
+										<th width="8%">관리자</th>
+										<th width="8%">정보변경</th>
+									</tr>
+								</thead>
+								<tbody>
 								
-								<tr>
-									<td><input type="text" class="updateNo" value="${ m.memberNo }" readonly></td>
-		            				<td><input type="text" class="updateName" value="${ m.memberName }"></td>
-						            <td><input type="text" class="updateNickName" value="${ m.nickName }"></td>
-						            <td><input type="email" class="updateEmail" value="${ m.email }"></td>
-						            <td><input type="text" class="updateAddress" value="${ m.address }"></td>
-						            <td><input type="tel" class="updatePhone" value="${ m.phone }"></td>
-						            <td>
-							            <c:if test="${m.status == 'Y'}">
-									            <label>
-									                <input type="radio" name="status_${m.memberNo}" value="Y" checked="checked" onclick="toggleStatus('Y','${m.memberNo}')"> Y
-									            </label>
-									            <label>
-									                <input type="radio" name="status_${m.memberNo}" value="N" onclick="toggleStatus('N','${m.memberNo}')"> N
-									            </label>
-									        </c:if>
-									        <c:if test="${m.status == 'N'}">
-									            <label>
-									                <input type="radio" name="status_${m.memberNo}" value="Y" onclick="toggleStatus('Y','${m.memberNo}')"> Y
-									            </label>
-									            <label>
-									                <input type="radio" name="status_${m.memberNo}" value="N" checked="checked" onclick="toggleStatus('N','${m.memberNo}')"> N
-									            </label>
-									        </c:if>
-									</td>
-									<td>
-								        <c:if test="${m.isAdmin == 'Y'}">
-									            <label>
-									                <input type="radio" name="admin_${m.memberNo}" value="Y" checked="checked" onclick="toggleAdmin('Y','${m.memberNo}')"> Y
-									            </label>
-									            <label>
-									                <input type="radio" name="admin_${m.memberNo}" value="N" onclick="toggleAdmin('N','${m.memberNo}')"> N
-									            </label>
-									        </c:if>
-									        <c:if test="${m.isAdmin == 'N'}">
-									            <label>
-									                <input type="radio" name="admin_${m.memberNo}" value="Y" onclick="toggleAdmin('Y','${m.memberNo}')"> Y
-									            </label>
-									            <label>
-									                <input type="radio" name="admin_${m.memberNo}" value="N" checked="checked" onclick="toggleAdmin('N','${m.memberNo}')"> N
-									            </label>
-									        </c:if>
-									</td>
-						            <td><button class="updateUserButton" onclick="updateMember('${m.memberNo}')">변경</button></td>
-								</tr>
-							</c:forEach>
+								</tbody>
 							</table>
 					</div>
 				<div class="userDelete hidden" id="userDelete">
@@ -286,28 +243,21 @@
 				</div>
 			<div class="supportPage hidden" id="supportList">
 					<table id="supportTable">
-						<tr>
-							<th width="10%">번호</th>
-							<th width="10%">회원번호</th>
-							<th width="10%">이름</th>
-							<th width="10%">이메일</th>
-							<th width="10%">휴대폰번호</th>
-							<th width="10%">후원분야</th>
-							<th width="10%">후원날짜</th>
-							<th width="10%">후원금액(원)</th>
-						</tr>
-						<c:forEach items="${ pay }" var="p">
+						<thead>
 							<tr>
-								<td>${ p.payNo }</td>
-								<td>${ p.memberNo }</td>
-								<td>${ p.buyer_name }</td>
-								<td>${ p.buyer_email }</td>
-								<td>${ p.buyer_tel }</td>
-								<td>${ p.product }</td>
-								<td>${ p.payDate }</td>
-								<td>${ p.amount }</td>
+								<th width="10%">번호</th>
+								<th width="10%">회원번호</th>
+								<th width="10%">이름</th>
+								<th width="10%">이메일</th>
+								<th width="10%">휴대폰번호</th>
+								<th width="10%">후원분야</th>
+								<th width="10%">후원날짜</th>
+								<th width="10%">후원금액(원)</th>
 							</tr>
-						</c:forEach>
+						</thead>
+						<tbody>
+			
+						</tbody>
 					</table>
 				</div>
 			<div class="regularSupportPage hidden" id="regularSupportList">
@@ -425,10 +375,91 @@
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
 				 
-				 
+				 $.ajax({
+						url: '${contextPath}/adminMemberList.me',
+						success: data =>{
+							document.getElementById('memberUpdate').classList.remove('hidden');
+							const memberUpdate = document.getElementById('memberUpdate');
+							const tbody = memberUpdate.querySelector('tbody');
+							tbody.innerHTML = '';
+							
+							for(const m of data){
+								const tr = document.createElement('tr');
+								
+								const noTd = document.createElement('td');
+								noTd.innerText = m.memberNo;
+								const nameTd = createInputTd('memberName', m.memberName);
+								const nickTd = createInputTd('nickName', m.nickName);
+								const emailTd = createInputTd('email', m.email);
+								const phoneTd = createInputTd('phone', m.phone);
+								const addressTd = createInputTd('address', m.address);
+								
+								const statusTd = document.createElement('td');
+					            const statusButton = document.createElement('button');
+					            statusButton.innerText = m.status === 'Y' ? 'Y' : 'N';
+					            statusButton.addEventListener('click', function() {
+					                toggleStatus(m.status, m.memberNo, statusButton);
+					            });
+					            statusTd.appendChild(statusButton);
+								
+					            const adminTd = document.createElement('td');
+					            const adminButton = document.createElement('button');
+					            adminButton.innerText = m.isAdmin === 'Y' ? 'Y' : 'N';
+					            adminButton.addEventListener('click', function() {
+					                toggleAdmin(m.isAdmin, m.memberNo, adminButton);
+					            });
+					            adminTd.appendChild(adminButton);
+								
+					            const nameInput = nameTd.querySelector('input');
+					            const nickInput = nickTd.querySelector('input');
+					            const emailInput = emailTd.querySelector('input'); 
+					            const addressInput = addressTd.querySelector('input');
+					            const phoneInput = phoneTd.querySelector('input'); 
+					            
+					            
+								const updateButtonTd = document.createElement('td');
+				                const updateButton = document.createElement('button');
+				                updateButton.innerText = '정보수정';
+
+				                
+				                updateButton.addEventListener('click', function() {
+				                    updateMember(m.memberNo, nameInput.value, nickInput.value, emailInput.value, addressInput.value, phoneInput.value);
+				                });
+
+				                updateButtonTd.appendChild(updateButton);
+								
+								tr.append(noTd);
+								tr.append(nameTd);
+								tr.append(nickTd);
+								tr.append(emailTd);
+								tr.append(addressTd);
+								tr.append(phoneTd);
+								tr.append(statusTd);
+								tr.append(adminTd);
+								tr.append(updateButtonTd);
+								
+								tbody.append(tr);
+							}
+						},
+						error: data => console.log(data)
+						
+					})
 				 
 				 
 			 })
+			 
+			 function createInputTd(className, value) {
+			    const td = document.createElement('td');
+			    const input = document.createElement('input');
+			    input.type = 'text';
+			    input.className = className;
+			    input.value = value;
+			    td.appendChild(input);
+			    return td;
+			}
+			 
+			 
+			 
 			 document.getElementById('user3').addEventListener('click', function(){
 				 document.getElementById('userDelete').classList.toggle('hidden');
 				 document.getElementById('userInfo').classList.add('hidden');
@@ -500,6 +531,52 @@
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
 				 
+				 $.ajax({
+						url: '${contextPath}/adminPayList.me',
+						success: data =>{
+							document.getElementById('supportList').classList.remove('hidden');
+							const supportList = document.getElementById('supportList');
+							const tbody = supportList.querySelector('tbody');
+							tbody.innerHTML = '';
+							
+							for(const p of data){
+								const tr = document.createElement('tr');
+								
+								const pNoTd = document.createElement('td');
+								pNoTd.innerText = p.payNo;
+								const mNoTd = document.createElement('td');
+								mNoTd.innerText = p.memberNo;
+								const nameTd = document.createElement('td');
+								nameTd.innerText = p.buyerName;
+								const emailTd = document.createElement('td');
+								emailTd.innerText = p.buyerEmail;
+								const phoneTd = document.createElement('td');
+								phoneTd.innerText = p.buyerTel;
+								const productTd = document.createElement('td');
+								productTd.innerText = p.product;
+								const payDateTd = document.createElement('td');
+								payDateTd.innerText = p.payDate;
+								const amountTd = document.createElement('td');
+								amountTd.innerText = p.amount+'원';
+								
+								
+								tr.append(pNoTd);
+								tr.append(mNoTd);
+								tr.append(nameTd);
+								tr.append(emailTd);
+								tr.append(phoneTd);
+								tr.append(productTd);
+								tr.append(payDateTd);
+								tr.append(amountTd);
+								
+								
+								tbody.append(tr);
+							}
+						},
+						error: data => console.log(data)
+						
+					})
+				 
 			 })
 			 
 			 document.getElementById('support2').addEventListener('click', function(){
@@ -531,12 +608,7 @@
 			
 		}
 		
-		function updateMember(memberNo){
-			var memberName = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updateName').val()
-			var nickName = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updateNickName').val()
-			var email = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updateEmail').val()
-			var phone = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updatePhone').val()
-			var address = $('.updateNo[value="' + memberNo + '"]').closest('tr').find('.updateAddress').val()
+		function updateMember(memberNo, memberName, nickName, email, address, phone){
 			$.ajax({
 	        	url: '${contextPath}/adminUpdate.me',
 	        	type: 'POST',
@@ -545,8 +617,8 @@
 	                memberName:memberName,
 	                nickName:nickName,
 	                email:email,
-	                phone:phone,
-	                address:address
+	                address:address,
+	                phone:phone
 		            },
 	        		success: data =>{
 	        			console.log(data)
@@ -561,34 +633,36 @@
 	        
 		}
 		
-		function toggleStatus(status, memberNo) {
-			console.log(status)
-			console.log(memberNo)
+		function toggleStatus(status, memberNo, statusButton) {
+			const updateStatus = status === 'Y' ? 'N' : 'Y'; 
 			$.ajax({
 				url:'${contextPath}/updateStatus.me',
 				data: {status:status, memberNo:memberNo},
 				success: data => {
 					if (status == 'Y') {
-		                alert('회원번호 ' + memberNo + '님의 활동 권한을 부여합니다.');
-		            } else {
 		                alert('회원번호 ' + memberNo + '님의 활동 권한을 해제합니다.');
+		            } else {
+		                alert('회원번호 ' + memberNo + '님의 활동 권한을 부여합니다.');
 		            }		
+		            statusButton.innerText = updateStatus;
 				},
 				error: data => console.log(data)
 			})
             
 		}
 		
-		function toggleAdmin(isAdmin, memberNo) {
+		function toggleAdmin(isAdmin, memberNo, adminButton) {
+			const updateAdmin = isAdmin == 'Y' ? 'N' : 'Y';
 			$.ajax({
 				url:'${contextPath}/updateAdmin.me',
 				data: {isAdmin:isAdmin, memberNo:memberNo},
 				success: data => {
 					if (isAdmin == 'Y') {
-		                alert('회원번호 ' + memberNo + '님의 관리자 권한을 부여합니다.');
-		            } else {
 		                alert('회원번호 ' + memberNo + '님의 관리자 권한을 해제합니다.');
-		            }		
+		            } else {
+		                alert('회원번호 ' + memberNo + '님의 관리자 권한을 부여합니다.');
+		            }
+					adminButton.innerText = updateAdmin;
 				},
 				error: data => console.log(data)
 			})

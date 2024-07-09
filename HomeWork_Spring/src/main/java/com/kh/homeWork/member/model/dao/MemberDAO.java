@@ -46,7 +46,7 @@ public class MemberDAO {
 		return (ArrayList)sqlSession.selectList("memberMapper.searchMember", map);
 	}
 
-	public int updateStatus(SqlSessionTemplate sqlSession, Member m) {
+	public int updateStatus(SqlSessionTemplate sqlSession, HashMap<String, String> m) {
 		return sqlSession.update("memberMapper.updateStatus", m);
 	}
 
@@ -72,6 +72,10 @@ public class MemberDAO {
 
 	public ArrayList<Member> adminStatusMember(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("memberMapper.adminStatusMember");
+	}
+
+	public ArrayList<Pay> adminPayList(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("memberMapper.adminPayList");
 	}
 
 

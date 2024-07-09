@@ -27,7 +27,7 @@ public interface MemberService{
 
 	ArrayList<Member> searchMember(HashMap<String, Object> map);
 
-	int updateStatus(Member m);
+	int updateStatus(HashMap<String, String> m);
 
 	int updateAdmin(Member m);
 
@@ -40,6 +40,10 @@ public interface MemberService{
 	ArrayList<Member> adminMemberList();
 
 	ArrayList<Member> adminStatusMember();
+
+	ArrayList<Pay> adminPayList();
+
+
 
 
 
