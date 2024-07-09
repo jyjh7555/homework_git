@@ -57,39 +57,44 @@
 				<div class="bd-example m-4 p-2" style="border-top: 2px solid black;">
 		            <table class="table" >
 		            	<tr>
-		            		<td style="background:#E3E3E3;width:120px">봉사구분</td>
+		            		<td style="border-bottom:1px solid white; background:#E3E3E3;width:120px">봉사구분</td>
 		            		<td width="35%">
-			            		<select class="form-control" name="category">
+			            		<select class="form-control" id="category"name="category">
 			            			<option value="집짓기">집짓기</option>
 			            			<option value="환경개선">환경개선</option>
 			            			<option value="긴급/재난">긴급/재난</option>
 			            		</select>
 		            		</td>
-		            		<td style="background:#E3E3E3;width:120px">국내/해외</td>
+		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">국내/해외</td>
 		            		<td>
 			            		<div class="col">
-			            			<select class="col-4 form-control" name="boardType" style="display:inline; width:100px">
+			            			<select class="col-4 form-control" id="boardType"name="boardType" style="display:inline; width:100px">
 			            				<option  value="1">국내</option>
 			            				<option  value="2">해외</option>
 			            			</select>
-			            			<select class="col-4 form-control" name="locationNo"style="display:inline; width:100px">
-			            				<option value="10">서울(에시)</option>
-			            				<option value="20">인천(예시))</option>
+			            			<select class="col-4 form-control" id="locationNo"name="locationNo"style="display:inline; width:100px">
+			            				<option value="10">서울</option>
+			            				<option value="20">인천</option>
+			            				<option value="30">경기도</option>
+			            				<option value="40">강원도</option>
+			            				<option value="50">충청도</option>
+			            				<option value="60">전라도</option>
+			            				<option value="70">경상도</option>
 			            			</select>
 			            		</div>
 		            		</td>
 		            	</tr>
 		            	<tr>
-		            		<td style="background:#E3E3E3;width:120px">봉사기간</td>
+		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사기간</td>
 		            		<td>
 		            			<div class="input-group mb-3">
-								  <input  type="date" name="startDate"class="form-control" required>
+								  <input  type="date" name="startDate"class="form-control"required>
 								  <span class="input-group-text" style="background:white; border:0">~</span>
 								  <input  type="date" name="endDate"class="form-control" required>
 								</div>
 		            		
 		            		</td>
-		            		<td style="background:#E3E3E3;width:120px">봉사시간</td>
+		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사시간</td>
 		            		<td>
 								<div class="input-group mb-3">
 									<input type="time" class="form-control"  name="startTime" value="00:00">
@@ -99,7 +104,7 @@
 							</td>
 		            	</tr>
 		            	<tr>
-		            		<td style="background:#E3E3E3;width:120px">모집기간</td>
+		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">모집기간</td>
 		            		<td>
 								<div class="input-group mb-1">
 									<input type="date" class="form-control" name="recruitStart" required>
@@ -107,7 +112,7 @@
 									<input type="date" class="form-control" name="recruitEnd" required>
 								</div>
 							</td>
-		            		<td style="background:#E3E3E3;width:120px">단체여부</td>
+		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">단체여부</td>
 		            		<td>
 		            			<div class="col m-4 mb-1 mt-2">
 		            				<input class="form-check-input " checked  type="radio"  name="groupYn" id="group1" value="Y">
@@ -118,19 +123,19 @@
 							</td>
 		            	</tr>
 		            	<tr>
-		            		<td style="background:#E3E3E3;width:120px">모집인원</td>
+		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">모집인원</td>
 		            		<td><input type="number" class="form-control" name="memberCount" required></td>
-		            		<td style="background:#E3E3E3;width:120px">신청인원</td>
+		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">신청인원</td>
 		            		<td></td>
 		            	</tr>
 		            	<tr>
-		            		<td style="background:#E3E3E3;width:120px">담당자</td>
+		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">담당자</td>
 		            		<td><input class="form-control" type="text" name="mgr" required></td>
 		            		<td style="background:#E3E3E3;width:120px">담당자연락처</td>
 		            		<td><input class="form-control" type="text" name="mgrPhone" required></td>
 		            	</tr>
 		            	<tr>
-		            		<td style="background:#E3E3E3;width:120px">봉사주소</td>
+		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사주소</td>
 		            		<td colspan="3">
 		            		<div class=col-12>
 						        <input name="address" class="form-control w-25 m-4 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_postcode" placeholder="우편번호" readonly>
@@ -144,35 +149,11 @@
 		            	</tr>
 		            	
 		            </table>
-		            <!-- <textarea style="width:100%; min-height:100%;  overflow-wrap: break-word;"> -->
 		            <textarea class="form-control"style="width:100%; height:500px" name="content">
-		            [ 공지사항 ]
-			 1. 신청 후 당사에서 별도의 연락이 없거나 배치가 안되었어도 해당 일에 봉사를 와주시면 실적 등록을 해 드
-			 리오니 배치 전에라도 봉사 오시면 됩니다. 
-			 2. 자원봉사 활동 확인 서류는 당사에서 발급해 드리지 않습니다. 센터 방문 또는 인터넷 발급하여 받아주세요.
-			 (여유없이 신청하시는 분들은 담당자 부재로 서류 받지 못할 수도 있으니 일주일 정도 여유있게 신청하시고 오세요)
-			
-			[봉사 안내]
-			당사는 장애인에게 일자리를 통한 영적인 안정과 자존감의 회복, 재정적인 자립을 할 수 있도록 돕기 위하여 설립 및 운영되는 시설입니다.
-			기업 및 개인에게 물건을 기증 받아 착한 가격으로 소비자에게 제공하며, 그 수익금으로 장애인에게 일자리를 제공하고 있습니다.
-			매장 운영과 관련하여 기증 물품 진열, 정리 등을 도와주실 자원봉사자를 아래와 같이 모집합니다.
-			
-			1. 기간 : 상시 모집
-			2. 날짜 : 매주 월요일~토요일
-			3. 봉사시간 : 평일 오전 9시~오후 1시 / 토요일 및 공휴일 오전 9시 30분 ~오후 1시30분 (4시간)
-			4. 자원봉사내용 : 기증물품 분류 및 매장 진열, 매장 청소 등 장애인의 업무 동행
-			5. 모집인원 : 5 명 / 일  (65세 미만 이신 분)
-			6. 주소 : 서울시 강서구 강서로 294, 1층 (우장산역 1번 출구에서 300 미터 / 강서 미즈메디병원 도로 반대편)
-			
-			[기타 사항]
-			1. 강서점(우장산역) / 가양점(가양역) 두개 매장에서 봉사자를 모집하고 있습니다. 신청하신 지역 잘 확인하시어 봉사 와주시길 부탁드립니다.
-			2. 특별한 연락 없이 신청 후 미 참여하실 경우 이후 봉사는 신청 거부될 수 있습니다.
-			3. 봉사를 확정하고 불참하실 경우에는 사전에 미리 담당자에게 알려주시길 부탁드립니다.
-			4. 일일 당사에서 승인해 드릴 수 있는 최대 봉사 인정 시간은 4시간입니다. 
-			5. 봉사 당일 매장 제품 구입시 10% 할인 혜택을 드립니다.
+		            [공지사항]
+		            입력해주세요!
+					
 					</textarea>
-					
-					
 				</div>		
 			</div>
 		</div>
@@ -189,6 +170,143 @@
 	
 	
 	<script>
+	
+		//국내,해외 타입 설정시 지역,봉사구분 변경하게하기
+		const bType = document.getElementById('boardType');
+		const locationNo = document.getElementById('locationNo');
+		const category = document.getElementById('category');
+		console.log(bType);
+		bType.addEventListener("change",function(){
+			if(this.value== 1){
+				locationNo.innerHTML = '<option value="10">서울</option>'+
+								 '<option value="20">인천</option>'+
+								 '<option value="30">경기도</option>'+
+								 '<option value="40">강원도</option>'+
+								 '<option value="50">충청도</option>'+
+								 '<option value="60">전라도</option>'+
+								 '<option value="70">경상도</option>';
+				category.innerHTML = '<option value="집짓기">집짓기</option>'+
+									'<option value="환경개선">환경개선</option>'+
+									'<option value="긴급/재난">긴급/재난</option>';
+			}else{
+				locationNo.innerHTML = '<option value="210">아시아</option>'+
+										 '<option value="220">아메리카</option>'+
+										 '<option value="230">북아메리카</option>'+
+										 '<option value="240">남아메리카</option>'+
+										 '<option value="250">중동</option>'+
+										 '<option value="260">오세아니아</option>'+
+				 						 '<option value="270">유럽</option>';
+				
+				category.innerHTML = '<option value="주거환경개선">주거환경개선</option>'+
+									'<option value="식수지원">식수지원</option>'+
+									'<option value="도시슬럼지원">도시슬럼지원</option>';
+			}
+		});
+		
+		//모집기간 날짜 반대로 입력 못하게 하기
+		const recStartDate = document.getElementsByName('recruitStart')[0];
+		const recEndDate = document.getElementsByName('recruitEnd')[0];
+		recStartDate.addEventListener('change',function(){
+			
+			if(recStartDate.value ==''){
+				recStartDate.style.border = '2px solid red';
+				
+			}else{
+				recStartDate.style.border = '1px solid #ced4da';
+			}
+			
+
+			const dateTypeStart = new Date(recStartDate.value);
+			const dateTypeEnd = new Date(recEndDate.value);
+			const sumDateSec = dateTypeStart.getTime() - dateTypeEnd.getTime();
+			const resultDate = sumDateSec / (24*60*60*1000);
+
+			if(isNaN(resultDate) || resultDate >0){
+				const year = recStartDate.value.substring(0,4);
+				const month = recStartDate.value.substring(5,7);
+				const day = recStartDate.value.substring(8,10);
+
+				recEndDate.value = year + '-' + month + '-' +day ;
+				recEndDate.style.border = '1px solid #ced4da';
+			}
+		});
+		recEndDate.addEventListener('change',function(){
+			if(recEndDate.value ==''){
+				recEndDate.style.border = '2px solid red';
+				
+			}else{
+				recEndDate.style.border = '1px solid #ced4da';
+			}
+			
+			
+			const dateTypeStart = new Date(recEndDate.value);
+			const dateTypeEnd = new Date(recStartDate.value);
+			const sumDateSec = dateTypeStart.getTime() - dateTypeEnd.getTime();
+			const resultDate = sumDateSec / (24*60*60*1000);
+
+			if(isNaN(resultDate) || resultDate <0){
+				const year = recEndDate.value.substring(0,4);
+				const month = recEndDate.value.substring(5,7);
+				const day = recEndDate.value.substring(8,10);
+				recStartDate.value = year + '-' + month + '-' +day ;
+				recStartDate.style.border = '1px solid #ced4da';
+			}
+		});
+		
+		
+		//봉사기간 날짜 반대로 입력 못하게 하기
+		const startDate = document.getElementsByName('startDate')[0];
+		const endDate = document.getElementsByName('endDate')[0];
+		startDate.addEventListener('change',function(){
+			
+			if(startDate.value ==''){
+				startDate.style.border = '2px solid red';
+				
+			}else{
+				startDate.style.border = '1px solid #ced4da';
+			}
+			
+			
+			const dateTypeStart = new Date(startDate.value);
+			const dateTypeEnd = new Date(endDate.value);
+			const sumDateSec = dateTypeStart.getTime() - dateTypeEnd.getTime();
+			const resultDate = sumDateSec / (24*60*60*1000);
+
+			if(isNaN(resultDate) || resultDate >0){
+				const year = startDate.value.substring(0,4);
+				const month = startDate.value.substring(5,7);
+				const day = startDate.value.substring(8,10);
+
+				endDate.value = year + '-' + month + '-' +day ;
+				endDate.style.border = '1px solid #ced4da';
+			}
+		});
+		endDate.addEventListener('change',function(){
+			
+			if(endDate.value ==''){
+				endDate.style.border = '2px solid red';
+				
+			}else{
+				endDate.style.border = '1px solid #ced4da';
+			}
+			
+			const dateTypeStart = new Date(endDate.value);
+			const dateTypeEnd = new Date(startDate.value);
+			const sumDateSec = dateTypeStart.getTime() - dateTypeEnd.getTime();
+			const resultDate = sumDateSec / (24*60*60*1000);
+
+			if(isNaN(resultDate) || resultDate <0){
+				const year = endDate.value.substring(0,4);
+				const month = endDate.value.substring(5,7);
+				const day = endDate.value.substring(8,10);
+				startDate.value = year + '-' + month + '-' +day ;
+				startDate.style.border = '1px solid #ced4da';
+			}
+		});
+		
+		
+	
+		//보드삽입 폼설정
 		const form = document.getElementById('form')
 		function insertBoard(){
 			form.action = '${contextPath}/insertBoard.bo';
@@ -196,7 +314,6 @@
 			form.submit();
 		}
 	
-		console.log(${loginUser.memberNo});
 	
 		function sample6_execDaumPostcode() {
 	        new daum.Postcode({
