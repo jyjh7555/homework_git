@@ -10,7 +10,7 @@ public interface BoardService {
 
 	int getListCount(int i);
 
-	ArrayList<Board> selectBoardList(PageInfo pi, int i);
+	ArrayList<Board> selectBoardList(PageInfo pi, int boardTypeNum);
 
 	Board selectBoard(int bId, int memberNo);
 

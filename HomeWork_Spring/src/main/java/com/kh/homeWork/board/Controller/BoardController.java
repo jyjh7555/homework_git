@@ -2,12 +2,14 @@ package com.kh.homeWork.board.Controller;
 
 import java.util.ArrayList;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
@@ -24,17 +26,39 @@ public class BoardController {
 	@Autowired
 	private BoardService bService;
 	
-	@RequestMapping("domesticList.bo")
-	public String selectBoardList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
-		int listCount = bService.getListCount(1);
+	@RequestMapping("{boardType}.bo")
+	public String selectDomesticBoardList(@PathVariable String boardType,@RequestParam(value="page", defaultValue="1") int currentPage, Model model,HttpServletRequest request) {
+										 // 변수명에 따라 url명이 달라진다.
+		int boardTypeNum;
+	    String viewName;
+	    
+	    switch (boardType) {
+        case "domestic":
+            boardTypeNum = 1;
+            viewName = "domesticList";
+            break;
+        case "global":
+        	boardTypeNum = 2;
+            viewName = "globalList";
+            break;
+        case "review":
+        	boardTypeNum = 3;
+            viewName = "reviewList";
+            break;
+        default:
+            return "errorPage";
+    }
+	    
+	    
+		int listCount = bService.getListCount(boardTypeNum);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 5);		
-		ArrayList<Board> list = bService.selectBoardList(pi,1);
-		//System.out.println(list);
+		ArrayList<Board> list = bService.selectBoardList(pi,boardTypeNum);
+		System.out.println(list);
 		
 		if(list !=null) {
 			model.addAttribute("list",list);
 			model.addAttribute("pi",pi);
-			return "domesticList";
+			return viewName;
 		} else {
 			return "korMap";
 		}

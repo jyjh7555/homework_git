@@ -17,11 +17,11 @@ public class BoardDAO {
 		return sqlSession.selectOne("boardMapper.getListCount",i);
 	}
 
-	public ArrayList<Board> selectBoardList(SqlSessionTemplate sqlSession, PageInfo pi, int i) {
+	public ArrayList<Board> selectBoardList(SqlSessionTemplate sqlSession, PageInfo pi, int boardTypeNum) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardList",i,rowBounds);
+		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardList",boardTypeNum,rowBounds);
 	}
 
 	public Board selectBoardList(SqlSessionTemplate sqlSession, int bId) {

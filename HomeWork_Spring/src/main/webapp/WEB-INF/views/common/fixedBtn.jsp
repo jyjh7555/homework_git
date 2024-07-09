@@ -9,8 +9,8 @@
 <style>
 	#heart-container {
 		  margin: 20px;
-		  width: 150px;
-		  height: 150px;
+		  width: 120px;
+		  height: 120px;
 		  text-align:center;
 		  background:skyblue;
 		  border-radius: 50%;
@@ -24,8 +24,8 @@
 		cursor:pointer;
 	}
 	#heart-icon {
-	   width: 100px;
-	   height: 100px;
+	   width: 75px;
+	   height: 75px;
 	   margin-top:10px;
 	  
 	}
