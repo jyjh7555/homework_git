@@ -58,7 +58,7 @@
 		            <table class="table" >
 		            	<tr>
 		            		<td style="background:#E3E3E3;width:120px">봉사구분</td>
-		            		<td width="40%">
+		            		<td width="35%">
 			            		<select class="form-control" name="category">
 			            			<option value="집짓기">집짓기</option>
 			            			<option value="환경개선">환경개선</option>
@@ -83,16 +83,16 @@
 		            		<td style="background:#E3E3E3;width:120px">봉사기간</td>
 		            		<td>
 		            			<div class="input-group mb-3">
-								  <input type="date" name="startDate"class="form-control" required>
+								  <input  type="date" name="startDate"class="form-control" required>
 								  <span class="input-group-text" style="background:white; border:0">~</span>
-								  <input type="date" name="endDate"class="form-control" required>
+								  <input  type="date" name="endDate"class="form-control" required>
 								</div>
 		            		
 		            		</td>
 		            		<td style="background:#E3E3E3;width:120px">봉사시간</td>
 		            		<td>
 								<div class="input-group mb-3">
-									<input type="time" class="form-control" name="startTime" value="00:00">
+									<input type="time" class="form-control"  name="startTime" value="00:00">
 									<span class="input-group-text" style="background:white; border:0">~</span>
 									<input type="time" class="form-control" name="endTime"value="23:00">
 								</div>

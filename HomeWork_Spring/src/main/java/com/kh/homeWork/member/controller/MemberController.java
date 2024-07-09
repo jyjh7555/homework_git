@@ -22,6 +22,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.kh.homeWork.member.model.exception.MemberException;
 import com.kh.homeWork.member.model.service.MemberService;
 import com.kh.homeWork.member.model.vo.Member;
 
@@ -51,8 +52,7 @@ public class MemberController {
 			session.setAttribute("loginUser", loginUser);			
 			return "../../../index";				
 		}else {
-			model.addAttribute("msg", "로그인에 실패하였습니다."); // request.setAttribute("msg", "~~");
-			return "login";
+			throw new MemberException("로그인을 실패했습니다.");
 		}
 	}
 	
@@ -126,7 +126,7 @@ public class MemberController {
 			model.addAttribute("loginUser",mService.loginCheck(m)); // session에 있는 정보도 수정
 			return "redirect:myPage.me";
 		} else {
-			return "redirect:index.jsp";
+			throw new MemberException("정보수정을 실패했습니다.");
 		}
 	}
 	
