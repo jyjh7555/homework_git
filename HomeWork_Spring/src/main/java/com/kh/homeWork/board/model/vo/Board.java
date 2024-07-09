@@ -1,4 +1,4 @@
-package com.kh.homeWork.member.model.vo;
+package com.kh.homeWork.board.model.vo;
 
 import java.sql.Date;
 
@@ -22,5 +22,6 @@ public class Board {
 	private int boardCount;
 	private Date createDate;
 	private Date updateDate;
+	private int memberNo;
 	private int boardType;
 }

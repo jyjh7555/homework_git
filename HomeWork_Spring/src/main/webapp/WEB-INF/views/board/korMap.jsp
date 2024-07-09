@@ -94,12 +94,10 @@
 			<img src="resources/image/korMapGood.png" alt="한국 지도"  usemap="#menuMap" /> 
 		
 			<map name="menuMap" id="menuMap"> 
-		     <area  shape="poly"  coords="225,63,238,49,256,65,240,99"  alt="서울"   onclick=showTarget() />
-		     <area  shape="poly"  coords="309,61,324,46,338,60,323,96"  alt="강원도"  onclick=showTarget() />
-		     <area  shape="poly"  coords="255,125,270,112,285,126,270,158"  alt="충청도"  onclick=showTarget() />
-		     <area  shape="poly"  coords="292,224,307,208,323,224,307,258"  alt="경상도"  onclick=showTarget() />
-		      
-		      
+		     	<area shape="poly" coords="225,63,238,49,256,65,240,99" alt="서울" data-region="서울" onclick="showTarget(event)">
+			    <area shape="poly" coords="309,61,324,46,338,60,323,96" alt="강원도" data-region="강원도" onclick="showTarget(event)">
+			    <area shape="poly" coords="255,125,270,112,285,126,270,158" alt="충청도" data-region="충청도" onclick="showTarget(event)">
+			    <area shape="poly" coords="292,224,307,208,323,224,307,258" alt="경상도" data-region="경상도" onclick="showTarget(event)">   
 			</map> 
 		</div>
 		<Br><Br>
@@ -115,9 +113,12 @@
  			<jsp:include page="../common/footer.jsp"/>
  		</div>	
 	<script>
-	const showTarget = () =>{
-		
+	const showTarget = (event)=>{
+		event.preventDefault();
+		const region = event.target.getAttribute('data-region');
+		console.log("선택된 지역:",region);
 		document.getElementById('domesticSeoul').style.display = 'block';
+		
 	}
 	
 	</script>

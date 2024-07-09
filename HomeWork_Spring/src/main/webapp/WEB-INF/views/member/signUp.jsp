@@ -103,7 +103,7 @@
 					<input class="form-check-input " checked style="margin-left:25px;"  type="radio"  name="gender" id="man" value="M">
 		  			<label class="form-check-label " for="man">남자</label>
 					<input class="form-check-input "  type="radio" name="gender" id="woman" value="F">
-		  			<label class="form-check-label" for="woman">여자</label>  
+		  			<label class="form-check-label" for="woman">여자</label> 
 				</div>
 				<div class="form-floating">
 		        	<input class="form-control w-50 m-4" type="text" placeholder="닉네임" required id="nickName" name="nickName">
@@ -127,7 +127,7 @@
 						<option>hanmail.net</option>
 					</select>
 		        </div>
-		        <input type="date" class="form-control w-25 m-4" value="2004-01-01" name="age" >
+		        <input type="number" class="form-control w-25 m-4" value="" name="age" placeholder="나이">
 		        <!-- <input class="form-control w-50 m-4" type="text" name="address" placeholder="주소 입력"> -->
 		        <div class=col-12>
 			        <input name="address" class="form-control w-25 m-4 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_postcode" placeholder="우편번호" readonly>

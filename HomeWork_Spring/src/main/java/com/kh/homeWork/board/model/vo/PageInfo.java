@@ -1,4 +1,4 @@
-package com.kh.homeWork.member.model.vo;
+package com.kh.homeWork.board.model.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
