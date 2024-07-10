@@ -51,11 +51,12 @@
 					<input type="hidden" name="memberNo" value="${loginUser.memberNo}">
 				</div>
 				
-				<div align="right" class="right m-4 mb-1 mt-1">
-					<button type="button" class="btn">표 없애기(미구현)</button>
+				<div align="left" class="right m-4 mb-1 mt-1">
+					<input class="form-check-input" type="checkbox" onclick="reviewCheckFn()" value="reviewCheck" id="reviewCheck">
+				  <label class="form-check-label" for="reviewCheck" >후기 게시판 등록하기</label>
 				</div> 
 				<div class="bd-example m-4 p-2" style="border-top: 2px solid black;">
-		            <table class="table" >
+		            <table class="table" id="editTable">
 		            	<tr>
 		            		<td style="border-bottom:1px solid white; background:#E3E3E3;width:120px">봉사구분</td>
 		            		<td width="35%">
@@ -71,6 +72,7 @@
 			            			<select class="col-4 form-control" id="boardType"name="boardType" style="display:inline; width:100px">
 			            				<option  value="1">국내</option>
 			            				<option  value="2">해외</option>
+			            				<option style="display:none" value="3">후기</option>
 			            			</select>
 			            			<select class="col-4 form-control" id="locationNo"name="locationNo"style="display:inline; width:100px">
 			            				<option value="10">서울</option>
@@ -88,9 +90,9 @@
 		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사기간</td>
 		            		<td>
 		            			<div class="input-group mb-3">
-								  <input  type="date" name="startDate"class="form-control"required>
+								  <input  type="date" name="startDate"class="form-control">
 								  <span class="input-group-text" style="background:white; border:0">~</span>
-								  <input  type="date" name="endDate"class="form-control" required>
+								  <input  type="date" name="endDate"class="form-control" >
 								</div>
 		            		
 		            		</td>
@@ -107,9 +109,9 @@
 		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">모집기간</td>
 		            		<td>
 								<div class="input-group mb-1">
-									<input type="date" class="form-control" name="recruitStart" required>
+									<input type="date" class="form-control" name="recruitStart" >
 									<span class="input-group-text" style="background:white; border:0">~</span>
-									<input type="date" class="form-control" name="recruitEnd" required>
+									<input type="date" class="form-control" name="recruitEnd" >
 								</div>
 							</td>
 		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">단체여부</td>
@@ -124,15 +126,15 @@
 		            	</tr>
 		            	<tr>
 		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">모집인원</td>
-		            		<td><input type="number" class="form-control" name="memberCount" required></td>
+		            		<td><input type="number" class="form-control" name="memberCount" ></td>
 		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">신청인원</td>
 		            		<td></td>
 		            	</tr>
 		            	<tr>
 		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">담당자</td>
-		            		<td><input class="form-control" type="text" name="mgr" required></td>
+		            		<td><input class="form-control" type="text" name="mgr" ></td>
 		            		<td style="background:#E3E3E3;width:120px">담당자연락처</td>
-		            		<td><input class="form-control" type="text" name="mgrPhone" required></td>
+		            		<td><input class="form-control" type="text" name="mgrPhone" ></td>
 		            	</tr>
 		            	<tr>
 		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사주소</td>
@@ -149,11 +151,26 @@
 		            	</tr>
 		            	
 		            </table>
-		            <textarea class="form-control"style="width:100%; height:500px" name="content">
+		            <div class="editor_head col-12">
+		            	
+		            	<button style="border:1px solid gray;">가</button>
+		            	<button style="border:1px solid gray; font-weight: bold;"><b>가</b></button>
+		            	<button style="border:1px solid gray; font-style:italic;">가</button>
+		            	<button style="border:1px solid gray; text-decoration:underline;">가</button>
+		            	<button style="border:1px solid gray; text-decoration:line-through;">가</button>
+		            	<button >이미지</button>	
+		            	
+		            		
+		            
+		            
+		            
+		            </div>
+		            <div id="editDiv" class="form-control workseditor-editor"style="width:100%; min-height:500px" contenteditable="true">
 		            [공지사항]
 		            입력해주세요!
 					
-					</textarea>
+					</div>
+					<input type="hidden" name="content">
 				</div>		
 			</div>
 		</div>
@@ -170,6 +187,58 @@
 	
 	
 	<script>
+	
+	
+		//리뷰게시판 작성하려구해~
+		const reviewCheck = document.getElementById('reviewCheck');
+		function reviewCheckFn(){
+			if(reviewCheck.checked){
+				document.getElementById('editTable').style.display = 'none';
+			}else{
+				document.getElementById('editTable').style.display = 'block';
+			}
+		};
+	
+	
+		//게시글에 사진 넣기
+		const editDiv = document.getElementById('editDiv');
+		console.log(editDiv.innerHTML);
+		console.log(editDiv.innerText);
+		editDiv.addEventListener('paste',(event)=>{
+			console.log(editDiv.innerHTML);
+			console.log(editDiv.innerText);
+			
+			
+		})
+		editDiv.addEventListener('drop',(event)=>{
+			/* console.log('2');
+			console.log(event);
+			console.log(event.dataTransfer);
+			console.log(event.dataTransfer.files);
+			console.log(typeof event.dataTransfer.files);
+			console.log(event.dataTransfer.files[0].name);
+			console.log(typeof event.dataTransfer.files[0]); */
+			event.preventDefault();
+			
+			const file = event.dataTransfer.files[0];
+			console.log(file);
+			uploadFile(file);
+		})
+		
+		function uploadFile(file) {
+			console.log(file);
+			console.log('여기까지맞니?');
+            const reader = new FileReader();
+            reader.readAsDataURL(file);
+            reader.onloadend = () => {
+                const img = document.createElement('img');
+                img.src = reader.result;
+                img.style.maxWidth = '100%';
+                editDiv.appendChild(img);
+            }
+        }
+		
+	
 	
 		//국내,해외 타입 설정시 지역,봉사구분 변경하게하기
 		const bType = document.getElementById('boardType');
@@ -310,7 +379,23 @@
 		const form = document.getElementById('form')
 		function insertBoard(){
 			form.action = '${contextPath}/insertBoard.bo';
+			document.getElementsByName('content')[0].value= editDiv.innerHTML;
 			//form.action = '${contextPath}/test.bo';
+			if(reviewCheck.checked){
+				document.getElementsByName('boardType')[0].value= '3';
+				document.getElementById('category').value= null;
+				document.getElementsByName('locationNo').value= '1000';
+				
+				document.getElementsByName('startDate')[0].value='2000-01-01';
+				document.getElementsByName('endDate')[0].value='2000-01-01';
+				document.getElementsByName('recruitStart')[0].value='2000-01-01';
+				document.getElementsByName('recruitEnd')[0].value='2000-01-01';
+				document.getElementsByName('memberCount')[0].value=0;
+				document.getElementsByName('mgr')[0].value=null;
+				document.getElementsByName('mgrPhone')[0].value=null;
+				document.getElementsByName('address')[0].value=null;
+				
+			}
 			form.submit();
 		}
 	

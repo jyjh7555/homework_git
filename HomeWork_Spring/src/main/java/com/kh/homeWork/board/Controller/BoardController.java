@@ -53,7 +53,7 @@ public class BoardController {
 		int listCount = bService.getListCount(boardTypeNum);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 5);		
 		ArrayList<Board> list = bService.selectBoardList(pi,boardTypeNum);
-		System.out.println(list);
+		//System.out.println(list);
 		
 		if(list !=null) {
 			model.addAttribute("list",list);
@@ -104,14 +104,13 @@ public class BoardController {
 
 	@RequestMapping("insertBoard.bo")
 	public String insertBoard(@ModelAttribute Board b, @ModelAttribute VolunteerDetail v) {
-		
 		int result = bService.insertBoard(b);
-		if(result>0) {
+		if(result>0 && b.getBoardType() !=3) {
 			int bNo = bService.selectBoardNoCheck();
 			v.setBoardNo(bNo);
 			int result2 = bService.insertVolunteer(v);
 		}
-		return "redirect:domesticList.bo";
+		return "redirect:domestic.bo";
 	}
 	
 	
