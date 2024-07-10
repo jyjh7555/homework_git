@@ -45,6 +45,7 @@
 	
 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
 		<div class="d-flex flex-column justify-content-center mb-3 border border-4 w-50 mt-3 ">
+		
 			<div class="m-4 p-4"style="border-bottom: 1px solid gray; border-top: 5px solid black; ">
 				<b>${b.title }</b>
 			</div>
@@ -96,7 +97,20 @@
 	            <!-- <textarea style="width:100%; min-height:100%;  overflow-wrap: break-word;"> -->
 	            <div style="white-space: pre-wrap;">${b.content }</div>
 				
+				
 			</div>
+				<div class="bd-example m-4 p-2" style="background: #FAFAFA;">
+					<div>
+						<b>${loginUser.nickName}</b>님! 댓글을 남겨보세요!!
+					</div>
+					<div class="form-floating input-group">
+					  <textarea class="form-control" id="replyContent" style="height: 100px"></textarea>
+					  <label for="replyContent"></label>
+					  <button class="input-group-text" id="replyButton" >댓글남기기</button>
+					</div>
+				</div>
+			
+			
 			<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
 	        	<button type="button" class ="btn btm-lg btn-secondary m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="location.href='${contextPath}/domestic.bo?page=${page}'">목록보기</button>
 			</div>		
@@ -108,6 +122,17 @@
  			<jsp:include page="../common/footer.jsp"/>
  	</div>
 	
+	
+	<script>
+		const replyButton = document.getElementById('replyButton');
+		replyButton.addEventListener('click',function(){
+			$.ajax({
+				url: '${contextPath}/insertReply.bo',
+				data: {replyContent: document.getElementById('replyContent'),replyWriter:}
+			})
+		})
+	
+	</script>
 	
 </body>
 </html>
