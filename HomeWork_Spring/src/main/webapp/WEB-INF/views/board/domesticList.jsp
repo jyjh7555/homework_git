@@ -69,37 +69,7 @@
 
 		 	
 		 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
-<<<<<<< HEAD
-		<div class="d-flex flex-column justify-content-center mb-3 border border-4 w-50 mt-3 " style="width:1400px;">
-				<table class="table table-hover">
-					<thead>
-						<tr>
-							<th width="10%">글 번호</th>
-							<th width="10%">지역</th>
-							<th width="30%">글 제목</th>
-							<th width="10%">모집인원</th>
-							<th width="20%">작성날짜</th>
-							<th width="10%">조회수</th>
-	          			</tr>
-	          		</thead>
-	         		<tbody> 
-	         			<c:forEach items="${ list }" var="b">
-	         				<tr>
-	            			<td>${b.boardNo }</td>
-	            			<td>${b.location }</td>
-	            			<td>${b.title }</td>
-	            			<td>몇명할까</td>
-	            			<td>${b.updateDate }</td>
-	            			<td>${b.boardCount }</td>
-	          			</tr>
-	         			</c:forEach>
-	          			
-	          		</tbody>
-	        	</table>
-       		 <nav aria-label="Standard pagination example" style="float: right;">
-=======
-		<div class="d-flex flex-row justify-content-end mb-3  w-50 mt-3 " style="width:1400px;">
->>>>>>> refs/remotes/origin/kimkiryong
+
         		<ul align="center"class="pagination">
 		            <li class="page-item">
 		            	<c:url var="goBack" value="${ loc }">

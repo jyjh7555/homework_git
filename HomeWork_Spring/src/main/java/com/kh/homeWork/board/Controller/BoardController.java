@@ -95,6 +95,12 @@ public class BoardController {
 	public String writeBoard() {
 		return "writeBoard";
 	}
+	
+	@RequestMapping("testWriteBoard.bo")
+	public String testWriteBoard() {
+		return "testWriteBoard";
+	}
+	
 
 	@RequestMapping("insertBoard.bo")
 	public String insertBoard(@ModelAttribute Board b, @ModelAttribute VolunteerDetail v) {
@@ -108,12 +114,7 @@ public class BoardController {
 		return "redirect:domesticList.bo";
 	}
 	
-	@RequestMapping("test.bo")
-	public String test2(@RequestParam("startTime") String st, @RequestParam("endTime") String et) {
-		System.out.println(st);
-		System.out.println(et);
-		return "redirect:domesticList.bo";
-	}
+	
 	
 	
 }

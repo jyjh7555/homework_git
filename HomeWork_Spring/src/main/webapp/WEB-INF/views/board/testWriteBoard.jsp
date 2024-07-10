@@ -52,7 +52,7 @@
 				</div>
 				
 				<div align="right" class="right m-4 mb-1 mt-1">
-					<button type="button" class="btn" onclick="location.href='testWriteBoard.bo'">표 없애기(미구현)</button>
+					<button type="button" class="btn">표 없애기(미구현)</button>
 				</div> 
 				<div class="bd-example m-4 p-2" style="border-top: 2px solid black;">
 		            <table class="table" >
