@@ -75,8 +75,11 @@ public class MemberDAO {
 		return (ArrayList)sqlSession.selectList("memberMapper.adminMemberList", null, rowBounds);
 	}
 
-	public ArrayList<Member> adminStatusMember(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("memberMapper.adminStatusMember");
+	public ArrayList<Member> adminStatusMember(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1)*pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.adminStatusMember", null, rowBounds);
 	}
 
 	public ArrayList<Pay> adminPayList(SqlSessionTemplate sqlSession) {

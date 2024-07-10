@@ -40,7 +40,7 @@ public interface MemberService{
 
 	ArrayList<Member> adminMemberList(PageInfo pi);
 
-	ArrayList<Member> adminStatusMember();
+	ArrayList<Member> adminStatusMember(PageInfo pi);
 
 	ArrayList<Pay> adminPayList();
 

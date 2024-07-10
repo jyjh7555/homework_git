@@ -261,6 +261,17 @@
 						<tbody>
 													
 						</tbody>
+						<tfoot>
+					        <tr>
+					            <td colspan="10">
+					                <nav aria-label="Standard pagination example" style="float: right;">
+					                    <ul id="pagination3" class="pagination">
+					                    
+					                    </ul>
+					                </nav>
+					            </td>
+					        </tr>
+					    </tfoot>
 						</table>
 				</div>
 			<div class="supportPage hidden" id="supportList">
@@ -280,6 +291,17 @@
 						<tbody>
 			
 						</tbody>
+						<tfoot>
+					        <tr>
+					            <td colspan="10">
+					                <nav aria-label="Standard pagination example" style="float: right;">
+					                    <ul id="pagination4" class="pagination">
+					                    
+					                    </ul>
+					                </nav>
+					            </td>
+					        </tr>
+					    </tfoot>
 					</table>
 				</div>
 			<div class="regularSupportPage hidden" id="regularSupportList">
@@ -422,9 +444,6 @@
 
 
 
-
-
-
 			 
 			  document.getElementById('user2').addEventListener('click', function(){
 				 document.getElementById('userUpdate').classList.toggle('hidden');
@@ -434,78 +453,120 @@
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
 				 
-				 $.ajax({
-						url: '${contextPath}/adminMemberList.me',
-						success: data =>{
-							document.getElementById('memberUpdate').classList.remove('hidden');
-							const memberUpdate = document.getElementById('memberUpdate');
-							const tbody = memberUpdate.querySelector('tbody');
-							tbody.innerHTML = '';
-							
-							for(const m of data.member){
-								const tr = document.createElement('tr');
-								
-								const noTd = document.createElement('td');
-								noTd.innerText = m.memberNo;
-								const nameTd = createInputTd('memberName', m.memberName);
-								const nickTd = createInputTd('nickName', m.nickName);
-								const emailTd = createInputTd('email', m.email);
-								const phoneTd = createInputTd('phone', m.phone);
-								const addressTd = createInputTd('address', m.address);
-								
-								const statusTd = document.createElement('td');
-					            const statusButton = document.createElement('button');
-					            statusButton.innerText = m.status === 'Y' ? 'Y' : 'N';
-					            statusButton.addEventListener('click', function() {
-					                toggleStatus(m.status, m.memberNo, statusButton);
-					            });
-					            statusTd.appendChild(statusButton);
-								
-					            const adminTd = document.createElement('td');
-					            const adminButton = document.createElement('button');
-					            adminButton.innerText = m.isAdmin === 'Y' ? 'Y' : 'N';
-					            adminButton.addEventListener('click', function() {
-					                toggleAdmin(m.isAdmin, m.memberNo, adminButton);
-					            });
-					            adminTd.appendChild(adminButton);
-								
-					            const nameInput = nameTd.querySelector('input');
-					            const nickInput = nickTd.querySelector('input');
-					            const emailInput = emailTd.querySelector('input'); 
-					            const addressInput = addressTd.querySelector('input');
-					            const phoneInput = phoneTd.querySelector('input'); 
-					            
-					            
-								const updateButtonTd = document.createElement('td');
-				                const updateButton = document.createElement('button');
-				                updateButton.innerText = '수정';
+				let currentPage = 1;
+			    let page = 1;
+			    const pageSize = 10;
 
-				                
-				                updateButton.addEventListener('click', function() {
-				                    updateMember(m.memberNo, nameInput.value, nickInput.value, emailInput.value, addressInput.value, phoneInput.value);
-				                });
+			    function loadPage3(page) {
 
-				                updateButtonTd.appendChild(updateButton);
-								
-								tr.append(noTd);
-								tr.append(nameTd);
-								tr.append(nickTd);
-								tr.append(emailTd);
-								tr.append(addressTd);
-								tr.append(phoneTd);
-								tr.append(statusTd);
-								tr.append(adminTd);
-								tr.append(updateButtonTd);
-								
-								tbody.append(tr);
-							}
-						},
-						error: data => console.log(data)
-						
-					})
+					
+			        const url = '${contextPath}/adminMemberList.me?page='+ page +'&size=' + pageSize;
+
+			        $.ajax({
+			            url: url,
+			            method: 'GET',
+			            success: function(data) {
+
+			                if (data && data.member) {
+			                    document.getElementById('memberUpdate').classList.remove('hidden');
+			                    const memberUpdate = document.getElementById('memberUpdate');
+			                    const tbody = memberUpdate.querySelector('tbody');
+			                    tbody.innerHTML = '';
+
+			                    data.member.forEach(m => {
 				 
-				 
-			 })
+									const tr = document.createElement('tr');
+									
+									const noTd = document.createElement('td');
+									noTd.innerText = m.memberNo;
+									const nameTd = createInputTd('memberName', m.memberName);
+									const nickTd = createInputTd('nickName', m.nickName);
+									const emailTd = createInputTd('email', m.email);
+									const phoneTd = createInputTd('phone', m.phone);
+									const addressTd = createInputTd('address', m.address);
+									
+									const statusTd = document.createElement('td');
+						            const statusButton = document.createElement('button');
+						            statusButton.innerText = m.status === 'Y' ? 'Y' : 'N';
+						            statusButton.addEventListener('click', function() {
+						                toggleStatus(m.status, m.memberNo, statusButton);
+						            });
+						            statusTd.appendChild(statusButton);
+									
+						            const adminTd = document.createElement('td');
+						            const adminButton = document.createElement('button');
+						            adminButton.innerText = m.isAdmin === 'Y' ? 'Y' : 'N';
+						            adminButton.addEventListener('click', function() {
+						                toggleAdmin(m.isAdmin, m.memberNo, adminButton);
+						            });
+						            adminTd.appendChild(adminButton);
+									
+						            const nameInput = nameTd.querySelector('input');
+						            const nickInput = nickTd.querySelector('input');
+						            const emailInput = emailTd.querySelector('input'); 
+						            const addressInput = addressTd.querySelector('input');
+						            const phoneInput = phoneTd.querySelector('input'); 
+						            
+						            
+									const updateButtonTd = document.createElement('td');
+					                const updateButton = document.createElement('button');
+					                updateButton.innerText = '수정';
+	
+					                
+					                updateButton.addEventListener('click', function() {
+					                    updateMember(m.memberNo, nameInput.value, nickInput.value, emailInput.value, addressInput.value, phoneInput.value);
+					                });
+
+					                updateButtonTd.appendChild(updateButton);
+									
+									tr.append(noTd);
+									tr.append(nameTd);
+									tr.append(nickTd);
+									tr.append(emailTd);
+									tr.append(addressTd);
+									tr.append(phoneTd);
+									tr.append(statusTd);
+									tr.append(adminTd);
+									tr.append(updateButtonTd);
+									
+									tbody.append(tr);
+								});
+			                    
+				                    const pagination = document.getElementById('pagination2');
+				                    pagination.innerHTML = '';
+	
+				                    if (data.maxPage > 1) {
+				                        for (let i = 1; i <= data.maxPage; i++) {
+				                            const pageLink = document.createElement('a');
+				                            pageLink.classList.add('page-link');
+				                            pageLink.href = '#';
+				                            pageLink.innerText = i;
+				                            pageLink.addEventListener('click', function(event) {
+				                                event.preventDefault();
+				                                loadPage3(i);
+				                            });
+	
+				                            if (i === currentPage) {
+				                                pageLink.classList.add('active');
+				                            } else {
+				                                pageLink.classList.remove('active');
+				                            }
+	
+				                            pagination.append(pageLink);
+				                        }
+				                    }
+				                } else {
+				                    console.error(data);
+				                }
+				            },
+				            error: function(error) {
+				                console.error(error);
+				            }
+				        });
+				    }
+	
+				    loadPage3(currentPage); 
+				});
 			 
 			 function createInputTd(className, value) {
 			    const td = document.createElement('td');
@@ -527,39 +588,49 @@
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
 				 
-				 $.ajax({
-						url: '${contextPath}/adminStatusMember.me',
-						success: data =>{
-							document.getElementById('memberDelete').classList.remove('hidden');
-							const memberDelete = document.getElementById('memberDelete');
-							const tbody = memberDelete.querySelector('tbody');
-							tbody.innerHTML = '';
-							
-							for(const m of data){
-								const tr = document.createElement('tr');
-								
-								const noTd = document.createElement('td');
-								noTd.innerText = m.memberNo;
-								const nameTd = document.createElement('td');
-								nameTd.innerText = m.memberName;
-								const nickTd = document.createElement('td');
-								nickTd.innerText = m.nickName;
-								const emailTd = document.createElement('td');
-								emailTd.innerText = m.email;
-								const phoneTd = document.createElement('td');
-								phoneTd.innerText = m.phone;
-								const ageTd = document.createElement('td');
-								ageTd.innerText = m.age;
-								const createDateTd = document.createElement('td');
-								createDateTd.innerText = m.createDate;
-								
-								const deleteButtonTd = document.createElement('td');
-				                const deleteButton = document.createElement('button');
-				                deleteButton.innerText = '탈퇴';
+				 let currentPage = 1;
+				 let page = 1;
+				 const pageSize = 10;
 
-				                deleteButton.addEventListener('click', function() {
-				                    deleteMember(m.memberNo);
-				                });
+	      	     function loadPage2(page) {
+				        const url = '${contextPath}/adminMemberList.me?page='+ page +'&size=' + pageSize;
+
+				        $.ajax({
+				            url: url,
+				            method: 'GET',
+				            success: function(data) {
+
+				                if (data && data.member) {
+				                    document.getElementById('memberDelete').classList.remove('hidden');
+				                    const memberDelete = document.getElementById('memberDelete');
+				                    const tbody = memberDelete.querySelector('tbody');
+				                    tbody.innerHTML = '';
+
+				                    data.member.forEach(m => {
+										const tr = document.createElement('tr');
+										
+										const noTd = document.createElement('td');
+										noTd.innerText = m.memberNo;
+										const nameTd = document.createElement('td');
+										nameTd.innerText = m.memberName;
+										const nickTd = document.createElement('td');
+										nickTd.innerText = m.nickName;
+										const emailTd = document.createElement('td');
+										emailTd.innerText = m.email;
+										const phoneTd = document.createElement('td');
+										phoneTd.innerText = m.phone;
+										const ageTd = document.createElement('td');
+										ageTd.innerText = m.age;
+										const createDateTd = document.createElement('td');
+										createDateTd.innerText = m.createDate;
+										
+										const deleteButtonTd = document.createElement('td');
+						                const deleteButton = document.createElement('button');
+						                deleteButton.innerText = '탈퇴';
+		
+						                deleteButton.addEventListener('click', function() {
+						                    deleteMember(m.memberNo);
+						                });
 
 				                deleteButtonTd.appendChild(deleteButton);
 								
@@ -573,14 +644,44 @@
 								tr.append(deleteButtonTd);
 								
 								
-								tbody.appendChild(tr);
-							}
-						},
-						error: data => console.log(data)
-						
-					})
-				 
-			 })
+								tbody.append(tr);
+									});
+				                    
+					                    const pagination = document.getElementById('pagination3');
+					                    pagination.innerHTML = '';
+		
+					                    if (data.maxPage > 1) {
+					                        for (let i = 1; i <= data.maxPage; i++) {
+					                            const pageLink = document.createElement('a');
+					                            pageLink.classList.add('page-link');
+					                            pageLink.href = '#';
+					                            pageLink.innerText = i;
+					                            pageLink.addEventListener('click', function(event) {
+					                                event.preventDefault();
+					                                loadPage2(i);
+					                            });
+		
+					                            if (i === currentPage) {
+					                                pageLink.classList.add('active');
+					                            } else {
+					                                pageLink.classList.remove('active');
+					                            }
+		
+					                            pagination.append(pageLink);
+					                        }
+					                    }
+					                } else {
+					                    console.error(data);
+					                }
+					            },
+					            error: function(error) {
+					                console.error(error);
+					            }
+					        });
+					    }
+		
+					    loadPage2(currentPage); 
+					});
 			
 			 document.getElementById('support1').addEventListener('click', function(){
 				 document.getElementById('supportList').classList.toggle('hidden');

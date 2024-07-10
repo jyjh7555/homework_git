@@ -321,14 +321,25 @@ public class MemberController {
 	
 	@RequestMapping("adminStatusMember.me")
 	@ResponseBody
-	public void adminStatusMember(HttpServletResponse response,
-							   Model model) {
-		ArrayList<Member> list = mService.adminStatusMember();
+	public void adminStatusMember(@RequestParam(value="page", defaultValue = "1") int page,
+								  @RequestParam(value="size", defaultValue = "10") int size,
+							      HttpServletResponse response,
+							      Model model) {
+		int listCount = mService.getListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
+		
+		ArrayList<Member> list = mService.adminStatusMember(pi);
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson = gb.create();
 		response.setContentType("application/json; charset=UTF-8");
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+	    result.put("member", list);
+	    result.put("maxPage", pi.getMaxPage()); 
+	    
 		try {
-			gson.toJson(list, response.getWriter());
+			gson.toJson(result, response.getWriter());
 		} catch (JsonIOException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

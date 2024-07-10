@@ -96,8 +96,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public ArrayList<Member> adminStatusMember() {
-		return mDAO.adminStatusMember(sqlSession);
+	public ArrayList<Member> adminStatusMember(PageInfo pi) {
+		return mDAO.adminStatusMember(sqlSession, pi);
 	}
 
 	@Override
