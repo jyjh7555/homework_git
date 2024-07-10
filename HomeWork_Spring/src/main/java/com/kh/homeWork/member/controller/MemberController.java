@@ -252,7 +252,6 @@ public class MemberController {
 		map.put("type", type);
 		map.put("text", text);
 		ArrayList<Member> searchList = mService.searchMember(map);
-		System.out.println(searchList);
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson = gb.create();
 		response.setContentType("application/json; charset=UTF-8");

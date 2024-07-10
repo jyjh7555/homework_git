@@ -140,9 +140,12 @@
 				</ul>
 			<div class=mainCate>게시판관리</div>
 				<ul class="hidden" style="list-style-type:none; text-align:left;">
-					<li>국내게시판</li>
-					<li>해외게시판</li>
-					
+					<li id="board1">국내게시판</a></li>
+					<li id="board2">해외게시판</li>
+				</ul>
+			<div class=mainCate>봉사신청관리</div>
+				<ul class="hidden" style="list-style-type:none; text-align:left;">
+					<li id="vollunteer1">봉사신청자</li>
 				</ul>
 			
 		</div>
@@ -155,7 +158,7 @@
 					<option value="member_name">회원이름</option> 
 					<option value="nickName">닉네임</option> 
 				</select>
-				<input type="text" placeholder="검색정보 입력" style="width:35%" id="searchText">
+				<input type="text" placeholder="회원정보 입력" style="width:35%" id="searchText">
 				<button type="button" onclick="searchMember()")>검색</button><br>
 			</form>
 			</div>
@@ -178,6 +181,7 @@
 						<tbody>
 						
 						</tbody>
+						
 					</table>
 					</div>
 					
@@ -203,7 +207,7 @@
 								<tfoot>
 							        <tr>
 							            <td colspan="10">
-							                <nav aria-label="Standard pagination example" style="float: right;">
+							                <nav aria-label="Standard pagination example" style="float: center;">
 							                    <ul id="pagination1" class="pagination">
 							                    
 							                    </ul>
@@ -234,7 +238,7 @@
 								<tfoot>
 							        <tr>
 							            <td colspan="10">
-							                <nav aria-label="Standard pagination example" style="float: right;">
+							                <nav aria-label="Standard pagination example" style="float: center;">
 							                    <ul id="pagination2" class="pagination">
 							                    
 							                    </ul>
@@ -264,7 +268,7 @@
 						<tfoot>
 					        <tr>
 					            <td colspan="10">
-					                <nav aria-label="Standard pagination example" style="float: right;">
+					                <nav aria-label="Standard pagination example" style="float: center;">
 					                    <ul id="pagination3" class="pagination">
 					                    
 					                    </ul>
@@ -294,7 +298,7 @@
 						<tfoot>
 					        <tr>
 					            <td colspan="10">
-					                <nav aria-label="Standard pagination example" style="float: right;">
+					                <nav aria-label="Standard pagination example" style="float: center;">
 					                    <ul id="pagination4" class="pagination">
 					                    
 					                    </ul>
@@ -328,6 +332,16 @@
 						</tr>
 					</table>
 				</div>
+				<div class="domesticBoardPage hidden" id="domesticBoardList">
+					<table id="domesticBoardTable">
+						<jsp:include page="../board/adminBoard.jsp" />
+					</table>
+				</div>
+				
+				<div class="globalBoardPage hidden" id="globalBoardList">
+					<table id="globalBoardTable">
+					</table>
+				</div>
 			</div>
 		</div>
 	</div>
@@ -347,6 +361,10 @@
 	                this.nextElementSibling.classList.toggle('hidden');
 	                
 	            });
+			 mainCate[3].addEventListener('click', function() {
+	                this.nextElementSibling.classList.toggle('hidden');
+	                
+	            });
 			
 			 
 			 
@@ -357,9 +375,10 @@
 				    document.getElementById('supportList').classList.add('hidden');
 				    document.getElementById('regularSupportList').classList.add('hidden');
 				    document.getElementById('searchResult').classList.add('hidden');
+				    document.getElementById('domesticBoardList').classList.add('hidden');
+				    document.getElementById('globalBoardList').classList.add('hidden');
 
 				    let currentPage = 1;
-				    let page = 1;
 				    const pageSize = 10;
 
 				    function loadPage1(page) {
@@ -452,6 +471,8 @@
 				 document.getElementById('supportList').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
+				 document.getElementById('domesticBoardList').classList.add('hidden');
+				 document.getElementById('globalBoardList').classList.add('hidden');
 				 
 				let currentPage = 1;
 			    let page = 1;
@@ -587,6 +608,8 @@
 				 document.getElementById('supportList').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
+				 document.getElementById('domesticBoardList').classList.add('hidden');
+				 document.getElementById('globalBoardList').classList.add('hidden');
 				 
 				 let currentPage = 1;
 				 let page = 1;
@@ -690,6 +713,8 @@
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
+				 document.getElementById('domesticBoardList').classList.add('hidden');
+				 document.getElementById('globalBoardList').classList.add('hidden');
 					let currentPage = 1;
 				    let page = 1;
 				    const pageSize = 10;
@@ -787,9 +812,34 @@
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
+				 document.getElementById('domesticBoardList').classList.add('hidden');
+				 document.getElementById('globalBoardList').classList.add('hidden');
+				 
+			 })
+			 
+			 document.getElementById('board1').addEventListener('click', function(){
+				 document.getElementById('domesticBoardList').classList.toggle('hidden');
+				 document.getElementById('userInfo').classList.add('hidden');
+				 document.getElementById('userUpdate').classList.add('hidden');
+				 document.getElementById('userDelete').classList.add('hidden');
+				 document.getElementById('supportList').classList.add('hidden');
+				 document.getElementById('searchResult').classList.add('hidden');
+				 document.getElementById('regularSupportList').classList.add('hidden');
+				 document.getElementById('globalBoardList').classList.add('hidden');	
 				 
 			 })
 			
+			  document.getElementById('board2').addEventListener('click', function(){
+				 document.getElementById('globalBoardList').classList.toggle('hidden');
+				 document.getElementById('userInfo').classList.add('hidden');
+				 document.getElementById('userUpdate').classList.add('hidden');
+				 document.getElementById('userDelete').classList.add('hidden');
+				 document.getElementById('supportList').classList.add('hidden');
+				 document.getElementById('searchResult').classList.add('hidden');
+				 document.getElementById('regularSupportList').classList.add('hidden');
+				 document.getElementById('domesticBoardList').classList.add('hidden');
+				
+			 })
 			 
 		}
 		
