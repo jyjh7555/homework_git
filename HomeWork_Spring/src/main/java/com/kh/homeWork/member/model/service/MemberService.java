@@ -42,8 +42,6 @@ public interface MemberService{
 
 	ArrayList<Member> adminStatusMember(PageInfo pi);
 
-	ArrayList<Pay> adminPayList();
-
 	int getListCount();
 
 

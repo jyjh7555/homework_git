@@ -323,8 +323,8 @@ public class MemberController {
 	@ResponseBody
 	public void adminStatusMember(@RequestParam(value="page", defaultValue = "1") int page,
 								  @RequestParam(value="size", defaultValue = "10") int size,
-							      HttpServletResponse response,
-							      Model model) {
+							      HttpServletResponse response
+							      ) {
 		int listCount = mService.getListCount();
 		
 		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
@@ -340,23 +340,6 @@ public class MemberController {
 	    
 		try {
 			gson.toJson(result, response.getWriter());
-		} catch (JsonIOException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
-	
-	@RequestMapping("adminPayList.me")
-	@ResponseBody
-	public void adminPayList(HttpServletResponse response,
-							   Model model) {
-		ArrayList<Pay> payList = mService.adminPayList();
-		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
-		Gson gson = gb.create();
-		response.setContentType("application/json; charset=UTF-8");
-		try {
-			gson.toJson(payList, response.getWriter());
 		} catch (JsonIOException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

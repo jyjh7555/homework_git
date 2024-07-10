@@ -1,5 +1,10 @@
 package com.kh.homeWork.surpport.controller;
 
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.HashMap;
+
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +13,13 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
+import com.kh.homeWork.board.model.vo.PageInfo;
+import com.kh.homeWork.common.Pagination;
 import com.kh.homeWork.member.model.vo.Member;
 import com.kh.homeWork.surpport.model.service.PayService;
 import com.kh.homeWork.surpport.model.vo.Pay;
@@ -66,6 +77,36 @@ public class surpportController {
 		}
 		
 		return "terms";
+	}
+	
+	@RequestMapping("adminPayList.su")
+	@ResponseBody
+	public void adminPayList(@RequestParam(value="page", defaultValue="1") int page,
+						     @RequestParam(value="page", defaultValue="10") int size,
+							  HttpServletResponse response
+							   ) {
+		int listCount = pService.getListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
+		
+		ArrayList<Pay> payList = pService.adminPayList(pi);
+		
+		
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+	    result.put("pay", payList);
+	    result.put("maxPage", pi.getMaxPage()); 
+	    
+		try {
+			gson.toJson(result, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 }

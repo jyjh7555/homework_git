@@ -146,12 +146,6 @@
 		order by member_no
 	</select>
 	
-	<select id="adminPayList" resultType="Pay">
-		select *
-		from pay
-		order by pay_no
-	</select>
-	
 	<select id="getListCount" resultType="_int">
 		select count(*)
 		from member

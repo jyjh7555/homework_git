@@ -171,7 +171,7 @@
 								<th width="10%">이메일</th>
 								<th width="10%">휴대폰번호</th>
 								<th width="12%">주소</th>
-								<th width="10%">생년월일</th>
+								<th width="10%">나이</th>
 								<th width="12%">가입날짜</th>
 							</tr>
 						</thead>
@@ -190,8 +190,8 @@
 									<th width="10%">닉네임</th>
 									<th width="10%">이메일</th>
 									<th width="10%">휴대폰번호</th>
-									<th width="10%">생년월일</th>
-									<th width="12%">주소</th>
+									<th width="14%">주소</th>
+									<th width="10%">나이</th>
 									<th width="12%">가입날짜</th>
 									<th width="6%">활동</th>
 									<th width="6%">관리자</th>
@@ -221,10 +221,10 @@
 										<th width="6%">이름</th>
 										<th width="10%">닉네임</th>
 										<th width="12%">이메일</th>
-										<th width="12%">주소</th>
+										<th width="14%">주소</th>
 										<th width="10%">휴대폰번호</th>
-										<th width="8%">활동</th>
-										<th width="8%">관리자</th>
+										<th width="7%">활동</th>
+										<th width="7%">관리자</th>
 										<th width="8%">정보변경</th>
 									</tr>
 								</thead>
@@ -690,16 +690,27 @@
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
-				 
-				 $.ajax({
-						url: '${contextPath}/adminPayList.me',
-						success: data =>{
-							document.getElementById('supportList').classList.remove('hidden');
-							const supportList = document.getElementById('supportList');
-							const tbody = supportList.querySelector('tbody');
-							tbody.innerHTML = '';
-							
-							for(const p of data){
+					let currentPage = 1;
+				    let page = 1;
+				    const pageSize = 10;
+
+				    function loadPage4(page) {
+
+						
+				        const url = '${contextPath}/adminPayList.su?page='+ page +'&size=' + pageSize;
+
+				        $.ajax({
+				            url: url,
+				            method: 'GET',
+				            success: function(data) {
+
+				                if (data && data.pay) {
+				                    document.getElementById('supportList').classList.remove('hidden');
+				                    const supportList = document.getElementById('supportList');
+				                    const tbody = supportList.querySelector('tbody');
+				                    tbody.innerHTML = '';
+
+				                    data.pay.forEach(p => {
 								const tr = document.createElement('tr');
 								
 								const pNoTd = document.createElement('td');
@@ -730,14 +741,44 @@
 								tr.append(amountTd);
 								
 								
-								tbody.append(tr);
-							}
-						},
-						error: data => console.log(data)
-						
-					})
-				 
-			 })
+								 tbody.append(tr);
+				                    });
+
+				                    const pagination = document.getElementById('pagination4');
+				                    pagination.innerHTML = '';
+
+				                    if (data.maxPage >=1) {
+				                        for (let i = 1; i <= data.maxPage; i++) {
+				                            const pageLink = document.createElement('a');
+				                            pageLink.classList.add('page-link');
+				                            pageLink.href = '#';
+				                            pageLink.innerText = i;
+				                            pageLink.addEventListener('click', function(event) {
+				                                event.preventDefault();
+				                                loadPage4(i);
+				                            });
+
+				                            if (i === currentPage) {
+				                                pageLink.classList.add('active');
+				                            } else {
+				                                pageLink.classList.remove('active');
+				                            }
+
+				                            pagination.append(pageLink);
+				                        }
+				                    }
+				                } else {
+				                    console.error(data);
+				                }
+				            },
+				            error: function(error) {
+				                console.error(error);
+				            }
+				        });
+				    }
+
+				    loadPage4(currentPage); 
+				});
 			 
 			 document.getElementById('support2').addEventListener('click', function(){
 				 document.getElementById('regularSupportList').classList.toggle('hidden');

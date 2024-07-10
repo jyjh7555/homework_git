@@ -65,6 +65,8 @@ public class MemberDAO {
 	}
 
 	public ArrayList<Pay> selectPay(SqlSessionTemplate sqlSession) {
+		
+		
 		return (ArrayList)sqlSession.selectList("memberMapper.selectPay");
 	}
 
@@ -82,9 +84,6 @@ public class MemberDAO {
 		return (ArrayList)sqlSession.selectList("memberMapper.adminStatusMember", null, rowBounds);
 	}
 
-	public ArrayList<Pay> adminPayList(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("memberMapper.adminPayList");
-	}
 
 	public int getListCount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("memberMapper.getListCount");

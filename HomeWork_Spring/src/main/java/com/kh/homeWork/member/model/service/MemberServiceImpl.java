@@ -100,10 +100,6 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.adminStatusMember(sqlSession, pi);
 	}
 
-	@Override
-	public ArrayList<Pay> adminPayList() {
-		return mDAO.adminPayList(sqlSession);
-	}
 
 	@Override
 	public int getListCount() {
