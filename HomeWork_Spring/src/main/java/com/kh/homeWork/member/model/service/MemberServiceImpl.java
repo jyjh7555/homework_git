@@ -8,6 +8,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.homeWork.board.model.vo.PageInfo;
 import com.kh.homeWork.member.model.dao.MemberDAO;
 import com.kh.homeWork.member.model.vo.Member;
 import com.kh.homeWork.surpport.model.vo.Pay;
@@ -90,8 +91,8 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-	public ArrayList<Member> adminMemberList() {
-		return mDAO.adminMemberList(sqlSession);
+	public ArrayList<Member> adminMemberList(PageInfo pi) {
+		return mDAO.adminMemberList(sqlSession, pi);
 	}
 
 	@Override
@@ -102,6 +103,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public ArrayList<Pay> adminPayList() {
 		return mDAO.adminPayList(sqlSession);
+	}
+
+	@Override
+	public int getListCount() {
+		return mDAO.getListCount(sqlSession);
 	}
 
 	

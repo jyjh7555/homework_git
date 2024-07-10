@@ -151,4 +151,9 @@
 		from pay
 		order by pay_no
 	</select>
+	
+	<select id="getListCount" resultType="_int">
+		select count(*)
+		from member
+	</select>
 </mapper>

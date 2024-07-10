@@ -22,6 +22,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.kh.homeWork.board.model.vo.PageInfo;
+import com.kh.homeWork.common.Pagination;
 import com.kh.homeWork.member.model.service.MemberService;
 import com.kh.homeWork.member.model.vo.Member;
 import com.kh.homeWork.surpport.model.vo.Pay;
@@ -291,14 +293,25 @@ public class MemberController {
 
 	@RequestMapping("adminMemberList.me")
 	@ResponseBody
-	public void adminMemberList(HttpServletResponse response,
-							   Model model) {
-		ArrayList<Member> list = mService.adminMemberList();
+	public void adminMemberList(@RequestParam(value="page", defaultValue = "1") int page,
+								@RequestParam(value="size", defaultValue = "10") int size,
+								HttpServletResponse response
+							    ) {
+	    
+		int listCount = mService.getListCount();
+		
+		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
+		
+		ArrayList<Member> list = mService.adminMemberList(pi);
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson = gb.create();
 		response.setContentType("application/json; charset=UTF-8");
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+	    result.put("member", list);
+	    result.put("maxPage", pi.getMaxPage()); 
 		try {
-			gson.toJson(list, response.getWriter());
+			gson.toJson(result, response.getWriter());
 		} catch (JsonIOException e) {
 			e.printStackTrace();
 		} catch (IOException e) {

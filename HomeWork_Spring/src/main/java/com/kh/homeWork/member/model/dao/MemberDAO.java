@@ -3,9 +3,11 @@ package com.kh.homeWork.member.model.dao;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.homeWork.board.model.vo.PageInfo;
 import com.kh.homeWork.member.model.vo.Member;
 import com.kh.homeWork.surpport.model.vo.Pay;
 
@@ -66,8 +68,11 @@ public class MemberDAO {
 		return (ArrayList)sqlSession.selectList("memberMapper.selectPay");
 	}
 
-	public ArrayList<Member> adminMemberList(SqlSessionTemplate sqlSession) {
-		return (ArrayList)sqlSession.selectList("memberMapper.adminMemberList");
+	public ArrayList<Member> adminMemberList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1)*pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("memberMapper.adminMemberList", null, rowBounds);
 	}
 
 	public ArrayList<Member> adminStatusMember(SqlSessionTemplate sqlSession) {
@@ -76,6 +81,10 @@ public class MemberDAO {
 
 	public ArrayList<Pay> adminPayList(SqlSessionTemplate sqlSession) {
 		return (ArrayList)sqlSession.selectList("memberMapper.adminPayList");
+	}
+
+	public int getListCount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("memberMapper.getListCount");
 	}
 
 

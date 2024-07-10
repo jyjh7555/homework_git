@@ -3,6 +3,7 @@ package com.kh.homeWork.member.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.homeWork.board.model.vo.PageInfo;
 import com.kh.homeWork.member.model.vo.Member;
 import com.kh.homeWork.surpport.model.vo.Pay;
 
@@ -37,11 +38,13 @@ public interface MemberService{
 
 	ArrayList<Pay> SelectPay();
 
-	ArrayList<Member> adminMemberList();
+	ArrayList<Member> adminMemberList(PageInfo pi);
 
 	ArrayList<Member> adminStatusMember();
 
 	ArrayList<Pay> adminPayList();
+
+	int getListCount();
 
 
 

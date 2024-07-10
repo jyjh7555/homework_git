@@ -7,6 +7,8 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 <style>
  .logo {
        display: flex;
@@ -46,11 +48,11 @@
 	.hidden{display:none;}
 	.cate{background:white; font-weight:none; font-size:14px; text-align:left ; list-style-type:none; }
 	#selectDiv{display:inline-block;  width:75%; padding:1px;margin-left: 10px;}
-	#adminContent{height:94%; width:99%; border:1px solid black; margin-top:8px;}
+	#adminContent{height:95%; width:100%; border:1px solid black; margin-top:8px;}
 	
 	
 	
-	.userInfo, .userUpdate, .userDelete, .supportPage, .regularSupportPage {
+	.userInfo, .userUpdate, .userDelete, .supportPage, .regularSupportPage, .searchResult {
             
             padding: 20px;
             border: 1px solid #ddd;
@@ -146,7 +148,7 @@
 		</div>
 				
 		<div id=selectDiv>
-			<div style="border:2px solid #CCCCCC; height:30px">
+			<div style="border:2px solid #CCCCCC; height:40px">
 			<form id="searchForm">
    				 <select id="searchType">
 					<option value="member_No">회원번호</option>
@@ -198,7 +200,17 @@
 							<tbody>
 							
 							</tbody>
-								
+								<tfoot>
+							        <tr>
+							            <td colspan="10">
+							                <nav aria-label="Standard pagination example" style="float: right;">
+							                    <ul id="pagination1" class="pagination">
+							                    
+							                    </ul>
+							                </nav>
+							            </td>
+							        </tr>
+							    </tfoot>
 							</table>
 					</div>
 					<div class="userUpdate hidden" id="userUpdate">
@@ -219,6 +231,17 @@
 								<tbody>
 								
 								</tbody>
+								<tfoot>
+							        <tr>
+							            <td colspan="10">
+							                <nav aria-label="Standard pagination example" style="float: right;">
+							                    <ul id="pagination2" class="pagination">
+							                    
+							                    </ul>
+							                </nav>
+							            </td>
+							        </tr>
+							    </tfoot>
 							</table>
 					</div>
 				<div class="userDelete hidden" id="userDelete">
@@ -237,7 +260,6 @@
 						</thead>
 						<tbody>
 													
-							<td><button id="deleteUserButton" onclick="deleteMember(${ m.memberNo })">회원탈퇴</button></td>
 						</tbody>
 						</table>
 				</div>
@@ -306,66 +328,103 @@
 			
 			 
 			 
-			 document.getElementById('user1').addEventListener('click', function(){
-				 document.getElementById('userInfo').classList.toggle('hidden');
-				 document.getElementById('userUpdate').classList.add('hidden');
-				 document.getElementById('userDelete').classList.add('hidden');
-				 document.getElementById('supportList').classList.add('hidden');
-				 document.getElementById('regularSupportList').classList.add('hidden');
-				 document.getElementById('searchResult').classList.add('hidden');
-				 
-				 $.ajax({
-						url: '${contextPath}/adminMemberList.me',
-						success: data =>{
-							document.getElementById('memberList').classList.remove('hidden');
-							const memberList = document.getElementById('memberList');
-							const tbody = memberList.querySelector('tbody');
-							tbody.innerHTML = '';
-							
-							for(const m of data){
-								const tr = document.createElement('tr');
-								
-								const noTd = document.createElement('td');
-								noTd.innerText = m.memberNo;
-								const nameTd = document.createElement('td');
-								nameTd.innerText = m.memberName;
-								const nickTd = document.createElement('td');
-								nickTd.innerText = m.nickName;
-								const emailTd = document.createElement('td');
-								emailTd.innerText = m.email;
-								const phoneTd = document.createElement('td');
-								phoneTd.innerText = m.phone;
-								const addressTd = document.createElement('td');
-								addressTd.innerText = m.address;
-								const ageTd = document.createElement('td');
-								ageTd.innerText = m.age;
-								const createDateTd = document.createElement('td');
-								createDateTd.innerText = m.createDate;
-								const statusTd = document.createElement('td');
-								statusTd.innerText = m.status;
-								const adminTd = document.createElement('td');
-								adminTd.innerText = m.isAdmin;
-								
-								tr.append(noTd);
-								tr.append(nameTd);
-								tr.append(nickTd);
-								tr.append(emailTd);
-								tr.append(phoneTd);
-								tr.append(ageTd);
-								tr.append(addressTd);
-								tr.append(createDateTd);
-								tr.append(statusTd);
-								tr.append(adminTd);
-								
-								
-								tbody.append(tr);
-							}
-						},
-						error: data => console.log(data)
+			 document.getElementById('user1').addEventListener('click', function() {
+				    document.getElementById('userInfo').classList.toggle('hidden');
+				    document.getElementById('userUpdate').classList.add('hidden');
+				    document.getElementById('userDelete').classList.add('hidden');
+				    document.getElementById('supportList').classList.add('hidden');
+				    document.getElementById('regularSupportList').classList.add('hidden');
+				    document.getElementById('searchResult').classList.add('hidden');
+
+				    let currentPage = 1;
+				    let page = 1;
+				    const pageSize = 10;
+
+				    function loadPage1(page) {
+
 						
-					})
-				 
-			 })
+				        const url = '${contextPath}/adminMemberList.me?page='+ page +'&size=' + pageSize;
+
+				        $.ajax({
+				            url: url,
+				            method: 'GET',
+				            success: function(data) {
+
+				                if (data && data.member) {
+				                    document.getElementById('memberList').classList.remove('hidden');
+				                    const memberList = document.getElementById('memberList');
+				                    const tbody = memberList.querySelector('tbody');
+				                    tbody.innerHTML = '';
+
+				                    data.member.forEach(m => {
+				                        const tr = document.createElement('tr');
+
+				                        const noTd = document.createElement('td');
+				                        noTd.innerText = m.memberNo;
+				                        const nameTd = document.createElement('td');
+				                        nameTd.innerText = m.memberName;
+				                        const nickTd = document.createElement('td');
+				                        nickTd.innerText = m.nickName;
+				                        const emailTd = document.createElement('td');
+				                        emailTd.innerText = m.email;
+				                        const phoneTd = document.createElement('td');
+				                        phoneTd.innerText = m.phone;
+				                        const addressTd = document.createElement('td');
+				                        addressTd.innerText = m.address;
+				                        const ageTd = document.createElement('td');
+				                        ageTd.innerText = m.age;
+				                        const createDateTd = document.createElement('td');
+				                        createDateTd.innerText = m.createDate;
+				                        const statusTd = document.createElement('td');
+				                        statusTd.innerText = m.status;
+				                        const adminTd = document.createElement('td');
+				                        adminTd.innerText = m.isAdmin;
+
+				                        tr.append(noTd, nameTd, nickTd, emailTd, phoneTd, addressTd, ageTd, createDateTd, statusTd, adminTd);
+				                        tbody.append(tr);
+				                    });
+
+				                    const pagination = document.getElementById('pagination1');
+				                    pagination.innerHTML = '';
+
+				                    if (data.maxPage > 1) {
+				                        for (let i = 1; i <= data.maxPage; i++) {
+				                            const pageLink = document.createElement('a');
+				                            pageLink.classList.add('page-link');
+				                            pageLink.href = '#';
+				                            pageLink.innerText = i;
+				                            pageLink.addEventListener('click', function(event) {
+				                                event.preventDefault();
+				                                loadPage1(i);
+				                            });
+
+				                            if (i === currentPage) {
+				                                pageLink.classList.add('active');
+				                            } else {
+				                                pageLink.classList.remove('active');
+				                            }
+
+				                            pagination.append(pageLink);
+				                        }
+				                    }
+				                } else {
+				                    console.error(data);
+				                }
+				            },
+				            error: function(error) {
+				                console.error(error);
+				            }
+				        });
+				    }
+
+				    loadPage1(currentPage); 
+				});
+
+
+
+
+
+
 			 
 			  document.getElementById('user2').addEventListener('click', function(){
 				 document.getElementById('userUpdate').classList.toggle('hidden');
@@ -383,7 +442,7 @@
 							const tbody = memberUpdate.querySelector('tbody');
 							tbody.innerHTML = '';
 							
-							for(const m of data){
+							for(const m of data.member){
 								const tr = document.createElement('tr');
 								
 								const noTd = document.createElement('td');
@@ -419,7 +478,7 @@
 					            
 								const updateButtonTd = document.createElement('td');
 				                const updateButton = document.createElement('button');
-				                updateButton.innerText = '정보수정';
+				                updateButton.innerText = '수정';
 
 				                
 				                updateButton.addEventListener('click', function() {
@@ -496,7 +555,7 @@
 								
 								const deleteButtonTd = document.createElement('td');
 				                const deleteButton = document.createElement('button');
-				                deleteButton.innerText = '회원탈퇴';
+				                deleteButton.innerText = '탈퇴';
 
 				                deleteButton.addEventListener('click', function() {
 				                    deleteMember(m.memberNo);
@@ -667,6 +726,7 @@
 				error: data => console.log(data)
 			})
 		}
+		
 		function selectMembers(){
 			 document.getElementById('userInfo').classList.add('hidden');
 			 document.getElementById('userUpdate').classList.add('hidden');
@@ -727,7 +787,6 @@
 				
 			})
 		}
-		
 	</script>
 </body>
 </html>
