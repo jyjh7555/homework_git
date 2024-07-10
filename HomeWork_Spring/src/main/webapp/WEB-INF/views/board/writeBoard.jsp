@@ -213,22 +213,22 @@
 				
 			}else{
 				recStartDate.style.border = '1px solid #ced4da';
+				const dateTypeStart = new Date(recStartDate.value);
+				const dateTypeEnd = new Date(recEndDate.value);
+				const sumDateSec = dateTypeStart.getTime() - dateTypeEnd.getTime();
+				const resultDate = sumDateSec / (24*60*60*1000);
+
+				if(isNaN(resultDate) || resultDate >0){
+					const year = recStartDate.value.substring(0,4);
+					const month = recStartDate.value.substring(5,7);
+					const day = recStartDate.value.substring(8,10);
+
+					recEndDate.value = year + '-' + month + '-' +day ;
+				}
 			}
 			
 
-			const dateTypeStart = new Date(recStartDate.value);
-			const dateTypeEnd = new Date(recEndDate.value);
-			const sumDateSec = dateTypeStart.getTime() - dateTypeEnd.getTime();
-			const resultDate = sumDateSec / (24*60*60*1000);
-
-			if(isNaN(resultDate) || resultDate >0){
-				const year = recStartDate.value.substring(0,4);
-				const month = recStartDate.value.substring(5,7);
-				const day = recStartDate.value.substring(8,10);
-
-				recEndDate.value = year + '-' + month + '-' +day ;
-				recEndDate.style.border = '1px solid #ced4da';
-			}
+			
 		});
 		recEndDate.addEventListener('change',function(){
 			if(recEndDate.value ==''){
@@ -236,21 +236,21 @@
 				
 			}else{
 				recEndDate.style.border = '1px solid #ced4da';
-			}
-			
-			
-			const dateTypeStart = new Date(recEndDate.value);
-			const dateTypeEnd = new Date(recStartDate.value);
-			const sumDateSec = dateTypeStart.getTime() - dateTypeEnd.getTime();
-			const resultDate = sumDateSec / (24*60*60*1000);
+				const dateTypeStart = new Date(recEndDate.value);
+				const dateTypeEnd = new Date(recStartDate.value);
+				const sumDateSec = dateTypeStart.getTime() - dateTypeEnd.getTime();
+				const resultDate = sumDateSec / (24*60*60*1000);
 
-			if(isNaN(resultDate) || resultDate <0){
-				const year = recEndDate.value.substring(0,4);
-				const month = recEndDate.value.substring(5,7);
-				const day = recEndDate.value.substring(8,10);
-				recStartDate.value = year + '-' + month + '-' +day ;
-				recStartDate.style.border = '1px solid #ced4da';
+				if(isNaN(resultDate) || resultDate <0){
+					const year = recEndDate.value.substring(0,4);
+					const month = recEndDate.value.substring(5,7);
+					const day = recEndDate.value.substring(8,10);
+					recStartDate.value = year + '-' + month + '-' +day ;
+				}
 			}
+			
+			
+			
 		});
 		
 		
@@ -264,22 +264,22 @@
 				
 			}else{
 				startDate.style.border = '1px solid #ced4da';
+				const dateTypeStart = new Date(startDate.value);
+				const dateTypeEnd = new Date(endDate.value);
+				const sumDateSec = dateTypeStart.getTime() - dateTypeEnd.getTime();
+				const resultDate = sumDateSec / (24*60*60*1000);
+
+				if(isNaN(resultDate) || resultDate >0){
+					const year = startDate.value.substring(0,4);
+					const month = startDate.value.substring(5,7);
+					const day = startDate.value.substring(8,10);
+
+					endDate.value = year + '-' + month + '-' +day ;
+				}
 			}
 			
 			
-			const dateTypeStart = new Date(startDate.value);
-			const dateTypeEnd = new Date(endDate.value);
-			const sumDateSec = dateTypeStart.getTime() - dateTypeEnd.getTime();
-			const resultDate = sumDateSec / (24*60*60*1000);
-
-			if(isNaN(resultDate) || resultDate >0){
-				const year = startDate.value.substring(0,4);
-				const month = startDate.value.substring(5,7);
-				const day = startDate.value.substring(8,10);
-
-				endDate.value = year + '-' + month + '-' +day ;
-				endDate.style.border = '1px solid #ced4da';
-			}
+			
 		});
 		endDate.addEventListener('change',function(){
 			
@@ -288,20 +288,20 @@
 				
 			}else{
 				endDate.style.border = '1px solid #ced4da';
+				const dateTypeStart = new Date(endDate.value);
+				const dateTypeEnd = new Date(startDate.value);
+				const sumDateSec = dateTypeStart.getTime() - dateTypeEnd.getTime();
+				const resultDate = sumDateSec / (24*60*60*1000);
+
+				if(isNaN(resultDate) || resultDate <0){
+					const year = endDate.value.substring(0,4);
+					const month = endDate.value.substring(5,7);
+					const day = endDate.value.substring(8,10);
+					startDate.value = year + '-' + month + '-' +day ;
+				}
 			}
 			
-			const dateTypeStart = new Date(endDate.value);
-			const dateTypeEnd = new Date(startDate.value);
-			const sumDateSec = dateTypeStart.getTime() - dateTypeEnd.getTime();
-			const resultDate = sumDateSec / (24*60*60*1000);
-
-			if(isNaN(resultDate) || resultDate <0){
-				const year = endDate.value.substring(0,4);
-				const month = endDate.value.substring(5,7);
-				const day = endDate.value.substring(8,10);
-				startDate.value = year + '-' + month + '-' +day ;
-				startDate.style.border = '1px solid #ced4da';
-			}
+			
 		});
 		
 		

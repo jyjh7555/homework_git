@@ -136,7 +136,7 @@
     		//포트원 api
     	
     		
-	    IMP.init("imp25707021");
+	    IMP.init("imp25707021");		//내가생성한 가짜 스토어번호임
     	
     	const now = new Date();
 		
