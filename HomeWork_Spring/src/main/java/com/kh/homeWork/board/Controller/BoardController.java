@@ -57,7 +57,7 @@ public class BoardController {
 			memberNo = loginUser.getMemberNo();
 		}
 		
-		Board b = bService.selectBoard(bId,memberNo);
+		Board b = bService.selectBoard(bId,memberNo);	//조회수 해결했는데?
 		VolunteerDetail v = bService.selectVolunteerDetail(bId);
 		model.addAttribute("b",b);
 		model.addAttribute("v",v);

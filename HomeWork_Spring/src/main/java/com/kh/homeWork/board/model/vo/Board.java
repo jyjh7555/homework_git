@@ -16,6 +16,7 @@ import lombok.ToString;
 public class Board {
 	private int boardNo;
 	private String locationNo;
+	private String location;
 	private String title;
 	private String content;
 	private String deleteYn;
