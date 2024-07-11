@@ -15,12 +15,5 @@ public class PayDAO {
 		return sqlSession.insert("payMapper.insertPay",pay);
 	}
 
-	public int getListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("payMapper.getListCount");
-	}
-
-	public ArrayList<Pay> adminPayList(SqlSessionTemplate sqlSession, PageInfo pi) {
-		return (ArrayList)sqlSession.selectList("payMapper.adminPayList");
-	}
 
 }

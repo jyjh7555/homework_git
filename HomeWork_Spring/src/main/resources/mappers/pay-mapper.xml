@@ -16,15 +16,5 @@
 		)
 	</insert>
 	
-	<select id="getListCount" resultType="_int">
-		select count(*)
-		from pay
-	</select>
-	
-	<select id="adminPayList" resultType="Pay">
-		select *
-		from pay
-		order by pay_no
-	</select>
 	
 </mapper>

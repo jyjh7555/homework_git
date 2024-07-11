@@ -66,10 +66,10 @@
             justify-content: flex-end;
         }
 </style>
-<title>게시판</title>
+<title>관리자게시판</title>
 </head>
 <body>
-<div class="logo">
+	<div class="logo">
        <div class="logo-container">
            <a href="${ contextPath }"><img id="logo-image" src="resources/image/newLogo.png" alt="로고"></a>
            <button type="button" class="btn btn-outline-primary btn-lg" onclick="goBack()">관리자 홈</button>
@@ -147,7 +147,7 @@
                 if (target.tagName.toLowerCase() === 'td') {
                     const tr = target.parentElement;
                     const boardId = tr.querySelector('td').innerText;
-                    location.href = "${contextPath}/adminSelectBoard.bo?bId=" + boardId + "&page=" + ${pi.currentPage}
+                    location.href = "${contextPath}/adminSelectBoard.ad?bId=" + boardId + "&page=" + ${pi.currentPage}
                 }
             });
         }

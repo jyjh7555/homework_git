@@ -334,7 +334,6 @@
 				</div>
 				<div class="domesticBoardPage hidden" id="domesticBoardList">
 					<table id="domesticBoardTable">
-						<jsp:include page="../board/adminBoard.jsp" />
 					</table>
 				</div>
 				
@@ -722,7 +721,7 @@
 				    function loadPage4(page) {
 
 						
-				        const url = '${contextPath}/adminPayList.su?page='+ page +'&size=' + pageSize;
+				        const url = '${contextPath}/adminPayList.ad?page='+ page +'&size=' + pageSize;
 
 				        $.ajax({
 				            url: url,
@@ -825,7 +824,7 @@
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');	
-				 location.href="adminDomesticList.bo";
+				 location.href="adminDomesticList.ad";
 				 
 			 })
 			

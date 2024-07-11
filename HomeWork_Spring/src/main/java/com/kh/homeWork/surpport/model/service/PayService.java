@@ -9,8 +9,5 @@ public interface PayService {
 
 	int insertPay(Pay pay);
 
-	int getListCount();
-
-	ArrayList<Pay> adminPayList(PageInfo pi);
 
 }

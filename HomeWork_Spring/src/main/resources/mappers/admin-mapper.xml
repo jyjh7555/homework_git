@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="adminMapper">
+	<select id="getListCountPay" resultType="_int">
+		select count(*)
+		from pay
+	</select>
+	
+	<select id="adminPayList" resultType="Pay">
+		select *
+		from pay
+		order by pay_no
+	</select>
+	
+ 	<select id="getListCount" resultType="_int">
+ 		select count(*)
+ 		from board
+ 		where delete_yn = 'N' and board_type = #{i}
+	</select>
+	
+ 	<select id="selectBoardList" resultType="Board">
+		select * 
+		from board
+	    join location using(location_no)
+		where delete_yn = 'N' and board_type = #{i}
+		order by board_no desc
+ 	</select>
+ 	
+ 	<select id="selectBoard" resultType="Board">
+ 		select *
+ 		from board
+ 		where delete_yn ='N' and board_No = #{bId}
+ 	</select>
+ 	
+ 	<update id="updateCount">
+ 		update board
+ 		set board_count = board_count + 1
+ 		where board_No = #{bId}
+ 	</update>
+ 	
+ 	<select id="adminBoardDetail" resultType="VolunteerDetail">
+ 		select *
+ 		from volunteer_detail
+ 		where member_no = #{bId}
+ 	</select>
+ 	
+</mapper>

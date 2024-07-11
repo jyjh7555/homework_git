@@ -26,15 +26,5 @@ public class PayServiceImpl implements PayService{
 	}
 
 
-	@Override
-	public int getListCount() {
-		return pDAO.getListCount(sqlSession);
-	}
-
-
-	@Override
-	public ArrayList<Pay> adminPayList(PageInfo pi) {
-		return pDAO.adminPayList(sqlSession, pi);
-	}
 
 }

@@ -79,34 +79,6 @@ public class surpportController {
 		return "terms";
 	}
 	
-	@RequestMapping("adminPayList.su")
-	@ResponseBody
-	public void adminPayList(@RequestParam(value="page", defaultValue="1") int page,
-						     @RequestParam(value="page", defaultValue="10") int size,
-							  HttpServletResponse response
-							   ) {
-		int listCount = pService.getListCount();
-		
-		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
-		
-		ArrayList<Pay> payList = pService.adminPayList(pi);
-		
-		
-		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
-		Gson gson = gb.create();
-		response.setContentType("application/json; charset=UTF-8");
-		
-		HashMap<String, Object> result = new HashMap<String, Object>();
-	    result.put("pay", payList);
-	    result.put("maxPage", pi.getMaxPage()); 
-	    
-		try {
-			gson.toJson(result, response.getWriter());
-		} catch (JsonIOException e) {
-			e.printStackTrace();
-		} catch (IOException e) {
-			e.printStackTrace();
-		}
-	}
+	
 	
 }
