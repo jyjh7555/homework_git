@@ -1,6 +1,8 @@
 package com.kh.homeWork.board.Controller;
 
+import java.sql.Timestamp;
 import java.util.ArrayList;
+import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,11 +14,13 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.kh.homeWork.board.model.exception.BoardException;
 import com.kh.homeWork.board.model.service.BoardService;
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
+import com.kh.homeWork.board.model.vo.Reply;
 import com.kh.homeWork.board.model.vo.VolunteerDetail;
 import com.kh.homeWork.common.Pagination;
 import com.kh.homeWork.member.model.vo.Member;
@@ -87,6 +91,28 @@ public class BoardController {
 		model.addAttribute("b",b);
 		model.addAttribute("v",v);
 		model.addAttribute("page",page);
+		
+		//댓글도 넣는다.
+		if(b.getBoardType()==3) {
+			ArrayList<Reply> list = bService.selectReply(bId);
+			for(Reply r : list) {
+				System.out.println("되는지먼저");
+				System.out.println(r.getUpdateDate());
+				
+				Calendar calendar = Calendar.getInstance();
+		        calendar.setTime(r.getUpdateDate());
+
+		        int year = calendar.get(Calendar.YEAR);
+		        int month = calendar.get(Calendar.MONTH) + 1;
+		        int day = calendar.get(Calendar.DAY_OF_MONTH);
+		        int hours = calendar.get(Calendar.HOUR_OF_DAY);
+		        int minutes = calendar.get(Calendar.MINUTE);
+		        int seconds = calendar.get(Calendar.SECOND);
+		        r.setReDate(""+year+"."+month+"."+day +" "+hours + ":" +minutes + ":" +seconds);
+		        
+			}
+			model.addAttribute("list",list);
+		}
 		
 		
 		return "boardDetail";
@@ -163,4 +189,15 @@ public class BoardController {
 	}
 	
 	
+	@RequestMapping("insertReply.bo")
+	@ResponseBody
+	public String insertReply(@ModelAttribute Reply r) {
+		System.out.println("확인");
+		System.out.println(r);
+		String test = "1";
+		
+		int result = bService.insertReply(r);
+		
+		return test;
+	}
 }

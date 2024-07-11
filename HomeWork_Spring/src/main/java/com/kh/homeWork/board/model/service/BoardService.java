@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
+import com.kh.homeWork.board.model.vo.Reply;
 import com.kh.homeWork.board.model.vo.VolunteerDetail;
 
 public interface BoardService {
@@ -27,5 +28,9 @@ public interface BoardService {
 	int updateVolunteerDetail(VolunteerDetail v);
 
 	int deleteBoard(int bNo);
+
+	int insertReply(Reply r);
+
+	ArrayList<Reply> selectReply(int bId);
 	
 }

@@ -6,6 +6,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
 
 <style>
@@ -22,7 +23,6 @@
 		}
 
 </style>
-
 
 </head>
 <body>
@@ -104,14 +104,30 @@
 				</div>
 					<!-- 여기부터 댓글 -->
 					<c:if test="${b.boardType ==3 }">
-						<div class="bd-example m-4 p-2" style="background: #FAFAFA;">
+						<div class="bd-example m-4 p-2" style="background: #fbfbfb;">
 							<div>
 								<b>${loginUser.nickName}</b>님! 댓글을 남겨보세요!!
 							</div>
 							<div class="form-floating input-group">
 							  <textarea class="form-control" id="replyContent" style="height: 100px"></textarea>
 							  <label for="replyContent"></label>
-							  <button class="input-group-text" id="replyButton" >댓글남기기</button>
+							  <button type="button"class="input-group-text" id="replyButton" >댓글남기기</button>
+							</div>
+							<div class="m-3" >
+							<table>
+								<c:forEach items="${list}" var="r">
+									<tr>
+									<td width="150px">${r.nickName }</td>
+									<td style="width:60%; font-size:12px; padding-top:15px">${r.reDate}</td>
+									<td width="150px"></td>
+									<td width="150px">아이콘 여기다넣자</td>
+								</tr>
+								<tr style="border-bottom: 1px solid #E3E3E3;">
+									<td colspan="3">${r.content }</td>
+								</tr>	
+								</c:forEach>
+								
+							</table>						
 							</div>
 						</div>
 					</c:if>
@@ -124,7 +140,7 @@
 		        	</c:if>
 		        	<button type="button" class ="btn btm-lg btn-secondary m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="location.href='${contextPath}/domestic.bo?page=${page}'">목록보기</button>
 				</div>		
-			
+				
 		</div>
 	</div>
 	
@@ -134,21 +150,33 @@
 	
 	
 	<script>
-		const form = document.getElementById('updateForm');
-		function editBoardFn(){
-			form.action ='editBoard.bo';
-			form.submit();
+		window.onload = () =>{
+			const form = document.getElementById('updateForm');
+			function editBoardFn(){
+				form.action ='editBoard.bo';
+				form.submit();
+			}
+			
+			
+			const replyButton = document.getElementById('replyButton');
+			if(${b.boardType == '3'}){
+				
+				
+				replyButton.addEventListener('click',function(){
+					 $.ajax({
+						url: '${contextPath}/insertReply.bo',
+						data: {content:document.getElementById('replyContent').value,
+							   nickName:'${loginUser.nickName}',
+							   boardNo:'${b.boardNo}',
+							   memberNo:'${loginUser.memberNo}'},
+						success:data=>{
+							console.log('성공~');
+						},
+						error:data=> console.log('실패~')
+					}); 
+				});
+			}
 		}
-	
-	
-		const replyButton = document.getElementById('replyButton');
-		replyButton.addEventListener('click',function(){
-			/* $.ajax({
-				url: '${contextPath}/insertReply.bo',
-				data: {replyContent: document.getElementById('replyContent'),replyWriter:}
-			}) */
-		})
-	
 	</script>
 	
 </body>

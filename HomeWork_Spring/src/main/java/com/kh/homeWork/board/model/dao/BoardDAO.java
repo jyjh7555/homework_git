@@ -8,6 +8,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
+import com.kh.homeWork.board.model.vo.Reply;
 import com.kh.homeWork.board.model.vo.VolunteerDetail;
 
 @Repository("bDAO")
@@ -58,6 +59,14 @@ public class BoardDAO {
 
 	public int deleteBoard(SqlSessionTemplate sqlSession, int bNo) {
 		return sqlSession.update("boardMapper.deleteBoard",bNo);
+	}
+
+	public int insertReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.insert("boardMapper.insertReply",r);
+	}
+
+	public ArrayList<Reply> selectReply(SqlSessionTemplate sqlSession, int bId) {
+		return (ArrayList)sqlSession.selectList("boardMapper.selectReply",bId);
 	}
 
 }

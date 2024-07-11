@@ -104,4 +104,23 @@
  		set delete_yn = 'Y'
  		where board_no = #{bNo}
  	</update>
+ 	<insert id="insertReply">
+ 		insert into reply values(
+ 			seq_reply.nextval,
+ 			sysdate,
+ 			sysdate,
+ 			default,
+ 			#{content},
+ 			#{boardNo},
+ 			#{memberNo}
+ 		)
+ 		
+ 	</insert>
+ 	
+ 	<select id="selectReply" resultType="Reply">
+ 		select reply_no,reply.create_date,update_date,delete_yn,content,board_no,member_no,nickName
+ 		from reply
+ 			join member using(member_no)
+ 		where board_no = #{bId} and delete_yn ='N'
+ 	</select>
 </mapper>
