@@ -381,7 +381,8 @@
 				    const pageSize = 10;
 
 				    function loadPage1(page) {
-
+						console.log(page)
+						console.log(pageSize)
 						
 				        const url = '${contextPath}/adminMemberList.ad?page='+ page +'&size=' + pageSize;
 
@@ -428,6 +429,7 @@
 				                    pagination.innerHTML = '';
 
 				                    if (data.maxPage > 1) {
+				                    	console.log(data.maxPage)
 				                        for (let i = 1; i <= data.maxPage; i++) {
 				                            const pageLink = document.createElement('a');
 				                            pageLink.classList.add('page-link');
@@ -435,6 +437,7 @@
 				                            pageLink.innerText = i;
 				                            pageLink.addEventListener('click', function(event) {
 				                                event.preventDefault();
+				                                
 				                                loadPage1(i);
 				                            });
 
@@ -720,7 +723,6 @@
 
 				    function loadPage4(page) {
 
-						
 				        const url = '${contextPath}/adminPayList.ad?page='+ page +'&size=' + pageSize;
 
 				        $.ajax({

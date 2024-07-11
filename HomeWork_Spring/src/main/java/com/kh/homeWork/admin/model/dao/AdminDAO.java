@@ -15,6 +15,7 @@ import com.kh.homeWork.surpport.model.vo.Pay;
 
 @Repository("aDAO")
 public class AdminDAO {
+	
 	public ArrayList<Member> adminMemberList(SqlSessionTemplate sqlSession, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());

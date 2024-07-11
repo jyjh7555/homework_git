@@ -33,7 +33,7 @@ public class AdminController {
 	@Autowired
 	private AdminService aService;
 	
-	@RequestMapping("adminMemberList.ad")
+	@RequestMapping("/adminMemberList.ad")
 	@ResponseBody
 	public void adminMemberList(@RequestParam(value="page", defaultValue = "1") int page,
 								@RequestParam(value="size", defaultValue = "10") int size,
@@ -44,6 +44,8 @@ public class AdminController {
 		
 		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
 		
+		System.out.println(listCount);
+		System.out.println(pi);
 		ArrayList<Member> list = aService.adminMemberList(pi);
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson = gb.create();
@@ -61,7 +63,7 @@ public class AdminController {
 		}
 	}
 	
-	@RequestMapping("adminStatusMember.ad")
+	@RequestMapping("/adminStatusMember.ad")
 	@ResponseBody
 	public void adminStatusMember(@RequestParam(value="page", defaultValue = "1") int page,
 								  @RequestParam(value="size", defaultValue = "10") int size,
