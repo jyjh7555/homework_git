@@ -20,14 +20,14 @@ public class AdminDAO {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("adminMapper.adminMemberList");
+		return (ArrayList)sqlSession.selectList("adminMapper.adminMemberList", null, rowBounds);
 	}
 	
 	public ArrayList<Member> adminStatusMember(SqlSessionTemplate sqlSession, PageInfo pi) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("adminMapper.adminStatusMember");
+		return (ArrayList)sqlSession.selectList("adminMapper.adminStatusMember", null, rowBounds);
 	}
 	
 	public int adminDelete(SqlSessionTemplate sqlSession, int mNo) {

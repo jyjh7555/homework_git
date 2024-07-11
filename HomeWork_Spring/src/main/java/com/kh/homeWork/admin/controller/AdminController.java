@@ -163,7 +163,7 @@ public class AdminController {
 		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
 		
 		ArrayList<Pay> payList = aService.adminPayList(pi);
-		
+		System.out.println(pi);
 		
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson = gb.create();
@@ -172,6 +172,7 @@ public class AdminController {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 	    result.put("pay", payList);
 	    result.put("maxPage", pi.getMaxPage()); 
+	    System.out.println(pi.getMaxPage());
 	    
 		try {
 			gson.toJson(result, response.getWriter());

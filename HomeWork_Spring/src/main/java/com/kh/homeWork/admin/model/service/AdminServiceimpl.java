@@ -25,6 +25,11 @@ public class AdminServiceimpl implements AdminService {
 	private AdminDAO aDAO;
 	
 	@Override
+	public int getListCountMember() {
+		return aDAO.getListCountMember(sqlSession);
+	}
+
+	@Override
 	public ArrayList<Member> adminMemberList(PageInfo pi) {
 		return aDAO.adminMemberList(sqlSession, pi);
 	}
@@ -59,11 +64,7 @@ public class AdminServiceimpl implements AdminService {
 		return aDAO.searchMember(sqlSession, map);
 	}
 	
-	@Override
-	public int getListCountMember() {
-		return aDAO.getListCountMember(sqlSession);
-	}
-
+	
 	@Override
 	public ArrayList<Pay> adminPayList(PageInfo pi) {
 		return aDAO.adminPayList(sqlSession, pi);
