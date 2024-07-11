@@ -56,4 +56,8 @@ public class BoardDAO {
 		return sqlSession.update("boardMapper.updateVolunteerDetail",v);
 	}
 
+	public int deleteBoard(SqlSessionTemplate sqlSession, int bNo) {
+		return sqlSession.update("boardMapper.deleteBoard",bNo);
+	}
+
 }

@@ -189,8 +189,9 @@
 		</div>
 	
 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
-		<button type="button" class ="btn btm-lg btn-success m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="updateBoard()">수정하기</button>
-		<button type="button" class ="btn btm-lg btn-success m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="deleteBoard()">삭제하기</button>
+		<button type="button" class ="btn btm-lg btn-success m-5" style="width:150px; border-radius:16px;font-size:24px;" onclick="updateBoard()">수정완료</button>
+		<button type="button" class ="btn btm-lg btn-secondary m-5" style="width:150px; border-radius:16px;font-size:24px;" onclick="javascript:history.back();">뒤로가기</button>
+		<button type="button" class ="btn btm-lg btn-danger m-5" style="width:150px; border-radius:16px;font-size:24px;" id="deleteModal">삭제하기</button>
 	</div>
 	
 	</form>
@@ -200,8 +201,29 @@
  	</div>
 	
 	
+	<!--  프로젝트 모달 -->
+	<div class="modal fade" tabindex="-1" role="dialog" id="modalChoice">
+			<div class="modal-dialog" role="document">
+	    		<div class="modal-content rounded-3 shadow">
+	      			<div class="modal-body p-4 text-center">
+	        			<h3 class="mb-0">정말로 삭제하시겠습니까?</h3>
+	        			<p class="mb-0">삭제 후 게시글은 복구할 수 없습니다.</p>
+	      			</div>
+	      			<div class="modal-footer flex-nowrap p-0">
+	        			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" id="delete">
+	        				<strong>네</strong>
+	        			</button>
+	        			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal">아니오</button>
+	      			</div>
+	    		</div>
+	  		</div>
+		</div>
+	
+	
+	
 	<script>
 	
+		
 	
 		//리뷰게시판 작성하려구해~
 		const reviewCheck = document.getElementById('reviewCheck');
@@ -395,6 +417,18 @@
 			document.getElementsByName('content')[0].value= editDiv.innerHTML;
 			form.submit();
 		}
+		
+		
+		
+		document.getElementById('deleteModal').addEventListener('click',()=>{
+			$('#modalChoice').modal('show');
+		});
+
+		document.getElementById('delete').addEventListener('click',()=>{
+			form.action= '${contextPath}/deleteBoard.bo';
+			form.submit();
+		});
+		
 	/* 
 		//보드삽입 폼설정 일단 주석, 후기게시판 바로남기기할수있어서
 		function insertBoard(){

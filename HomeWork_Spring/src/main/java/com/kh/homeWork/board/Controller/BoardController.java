@@ -136,9 +136,30 @@ public class BoardController {
 		System.out.println(result2); //잘도니ㅡㄴ거확인햇음
 		
 		if(result1>0 && result2>0) {
-			return "redirect:domestic.bo?page="+page;
+			switch(b.getBoardType()) {
+			case 1: return "redirect:domestic.bo?page="+page;
+			case 2: return "redirect:global.bo?page="+page;
+			case 3: return "redirect:review.bo?page="+page;
+			}
 		}
 		throw new BoardException("게시글 수정에 실패하였습니다");
+	}
+	
+	@RequestMapping("deleteBoard.bo")
+	public String deleteBoard(@RequestParam("boardNo") int bNo,@RequestParam("boardType") int boardType,@RequestParam("page") int page) {
+		int result = bService.deleteBoard(bNo);
+		
+		if(result>0) {
+			switch(boardType) {
+			case 1: return "redirect:domestic.bo?page="+page;
+			case 2: return "redirect:global.bo?page="+page;
+			case 3: return "redirect:review.bo?page="+page;
+			}
+		}
+		
+		throw new BoardException("게시글 삭제에 실패하였습니다");
+		
+		
 	}
 	
 	

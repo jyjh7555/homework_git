@@ -99,4 +99,9 @@
  			end_time = #{endTime}
  		where board_no = #{boardNo}
  	</update>
+ 	<update id="deleteBoard">
+ 		update board
+ 		set delete_yn = 'Y'
+ 		where board_no = #{bNo}
+ 	</update>
 </mapper>

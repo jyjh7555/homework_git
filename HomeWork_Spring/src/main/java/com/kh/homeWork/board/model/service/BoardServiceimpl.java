@@ -75,4 +75,9 @@ public class BoardServiceimpl implements BoardService {
 		return bDAO.updateVolunteerDetail(sqlSession,v);
 	}
 
+	@Override
+	public int deleteBoard(int bNo) {
+		return bDAO.deleteBoard(sqlSession,bNo);
+	}
+
 }
