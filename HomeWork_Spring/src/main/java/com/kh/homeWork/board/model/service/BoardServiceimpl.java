@@ -65,4 +65,17 @@ public class BoardServiceimpl implements BoardService {
 		return bDAO.selectVolunteerDetail(sqlSession,bId);
 	}
 
+	@Override
+	public ArrayList<Board> regionBoardList(String region,PageInfo pi) {
+		return bDAO.regionBoardList(sqlSession,region,pi);
+	}
+
+
+	@Override
+	public int getRegionListCount(String region) {
+		return bDAO.getRegionListCount(sqlSession,region);
+	}
+
+
+
 }

@@ -48,4 +48,18 @@ public class BoardDAO {
 		return sqlSession.selectOne("boardMapper.selectVolunteerDetail",bId);
 	}
 
+	public ArrayList<Board> regionBoardList(SqlSessionTemplate sqlSession, String region,PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.regionBoardList",region,rowBounds);
+	}
+
+	public int getRegionListCount(SqlSessionTemplate sqlSession, String region) {
+		return sqlSession.selectOne("boardMapper.getRegionListCount",region);
+	}
+
+
+
+
 }

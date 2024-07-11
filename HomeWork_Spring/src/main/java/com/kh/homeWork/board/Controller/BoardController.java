@@ -1,8 +1,12 @@
 package com.kh.homeWork.board.Controller;
 
+import java.io.IOException;
 import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,6 +17,9 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.homeWork.board.model.service.BoardService;
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
@@ -53,7 +60,6 @@ public class BoardController {
 		int listCount = bService.getListCount(boardTypeNum);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 5);		
 		ArrayList<Board> list = bService.selectBoardList(pi,boardTypeNum);
-		System.out.println(list);
 		
 		if(list !=null) {
 			model.addAttribute("list",list);
@@ -93,6 +99,7 @@ public class BoardController {
 	
 	@RequestMapping("writeBoard.bo")
 	public String writeBoard() {
+		System.out.println("hi");
 		return "writeBoard";
 	}
 
@@ -110,10 +117,51 @@ public class BoardController {
 	
 	@RequestMapping("test.bo")
 	public String test2(@RequestParam("startTime") String st, @RequestParam("endTime") String et) {
-		System.out.println(st);
-		System.out.println(et);
 		return "redirect:domesticList.bo";
 	}
+	
+	@RequestMapping("regionBoardList.bo")
+	public void regionBoardList(HttpServletResponse response,
+								@RequestParam(value = "region", required = false) String region,
+								@RequestParam(value = "page", defaultValue = "1") int currentPage) {
+		int listCount = bService.getRegionListCount(region);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,5);
+	
+		ArrayList<Board> list = bService.regionBoardList(region,pi);
+	    Map<String, Object> resultMap = new HashMap<>();
+	    resultMap.put("list", list);
+	    resultMap.put("pi", pi);
+	    
+		GsonBuilder gb = new GsonBuilder().setDateFormat("YYYY-MM-dd");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		try {
+			gson.toJson(resultMap,response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 }

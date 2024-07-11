@@ -21,5 +21,12 @@ public interface BoardService {
 	int selectBoardNoCheck();
 
 	VolunteerDetail selectVolunteerDetail(int bId);
+
+	ArrayList<Board> regionBoardList(String region, PageInfo pi);
+
+	int getRegionListCount(String region);
+
+
+
 	
 }

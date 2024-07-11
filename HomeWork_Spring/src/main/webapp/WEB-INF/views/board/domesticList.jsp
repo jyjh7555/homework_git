@@ -4,6 +4,7 @@
 <!DOCTYPE html>
 <html>
 <head>
+<script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <meta charset="UTF-8">
 <style>
 		#topAndNavbar {
@@ -56,111 +57,110 @@
 					<jsp:include page="../common/volunteer.jsp"/>
 				</div>	
 		 	</div>
-		 	 	<div align="center" >
- 		<Br><Br>
- 		<h3>자원 봉사 신청 하기</h3>
- 		<Br>
- 		
- 		<div align="center">
-			<ul>
-				<li class=categoryDomestic><a style=" border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="domesticBoard">국내봉사일정</a></li>
-				<li class=categoryDomestic><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #00AFD7;border-bottom:3px solid #00AFD7;" href="globalBoard">해외봉사일정</a></li>
-				<li class=categoryDomestic><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:2px solid #EEEEEE;border-bottom:3px solid #00AFD7;" href="domestic03.do">게시판 모아보기</a></li>
-			</ul>
-		</div>
+		 	
+ 		<div class="container" style="height:1000px">
+ 			<div class="mt-5 ms-0 me-0 ps-0 pe-0 w-100"align="center">
+				<ul>
+					<li class="categoryDomestic"><a style=" border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="domesticBoard">국내봉사일정</a></li>
+					<li class="categoryDomestic"><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #00AFD7;border-bottom:3px solid #00AFD7;" href="globalBoard">해외봉사일정</a></li>
+					<li class="categoryDomestic"><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:2px solid #EEEEEE;border-bottom:3px solid #00AFD7;" href="domestic03.do">게시판 모아보기</a></li>
+				</ul>
+			</div>
  		
  		
- 		<div class="checkList" style="width:1200px; border:1px solid #ddd; text-align:left; margin:30px; padding:15px;">
- 		<em>&nbsp;&nbsp; 확인하기!</em>
- 		<ul>
- 			<li>아래 일정에서 신청하고자 하는 날짜/지역을 선택하세요!</li>
- 			<li>일정이 없는 경우엔 지도에 나타나지 않습니다.</li>
- 			<li>건축봉사활동 특성상, 현장 상황에 따라 공사는 진행되어도 봉사자 모집은 없을 수 있습니다.</li>
- 		</ul>
- 		</div>
-		<div style="border:8px solid #E3E3E3; width:1232px;">
-			<img src="resources/image/korMapGood.png" alt="한국 지도"  usemap="#menuMap" /> 
-		
-			<map name="menuMap" id="menuMap"> 
-		     	<area shape="poly" coords="225,63,238,49,256,65,240,99" alt="서울" data-region="서울" onclick="showTarget(event)"/>
-			    <area shape="poly" coords="309,61,324,46,338,60,323,96" alt="강원도" data-region="강원도" onclick="showTarget(event)"/>
-			    <area shape="poly" coords="255,125,270,112,285,126,270,158" alt="충청도" data-region="충청도" onclick="showTarget(event)"/>
-			    <area shape="poly" coords="292,224,307,208,323,224,307,258" alt="경상도" data-region="경상도" onclick="showTarget(event)"/>   
-			</map> 
-		</div>
-		
-	
-	
-	</div>
-
-		 	<div class="domestic-container container text-center mt-5">
+	 		<div class="checkList ms-0 me-0 mb-3 w-100" style="text-align:left;">
+	 		<em>&nbsp;&nbsp; 확인하기!</em>
+	 		<ul>
+	 			<li>아래 일정에서 신청하고자 하는 날짜/지역을 선택하세요!</li>
+	 			<li>일정이 없는 경우엔 지도에 나타나지 않습니다.</li>
+	 			<li>건축봉사활동 특성상, 현장 상황에 따라 공사는 진행되어도 봉사자 모집은 없을 수 있습니다.</li>
+	 		</ul>
+	 		</div>
+ 		
+ 		<div class="mapAndBoard d-flex flex-row border border-2 h-75 align-items-center ">
+ 				<div class="w-75">
+					<img src="resources/image/korMapGood.png" alt="한국 지도"  usemap="#menuMap" /> 
+					<map name="menuMap" id="menuMap"> 
+				     	<area shape="poly" coords="225,63,238,49,256,65,240,99" alt="서울" data-region="서울" onclick="showTarget(event)"/>
+					    <area shape="poly" coords="309,61,324,46,338,60,323,96" alt="강원도" data-region="강원도" onclick="showTarget(event)"/>
+					    <area shape="poly" coords="255,125,270,112,285,126,270,158" alt="충청도" data-region="충청도" onclick="showTarget(event)"/>
+					    <area shape="poly" coords="292,224,307,208,323,224,307,258" alt="경상도" data-region="경상도" onclick="showTarget(event)"/>   
+					</map> 
+				</div>
+					
+		 		<div class="domestic-container container text-center me-5">
 			 		<div class="bd-example">
 						<table class="table table-hover">
 							<thead>
 								<tr class="pb-3">
-									<th width="10%">글 번호</th>
-									<th width="10%">지역</th>
-									<th width="30%">글 제목</th>
-									<th width="10%">작성자</th>
-									<th width="20%">작성일자</th>
-									<th width="10%">조회수</th>
+									<th class="w-10">글 번호</th>
+									<th class="w-10">지역</th>
+									<th class="w-10">글 제목</th>
+									<th class="w-10">작성자</th>
+									<th class="w-10">작성일자</th>
+									<th class="w-10">조회수</th>
 			          			</tr>
 			          		</thead>
 			         		<tbody> 
 			         			<c:forEach items="${ list }" var="b">
 			         				<tr>
-			            			<td>${b.boardNo }</td>
-			            			<td>${b.location }</td>
-			            			<td>${b.title }</td>
-			            			<td>관리자</td>
-			            			<td>${b.updateDate }</td>
-			            			<td>${b.boardCount }</td>
-			          			</tr>
+				            			<td>${b.boardNo }</td>
+				            			<td>${b.location }</td>
+				            			<td>${b.title }</td>
+				            			<td>관리자</td>
+				            			<td>${b.updateDate }</td>
+				            			<td>${b.boardCount }</td>
+			          				</tr>
 			         			</c:forEach>
 			          		</tbody>
 			        	</table>
 	       			</div>
 
-		 	
-		 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
-		<div class="d-flex flex-row justify-content-end mb-3  w-50 mt-3 " style="width:1400px;">
-        		<ul align="center"class="pagination">
-		            <li class="page-item">
-		            	<c:url var="goBack" value="${ loc }">
-	        			<c:param name="page" value="${ pi.currentPage -1 }"/>
-	        			</c:url>
-		            	<a class="page-link" href="${ goBack }" aria-label="Previous">
-		            		<span aria-hidden="true">&laquo;</span>
-		              	</a>
-		            </li>
-		            <c:forEach begin="${pi.startPage }" end="${pi.endPage }" var="p">
-		            	<c:url var="goNum" value="${ loc }">
-		            		<c:param name="page" value="${ p }"/>
-		            	</c:url>
-		            	<li class="page-item"><a class="page-link" href="${ goNum }">${ p }</a></li>
-		            </c:forEach>
-		            <li class="page-item">
-		            	<c:url var="goNext" value="${ loc }">
-		            		<c:param name="page" value="${ pi.currentPage +1 }"/>
-		            	</c:url>
-		            	<a class="page-link" href="${ goNext }" aria-label="Next">
-		            		<span aria-hidden="true">&raquo;</span>
-		            	</a>
-		            </li>
-	    		</ul>
-      	  </nav>
-      	  
+				 	
+				 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
+						<div class="d-flex flex-row justify-content-end mb-3  w-50 mt-3 " style="width:1400px;">
+				       		<ul align="center"class="pagination">
+					            <li class="page-item">
+					            	<c:url var="goBack" value="${ loc }">
+				        			<c:param name="page" value="${ pi.currentPage -1 }"/>
+				        			</c:url>
+					            	<a class="page-link" href="${ goBack }" aria-label="Previous">
+					            		<span aria-hidden="true">&laquo;</span>
+					              	</a>
+					            </li>
+					            <c:forEach begin="${pi.startPage }" end="${pi.endPage }" var="p">
+					            	<c:url var="goNum" value="${ loc }">
+					            		<c:param name="page" value="${ p }"/>
+					            	</c:url>
+					            	<li class="page-item"><a class="page-link" href="${ goNum }">${ p }</a></li>
+					            	<input type="hidden" value="${goNum }" id = "goNumtest">
+					            </c:forEach>
+					            <li class="page-item">
+					            	<c:url var="goNext" value="${ loc }">
+					            		<c:param name="page" value="${ pi.currentPage +1 }"/>
+					            	</c:url>
+					            	<a class="page-link" href="${ goNext }" aria-label="Next">
+					            		<span aria-hidden="true">&raquo;</span>
+					            	</a>
+					            </li>
+				    		</ul>
+		      	  
+		      	  
+		
+							<c:if test="${ !empty loginUser }">
+					        	<button class="btn btn-sm btn-outline-success ms-3" style="width:70px; height:40px; border-radius:16px;font-size:12px;" type="button" onclick="location.href='${ contextPath }/writeBoard.bo'">글 작성</button>
+					        </c:if>
+			 			</div>
+				 	</div>
+ 		</div>
 
-	<c:if test="${ !empty loginUser }">
-        	<button class="btn btn-sm btn-outline-success ms-3" style="width:70px; height:40px; border-radius:16px;font-size:12px;" type="button" onclick="location.href='${ contextPath }/writeBoard.bo'">글 작성</button>
-        </c:if>
-
-		 	</div>
-			
-
-
-		</div>
  	  </div>
+	
+	
+	</div>
+ 		</div>
+ 		
+
       	  
       	  
 	<div id="footer">
@@ -172,57 +172,118 @@
 		window.onload = ()=>{
 			const tbody = document.querySelector('tbody');
 			const tds = tbody.querySelectorAll('td');
+			
 			for(const td of tds) {
 				td.addEventListener('click',function(){
+					
 					const trTds = this.parentElement.querySelectorAll('td');
 					const boardId = trTds[0].innerText;
 					location.href="${contextPath}/selectBoard.bo?bId=" + boardId + "&page=" + ${pi.currentPage};
+					
 				})
 			}
 			
 			
 		}
 		
-		const showTarget = (event)=>{
+		const showTarget = (event) => {
+			
+		    event.preventDefault();
+		    const region = event.target.getAttribute('data-region');
+		    loadRegionBoard(region, 1);  // 초기 페이지는 1로 설정
+		}
+
+		function loadRegionBoard(region, page) {
+		    $.ajax({
+		        url: '${contextPath}/regionBoardList.bo',
+		        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+		        data: { region: region, page: page },
+		        success: data => {
+		            updateTable(data.list);
+		            updatePagination(data.pi, region);
+
+		        },
+		        error: error => console.log("Error:", error)
+		    });
+		}
+
+		function updateTable(list) {
+		    const tbody = document.querySelector('tbody');
+		    tbody.innerHTML = '';
+		    for (const b of list) {
+		        const tr = document.createElement('tr');
+		        const createTd = (text) => {
+		            const td = document.createElement('td');
+		            td.textContent = text;
+		            return td;
+		        };
+		        tr.appendChild(createTd(b.boardNo));
+		        tr.appendChild(createTd(b.location));
+		        tr.appendChild(createTd(b.title));
+		        tr.appendChild(createTd('관리자'));
+		        tr.appendChild(createTd(b.updateDate));
+		        tr.appendChild(createTd(b.boardCount));
+		        tbody.appendChild(tr);
+		    }
+		}
+		
+		function updatePagination(pi, region) {
+		    const pagination = document.querySelector('.pagination');
+		    pagination.innerHTML = '';
+
+		    if (pi.currentPage > 1) {
+		        pagination.innerHTML += `<li class="page-item"><a class="page-link" href="#" onclick="loadRegionBoard('${region}', ${pi.currentPage - 1})">&laquo;</a></li>`;
+		    }
+
+		    for (let i = pi.startPage; i <= pi.endPage; i++) {
+		        pagination.innerHTML += `<li class="page-item ${i == pi.currentPage ? 'active' : ''}"><a class="page-link" href="#" onclick="loadRegionBoard('${region}', ${i})">${i}</a></li>`;
+		    }
+
+		    if (pi.currentPage < pi.maxPage) {
+		        pagination.innerHTML += `<li class="page-item"><a class="page-link" href="#" onclick="loadRegionBoard('${region}', ${pi.currentPage + 1})">&raquo;</a></li>`;
+		    }
+		}
+		/* const showTarget = (event)=>{
+			const tbody = document.querySelector('tbody');
+
 			event.preventDefault();
 			const region = event.target.getAttribute('data-region');
 			console.log(region);
-			const popUp = window.open('${contextPath}',"_blank",'width=500,height=700,scrollbars=yes,fullscreen')
-/* 			$.ajax({
+				$.ajax({
 				url:'${contextPath}/regionBoardList.bo',
-				data:{b.location:region},
+				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
+				data:{region:region},
 				success: data => {
-					console.log(data);
 					const tbody = document.querySelector('tbody');
+					console.log(data.pi);
 					tbody.innerHTML = '';
-					
-					for(const b of data) {
-						const tr = document.createElement('tr');
-						
-						const idTd = document.createElement('td');
-						idTd.innerText = b.boardId;
-						const titleTd = document.createElement('td');
-						titleTd.innerText = b.boardTitle;
-						const writerTd = document.createElement('td');
-						writerTd.innerText = b.nickName;
-						const dateTd = document.createElement('td');
-						dateTd.innerText = b.boardModifyDate;
-						const countTd = document.createElement('td');
-						countTd.innerText = b.boardCount;
-						
-						tr.append(idTd);
-						tr.append(titleTd);
-						tr.append(writerTd);
-						tr.append(dateTd);
-						tr.append(countTd);
-						
-						tbody.append(tr);
 
-					}
-				},
-				error: data => console.log(data)
-			}) */
-		}
+		            for (const b of data) {
+		            	const tr = document.createElement('tr');
+		               
+		                const createTd = (text) => {
+		                	  const td = document.createElement('td');
+		                	  td.textContent = text;
+		                	  return td;
+		                	};
+
+		                	tr.appendChild(createTd(b.boardNo));
+		                	tr.appendChild(createTd(b.location));
+		                	tr.appendChild(createTd(b.title));
+		                	tr.appendChild(createTd('관리자'));
+		                	tr.appendChild(createTd(b.updateDate));
+		                	tr.appendChild(createTd(b.boardCount));
+		                	tbody.append(tr);
+		                	console.log(tr);
+		                
+		            
+		            }
+		        },
+				error: data => console.log("hi")
+			}) 
+				   
+				
+		} */
 			
 		
 	</script>
