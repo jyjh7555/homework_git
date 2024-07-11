@@ -65,4 +65,14 @@ public class BoardServiceimpl implements BoardService {
 		return bDAO.selectVolunteerDetail(sqlSession,bId);
 	}
 
+	@Override
+	public int updateBoard(Board b) {
+		return bDAO.updateBoard(sqlSession,b);
+	}
+
+	@Override
+	public int updateVolunteerDetail(VolunteerDetail v) {
+		return bDAO.updateVolunteerDetail(sqlSession,v);
+	}
+
 }

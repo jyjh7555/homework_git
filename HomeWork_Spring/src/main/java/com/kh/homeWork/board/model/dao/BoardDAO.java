@@ -48,4 +48,12 @@ public class BoardDAO {
 		return sqlSession.selectOne("boardMapper.selectVolunteerDetail",bId);
 	}
 
+	public int updateBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.update("boardMapper.updateBoard",b);
+	}
+
+	public int updateVolunteerDetail(SqlSessionTemplate sqlSession, VolunteerDetail v) {
+		return sqlSession.update("boardMapper.updateVolunteerDetail",v);
+	}
+
 }

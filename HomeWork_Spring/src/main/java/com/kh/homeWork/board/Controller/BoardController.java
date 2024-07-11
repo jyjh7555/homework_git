@@ -13,6 +13,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.kh.homeWork.board.model.exception.BoardException;
 import com.kh.homeWork.board.model.service.BoardService;
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
@@ -113,7 +114,32 @@ public class BoardController {
 		return "redirect:domestic.bo";
 	}
 	
+	@RequestMapping("editBoard.bo")
+	public String editBoard(@RequestParam("bId") int bId,@RequestParam("page")int page,Model model) {
+		Board b = bService.selectBoard(bId, 0);
+		VolunteerDetail v = bService.selectVolunteerDetail(bId);
+		String[] address = v.getAddress().split(",");
+		model.addAttribute("b",b);
+		model.addAttribute("v",v);
+		model.addAttribute("address",address);
+		model.addAttribute("page",page);
+		
+		return "editBoard";
+	}
 	
+	@RequestMapping("updateBoard.bo")
+	public String updateBoard(@ModelAttribute Board b, @ModelAttribute VolunteerDetail v,@RequestParam("page") int page) {
+		
+		int result1 = bService.updateBoard(b);
+		System.out.println(result1); //잘도니ㅡㄴ거확인햇음
+		int result2 = bService.updateVolunteerDetail(v);
+		System.out.println(result2); //잘도니ㅡㄴ거확인햇음
+		
+		if(result1>0 && result2>0) {
+			return "redirect:domestic.bo?page="+page;
+		}
+		throw new BoardException("게시글 수정에 실패하였습니다");
+	}
 	
 	
 }

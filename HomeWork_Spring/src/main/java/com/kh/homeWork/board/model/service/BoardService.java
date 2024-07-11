@@ -21,5 +21,9 @@ public interface BoardService {
 	int selectBoardNoCheck();
 
 	VolunteerDetail selectVolunteerDetail(int bId);
+
+	int updateBoard(Board b);
+
+	int updateVolunteerDetail(VolunteerDetail v);
 	
 }

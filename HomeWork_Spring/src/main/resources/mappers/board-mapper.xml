@@ -75,4 +75,28 @@
  		from volunteer_Detail
  		where board_no = #{bId}
  	</select>
+ 	
+ 	<update id="updateBoard">
+ 		update board
+ 		set location_no = #{locationNo}, title = #{title}, content= #{content}, update_date = sysdate, member_no = #{memberNo},board_type = #{boardType}
+ 		where board_no = #{boardNo}
+ 	</update>
+ 	<update id="updateVolunteerDetail">
+ 		update volunteer_detail
+ 		set member_count = #{memberCount},
+ 			category = #{category},
+ 			group_yn = #{groupYn},
+ 			address = #{address},
+ 			mgr = #{mgr},
+ 			mgr_Phone = #{mgrPhone},
+ 			update_date = sysdate,
+ 			member_no = #{memberNo},
+ 			recruit_Start = #{recruitStart},
+ 			recruit_end = #{recruitEnd},
+ 			start_date = #{startDate},
+ 			end_date = #{endDate},
+ 			start_time = #{startTime},
+ 			end_time = #{endTime}
+ 		where board_no = #{boardNo}
+ 	</update>
 </mapper>
