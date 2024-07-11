@@ -98,5 +98,15 @@ public class BoardController {
 		return "redirect:domesticList.bo";
 	}
 	
+	@RequestMapping("adminDomesticList.bo")
+	public String adminBoardList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
+		int listCount = bService.getListCount(1);
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 10);		
+		ArrayList<Board> list = bService.selectBoardList(pi,1);
+		
+			model.addAttribute("list",list);
+			model.addAttribute("pi",pi);
+			return "adminBoard";
+	}
 	
 }

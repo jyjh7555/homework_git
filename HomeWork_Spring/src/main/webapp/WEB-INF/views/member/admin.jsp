@@ -818,7 +818,6 @@
 			 })
 			 
 			 document.getElementById('board1').addEventListener('click', function(){
-				 document.getElementById('domesticBoardList').classList.toggle('hidden');
 				 document.getElementById('userInfo').classList.add('hidden');
 				 document.getElementById('userUpdate').classList.add('hidden');
 				 document.getElementById('userDelete').classList.add('hidden');
@@ -826,11 +825,11 @@
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');	
+				 location.href="adminDomesticList.bo";
 				 
 			 })
 			
 			  document.getElementById('board2').addEventListener('click', function(){
-				 document.getElementById('globalBoardList').classList.toggle('hidden');
 				 document.getElementById('userInfo').classList.add('hidden');
 				 document.getElementById('userUpdate').classList.add('hidden');
 				 document.getElementById('userDelete').classList.add('hidden');
