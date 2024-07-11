@@ -21,28 +21,9 @@ public interface MemberService{
 	int updateTempPwd(HashMap<String, String> map);
 
 
-
-	int adminDelete(int mNo);
-
-	int adminUpdate(Member m);
-
-	ArrayList<Member> searchMember(HashMap<String, Object> map);
-
-	int updateStatus(HashMap<String, String> m);
-
-	int updateAdmin(Member m);
-
 	int checkMemberId(String id);
 
 	int checkMemberNickName(String nickName);
-
-	ArrayList<Pay> SelectPay();
-
-	ArrayList<Member> adminMemberList(PageInfo pi);
-
-	ArrayList<Member> adminStatusMember(PageInfo pi);
-
-	int getListCount();
 
 
 

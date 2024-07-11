@@ -383,7 +383,7 @@
 				    function loadPage1(page) {
 
 						
-				        const url = '${contextPath}/adminMemberList.me?page='+ page +'&size=' + pageSize;
+				        const url = '${contextPath}/adminMemberList.ad?page='+ page +'&size=' + pageSize;
 
 				        $.ajax({
 				            url: url,
@@ -480,7 +480,7 @@
 			    function loadPage3(page) {
 
 					
-			        const url = '${contextPath}/adminMemberList.me?page='+ page +'&size=' + pageSize;
+			        const url = '${contextPath}/adminMemberList.ad?page='+ page +'&size=' + pageSize;
 
 			        $.ajax({
 			            url: url,
@@ -615,7 +615,7 @@
 				 const pageSize = 10;
 
 	      	     function loadPage2(page) {
-				        const url = '${contextPath}/adminMemberList.me?page='+ page +'&size=' + pageSize;
+				        const url = '${contextPath}/adminMemberList.ad?page='+ page +'&size=' + pageSize;
 
 				        $.ajax({
 				            url: url,
@@ -846,7 +846,7 @@
                 alert("탈퇴되었습니다.");
             }
 				$.ajax({
-					url: '${contextPath}/adminDelete.me',
+					url: '${contextPath}/adminDelete.ad',
 					data: {mNo:memberNo},
 					success: data =>{
 						console.log(data)
@@ -859,7 +859,7 @@
 		
 		function updateMember(memberNo, memberName, nickName, email, address, phone){
 			$.ajax({
-	        	url: '${contextPath}/adminUpdate.me',
+	        	url: '${contextPath}/adminUpdate.ad',
 	        	type: 'POST',
 	        	data: {
 	        		memberNo:memberNo,
@@ -885,7 +885,7 @@
 		function toggleStatus(status, memberNo, statusButton) {
 			const updateStatus = status === 'Y' ? 'N' : 'Y'; 
 			$.ajax({
-				url:'${contextPath}/updateStatus.me',
+				url:'${contextPath}/updateStatus.ad',
 				data: {status:status, memberNo:memberNo},
 				success: data => {
 					if (status == 'Y') {
@@ -903,7 +903,7 @@
 		function toggleAdmin(isAdmin, memberNo, adminButton) {
 			const updateAdmin = isAdmin == 'Y' ? 'N' : 'Y';
 			$.ajax({
-				url:'${contextPath}/updateAdmin.me',
+				url:'${contextPath}/updateAdmin.ad',
 				data: {isAdmin:isAdmin, memberNo:memberNo},
 				success: data => {
 					if (isAdmin == 'Y') {
@@ -929,7 +929,7 @@
 	        var searchType = document.getElementById('searchType').value;
 	        var searchText = document.getElementById('searchText').value;
 	        $.ajax({
-				url: '${contextPath}/searchMember.me',
+				url: '${contextPath}/searchMember.ad',
 				data: {
 					   type:searchType,
 					   text:searchText	

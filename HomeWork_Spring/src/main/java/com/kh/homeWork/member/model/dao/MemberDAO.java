@@ -36,26 +36,6 @@ public class MemberDAO {
 	}
 
 
-	public int adminDelete(SqlSessionTemplate sqlSession, int mNo) {
-		return sqlSession.update("memberMapper.adminDelete", mNo);
-	}
-
-	public int adminUpdate(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.update("memberMapper.adminUpdate", m);
-	}
-
-	public ArrayList<Member> searchMember(SqlSessionTemplate sqlSession, HashMap<String, Object> map) {
-		return (ArrayList)sqlSession.selectList("memberMapper.searchMember", map);
-	}
-
-	public int updateStatus(SqlSessionTemplate sqlSession, HashMap<String, String> m) {
-		return sqlSession.update("memberMapper.updateStatus", m);
-	}
-
-	public int updateAdmin(SqlSessionTemplate sqlSession, Member m) {
-		return sqlSession.update("memberMapper.updateAdmin", m);
-	}
-
 	public int checkMemberId(SqlSessionTemplate sqlSession, String id) {
 		return sqlSession.selectOne("memberMapper.checkMemberId",id);
 	}
@@ -64,30 +44,6 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.checkMemberNickName",nickName);
 	}
 
-	public ArrayList<Pay> selectPay(SqlSessionTemplate sqlSession) {
-		
-		
-		return (ArrayList)sqlSession.selectList("memberMapper.selectPay");
-	}
-
-	public ArrayList<Member> adminMemberList(SqlSessionTemplate sqlSession, PageInfo pi) {
-		int offset = (pi.getCurrentPage() - 1)*pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
-		return (ArrayList)sqlSession.selectList("memberMapper.adminMemberList", null, rowBounds);
-	}
-
-	public ArrayList<Member> adminStatusMember(SqlSessionTemplate sqlSession, PageInfo pi) {
-		int offset = (pi.getCurrentPage() - 1)*pi.getBoardLimit();
-		RowBounds rowBounds = new RowBounds(offset, pi.getBoardLimit());
-		
-		return (ArrayList)sqlSession.selectList("memberMapper.adminStatusMember", null, rowBounds);
-	}
-
-
-	public int getListCount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("memberMapper.getListCount");
-	}
 
 
 

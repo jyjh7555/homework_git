@@ -121,9 +121,9 @@
 	            </table>
 	            <div style="white-space: pre-wrap;">${b.content }</div>
 	            <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
-	        		<button type="button" class ="btn btn-info m-5" style="width:150px; border-radius:16px;font-size:20px; background:" onclick="location.href='#'">수정하기</button>
+	        		<button type="button" class ="btn btn-info m-5" style="width:150px; border-radius:16px;font-size:20px; background:" onclick="location.href='${contextPath}/adminBoardUpdate.ad'">수정하기</button>
 	        		<button type="button" class ="btn btn-secondary m-5" style="width:150px; border-radius:16px;font-size:20px;" onclick="location.href='${contextPath}/adminDomesticList.ad?page=${page}'">목록보기</button>
-	        		<button type="button" class ="btn btn-danger m-5" style="width:150px; border-radius:16px;font-size:20px;" onclick="location.href='#'">삭제하기</button>
+	        		<button type="button" class ="btn btn-danger m-5" style="width:150px; border-radius:16px;font-size:20px;" onclick="location.href='${contextPath}/adminBoardDelete.ad'">삭제하기</button>
 				</div>
         </div>
     </div>

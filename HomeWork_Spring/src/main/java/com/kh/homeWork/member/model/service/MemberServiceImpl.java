@@ -34,13 +34,11 @@ public class MemberServiceImpl implements MemberService {
 	}
 
 	@Override
-
 	public int updateMember(Member m) {
 		return mDAO.updateMember(sqlSession, m);
 	}
-
 	
-
+	@Override
 	public String selectId(HashMap<String, String> map) {
 		return mDAO.selectId(sqlSession, map);
 	}
@@ -48,32 +46,6 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int updateTempPwd(HashMap<String, String> map) {
 		return mDAO.updateTempPwd(sqlSession, map);
-	}
-
-
-	@Override
-	public int adminDelete(int mNo) {
-		return mDAO.adminDelete(sqlSession, mNo);
-	}
-
-	@Override
-	public int adminUpdate(Member m) {
-		return mDAO.adminUpdate(sqlSession, m);
-	}
-
-	@Override
-	public ArrayList<Member> searchMember(HashMap<String, Object> map) {
-		return mDAO.searchMember(sqlSession, map);
-	}
-
-	@Override
-	public int updateStatus(HashMap<String, String> m) {
-		return mDAO.updateStatus(sqlSession, m);
-	}
-
-	@Override
-	public int updateAdmin(Member m) {
-		return mDAO.updateAdmin(sqlSession, m);
 	}
 
 	public int checkMemberId(String id) {
@@ -85,26 +57,6 @@ public class MemberServiceImpl implements MemberService {
 		return mDAO.checkMemberNickName(sqlSession,nickName);
 	}
 
-	@Override
-	public ArrayList<Pay> SelectPay() {
-		return mDAO.selectPay(sqlSession);
-	}
-
-	@Override
-	public ArrayList<Member> adminMemberList(PageInfo pi) {
-		return mDAO.adminMemberList(sqlSession, pi);
-	}
-
-	@Override
-	public ArrayList<Member> adminStatusMember(PageInfo pi) {
-		return mDAO.adminStatusMember(sqlSession, pi);
-	}
-
-
-	@Override
-	public int getListCount() {
-		return mDAO.getListCount(sqlSession);
-	}
 
 	
 

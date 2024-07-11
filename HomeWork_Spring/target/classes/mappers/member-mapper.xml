@@ -56,13 +56,6 @@
 		and phone = #{findPhone}
 	</update>
 
-	
-	<update id="adminDelete">
-		update member
-		set status = 'N'
-		where member_no = #{memberNo}
-	</update>
-
 	<select id="checkMemberId" resultType="_int">
 		select count(*)
 		from member
@@ -75,79 +68,4 @@
 	</select>
 
 
-	
-	<update id="adminUpdate">
-		update member
-		set member_name = #{memberName},
-			nickname = #{nickName},
-			email = #{email},
-			phone = #{phone},
-			address = #{address}
-		where member_no = #{memberNo}
-	</update>
-	
-	<select id="searchMember" resultType="Member">
-		select *
-		from member
-		<if test="type=='member_No' or type=='member_name' or type=='nickName'">
-		where ${type} like '%' || #{text} || '%'
-   		</if>
-	</select>
-	
-	<update id="updateStatus">
-	    update member
-	    set status = 
-	        <choose>
-	            <when test='status == "Y"'>
-	                'N'
-	            </when>
-	            <when test='status == "N"'>
-	                'Y'
-	            </when>
-	            <otherwise>
-	                #{status}
-	            </otherwise>
-	        </choose>
-	    where member_no = #{memberNo}
-	</update>
-	
-	<update id="updateAdmin">
-		update member
-		set isAdmin = 
-			<choose>
-				<when test='isAdmin == "Y"'>
-					'N'
-				</when>
-				<when test='isAdmin == "N"'>
-					'Y'
-				</when>
-				<otherwise>
-					#{isAdmin}
-				</otherwise>
-			</choose>
-		where member_no = #{memberNo}
-	</update>
-	
-	<select id="selectPay" resultType="Pay">
-		select *
-		from pay
-	</select>
-	
-	<select id="adminMemberList" resultType="Member">
-		select *
-		from member
-		order by member_no
-	</select>
-	
-	<select id="adminStatusMember" resultType="Member">
-		select *
-		from member
-		where status = 'Y'
-		order by member_no
-	</select>
-	
-	<select id="getListCount" resultType="_int">
-		select count(*)
-		from member
-	</select>
 </mapper>

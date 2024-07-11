@@ -1,6 +1,7 @@
 package com.kh.homeWork.admin.model.service;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import com.kh.homeWork.board.model.dao.BoardDAO;
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
 import com.kh.homeWork.board.model.vo.VolunteerDetail;
+import com.kh.homeWork.member.model.vo.Member;
 import com.kh.homeWork.surpport.model.vo.Pay;
 
 @Service("aService")
@@ -22,8 +24,43 @@ public class AdminServiceimpl implements AdminService {
 	private AdminDAO aDAO;
 	
 	@Override
-	public int getListCount() {
-		return aDAO.getListCount(sqlSession);
+	public ArrayList<Member> adminMemberList(PageInfo pi) {
+		return aDAO.adminMemberList(sqlSession, pi);
+	}
+
+	@Override
+	public ArrayList<Member> adminStatusMember(PageInfo pi) {
+		return aDAO.adminStatusMember(sqlSession, pi);
+	}
+
+	@Override
+	public int adminDelete(int mNo) {
+		return aDAO.adminDelete(sqlSession, mNo);
+	}
+
+	@Override
+	public int adminUpdate(Member m) {
+		return aDAO.adminUpdate(sqlSession, m);
+	}
+
+	@Override
+	public int updateStatus(HashMap<String, String> m) {
+		return aDAO.updateStatus(sqlSession, m);
+	}
+
+	@Override
+	public int updateAdmin(Member m) {
+		return aDAO.updateAdmin(sqlSession, m);
+	}
+
+	@Override
+	public ArrayList<Member> searchMember(HashMap<String, Object> map) {
+		return aDAO.searchMember(sqlSession, map);
+	}
+	
+	@Override
+	public int getListCountMember() {
+		return aDAO.getListCountMember(sqlSession);
 	}
 
 	@Override
@@ -31,8 +68,8 @@ public class AdminServiceimpl implements AdminService {
 		return aDAO.adminPayList(sqlSession, pi);
 	}
 	@Override
-	public int getListCount(int i) {
-		return aDAO.getListCount(sqlSession,i);
+	public int getListCountBoard(int i) {
+		return aDAO.getListCountBoard(sqlSession,i);
 	}
 
 	@Override
@@ -59,6 +96,13 @@ public class AdminServiceimpl implements AdminService {
 	public VolunteerDetail adminBoardDetail(int bId) {
 		return aDAO.adminBoardDetail(sqlSession, bId);
 	}
+
+	@Override
+	public int getListCountPay() {
+		return aDAO.getListCountPay(sqlSession);
+	}
+
+
 
 	
 	
