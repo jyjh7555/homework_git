@@ -112,7 +112,6 @@ public class BoardController {
 		        int minutes = calendar.get(Calendar.MINUTE);
 		        int seconds = calendar.get(Calendar.SECOND);
 		        r.setReDate(""+year+"."+month+"."+day +" "+hours + ":" +minutes + ":" +seconds);
-		        System.out.println(r.getContent());
 			}
 			model.addAttribute("list",list);
 		}
@@ -195,9 +194,6 @@ public class BoardController {
 	@RequestMapping("insertReply.bo")
 	@ResponseBody
 	public void insertReply(@ModelAttribute Reply r,HttpServletResponse response) {
-		System.out.println("확인");
-		System.out.println(r);
-		String test = "1";
 		
 		int result = bService.insertReply(r);
 		
@@ -225,5 +221,78 @@ public class BoardController {
 		}
 		
 		
+	}
+	
+	@RequestMapping("updateReply.bo")
+	@ResponseBody
+	public void updateReply(@ModelAttribute Reply r,HttpServletResponse response) {
+		int result = bService.updateReply(r);
+		Reply selectR = bService.selectOneReply(r);
+		
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm:ss");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		
+		alterReply(selectR);
+		
+		
+		try {
+			gson.toJson(selectR,response.getWriter());
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		
+	}
+	
+	@RequestMapping("selectOneReply.bo")
+	@ResponseBody
+	public void selectOneReply(@ModelAttribute Reply r,HttpServletResponse response) {
+		Reply selectR = bService.selectOneReply(r);
+		
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm:ss");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		
+		alterReply(selectR);
+		
+		try {
+			gson.toJson(selectR,response.getWriter());
+		} catch (JsonIOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	
+	
+	@RequestMapping("deleteReply.bo")
+	@ResponseBody
+	public String deleteReply(Reply r) {
+		int result = bService.deleteReply(r);
+		
+		
+		return result == 1 ? "success" : "fail"; 
+	}
+	
+	public Reply alterReply(Reply r) {
+		r.setContent(r.getContent().replace("\n","<br>"));
+		Calendar calendar = Calendar.getInstance();
+        calendar.setTime(r.getUpdateDate());
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hours = calendar.get(Calendar.HOUR_OF_DAY);
+        int minutes = calendar.get(Calendar.MINUTE);
+        int seconds = calendar.get(Calendar.SECOND);
+        r.setReDate(""+year+"."+month+"."+day +" "+hours + ":" +minutes + ":" +seconds);
+        
+        return r;
 	}
 }

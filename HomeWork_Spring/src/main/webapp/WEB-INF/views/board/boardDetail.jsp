@@ -124,7 +124,9 @@
 									</tr>
 									<tr style="border-bottom: 1px solid #E3E3E3;">
 										<td colspan="3">${r.content }</td>
+																				
 									</tr>	
+									<input type="hidden" name="replyNo" value="${r.replyNo }"/>
 								</c:forEach>
 								
 							</table>						
@@ -157,11 +159,10 @@
 				form.submit();
 			}
 			
-			
+			//후기게시판 댓글 관련
 			const replyButton = document.getElementById('replyButton');
+			const replyTable = document.getElementById('replyTable');
 			if(${b.boardType == '3'}){
-				
-				
 				replyButton.addEventListener('click',function(){
 					 $.ajax({
 						url: '${contextPath}/insertReply.bo',
@@ -171,7 +172,7 @@
 							   memberNo:'${loginUser.memberNo}'},
 						success:data=>{
 							console.log(data, typeof data);
-							const replyTable = document.getElementById('replyTable');
+							
 							document.getElementById('replyContent').value='';
 							replyTable.innerHTML='';
 							let reviewList = '';
@@ -196,13 +197,93 @@
 									
 									
 								replyTable.innerHTML += reviewList;
-									
+								
 							}
 						},
 						error:data=> console.log('실패~')
 					}); 
 				});
-			}
+				
+				
+				//후기게시판 내 댓글 수정하기
+				let replyAlters = document.querySelectorAll('td a');
+
+				
+					replyAlters.forEach(replyAlter=>{
+						const beforeCon =replyAlter.parentElement.parentElement.nextElementSibling.children[0];
+						let beforeConVal =replyAlter.parentElement.parentElement.nextElementSibling.children[0].innerText;
+						
+						if(replyAlter.innerText == '수정'){
+							replyAlter.addEventListener('click',function(){
+								if(this.innerText=='수정'){
+									this.innerText='완료';
+									this.nextElementSibling.innerText='취소';
+									const contentTd = this.parentElement.parentElement.nextElementSibling.children[0];
+									let beforeContent = contentTd.innerText;
+									contentTd.innerHTML = '<textarea class="form-control" placeholder="" style="height: 100px">'+beforeContent+'</textarea>';
+								}else if(this.innerText=='완료'){
+									const afterContent = this.parentElement.parentElement.nextElementSibling.children[0].children[0];
+									const updateReplyNo = this.parentElement.parentElement.nextElementSibling.nextElementSibling.value;
+									console.log(updateReplyNo);
+									console.log(afterContent.parentElement);
+									$.ajax({
+										url: '${contextPath}/updateReply.bo',
+										data: {content:afterContent.value,replyNo:updateReplyNo},
+										success:data=>{
+											console.log(data);
+											beforeCon.innerHTML='<td colspan="3">'+data.content+'</td>';
+											//afterContent.parentElement.innerHTML='<td colspan="3">'+afterContent.value+'</td>';
+											this.innerText='수정';
+											this.nextElementSibling.innerText='삭제';
+										},
+										error:data=>console.log(data)
+									});
+								}
+							});
+						}else if(replyAlter.innerText =='삭제'){
+							
+							replyAlter.addEventListener('click',function(){
+								const updateReplyNoTag = this.parentElement.parentElement.nextElementSibling.nextElementSibling;
+								const updateReplyNo = this.parentElement.parentElement.nextElementSibling.nextElementSibling.value;
+								if(replyAlter.innerText =='삭제'){
+									$.ajax({
+										url:'${contextPath}/deleteReply.bo',
+										data:{replyNo:updateReplyNo},
+										success:data=>{
+											console.log(data);
+											console.log(updateReplyNoTag)
+											updateReplyNoTag.previousElementSibling.remove();
+											updateReplyNoTag.previousElementSibling.remove();
+											updateReplyNoTag.remove();
+										},
+										error:data=>console.log('안됨')
+									});
+									
+									
+								}else if(replyAlter.innerText =='취소'){
+									console.log(updateReplyNo);
+									this.innerText='삭제';
+									this.previousElementSibling.innerText='수정';
+									$.ajax({
+										url:'${contextPath}/selectOneReply.bo',
+										data:{replyNo:updateReplyNo},
+										success:data=>{
+											beforeCon.innerHTML='<td colspan="3">'+data.content+'</td>';
+										},
+										error:data=>console.log('안됨')
+									});	
+								
+								}
+							})						
+						}
+					});
+					
+				
+			};
+			
+			
+			
+			
 		}
 	</script>
 	

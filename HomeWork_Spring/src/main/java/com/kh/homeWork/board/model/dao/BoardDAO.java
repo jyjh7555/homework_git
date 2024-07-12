@@ -69,4 +69,16 @@ public class BoardDAO {
 		return (ArrayList)sqlSession.selectList("boardMapper.selectReply",bId);
 	}
 
+	public int updateReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.update("boardMapper.updateReply",r);
+	}
+
+	public Reply selectOneReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.selectOne("boardMapper.selectOneReply",r);
+	}
+
+	public int deleteReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.update("boardMapper.deleteReply",r);
+	}
+
 }

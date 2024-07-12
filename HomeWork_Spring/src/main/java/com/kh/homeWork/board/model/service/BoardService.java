@@ -32,5 +32,11 @@ public interface BoardService {
 	int insertReply(Reply r);
 
 	ArrayList<Reply> selectReply(int bId);
+
+	int updateReply(Reply r);
+
+	Reply selectOneReply(Reply r);
+
+	int deleteReply(Reply r);
 	
 }

@@ -124,4 +124,21 @@
  		where board_no = #{bId} and delete_yn ='N'
  		order by reply_no desc
  	</select>
+ 	<update id="updateReply">
+ 		update reply
+ 		set content= #{content}, update_date = sysdate
+ 		where reply_no= #{replyNo}
+ 	</update>
+ 	
+ 	<select id="selectOneReply" resultType="reply">
+ 		select *
+ 		from reply
+ 		where reply_no =#{replyNo}
+ 	</select>
+ 	
+ 	<update id="deleteReply">
+ 		update reply
+ 		set delete_yn = 'Y'
+ 		where reply_no =#{replyNo}
+ 	</update>
 </mapper>

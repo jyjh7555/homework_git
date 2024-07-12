@@ -91,4 +91,19 @@ public class BoardServiceimpl implements BoardService {
 		return bDAO.selectReply(sqlSession,bId);
 	}
 
+	@Override
+	public int updateReply(Reply r) {
+		return bDAO.updateReply(sqlSession,r);
+	}
+
+	@Override
+	public Reply selectOneReply(Reply r) {
+		return bDAO.selectOneReply(sqlSession,r);
+	}
+
+	@Override
+	public int deleteReply(Reply r) {
+		return bDAO.deleteReply(sqlSession,r);
+	}
+
 }
