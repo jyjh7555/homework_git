@@ -125,12 +125,12 @@ public class BoardController {
 								@RequestParam(value = "region", required = false) String region,
 								@RequestParam(value = "page", defaultValue = "1") int currentPage) {
 		int listCount = bService.getRegionListCount(region);
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount,5);
-	
-		ArrayList<Board> list = bService.regionBoardList(region,pi);
+		PageInfo pi2 = Pagination.getPageInfo(currentPage, listCount,5);
+		
+		ArrayList<Board> list = bService.regionBoardList(region,pi2);
 	    Map<String, Object> resultMap = new HashMap<>();
 	    resultMap.put("list", list);
-	    resultMap.put("pi", pi);
+	    resultMap.put("pi2", pi2);
 	    
 		GsonBuilder gb = new GsonBuilder().setDateFormat("YYYY-MM-dd");
 		Gson gson = gb.create();

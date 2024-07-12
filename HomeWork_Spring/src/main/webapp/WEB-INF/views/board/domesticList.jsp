@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -122,7 +123,7 @@
 				       		<ul align="center"class="pagination">
 					            <li class="page-item">
 					            	<c:url var="goBack" value="${ loc }">
-				        			<c:param name="page" value="${ pi.currentPage -1 }"/>
+				        				<c:param name="page" value="${ pi.currentPage -1 }"/>
 				        			</c:url>
 					            	<a class="page-link" href="${ goBack }" aria-label="Previous">
 					            		<span aria-hidden="true">&laquo;</span>
@@ -132,8 +133,7 @@
 					            	<c:url var="goNum" value="${ loc }">
 					            		<c:param name="page" value="${ p }"/>
 					            	</c:url>
-					            	<li class="page-item"><a class="page-link" href="${ goNum }">${ p }</a></li>
-					            	<input type="hidden" value="${goNum }" id = "goNumtest">
+					            	<li class="page-item"><a class="page-link" href="${ goNum }">${ p }</a></li>		            	
 					            </c:forEach>
 					            <li class="page-item">
 					            	<c:url var="goNext" value="${ loc }">
@@ -167,12 +167,15 @@
 		<jsp:include page="../common/footer.jsp"/>
 	</div>
 
-	
+	${pi.currentPage}
 	<script>
 		window.onload = ()=>{
+				selectBoard();	
+		}
+		
+		function selectBoard(){
 			const tbody = document.querySelector('tbody');
 			const tds = tbody.querySelectorAll('td');
-			
 			for(const td of tds) {
 				td.addEventListener('click',function(){
 					
@@ -182,15 +185,13 @@
 					
 				})
 			}
-			
-			
 		}
 		
 		const showTarget = (event) => {
-			
+
 		    event.preventDefault();
 		    const region = event.target.getAttribute('data-region');
-		    loadRegionBoard(region, 1);  // 초기 페이지는 1로 설정
+		    loadRegionBoard(region,1);  // 초기 페이지는 1로 설정
 		}
 
 		function loadRegionBoard(region, page) {
@@ -199,13 +200,17 @@
 		        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 		        data: { region: region, page: page },
 		        success: data => {
+		       
 		            updateTable(data.list);
-		            updatePagination(data.pi, region);
+		         
+		            updatePagination(data.pi2, region);
+		            selectBoard();
 
 		        },
 		        error: error => console.log("Error:", error)
 		    });
 		}
+		
 
 		function updateTable(list) {
 		    const tbody = document.querySelector('tbody');
@@ -227,63 +232,61 @@
 		    }
 		}
 		
-		function updatePagination(pi, region) {
-		    const pagination = document.querySelector('.pagination');
-		    pagination.innerHTML = '';
+		function updatePagination(pi2, region) {
+		    const paginationContainer = document.querySelector('.d-flex.justify-content-center.align-items-center.vh-30.row-gap-3');
 
-		    if (pi.currentPage > 1) {
-		        pagination.innerHTML += `<li class="page-item"><a class="page-link" href="#" onclick="loadRegionBoard('${region}', ${pi.currentPage - 1})">&laquo;</a></li>`;
-		    }
+	        
+		    if (paginationContainer) {
+		    	console.log(pi2.currentPage);
+		    	console.log(pi2.startPage);
+		    	console.log(pi2.maxPage);
+		    	if(pi2.currentPage == pi2.startPage){
+		    		console.log(true);
+		    	} else {
+		    		console.log(false);
+		    	}
+		    	
+		        let paginationHTML = `
+		            <div class="d-flex flex-row justify-content-end mb-3 w-50 mt-3" style="width:1400px;">
+		                <ul align="center" class="pagination">
+		                	<li class="page-item ${pi2.currentPage == 1 ? 'disabled' : ''}">
+		                        <a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{pi2.currentPage - 1}')"aria-label="Previous">
+		                            <span aria-hidden="true">&laquo;</span>
+		                        </a>
+		                    </li>`;
 
-		    for (let i = pi.startPage; i <= pi.endPage; i++) {
-		        pagination.innerHTML += `<li class="page-item ${i == pi.currentPage ? 'active' : ''}"><a class="page-link" href="#" onclick="loadRegionBoard('${region}', ${i})">${i}</a></li>`;
-		    }
-
-		    if (pi.currentPage < pi.maxPage) {
-		        pagination.innerHTML += `<li class="page-item"><a class="page-link" href="#" onclick="loadRegionBoard('${region}', ${pi.currentPage + 1})">&raquo;</a></li>`;
+					
+		        for (let p = pi2.startPage; p <= pi2.endPage; p++) {
+		            paginationHTML += `
+		                <li class="page-item ${p == pi2.currentPage ? 'active' : ''}">
+		            		<a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{p}')">${'$'}{p}</a> 
+		                </li>`;
+		            
+		        }
+		        
+				
+					paginationHTML += `
+		                    <li class="page-item disabled">
+		                    
+		                        <a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{pi2.currentPage + 1}')" aria-label="Next">
+		                            <span aria-hidden="true">&raquo;</span>
+		                        </a>
+		                    </li>
+		                </ul>
+		            </div>`;
+				
+		        paginationContainer.innerHTML = paginationHTML;
+		        console.log('Pagination HTML:', paginationHTML);
+				
+		        
+		        
+		        
+		        
+				
+		        
 		    }
 		}
-		/* const showTarget = (event)=>{
-			const tbody = document.querySelector('tbody');
-
-			event.preventDefault();
-			const region = event.target.getAttribute('data-region');
-			console.log(region);
-				$.ajax({
-				url:'${contextPath}/regionBoardList.bo',
-				contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-				data:{region:region},
-				success: data => {
-					const tbody = document.querySelector('tbody');
-					console.log(data.pi);
-					tbody.innerHTML = '';
-
-		            for (const b of data) {
-		            	const tr = document.createElement('tr');
-		               
-		                const createTd = (text) => {
-		                	  const td = document.createElement('td');
-		                	  td.textContent = text;
-		                	  return td;
-		                	};
-
-		                	tr.appendChild(createTd(b.boardNo));
-		                	tr.appendChild(createTd(b.location));
-		                	tr.appendChild(createTd(b.title));
-		                	tr.appendChild(createTd('관리자'));
-		                	tr.appendChild(createTd(b.updateDate));
-		                	tr.appendChild(createTd(b.boardCount));
-		                	tbody.append(tr);
-		                	console.log(tr);
-		                
-		            
-		            }
-		        },
-				error: data => console.log("hi")
-			}) 
-				   
-				
-		} */
+		
 			
 		
 	</script>
