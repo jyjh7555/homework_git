@@ -125,4 +125,43 @@
  		where member_no = #{bId}
  	</select>
  	
+ 	<insert id="adminInsertBoard">
+ 		insert into board values(
+ 			seq_board.nextval,
+ 			${locationNo},
+ 			#{title},
+ 			#{content},
+ 			'N',
+ 			sysdate,
+ 			sysdate,
+ 			#{memberNo},
+ 			#{boardType},
+ 			0
+ 		)
+ 	</insert>
+ 	
+ 	<update id="adminDeleteBoard">
+ 	
+ 	</update>
+ 	
+ 	<select id="adminSelectMember" resultType="Member">
+ 		select *
+ 		from member
+ 		where member_No = #{memberNo}
+ 		order by member_No
+ 	</select>
+ 	
+ 	<select id="adminSelectPay" resultType="Pay">
+ 		select *
+ 		from pay
+ 		where member_No = #{memberNo}
+ 		order by pay_date
+ 	</select>
+ 	
+ 	<update id="adminUpdateMember">
+ 		update board
+ 		set delete_yn = 'Y'
+ 		where board
+ 	</update>
+ 	
 </mapper>

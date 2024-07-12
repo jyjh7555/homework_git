@@ -89,6 +89,28 @@ public class AdminDAO {
 		return sqlSession.selectOne("adminMapper.getListCountMember");
 	}
 
+	public int adminInsertBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.insert("adminMapper.adminInsertBoard", b);
+	}
+	
+	public int adminDeleteBoard(SqlSessionTemplate sqlSession, int bId) {
+		return sqlSession.update("adminMapper.adminDeleteBoard", bId);
+	}
+
+	public Member adminSelectMember(SqlSessionTemplate sqlSession, int memberNo) {
+		return sqlSession.selectOne("adminMapper.adminSelectMember", memberNo);
+	}
+
+	public ArrayList<Pay> adminSelectPay(SqlSessionTemplate sqlSession, int memberNo) {
+		return (ArrayList)sqlSession.selectList("adminMapper.adminSelectPay", memberNo);
+	}
+
+	public int adminUpdateMember(SqlSessionTemplate sqlSession, Member m) {
+		return sqlSession.update("adminMapper.adminUpdateMember", m);
+	}
+
+	
+
 	
 
 	

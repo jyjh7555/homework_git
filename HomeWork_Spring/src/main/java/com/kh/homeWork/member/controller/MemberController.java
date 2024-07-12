@@ -70,7 +70,7 @@ public class MemberController {
 	public String logout(HttpServletRequest request) {
 	    HttpSession session = request.getSession(false);
 	    if (session != null) {
-	        session.invalidate(); // �꽭�뀡 臾댄슚�솕
+	        session.invalidate(); 
 	    }
 	    return "redirect:index.jsp";
 	}

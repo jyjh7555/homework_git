@@ -6,6 +6,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+import javax.websocket.Session;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,11 +20,13 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.kh.homeWork.admin.model.service.AdminService;
+import com.kh.homeWork.board.model.exception.BoardException;
 import com.kh.homeWork.board.model.service.BoardService;
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
 import com.kh.homeWork.board.model.vo.VolunteerDetail;
 import com.kh.homeWork.common.Pagination;
+import com.kh.homeWork.member.model.exception.MemberException;
 import com.kh.homeWork.member.model.vo.Member;
 import com.kh.homeWork.surpport.model.vo.Pay;
 
@@ -44,8 +47,6 @@ public class AdminController {
 		
 		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
 		
-		System.out.println(listCount);
-		System.out.println(pi);
 		ArrayList<Member> list = aService.adminMemberList(pi);
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson = gb.create();
@@ -54,6 +55,8 @@ public class AdminController {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 	    result.put("member", list);
 	    result.put("maxPage", pi.getMaxPage()); 
+	    result.put("currentPage", pi.getCurrentPage());
+	    result.put("currentPage", pi.getCurrentPage());
 		try {
 			gson.toJson(result, response.getWriter());
 		} catch (JsonIOException e) {
@@ -213,7 +216,57 @@ public class AdminController {
 		model.addAttribute("page",page);
 		
 		
-		return "adminDetail";
+		return "adminBoardDetail";
 	}
+	
+	@RequestMapping("adminWriteBoard.ad")
+	public String writeBoard() {
+		return "adminWriteBoard";
+	}
+
+	@RequestMapping("adminInsertBoard.ad")
+	public String insertBoard(@ModelAttribute Board b) {
+		
+		int result = aService.adminInsertBoard(b);
+		
+		return "redirect:adminDomesticList.ad";
+	}
+	
+	@RequestMapping("adminBoardDelete.ad")
+	public String deleteBoard(@RequestParam("board") int bId) {
+		int result = aService.adminDeleteBoard(bId);
+		if(result > 0) {				
+			return "redirect:/adminDomesticList.ad";
+		} else {
+			throw new BoardException("게시글 삭제에 실패하였습니다.");
+		}
+	}
+	
+	@RequestMapping("adminSelectMember.ad")
+	public String adminSelectMember(@RequestParam("memberNo") int memberNo,
+									HttpSession session) {
+	
+		Member m = aService.adminSelectMember(memberNo);	
+		ArrayList<Pay> pay = aService.adminSelectPay(memberNo);
+		
+		session.setAttribute("m", m);
+		session.setAttribute("pay", pay);
+		
+		
+		return "adminMemberDetail";
+	}
+	
+	@RequestMapping("adminMemberUpdate.ad")
+	public String adminUpdateMember(@ModelAttribute Member m, Model model) {
+		int result = aService.adminUpdateMember(m);
+		
+		if(result > 0) {
+			return "redirect:adminSelectMember.ad";
+		} else {
+			throw new MemberException("정보수정을 실패했습니다.");
+		}
+	}
+	
+	
 	
 }

@@ -104,6 +104,33 @@ public class AdminServiceimpl implements AdminService {
 		return aDAO.getListCountPay(sqlSession);
 	}
 
+	@Override
+	public int adminInsertBoard(Board b) {
+		return aDAO.adminInsertBoard(sqlSession, b);
+	}
+	
+	@Override
+	public int adminDeleteBoard(int bId) {
+		return aDAO.adminDeleteBoard(sqlSession, bId);
+	}
+
+	@Override
+	public Member adminSelectMember(int memberNo) {
+		return aDAO.adminSelectMember(sqlSession, memberNo);
+	}
+
+	@Override
+	public ArrayList<Pay> adminSelectPay(int memberNo) {
+		return aDAO.adminSelectPay(sqlSession, memberNo);
+	}
+
+	@Override
+	public int adminUpdateMember(Member m) {
+		return aDAO.adminUpdateMember(sqlSession, m);
+	}
+
+	
+
 
 
 	

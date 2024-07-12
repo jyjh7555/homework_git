@@ -39,6 +39,18 @@ public interface AdminService {
 	
 	int getListCountBoard(int i);
 
+	int adminInsertBoard(Board b);
+	
+	int adminDeleteBoard(int bId);
+
+	Member adminSelectMember(int memberNo);
+
+	ArrayList<Pay> adminSelectPay(int memberNo);
+
+	int adminUpdateMember(Member m);
+
+	
+
 
 	
 }

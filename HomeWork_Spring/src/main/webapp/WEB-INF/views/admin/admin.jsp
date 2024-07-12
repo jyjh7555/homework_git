@@ -381,8 +381,6 @@
 				    const pageSize = 10;
 
 				    function loadPage1(page) {
-						console.log(page)
-						console.log(pageSize)
 						
 				        const url = '${contextPath}/adminMemberList.ad?page='+ page +'&size=' + pageSize;
 
@@ -396,7 +394,8 @@
 				                    const memberList = document.getElementById('memberList');
 				                    const tbody = memberList.querySelector('tbody');
 				                    tbody.innerHTML = '';
-
+								
+				                    
 				                    data.member.forEach(m => {
 				                        const tr = document.createElement('tr');
 
@@ -420,7 +419,14 @@
 				                        statusTd.innerText = m.status;
 				                        const adminTd = document.createElement('td');
 				                        adminTd.innerText = m.isAdmin;
-
+										
+				                        const tds = [noTd, nameTd, nickTd, emailTd, phoneTd, addressTd, ageTd, createDateTd, statusTd, adminTd];
+				                        tds.forEach(td => {
+				                            td.addEventListener('click', () => {
+				                                window.location.href = '${contextPath}/adminSelectMember.ad?memberNo=' + m.memberNo ;
+				                            });
+				                        });
+				                        
 				                        tr.append(noTd, nameTd, nickTd, emailTd, phoneTd, addressTd, ageTd, createDateTd, statusTd, adminTd);
 				                        tbody.append(tr);
 				                    });
@@ -428,26 +434,29 @@
 				                    const pagination = document.getElementById('pagination1');
 				                    pagination.innerHTML = '';
 
+				                    
 				                    if (data.maxPage > 1) {
-				                    	console.log(data.maxPage)
 				                        for (let i = 1; i <= data.maxPage; i++) {
+				                        	const pageItem = document.createElement('li');
+				                        	pageItem.classList.add('page-item');
 				                            const pageLink = document.createElement('a');
 				                            pageLink.classList.add('page-link');
 				                            pageLink.href = '#';
 				                            pageLink.innerText = i;
-				                            pageLink.addEventListener('click', function(event) {
-				                                event.preventDefault();
-				                                
-				                                loadPage1(i);
-				                            });
+				                            (function(pageNumber) {
+				                                pageLink.addEventListener('click', function(event) {
+				                                    event.preventDefault();
+				                                    loadPage1(pageNumber);
+				                                });
+				                            })(i);
 
-				                            if (i === currentPage) {
-				                                pageLink.classList.add('active');
+				                            if (i === page) {
+				                                pageItem.classList.add('active');
 				                            } else {
-				                                pageLink.classList.remove('active');
+				                                pageItem.classList.remove('active');
 				                            }
-
-				                            pagination.append(pageLink);
+											pageItem.append(pageLink)
+				                            pagination.append(pageItem);
 				                        }
 				                    }
 				                } else {
@@ -560,6 +569,8 @@
 	
 				                    if (data.maxPage > 1) {
 				                        for (let i = 1; i <= data.maxPage; i++) {
+				                        	const pageItem = document.createElement('li');
+				                        	pageItem.classList.add('page-item');
 				                            const pageLink = document.createElement('a');
 				                            pageLink.classList.add('page-link');
 				                            pageLink.href = '#';
@@ -569,13 +580,14 @@
 				                                loadPage3(i);
 				                            });
 	
-				                            if (i === currentPage) {
-				                                pageLink.classList.add('active');
+				                            if (i === data.currentPage) {
+				                                pageItem.classList.add('active');
 				                            } else {
-				                                pageLink.classList.remove('active');
+				                                pageItem.classList.remove('active');
 				                            }
 	
-				                            pagination.append(pageLink);
+				                            pageItem.append(pageLink);
+				                            pagination.append(pageItem);
 				                        }
 				                    }
 				                } else {
@@ -677,6 +689,8 @@
 		
 					                    if (data.maxPage > 1) {
 					                        for (let i = 1; i <= data.maxPage; i++) {
+					                        	const pageItem = document.createElement('li');
+					                        	pageItem.classList.add('page-item');
 					                            const pageLink = document.createElement('a');
 					                            pageLink.classList.add('page-link');
 					                            pageLink.href = '#';
@@ -686,13 +700,13 @@
 					                                loadPage2(i);
 					                            });
 		
-					                            if (i === currentPage) {
-					                                pageLink.classList.add('active');
+					                            if (i === data.currentPage) {
+					                                pageItem.classList.add('active');
 					                            } else {
-					                                pageLink.classList.remove('active');
+					                                pageItem.classList.remove('active');
 					                            }
-		
-					                            pagination.append(pageLink);
+												pageItem.append(pageLink)		
+					                            pagination.append(pageItem);
 					                        }
 					                    }
 					                } else {
@@ -722,7 +736,7 @@
 				    const pageSize = 10;
 
 				    function loadPage4(page) {
-
+						currentPage = page
 				        const url = '${contextPath}/adminPayList.ad?page='+ page +'&size=' + pageSize;
 
 				        $.ajax({
@@ -775,6 +789,8 @@
 
 				                    if (data.maxPage >=1) {
 				                        for (let i = 1; i <= data.maxPage; i++) {
+				                        	const pageItem = document.createElement('li');
+				                        	pageItem.classList.add('page-item');
 				                            const pageLink = document.createElement('a');
 				                            pageLink.classList.add('page-link');
 				                            pageLink.href = '#';
@@ -785,12 +801,12 @@
 				                            });
 
 				                            if (i === currentPage) {
-				                                pageLink.classList.add('active');
+				                                pageItem.classList.add('active');
 				                            } else {
-				                                pageLink.classList.remove('active');
+				                                pageItem.classList.remove('active');
 				                            }
-
-				                            pagination.append(pageLink);
+											pageItem.append(pageLink)
+				                            pagination.append(pageItem);
 				                        }
 				                    }
 				                } else {
@@ -971,6 +987,13 @@
 						tr.append(addressTd);
 						tr.append(ageTd);
 						tr.append(createDateTd);
+						
+						const tds = [noTd, nameTd, nickTd, emailTd, phoneTd, addressTd, ageTd, createDateTd];
+		                tds.forEach(td => {
+		                    td.addEventListener('click', () => {
+		                        window.location.href = '${contextPath}/adminSelectMember.ad?memberNo=' + s.memberNo ;
+		                    });
+		                });
 						
 						tbody.append(tr);
 					}

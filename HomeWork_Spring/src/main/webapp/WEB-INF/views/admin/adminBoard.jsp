@@ -5,8 +5,9 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+<link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <style>
     #topAndNavbar {
         background-image: linear-gradient(
@@ -118,7 +119,7 @@
 		            	<c:url var="goNum" value="${ loc }">
 		            		<c:param name="page" value="${ p }"/>
 		            	</c:url>
-		            	<li class="page-item"><a class="page-link" href="${ goNum }">${ p }</a></li>
+		            	<li class="page-item ${ p == pi.currentPage ? 'active' : '' }""><a class="page-link" href="${ goNum }">${ p }</a></li>
 		            </c:forEach>
 		            <li class="page-item">
 		            	<c:url var="goNext" value="${ loc }">
@@ -132,7 +133,7 @@
       	  </nav>
             <c:if test="${!empty loginUser}">
             	<div align="right">
-	                <button class="btn btn-lg btn-outline-info" style="width:100px; border-radius:10px;font-size:15px;" type="button" onclick="location.href='${contextPath}/adminWriteBoard.bo'">글 작성</button>
+	                <button class="btn btn-lg btn-outline-info" style="width:100px; border-radius:10px;font-size:15px;" type="button" onclick="location.href='${contextPath}/adminWriteBoard.ad'">글 작성</button>
             	</div>
             </c:if>
         </div>
