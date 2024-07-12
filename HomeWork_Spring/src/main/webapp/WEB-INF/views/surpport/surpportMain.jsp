@@ -116,7 +116,7 @@
 	        	<!-- <button type="button" class ="btn btm-lg btn-success m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="test()">테스트</button> -->
 	        	<input type="hidden" id="payCheck"name="success">
 	        	<input type="hidden" name="merchantUid">
-	        	<input type="hidden" name="memberNo"<c:if test="${ !empty loginUser }">value="${loginUser.memberNo}"</c:if><c:if test="${ empty loginUser }">value="202"</c:if> >
+	        	<input type="hidden" name="memberNo"<c:if test="${ !empty loginUser }">value="${loginUser.memberNo}"</c:if><c:if test="${ empty loginUser }">value="0"</c:if> >
 	</form>
 	
 	

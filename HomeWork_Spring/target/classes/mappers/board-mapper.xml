@@ -122,5 +122,6 @@
  		from reply
  			join member using(member_no)
  		where board_no = #{bId} and delete_yn ='N'
+ 		order by reply_no desc
  	</select>
 </mapper>

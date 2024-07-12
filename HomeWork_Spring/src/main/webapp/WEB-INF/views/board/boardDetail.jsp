@@ -109,22 +109,22 @@
 								<b>${loginUser.nickName}</b>님! 댓글을 남겨보세요!!
 							</div>
 							<div class="form-floating input-group">
-							  <textarea class="form-control" id="replyContent" style="height: 100px"></textarea>
+							  <textarea class="form-control" placeholder=""id="replyContent" style="height: 100px"></textarea>
 							  <label for="replyContent"></label>
 							  <button type="button"class="input-group-text" id="replyButton" >댓글남기기</button>
 							</div>
 							<div class="m-3" >
-							<table>
+							<table id="replyTable">
 								<c:forEach items="${list}" var="r">
 									<tr>
-									<td width="150px">${r.nickName }</td>
-									<td style="width:60%; font-size:12px; padding-top:15px">${r.reDate}</td>
-									<td width="150px"></td>
-									<td width="150px">아이콘 여기다넣자</td>
-								</tr>
-								<tr style="border-bottom: 1px solid #E3E3E3;">
-									<td colspan="3">${r.content }</td>
-								</tr>	
+										<td width="150px"><b>${r.nickName }</b></td>
+										<td style="width:60%; font-size:12px; padding-top:15px">${r.reDate}</td>
+										<td width="150px"></td>
+										<c:if test="${r.memberNo ==loginUser.memberNo }"><td width="150px"><a class="fs-6">수정</a>/<a class="fs-6">삭제</a></td></c:if>
+									</tr>
+									<tr style="border-bottom: 1px solid #E3E3E3;">
+										<td colspan="3">${r.content }</td>
+									</tr>	
 								</c:forEach>
 								
 							</table>						
@@ -170,7 +170,34 @@
 							   boardNo:'${b.boardNo}',
 							   memberNo:'${loginUser.memberNo}'},
 						success:data=>{
-							console.log('성공~');
+							console.log(data, typeof data);
+							const replyTable = document.getElementById('replyTable');
+							document.getElementById('replyContent').value='';
+							replyTable.innerHTML='';
+							let reviewList = '';
+							let check ='';
+							for(r of data){
+								
+								if(r.memberNo == ${loginUser.memberNo}){
+									check ='<td width="150px"><a class="fs-6">수정</a>/<a class="fs-6">삭제</a></td>'; 
+								}else{
+									check = '';
+								}
+								reviewList =
+									'<tr>'+
+										'<td width="150px"><b>'+ r.nickName + '</b></td>'+
+										'<td style="width:60%; font-size:12px; padding-top:15px">'+r.updateDate+'</td>'+
+										'<td width="150px"></td>'+
+										check+
+									'</tr>'+
+									'<tr style="border-bottom: 1px solid #E3E3E3;">'+
+										'<td colspan="3">'+r.content+'</td>'+
+									'</tr>';		
+									
+									
+								replyTable.innerHTML += reviewList;
+									
+							}
 						},
 						error:data=> console.log('실패~')
 					}); 

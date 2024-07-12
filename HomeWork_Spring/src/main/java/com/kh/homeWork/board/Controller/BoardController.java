@@ -1,10 +1,12 @@
 package com.kh.homeWork.board.Controller;
 
+import java.io.IOException;
 import java.sql.Timestamp;
 import java.util.ArrayList;
 import java.util.Calendar;
 
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,6 +18,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.google.gson.Gson;
+import com.google.gson.GsonBuilder;
+import com.google.gson.JsonIOException;
 import com.kh.homeWork.board.model.exception.BoardException;
 import com.kh.homeWork.board.model.service.BoardService;
 import com.kh.homeWork.board.model.vo.Board;
@@ -96,9 +101,7 @@ public class BoardController {
 		if(b.getBoardType()==3) {
 			ArrayList<Reply> list = bService.selectReply(bId);
 			for(Reply r : list) {
-				System.out.println("되는지먼저");
-				System.out.println(r.getUpdateDate());
-				
+				r.setContent(r.getContent().replace("\n","<br>"));
 				Calendar calendar = Calendar.getInstance();
 		        calendar.setTime(r.getUpdateDate());
 
@@ -109,7 +112,7 @@ public class BoardController {
 		        int minutes = calendar.get(Calendar.MINUTE);
 		        int seconds = calendar.get(Calendar.SECOND);
 		        r.setReDate(""+year+"."+month+"."+day +" "+hours + ":" +minutes + ":" +seconds);
-		        
+		        System.out.println(r.getContent());
 			}
 			model.addAttribute("list",list);
 		}
@@ -191,13 +194,36 @@ public class BoardController {
 	
 	@RequestMapping("insertReply.bo")
 	@ResponseBody
-	public String insertReply(@ModelAttribute Reply r) {
+	public void insertReply(@ModelAttribute Reply r,HttpServletResponse response) {
 		System.out.println("확인");
 		System.out.println(r);
 		String test = "1";
 		
 		int result = bService.insertReply(r);
 		
-		return test;
+		if(result>0) {
+			ArrayList<Reply> rList = bService.selectReply(r.getBoardNo());
+			
+			for(Reply rr : rList) {
+				
+				rr.setContent(rr.getContent().replace("\n","<br>"));
+			}
+			
+			
+			GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm:ss");
+			Gson gson = gb.create();
+			response.setContentType("application/json; charset=UTF-8");
+			//System.out.println("여기까진 될거같은데?");
+			try {
+				gson.toJson(rList,response.getWriter());
+			} catch (JsonIOException | IOException  e) {
+				// TODO Auto-generated catch block
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("오류!!");
+		}
+		
+		
 	}
 }
