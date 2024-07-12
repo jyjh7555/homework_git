@@ -199,19 +199,24 @@
 								replyTable.innerHTML += reviewList;
 								
 							}
+							whynot();
 						},
 						error:data=> console.log('실패~')
 					}); 
 				});
 				
-				
+				whynot();
 				//후기게시판 내 댓글 수정하기
+				
+				function whynot(){
+					console.log('싱핼');
 				let replyAlters = document.querySelectorAll('td a');
 
 				
 					replyAlters.forEach(replyAlter=>{
-						const beforeCon =replyAlter.parentElement.parentElement.nextElementSibling.children[0];
+						let beforeCon =replyAlter.parentElement.parentElement.nextElementSibling.children[0];
 						let beforeConVal =replyAlter.parentElement.parentElement.nextElementSibling.children[0].innerText;
+						console.log(replyAlter.innerText);
 						
 						if(replyAlter.innerText == '수정'){
 							replyAlter.addEventListener('click',function(){
@@ -278,7 +283,7 @@
 						}
 					});
 					
-				
+				};
 			};
 			
 			
