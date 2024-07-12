@@ -107,6 +107,7 @@
 		order by board_no desc
  	</select>
  	
+ 	
  	<select id="selectBoard" resultType="Board">
  		select *
  		from board
