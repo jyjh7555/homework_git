@@ -114,21 +114,22 @@
 							  <button type="button"class="input-group-text" id="replyButton" >댓글남기기</button>
 							</div>
 							<div class="m-3" >
-							<table id="replyTable">
-								<c:forEach items="${list}" var="r">
-									<tr>
-										<td width="150px"><b>${r.nickName }</b></td>
-										<td style="width:60%; font-size:12px; padding-top:15px">${r.reDate}</td>
-										<td width="150px"></td>
-										<c:if test="${r.memberNo ==loginUser.memberNo }"><td width="150px"><a class="fs-6">수정</a>/<a class="fs-6">삭제</a></td></c:if>
-									</tr>
-									<tr style="border-bottom: 1px solid #E3E3E3;">
-										<td colspan="3">${r.content }</td>
-																				
-									</tr>	
-									<input type="hidden" name="replyNo" value="${r.replyNo }"/>
-								</c:forEach>
-								
+							<table >
+								<tbody id="replyTable">
+									<c:forEach items="${list}" var="r">
+										<tr>
+											<td width="150px"><b>${r.nickName }</b></td>
+											<td style="width:60%; font-size:12px; padding-top:15px">${r.reDate}</td>
+											<td width="150px"></td>
+											<c:if test="${r.memberNo ==loginUser.memberNo }"><td width="150px"><a class="fs-6">수정</a>/<a class="fs-6">삭제</a></td></c:if>
+										</tr>
+										<tr style="border-bottom: 1px solid #E3E3E3;">
+											<td colspan="3">${r.content }</td>
+																					
+										</tr>	
+										<input type="hidden" name="replyNo" value="${r.replyNo }"/>
+									</c:forEach>
+								</tbody>
 							</table>						
 							</div>
 						</div>
@@ -177,8 +178,10 @@
 							replyTable.innerHTML='';
 							let reviewList = '';
 							let check ='';
+							
 							for(r of data){
-								
+								console.log(r.replyNo);
+								console.log('여기위가 내가체크하려는거임');
 								if(r.memberNo == ${loginUser.memberNo}){
 									check ='<td width="150px"><a class="fs-6">수정</a>/<a class="fs-6">삭제</a></td>'; 
 								}else{
@@ -193,7 +196,8 @@
 									'</tr>'+
 									'<tr style="border-bottom: 1px solid #E3E3E3;">'+
 										'<td colspan="3">'+r.content+'</td>'+
-									'</tr>';		
+									'</tr>'+
+									'<input type="hidden" name="replyNo" value="'+r.replyNo+'"/>';		
 									
 									
 								replyTable.innerHTML += reviewList;
@@ -209,7 +213,6 @@
 				//후기게시판 내 댓글 수정하기
 				
 				function whynot(){
-					console.log('싱핼');
 				let replyAlters = document.querySelectorAll('td a');
 
 				
