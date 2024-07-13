@@ -2,6 +2,7 @@ package com.kh.homeWork.board.Controller;
 
 import java.io.IOException;
 import java.sql.Timestamp;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 
@@ -94,8 +95,16 @@ public class BoardController {
 		Board b = bService.selectBoard(bId,memberNo);	//조회수 해결했는데?
 		VolunteerDetail v = bService.selectVolunteerDetail(bId);
 		model.addAttribute("b",b);
+		
+		v.setAddress(v.getAddress().replace(","," "));
 		model.addAttribute("v",v);
 		model.addAttribute("page",page);
+		System.out.println(LocalDate.now());
+		if(v != null) {
+			boolean dateCheck = LocalDate.now().isAfter(v.getEndDate().toLocalDate());
+			model.addAttribute("dateCheck",dateCheck);
+			
+		}
 		
 		//댓글도 넣는다.
 		if(b.getBoardType()==3) {

@@ -40,10 +40,7 @@
  	</div>
 	
 	
-	<form method="post" id="updateForm">
-		<input type="hidden" name="bId" value="${b.boardNo }">
-		<input type="hidden" name="page" value="${page }">
-	</form>
+	
 	
 	
 	
@@ -98,7 +95,7 @@
 			            </table>
 					</c:if>
 		            <!-- <textarea style="width:100%; min-height:100%;  overflow-wrap: break-word;"> -->
-		            <div style="white-space: pre-wrap;">${b.content }</div>
+		            <div style="white-space: pre-wrap;">${b.content }${v.endDate }</div>
 					
 					
 				</div>
@@ -139,8 +136,16 @@
 				
 				<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
 		        	<c:if test="${loginUser.status =='Y' }">
-		        		<button type="button" class ="btn btm-lg btn-light m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="editBoardFn()">수정하기</button>
+		        		<form method="post" action="editBoard.bo" id="updateForm">
+							<input type="hidden" name="bId" value="${b.boardNo }">
+							<input type="hidden" name="page" value="${page }">
+			        		<button class ="btn btm-lg btn-light m-5" style="width:250px; border-radius:16px;font-size:24px;">수정하기</button>
+						</form>
 		        	</c:if>
+		        	<c:if test="${loginUser.status =='Y' && dateCheck}">
+		        		<button class ="btn btm-lg btn-light m-5" style="width:200px; border-radius:16px;font-size:22px;">후기 작성하기!</button>
+		        	</c:if>
+		        	
 		        	<button type="button" class ="btn btm-lg btn-secondary m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="location.href='${contextPath}/domestic.bo?page=${page}'">목록보기</button>
 				</div>		
 				
@@ -154,11 +159,6 @@
 	
 	<script>
 		window.onload = () =>{
-			const form = document.getElementById('updateForm');
-			function editBoardFn(){
-				form.action ='editBoard.bo';
-				form.submit();
-			}
 			
 			//후기게시판 댓글 관련
 			const replyButton = document.getElementById('replyButton');
@@ -218,6 +218,7 @@
 				
 					replyAlters.forEach(replyAlter=>{
 						let beforeCon =replyAlter.parentElement.parentElement.nextElementSibling.children[0];
+						let afterUpdateDate =replyAlter.parentElement.previousElementSibling.previousElementSibling;
 						let beforeConVal =replyAlter.parentElement.parentElement.nextElementSibling.children[0].innerText;
 						console.log(replyAlter.innerText);
 						
@@ -229,6 +230,7 @@
 									const contentTd = this.parentElement.parentElement.nextElementSibling.children[0];
 									let beforeContent = contentTd.innerText;
 									contentTd.innerHTML = '<textarea class="form-control" placeholder="" style="height: 100px">'+beforeContent+'</textarea>';
+									
 								}else if(this.innerText=='완료'){
 									const afterContent = this.parentElement.parentElement.nextElementSibling.children[0].children[0];
 									const updateReplyNo = this.parentElement.parentElement.nextElementSibling.nextElementSibling.value;
@@ -240,6 +242,7 @@
 										success:data=>{
 											console.log(data);
 											beforeCon.innerHTML='<td colspan="3">'+data.content+'</td>';
+											afterUpdateDate.innerText = data.updateDate;
 											//afterContent.parentElement.innerHTML='<td colspan="3">'+afterContent.value+'</td>';
 											this.innerText='수정';
 											this.nextElementSibling.innerText='삭제';
