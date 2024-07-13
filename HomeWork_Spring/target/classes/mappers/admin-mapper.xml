@@ -208,9 +208,11 @@
  	</select>
  	
  	<update id="adminUpdateMember">
- 		update board
- 		set delete_yn = 'Y'
- 		where board
+ 		update member
+ 		set nickname = #{nickName},
+ 			isAdmin = #{isAdmin},
+ 			status = #{status}
+ 		where member_no = #{memberNo}
  	</update>
  	
  	<select id="adminSelectReply" resultType="Reply">

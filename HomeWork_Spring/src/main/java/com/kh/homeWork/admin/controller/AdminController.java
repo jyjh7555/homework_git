@@ -106,7 +106,6 @@ public class AdminController {
 	@RequestMapping("/adminUpdate.ad")
 	@ResponseBody
 	public String adminUpdate(@ModelAttribute Member m) {
-		System.out.println(m);
 		int result = aService.adminUpdate(m);
 		return result == 1? "success" : "fail";
 	}

@@ -69,6 +69,80 @@
             justify-content: flex-end;
         }
      .hidden{display:none;}
+     
+     .custom-check-label {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.custom-check-input {
+  appearance: none;
+  position: relative;
+  border: max(2px, 0.1em) solid gray;
+  border-radius: 1.25em;
+  width: 2.25em;
+  height: 1.25em;
+}
+
+.custom-check-input::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  transform: scale(0.8);
+  background-color: gray;
+  transition: left 250ms linear;
+}
+
+.custom-check-input:checked::before {
+  background-color: white;
+  left: 1em;
+}
+
+.custom-check-input:checked {
+  background-color: tomato;
+  border-color: tomato;
+}
+
+.custom-check-input:checked::before {
+  background-color: white;
+  left: 1em;
+}
+
+.custom-check-input:checked {
+  background-color: tomato;
+  border-color: tomato;
+}
+
+.custom-check-input:checked::before {
+  background-color: white;
+  left: 1em;
+}
+
+.custom-check-input:checked {
+  background-color: tomato;
+  border-color: tomato;
+}
+
+.custom-check-input:enabled:hover {
+  box-shadow: 0 0 0 max(4px, 0.2em) lightgray;
+}
+
+.custom-check-input::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  width: 1em;
+  height: 1em;
+  border-radius: 50%;
+  transform: scale(0.8);
+  background-color: gray;
+  transition: left 250ms linear;
+}
 </style>
 <title>관리자게시판</title>
 </head>
@@ -90,14 +164,14 @@
 							<label for="id" class="form-label">회원번호</label>
 							<input type="text" class="form-control" id="memberNo" name="memberNo" value="${ m.memberNo }" readonly>
 						</div>
-						<div class="col-12 form-floating mb-3">
+						<div class="col-12 form-floating mb-3"> 
 							<label for="id" class="form-label">아이디</label>
-							<input type="text" class="form-control" id="id" name="id" value="${ m.memberId }" readonly>
+							<input type="text" class="form-control" id="memberId" name="memberId" value="${ m.memberId }" readonly>
 						</div>
 												
 						<div class="col-12 form-floating mb-3">	
 							<label for="name" class="form-label">이름</label>
-							<input type="text" class="form-control" id="name" name="name" required value="${ m.memberName }" readonly>
+							<input type="text" class="form-control" id="memberName" name="memberName" required value="${ m.memberName }" readonly>
 						</div>
 						
 						<div class="col-12 form-floating mb-3">
@@ -110,9 +184,9 @@
 							<c:set var="emailId" value="${ fn:split(m.email, '@')[0] }"/>
 							<c:set var="emailDomain" value="${ fn:split(m.email, '@')[1] }"/>
 							<div class="input-group">
-								<input type="text" class="form-control" id="emailId" name="emailId" value="${ emailId }" readonly/>
+								<input type="text" class="form-control" id="emailId" name="email" value="${ emailId }" readonly/>
 								<span class="input-group-text">@</span>
-								<input type="text" class="form-control" id="emailId" name="emailId" value="${ fn:split(m.email, '@')[1] }" readonly/>
+								<input type="text" class="form-control" id="emailId" name="email" value="${ fn:split(m.email, '@')[1] }" readonly/>
 								
 							</div>
 						</div>
@@ -136,14 +210,40 @@
 						</div>
 						
 						<div class="col-12">
-							<label for="address" class="form-label">주소</label>
-							<input type="text" class="form-control" id="address" name="address" value="${ m.address }"><br>
+							<label for="address" class="form-label">ADDRESS</label>
+							<input type="text" class="form-control" id="address" name="address" value="${ m.address }" readonly>
 						</div>
+						
 						<div class="col-12">
-							<label for="create_date" class="form-label">가입일</label>
-							<input type="text" class="form-control" id="create_date" name="create_date" value="${ m.createDate }" readonly><br>
+							<div class="row">
+								<div class="col-12">
+									<label for="activeYn" class="form-label">활동여부
+									</label>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="row">
+									<input class="custom-check-input" type="checkbox" id="statusYn" name="status"> &nbsp;
+									<label class="custom-check-label align-middle" for="activeYn">활동중지 / 활동중</label>
+								</div>
+							</div>
 						</div>
-				
+						
+						<div class="col-12">
+							<div class="row">
+								<div class="col-12">
+									<label for="activeYn" class="form-label">회원상태
+									</label>
+								</div>
+							</div>
+							<div class="col-12">
+								<div class="row">
+									<input class="custom-check-input" type="checkbox" id="adminYn" name="isAdmin"> &nbsp;
+									<label class="custom-check-label align-middle" for="activeYn">사용자 / 관리자</label>
+								</div>
+							</div>
+						</div>
+						
 						<br><br>
 						<div class="col-12">
 							<label for="pay" class="form-label" id="payList">
@@ -198,40 +298,50 @@
 	            <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" align="center">
 	        		<button type="button" class ="btn btn-info m-5" style="width:150px; border-radius:16px;font-size:20px; background:" onclick="location.href='${contextPath}/adminMemberUpdate.ad'">수정하기</button>
 				</div>
+					</div>
+				</div>
+			</form>
         </div>
     </div>
     
-    <script>      
-    window.onload = () =>{
-    	const payList = document.getElementById('payList');
-    	payList.addEventListener('click', function(){
-    		 document.getElementById('payTable').classList.toggle('hidden');
-    	});
-    	
-    	const payTable = document.getElementById('payTable');
-    	payList.addEventListener('mouseover', function() {
-            payList.style.cursor = "pointer"
-        });
-    	payList.addEventListener('mouseout', function() {
-            payList.style.cursor = ''; 
-        });
-    	
-    	const volunteerList = document.getElementById('volunteerList');
-    	const volunteerTable = document.getElementById('volunteerTable');
-    	volunteerList.addEventListener('click', function(){
-    		 volunteerTable.classList.toggle('hidden');
-    	});
-    	volunteerList.addEventListener('mouseover', function() {
-            volunteerList.style.cursor = "pointer"
-        });
-    	volunteerList.addEventListener('mouseout', function() {
-            volunteerList.style.cursor = ''; 
-        });
-    }
+    
+	<script>
+        window.onload = () => {
+            const payList = document.getElementById('payList');
+            payList.addEventListener('click', function() {
+                document.getElementById('payTable').classList.toggle('hidden');
+            });
+            
+            payList.addEventListener('mouseover', function() {
+                payList.style.cursor = "pointer";
+            });
+            payList.addEventListener('mouseout', function() {
+                payList.style.cursor = '';
+            });
+            
+            const volunteerList = document.getElementById('volunteerList');
+            volunteerList.addEventListener('click', function() {
+                document.getElementById('volunteerTable').classList.toggle('hidden');
+            });
+            volunteerList.addEventListener('mouseover', function() {
+                volunteerList.style.cursor = "pointer";
+            });
+            volunteerList.addEventListener('mouseout', function() {
+                volunteerList.style.cursor = '';
+            });
+
+            var status = "${m.status}"; 
+            var checkbox = document.getElementById('statusYn');
+            checkbox.checked = status === 'Y'; 
+            
+            var isAdmin = "${m.isAdmin}"; 
+            var adminCheckbox = document.getElementById('adminYn');
+            adminCheckbox.checked = isAdmin === 'Y'; 
+        }
+        
         function goBack() {
             location.href="admin.me";
         }
-
     </script>
 </body>
 </html>
