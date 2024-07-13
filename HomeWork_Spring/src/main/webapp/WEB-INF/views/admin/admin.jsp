@@ -142,6 +142,7 @@
 				<ul class="hidden" style="list-style-type:none; text-align:left;">
 					<li id="board1">국내게시판</a></li>
 					<li id="board2">해외게시판</li>
+					<li id="board3">후기게시판</li>
 				</ul>
 			<div class=mainCate>봉사신청관리</div>
 				<ul class="hidden" style="list-style-type:none; text-align:left;">
@@ -842,7 +843,7 @@
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');	
-				 location.href="adminDomesticList.ad";
+				 location.href="admindomestic.ad";
 				 
 			 })
 			
@@ -854,7 +855,19 @@
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
+				 location.href="adminglobal.ad";
 				
+			 })
+			 
+			  document.getElementById('board3').addEventListener('click', function(){
+				 document.getElementById('userInfo').classList.add('hidden');
+				 document.getElementById('userUpdate').classList.add('hidden');
+				 document.getElementById('userDelete').classList.add('hidden');
+				 document.getElementById('supportList').classList.add('hidden');
+				 document.getElementById('searchResult').classList.add('hidden');
+				 document.getElementById('regularSupportList').classList.add('hidden');
+				 document.getElementById('domesticBoardList').classList.add('hidden');
+				 location.href="adminreview.ad"	
 			 })
 			 
 		}

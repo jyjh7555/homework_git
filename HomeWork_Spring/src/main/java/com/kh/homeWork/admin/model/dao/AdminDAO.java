@@ -9,6 +9,7 @@ import org.springframework.stereotype.Repository;
 
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
+import com.kh.homeWork.board.model.vo.Reply;
 import com.kh.homeWork.board.model.vo.VolunteerDetail;
 import com.kh.homeWork.member.model.vo.Member;
 import com.kh.homeWork.surpport.model.vo.Pay;
@@ -62,15 +63,15 @@ public class AdminDAO {
 		
 	}
 
-	public int getListCountBoard(SqlSessionTemplate sqlSession, int i) {
-		return sqlSession.selectOne("adminMapper.getListCountBoard",i);
+	public int getListCountBoard(SqlSessionTemplate sqlSession, int boardTypeNum) {
+		return sqlSession.selectOne("adminMapper.getListCountBoard",boardTypeNum);
 	}
 
-	public ArrayList<Board> selectBoardList(SqlSessionTemplate sqlSession, PageInfo pi, int i) {
+	public ArrayList<Board> selectBoardList(SqlSessionTemplate sqlSession, PageInfo pi, int boardTypeNum) {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("adminMapper.selectBoardList",i,rowBounds);
+		return (ArrayList)sqlSession.selectList("adminMapper.selectBoardList",boardTypeNum,rowBounds);
 	}
 
 	public Board selectBoardList(SqlSessionTemplate sqlSession, int bId) {
@@ -93,8 +94,8 @@ public class AdminDAO {
 		return sqlSession.insert("adminMapper.adminInsertBoard", b);
 	}
 	
-	public int adminDeleteBoard(SqlSessionTemplate sqlSession, int bId) {
-		return sqlSession.update("adminMapper.adminDeleteBoard", bId);
+	public int adminDeleteBoard(SqlSessionTemplate sqlSession, int bNo) {
+		return sqlSession.update("adminMapper.adminDeleteBoard", bNo);
 	}
 
 	public Member adminSelectMember(SqlSessionTemplate sqlSession, int memberNo) {
@@ -107,6 +108,23 @@ public class AdminDAO {
 
 	public int adminUpdateMember(SqlSessionTemplate sqlSession, Member m) {
 		return sqlSession.update("adminMapper.adminUpdateMember", m);
+	}
+
+
+	public ArrayList<Reply> adminSelectReply(SqlSessionTemplate sqlSession, int bId) {
+		return (ArrayList)sqlSession.selectList("adminMapper.adminSelectReply", bId);
+	}
+
+	public int adminSelectBoardNoCheck(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.adminSelectBoardNoCheck");
+	}
+
+	public int adminInsertVolunteer(SqlSessionTemplate sqlSession, VolunteerDetail v) {
+		return sqlSession.insert("adminMapper.adminInsertVolunteer", v);
+	}
+
+	public VolunteerDetail adminSelectVolunteerDetail(SqlSessionTemplate sqlSession, int bId) {
+		return sqlSession.selectOne("adminMapper.adminSelectVolunteerDetail", bId);
 	}
 
 	

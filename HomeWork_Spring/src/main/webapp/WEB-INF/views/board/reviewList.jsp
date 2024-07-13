@@ -69,7 +69,7 @@
 
 		 	
 		 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
-
+		<div class="d-flex flex-row justify-content-end mb-3  w-50 mt-3 " style="width:1400px;">
         		<ul align="center"class="pagination">
 		            <li class="page-item">
 		            	<c:url var="goBack" value="${ loc }">

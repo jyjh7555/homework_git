@@ -4,14 +4,14 @@
  	<select id="getListCount" resultType="_int">
  		select count(*)
  		from board
- 		where delete_yn = 'N' and board_type = #{i}
+ 		where delete_yn = 'N' and board_type = #{boardTypeNum}
 	</select>
 	
  	<select id="selectBoardList" resultType="Board">
 		select * 
 		from board
 	    join location using(location_no)
-		where delete_yn = 'N' and board_type = #{i}
+		where delete_yn = 'N' and board_type = #{boardTypeNum}
 		order by board_no desc
  	</select>
  	<select id="selectBoard" resultType="Board">
@@ -75,4 +75,70 @@
  		from volunteer_Detail
  		where board_no = #{bId}
  	</select>
+ 	
+ 	<update id="updateBoard">
+ 		update board
+ 		set location_no = #{locationNo}, title = #{title}, content= #{content}, update_date = sysdate, member_no = #{memberNo},board_type = #{boardType}
+ 		where board_no = #{boardNo}
+ 	</update>
+ 	<update id="updateVolunteerDetail">
+ 		update volunteer_detail
+ 		set member_count = #{memberCount},
+ 			category = #{category},
+ 			group_yn = #{groupYn},
+ 			address = #{address},
+ 			mgr = #{mgr},
+ 			mgr_Phone = #{mgrPhone},
+ 			update_date = sysdate,
+ 			member_no = #{memberNo},
+ 			recruit_Start = #{recruitStart},
+ 			recruit_end = #{recruitEnd},
+ 			start_date = #{startDate},
+ 			end_date = #{endDate},
+ 			start_time = #{startTime},
+ 			end_time = #{endTime}
+ 		where board_no = #{boardNo}
+ 	</update>
+ 	<update id="deleteBoard">
+ 		update board
+ 		set delete_yn = 'Y'
+ 		where board_no = #{bNo}
+ 	</update>
+ 	<insert id="insertReply">
+ 		insert into reply values(
+ 			seq_reply.nextval,
+ 			sysdate,
+ 			sysdate,
+ 			default,
+ 			#{content},
+ 			#{boardNo},
+ 			#{memberNo}
+ 		)
+ 		
+ 	</insert>
+ 	
+ 	<select id="selectReply" resultType="Reply">
+ 		select reply_no,reply.create_date,update_date,delete_yn,content,board_no,member_no,nickName
+ 		from reply
+ 			join member using(member_no)
+ 		where board_no = #{bId} and delete_yn ='N'
+ 		order by reply_no desc
+ 	</select>
+ 	<update id="updateReply">
+ 		update reply
+ 		set content= #{content}, update_date = sysdate
+ 		where reply_no= #{replyNo}
+ 	</update>
+ 	
+ 	<select id="selectOneReply" resultType="reply">
+ 		select *
+ 		from reply
+ 		where reply_no =#{replyNo}
+ 	</select>
+ 	
+ 	<update id="deleteReply">
+ 		update reply
+ 		set delete_yn = 'Y'
+ 		where reply_no =#{replyNo}
+ 	</update>
 </mapper>

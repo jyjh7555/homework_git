@@ -78,17 +78,24 @@
     </div>
 	<h1 align="center"> 관리자페이지 </h1>
 	<br>
-	<h3 align="center">[국내게시판 관리]</h3>
+	<h3 align="center">[게시판 관리]</h3>
+	
+	
     <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3">
         <div class="d-flex flex-column justify-content-center mb-3 border border-1 border-info w-50 mt-3" style="width:1400px;">
+        <form method="post" id="admimVolunteerInfo">
+        	<input type="hidden" name="boardNo" value="${b.boardNo }">
+			<input type="hidden" name="boardType" value="${b.boardType }">
+			<input type="hidden" name="page" value="${page}">
             <table id="domesticBoardDetail">
-				<tr>
+					<tr>
 	            		<td style="background:#E3E3E3;width:120px">봉사구분</td>
 	            		<td width="">${b.title }</td>
 	            		<td style="background:#E3E3E3;width:120px">국내/해외</td>
 	            		<td>
 		            		<c:if test="${b.boardType == 1 }">국내</c:if>
 		            		<c:if test="${b.boardType == 2 }">해외</c:if>
+		            		<c:if test="${b.boardType == 3 }">후기</c:if>
 	            		</td>
 	            	</tr>
 	            	<tr>
@@ -120,16 +127,61 @@
 	            		<td colspan="3">${v.address }</td>
 	            	</tr>
 	            </table>
+            
+				<c:if test="${b.boardType ==3 }">
+					<div class="bd-example m-4 p-2" style="background: #fbfbfb;">
+						<div>
+							<b>댓글</b>
+						</div>
+						<div class="form-floating input-group">
+						  <textarea class="form-control" placeholder=""id="replyContent" style="height: 100px"></textarea>
+						  <label for="replyContent"></label>
+						  <button type="button"class="input-group-text" id="replyButton" >댓글남기기</button>
+						</div>
+						<div class="m-3" >
+						<table id="replyTable">
+							<c:forEach items="${list}" var="r">
+								<tr>
+									<td width="150px"><b>${r.nickName }</b></td>
+									<td style="width:60%; font-size:12px; padding-top:15px">${r.reDate}</td>
+									<td width="150px"></td>
+									<td width="150px"><a class="fs-6">수정</a>/<a class="fs-6">삭제</a></td>
+								</tr>
+								<tr style="border-bottom: 1px solid #E3E3E3;">
+									<td colspan="3">${r.content }</td>
+																			
+								</tr>	
+								<input type="hidden" name="replyNo" value="${r.replyNo }"/>
+							</c:forEach>
+							
+						</table>						
+						</div>
+					</div>
+				</c:if>
+					
 	            <div style="white-space: pre-wrap;">${b.content }</div>
 	            <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
-	        		<button type="button" class ="btn btn-info m-5" style="width:150px; border-radius:16px;font-size:20px; background:" onclick="location.href='${contextPath}/adminBoardUpdate.ad'">수정하기</button>
-	        		<button type="button" class ="btn btn-secondary m-5" style="width:150px; border-radius:16px;font-size:20px;" onclick="location.href='${contextPath}/adminDomesticList.ad?page=${page}'">목록보기</button>
-	        		<button type="button" class ="btn btn-danger m-5" style="width:150px; border-radius:16px;font-size:20px;" onclick="location.href='${contextPath}/adminBoardDelete.ad'">삭제하기</button>
+	        		<button type="button" id="editButton" class ="btn btn-info m-5" style="width:150px; border-radius:16px;font-size:20px;">수정하기</button>
+	        		<button type="button" class ="btn btn-secondary m-5" style="width:150px; border-radius:16px;font-size:20px;" onclick="location.href='${contextPath}/admindomestic.ad'">목록보기</button>
+	        		<button type="button" id="deleteButton" class ="btn btn-danger m-5" style="width:150px; border-radius:16px;font-size:20px;">삭제하기</button>
 				</div>
+				</form>
         </div>
     </div>
     
     <script>      
+    window.onload = () => {
+        const form = document.getElementById('admimVolunteerInfo');
+        document.getElementById('editButton').addEventListener('click', () => {
+            form.action = '${contextPath}/adminBoardEdit.ad';
+            form.submit();
+        });
+
+        document.getElementById('deleteButton').addEventListener('click', () => {
+            form.action = '${contextPath}/adminBoardDelete.ad';
+            form.submit();
+        });
+    }
         function goBack() {
             location.href="admin.me";
         }

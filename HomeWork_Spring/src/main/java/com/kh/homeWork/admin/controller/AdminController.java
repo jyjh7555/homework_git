@@ -2,6 +2,7 @@ package com.kh.homeWork.admin.controller;
 
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
@@ -12,6 +13,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -24,6 +26,7 @@ import com.kh.homeWork.board.model.exception.BoardException;
 import com.kh.homeWork.board.model.service.BoardService;
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
+import com.kh.homeWork.board.model.vo.Reply;
 import com.kh.homeWork.board.model.vo.VolunteerDetail;
 import com.kh.homeWork.common.Pagination;
 import com.kh.homeWork.member.model.exception.MemberException;
@@ -186,15 +189,36 @@ public class AdminController {
 		}
 	}
 	
-	@RequestMapping("adminDomesticList.ad")
-	public String adminBoardList(@RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
-		int listCount = aService.getListCountBoard(1);
+	@RequestMapping("admin{boardType}.ad")
+	public String adminBoardList(@PathVariable String boardType, @RequestParam(value="page", defaultValue="1") int currentPage, Model model) {
+		
+		int boardTypeNum;
+	    String viewName;
+	    
+	    switch (boardType) {
+        case "domestic":
+            boardTypeNum = 1;
+            viewName = "adminDomesticBoard";
+            break;
+        case "global":
+        	boardTypeNum = 2;
+            viewName = "adminGlobalBoard";
+            break;
+        case "review":
+        	boardTypeNum = 3;
+            viewName = "adminReviewBoard";
+            break;
+        default:
+            return "../errorPage";
+    }
+		
+		int listCount = aService.getListCountBoard(boardTypeNum);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 10);		
-		ArrayList<Board> list = aService.selectBoardList(pi,1);
+		ArrayList<Board> list = aService.selectBoardList(pi,boardTypeNum);
 		
 			model.addAttribute("list",list);
 			model.addAttribute("pi",pi);
-			return "adminBoard";
+			return viewName;
 	}
 	
 	@RequestMapping("adminSelectBoard.ad")
@@ -215,6 +239,24 @@ public class AdminController {
 		model.addAttribute("v",v);
 		model.addAttribute("page",page);
 		
+		//댓글
+		if(b.getBoardType()==3) {
+			ArrayList<Reply> list = aService.selectReply(bId);
+			for(Reply r : list) {
+				r.setContent(r.getContent().replace("\n","<br>"));
+				Calendar calendar = Calendar.getInstance();
+		        calendar.setTime(r.getUpdateDate());
+
+		        int year = calendar.get(Calendar.YEAR);
+		        int month = calendar.get(Calendar.MONTH) + 1;
+		        int day = calendar.get(Calendar.DAY_OF_MONTH);
+		        int hours = calendar.get(Calendar.HOUR_OF_DAY);
+		        int minutes = calendar.get(Calendar.MINUTE);
+		        int seconds = calendar.get(Calendar.SECOND);
+		        r.setReDate(""+year+"."+month+"."+day +" "+hours + ":" +minutes + ":" +seconds);
+			}
+			model.addAttribute("list",list);
+		}
 		
 		return "adminBoardDetail";
 	}
@@ -223,23 +265,43 @@ public class AdminController {
 	public String writeBoard() {
 		return "adminWriteBoard";
 	}
-
+	
 	@RequestMapping("adminInsertBoard.ad")
-	public String insertBoard(@ModelAttribute Board b) {
-		
+	public String insertBoard(@ModelAttribute Board b, @ModelAttribute VolunteerDetail v) {
 		int result = aService.adminInsertBoard(b);
-		
-		return "redirect:adminDomesticList.ad";
+		if(result>0 && b.getBoardType() !=3) {
+			int bNo = aService.adminSelectBoardNoCheck();
+			v.setBoardNo(bNo);
+			int result2 = aService.adminInsertVolunteer(v);
+		}
+		return "redirect:adminDomestic.ad";
 	}
+
 	
 	@RequestMapping("adminBoardDelete.ad")
-	public String deleteBoard(@RequestParam("board") int bId) {
-		int result = aService.adminDeleteBoard(bId);
+	public String adminDeleteBoard(@RequestParam("boardNo") int bNo, @RequestParam("boardType") int boardType, @RequestParam("page") int page) {
+		int result = aService.adminDeleteBoard(bNo);
 		if(result > 0) {				
-			return "redirect:/adminDomesticList.ad";
-		} else {
-			throw new BoardException("게시글 삭제에 실패하였습니다.");
+			switch(boardType) {
+			case 1: return "redirect:admindomestic.ad";
+			case 2: return "redirect:adminglobal.ad";
+			case 3: return "redirect:adminreview.ad";
+			}
 		}
+			throw new BoardException("게시글 삭제에 실패하였습니다.");
+	}
+	
+	@RequestMapping("adminBoardEdit.ad")
+	public String editBoard(@RequestParam("boardNo") int bId,@RequestParam("page")int page,Model model) {
+		Board b = aService.selectBoard(bId, 0);
+		VolunteerDetail v = aService.adminSlectVolunteerDetail(bId);
+		String[] address = v.getAddress().split(",");
+		model.addAttribute("b",b);
+		model.addAttribute("v",v);
+		model.addAttribute("address",address);
+		model.addAttribute("page",page);
+		
+		return "adminEditBoard";
 	}
 	
 	@RequestMapping("adminSelectMember.ad")

@@ -80,121 +80,122 @@
 	<h1 align="center"> 관리자페이지 </h1>
 	<br>
 	<h3 align="center">[국내게시판 관리]</h3>
-    <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3">
-        <div class="d-flex flex-column justify-content-center mb-3 border border-1 border-info w-60 mt-3" style="width:1400px;">
-        	<div class="m-4 p-4"style="border-bottom: 1px solid gray; border-top: 5px solid black; ">
-				제목:<input type="text" class="form-control" name="title" required>
-				<input type="hidden" name="memberNo" value="${loginUser.memberNo}">
+	<form method="post" id="form">
+	    <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3">
+	        <div class="d-flex flex-column justify-content-center mb-3 border border-1 border-info w-60 mt-3" style="width:1400px;">
+	        	<div class="m-4 p-4"style="border-bottom: 1px solid gray; border-top: 5px solid black; ">
+					제목:<input type="text" class="form-control" name="title" required>
+					<input type="hidden" name="memberNo" value="${loginUser.memberNo}">
+				</div>
+				<div class="bd-example m-4 p-2" style="border-top: 2px solid black;">
+	            <table id="adminWriteBoard">
+					<tr>
+			            		<td style="border-bottom:1px solid white; background:#E3E3E3;width:120px">봉사구분</td>
+			            		<td width="35%">
+				            		<select class="form-control" id="category"name="category">
+				            			<option value="집짓기">집짓기</option>
+				            			<option value="환경개선">환경개선</option>
+				            			<option value="긴급/재난">긴급/재난</option>
+				            		</select>
+			            		</td>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px;">국내/해외</td>
+			            		<td>
+				            		<div class="col" align="left">
+				            			<select class="col-4 form-control" id="boardType"name="boardType" style="display:inline; width:100px;">
+				            				<option  value="1">국내</option>
+				            				<option  value="2">해외</option>
+				            			</select>
+				            			<select class="col-4 form-control" id="locationNo"name="locationNo"style="display:inline; width:100px">
+				            				<option value="10">서울</option>
+				            				<option value="20">인천</option>
+				            				<option value="30">경기도</option>
+				            				<option value="40">강원도</option>
+				            				<option value="50">충청도</option>
+				            				<option value="60">전라도</option>
+				            				<option value="70">경상도</option>
+				            			</select>
+				            		</div>
+			            		</td>
+			            	</tr>
+			            	<tr>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사기간</td>
+			            		<td>
+			            			<div class="input-group mb-3">
+									  <input  type="date" name="startDate"class="form-control"required>
+									  <span class="input-group-text" style="background:white; border:0">~</span>
+									  <input  type="date" name="endDate"class="form-control" required>
+									</div>
+			            		
+			            		</td>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사시간</td>
+			            		<td>
+									<div class="input-group mb-3">
+										<input type="time" class="form-control"  name="startTime" value="00:00">
+										<span class="input-group-text" style="background:white; border:0">~</span>
+										<input type="time" class="form-control" name="endTime"value="23:00">
+									</div>
+								</td>
+			            	</tr>
+			            	<tr>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">모집기간</td>
+			            		<td>
+									<div class="input-group mb-1">
+										<input type="date" class="form-control" name="recruitStart" required>
+										<span class="input-group-text" style="background:white; border:0">~</span>
+										<input type="date" class="form-control" name="recruitEnd" required>
+									</div>
+								</td>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">단체여부</td>
+			            		<td>
+			            			<div class="col m-4 mb-1 mt-2">
+			            				<input class="form-check-input " checked  type="radio"  name="groupYn" id="group1" value="Y">
+							  			<label class="form-check-label " for="group1">단체가능</label>
+							  			<br>
+										<input class="form-check-input "  type="radio" name="groupYn" id="group2" value="N">
+							  			<label class="form-check-label" for="group2">불가능</label>
+			            			</div>
+								</td>
+			            	</tr>
+			            	<tr>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">모집인원</td>
+			            		<td><input type="number" class="form-control" name="memberCount" required></td>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">신청인원</td>
+			            		<td></td>
+			            	</tr>
+			            	<tr>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">담당자</td>
+			            		<td><input class="form-control" type="text" name="mgr" required></td>
+			            		<td style="background:#E3E3E3;width:120px">담당자연락처</td>
+			            		<td><input class="form-control" type="text" name="mgrPhone" required></td>
+			            	</tr>
+			            	<tr>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사주소</td>
+			            		<td colspan="3">
+			            		<div class=col-12 align="left">
+							        <input name="address" class="form-control w-25 m-4 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_postcode" placeholder="우편번호" readonly>
+							        <input class="btn btn-outline-secondary btn-sm" type="button" class="btn btn-outline-secondary btn-sm" style="display:inline-block;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+							        <input name="address" class="form-control w-50 m-4 mt-1 mb-1" type="text"  id="sample6_address" placeholder="주소" readonly>
+									<input name="address" class="form-control w-50 m-4 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_detailAddress" placeholder="상세주소">
+									
+						        </div>
+			            		
+			            		</td>
+			            	</tr>
+			            	
+			            </table>
+			            <textarea class="form-control"style="width:100%; height:500px" name="content">
+			            [공지사항]
+			            입력해주세요!
+						
+						</textarea>
+					</div>		
+				</div>
 			</div>
-			<div class="bd-example m-4 p-2" style="border-top: 2px solid black;">
-            <table id="adminWriteBoard">
-				<tr>
-		            		<td style="border-bottom:1px solid white; background:#E3E3E3;width:120px">봉사구분</td>
-		            		<td width="35%">
-			            		<select class="form-control" id="category"name="category">
-			            			<option value="집짓기">집짓기</option>
-			            			<option value="환경개선">환경개선</option>
-			            			<option value="긴급/재난">긴급/재난</option>
-			            		</select>
-		            		</td>
-		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px;">국내/해외</td>
-		            		<td>
-			            		<div class="col" align="left">
-			            			<select class="col-4 form-control" id="boardType"name="boardType" style="display:inline; width:100px;">
-			            				<option  value="1">국내</option>
-			            				<option  value="2">해외</option>
-			            			</select>
-			            			<select class="col-4 form-control" id="locationNo"name="locationNo"style="display:inline; width:100px">
-			            				<option value="10">서울</option>
-			            				<option value="20">인천</option>
-			            				<option value="30">경기도</option>
-			            				<option value="40">강원도</option>
-			            				<option value="50">충청도</option>
-			            				<option value="60">전라도</option>
-			            				<option value="70">경상도</option>
-			            			</select>
-			            		</div>
-		            		</td>
-		            	</tr>
-		            	<tr>
-		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사기간</td>
-		            		<td>
-		            			<div class="input-group mb-3">
-								  <input  type="date" name="startDate"class="form-control"required>
-								  <span class="input-group-text" style="background:white; border:0">~</span>
-								  <input  type="date" name="endDate"class="form-control" required>
-								</div>
-		            		
-		            		</td>
-		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사시간</td>
-		            		<td>
-								<div class="input-group mb-3">
-									<input type="time" class="form-control"  name="startTime" value="00:00">
-									<span class="input-group-text" style="background:white; border:0">~</span>
-									<input type="time" class="form-control" name="endTime"value="23:00">
-								</div>
-							</td>
-		            	</tr>
-		            	<tr>
-		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">모집기간</td>
-		            		<td>
-								<div class="input-group mb-1">
-									<input type="date" class="form-control" name="recruitStart" required>
-									<span class="input-group-text" style="background:white; border:0">~</span>
-									<input type="date" class="form-control" name="recruitEnd" required>
-								</div>
-							</td>
-		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">단체여부</td>
-		            		<td>
-		            			<div class="col m-4 mb-1 mt-2">
-		            				<input class="form-check-input " checked  type="radio"  name="groupYn" id="group1" value="Y">
-						  			<label class="form-check-label " for="group1">단체가능</label>
-						  			<br>
-									<input class="form-check-input "  type="radio" name="groupYn" id="group2" value="N">
-						  			<label class="form-check-label" for="group2">불가능</label>
-		            			</div>
-							</td>
-		            	</tr>
-		            	<tr>
-		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">모집인원</td>
-		            		<td><input type="number" class="form-control" name="memberCount" required></td>
-		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">신청인원</td>
-		            		<td></td>
-		            	</tr>
-		            	<tr>
-		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">담당자</td>
-		            		<td><input class="form-control" type="text" name="mgr" required></td>
-		            		<td style="background:#E3E3E3;width:120px">담당자연락처</td>
-		            		<td><input class="form-control" type="text" name="mgrPhone" required></td>
-		            	</tr>
-		            	<tr>
-		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사주소</td>
-		            		<td colspan="3">
-		            		<div class=col-12 align="left">
-						        <input name="address" class="form-control w-25 m-4 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_postcode" placeholder="우편번호" readonly>
-						        <input class="btn btn-outline-secondary btn-sm" type="button" class="btn btn-outline-secondary btn-sm" style="display:inline-block;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-						        <input name="address" class="form-control w-50 m-4 mt-1 mb-1" type="text"  id="sample6_address" placeholder="주소" readonly>
-								<input name="address" class="form-control w-50 m-4 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_detailAddress" placeholder="상세주소">
-								
-					        </div>
-		            		
-		            		</td>
-		            	</tr>
-		            	
-		            </table>
-		            <textarea class="form-control"style="width:100%; height:500px" name="content">
-		            [공지사항]
-		            입력해주세요!
-					
-					</textarea>
-				</div>		
-			</div>
+		
+		<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
+			<button type="button" class ="btn btm-lg btn-success m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="adminInsertBoard()">게시판 작성</button>
 		</div>
-	
-	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
-		<button type="button" class ="btn btm-lg btn-success m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="insertBoard()">게시판 작성</button>
-	</div>
-	
+		
 	</form>
 	
 	<div id="footer">
@@ -341,9 +342,8 @@
 	
 		//보드삽입 폼설정
 		const form = document.getElementById('form')
-		function insertBoard(){
-			form.action = '${contextPath}/insertBoard.bo';
-			//form.action = '${contextPath}/test.bo';
+		function adminInsertBoard(){
+			form.action = '${contextPath}/adminInsertBoard.ad';
 			form.submit();
 		}
 	
@@ -380,7 +380,7 @@
 	                    if(extraAddr !== ''){
 	                        extraAddr = ' (' + extraAddr + ')';
 	                    }
-	                    // 조합된 참고항목을 해당 필드에 넣는다.
+	                    // 조합된 참고항목을 해당 필드에 넣는다.  
 	                    //document.getElementById("sample6_extraAddress").value = extraAddr;
 	                
 	                } else {

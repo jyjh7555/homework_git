@@ -11,12 +11,13 @@ import com.kh.homeWork.admin.model.dao.AdminDAO;
 import com.kh.homeWork.board.model.dao.BoardDAO;
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
+import com.kh.homeWork.board.model.vo.Reply;
 import com.kh.homeWork.board.model.vo.VolunteerDetail;
 import com.kh.homeWork.member.model.vo.Member;
 import com.kh.homeWork.surpport.model.vo.Pay;
 
 @Service("aService")
-public class AdminServiceimpl implements AdminService {
+public class AdminServiceImpl implements AdminService {
 	
 	@Autowired
 	private SqlSessionTemplate sqlSession; 
@@ -70,13 +71,13 @@ public class AdminServiceimpl implements AdminService {
 		return aDAO.adminPayList(sqlSession, pi);
 	}
 	@Override
-	public int getListCountBoard(int i) {
-		return aDAO.getListCountBoard(sqlSession,i);
+	public int getListCountBoard(int boardTypeNum) {
+		return aDAO.getListCountBoard(sqlSession, boardTypeNum);
 	}
 
 	@Override
-	public ArrayList<Board> selectBoardList(PageInfo pi, int i) {
-		return aDAO.selectBoardList(sqlSession,pi,i);
+	public ArrayList<Board> selectBoardList(PageInfo pi, int boardTypeNum) {
+		return aDAO.selectBoardList(sqlSession,pi,boardTypeNum);
 	}
 
 	@Override
@@ -110,8 +111,8 @@ public class AdminServiceimpl implements AdminService {
 	}
 	
 	@Override
-	public int adminDeleteBoard(int bId) {
-		return aDAO.adminDeleteBoard(sqlSession, bId);
+	public int adminDeleteBoard(int bNo) {
+		return aDAO.adminDeleteBoard(sqlSession, bNo);
 	}
 
 	@Override
@@ -127,6 +128,26 @@ public class AdminServiceimpl implements AdminService {
 	@Override
 	public int adminUpdateMember(Member m) {
 		return aDAO.adminUpdateMember(sqlSession, m);
+	}
+
+	@Override
+	public ArrayList<Reply> selectReply(int bId) {
+		return aDAO.adminSelectReply(sqlSession, bId);
+	}
+
+	@Override
+	public int adminSelectBoardNoCheck() {
+		return aDAO.adminSelectBoardNoCheck(sqlSession);
+	}
+
+	@Override
+	public int adminInsertVolunteer(VolunteerDetail v) {
+		return aDAO.adminInsertVolunteer(sqlSession, v);
+	}
+
+	@Override
+	public VolunteerDetail adminSlectVolunteerDetail(int bId) {
+		return aDAO.adminSelectVolunteerDetail(sqlSession, bId);
 	}
 
 	

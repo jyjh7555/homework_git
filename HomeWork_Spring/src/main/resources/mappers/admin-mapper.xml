@@ -96,14 +96,14 @@
  	<select id="getListCountBoard" resultType="_int">
  		select count(*)
  		from board
- 		where delete_yn = 'N' and board_type = #{i}
+ 		where delete_yn = 'N' and board_type = #{boardTypeNum}
 	</select>
 	
  	<select id="selectBoardList" resultType="Board">
 		select * 
 		from board
 	    join location using(location_no)
-		where delete_yn = 'N' and board_type = #{i}
+		where delete_yn = 'N' and board_type = #{boardTypeNum}
 		order by board_no desc
  	</select>
  	
@@ -141,9 +141,32 @@
  		)
  	</insert>
  	
- 	<update id="adminDeleteBoard">
+ 	<select id="adminSelectBoardNoCheck" resultType="_int">
+ 		select *
+		from (
+		select board_no
+		from board
+		order by board_no desc)
+		where rownum = 1
+ 	</select>
  	
+ 	<select id="adminSelectVolunteerDetail" resultType="VolunteerDetail">
+ 		select *
+ 		from volunteer_Detail
+ 		where board_no = #{bId}
+ 	</select>
+ 	
+ 	<update id="adminDeleteBoard">
+ 		update board
+ 		set delete_yn = 'Y'
+ 		where board_no = #{bNo}
  	</update>
+ 	
+ 	<select id="selectVolunteerDetail" resultType="VolunteerDetail">
+ 		select *
+ 		from volunteer_Detail
+ 		where board_no = #{bId}
+ 	</select>
  	
  	<select id="adminSelectMember" resultType="Member">
  		select *
@@ -164,5 +187,13 @@
  		set delete_yn = 'Y'
  		where board
  	</update>
+ 	
+ 	<select id="adminSelectReply" resultType="Reply">
+ 		select reply_no,reply.create_date,update_date,delete_yn,content,board_no,member_no,nickName
+ 		from reply
+ 			join member using(member_no)
+ 		where board_no = #{bId} and delete_yn ='N'
+ 		order by reply_no desc
+ 	</select>
  	
 </mapper>

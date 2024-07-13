@@ -9,6 +9,7 @@ import org.springframework.stereotype.Service;
 import com.kh.homeWork.board.model.dao.BoardDAO;
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
+import com.kh.homeWork.board.model.vo.Reply;
 import com.kh.homeWork.board.model.vo.VolunteerDetail;
 
 @Service("bService")
@@ -26,8 +27,8 @@ public class BoardServiceimpl implements BoardService {
 	}
 
 	@Override
-	public ArrayList<Board> selectBoardList(PageInfo pi, int i) {
-		return bDAO.selectBoardList(sqlSession,pi,i);
+	public ArrayList<Board> selectBoardList(PageInfo pi, int boardTypeNum) {
+		return bDAO.selectBoardList(sqlSession,pi,boardTypeNum);
 	}
 
 	@Override
@@ -63,6 +64,46 @@ public class BoardServiceimpl implements BoardService {
 	@Override
 	public VolunteerDetail selectVolunteerDetail(int bId) {
 		return bDAO.selectVolunteerDetail(sqlSession,bId);
+	}
+
+	@Override
+	public int updateBoard(Board b) {
+		return bDAO.updateBoard(sqlSession,b);
+	}
+
+	@Override
+	public int updateVolunteerDetail(VolunteerDetail v) {
+		return bDAO.updateVolunteerDetail(sqlSession,v);
+	}
+
+	@Override
+	public int deleteBoard(int bNo) {
+		return bDAO.deleteBoard(sqlSession,bNo);
+	}
+
+	@Override
+	public int insertReply(Reply r) {
+		return bDAO.insertReply(sqlSession,r);
+	}
+
+	@Override
+	public ArrayList<Reply> selectReply(int bId) {
+		return bDAO.selectReply(sqlSession,bId);
+	}
+
+	@Override
+	public int updateReply(Reply r) {
+		return bDAO.updateReply(sqlSession,r);
+	}
+
+	@Override
+	public Reply selectOneReply(Reply r) {
+		return bDAO.selectOneReply(sqlSession,r);
+	}
+
+	@Override
+	public int deleteReply(Reply r) {
+		return bDAO.deleteReply(sqlSession,r);
 	}
 
 }
