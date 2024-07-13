@@ -81,9 +81,9 @@
 	<h3 align="center">[국내게시판 관리]</h3>
     <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3">
         <div class="d-flex flex-column justify-content-center mb-3 border border-1 border-info w-50 mt-3" style="width:1500px;">
-            	<form method="post" id="form">
+        <form method="post" id="form">
 		<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
-			<div class="d-flex flex-column justify-content-center mb-3 border border-4 w-50 mt-3 " style="width:1600px">
+			<div class="d-flex flex-column justify-content-center mb-3 border border-4 mt-3 " style="width:1600px">
 				<div class="m-4 p-4"style="border-bottom: 1px solid gray; border-top: 5px solid black; ">
 					<input type="text" class="form-control" name="title" value="${b.title }"required>
 					<input type="hidden" name="memberNo" value="${loginUser.memberNo}">
@@ -171,6 +171,7 @@
 		            			<div class="col m-4 mb-1 mt-2">
 		            				<input class="form-check-input " <c:if test="${v.groupYn =='Y' }">checked</c:if>  type="radio"  name="groupYn" id="group1" value="Y">
 						  			<label class="form-check-label " for="group1">단체가능</label>
+						  			<br>
 									<input class="form-check-input " <c:if test="${v.groupYn =='N' }">checked</c:if> type="radio" name="groupYn" id="group2" value="N">
 						  			<label class="form-check-label" for="group2">불가능</label>
 		            			</div>
@@ -180,7 +181,7 @@
 		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">모집인원</td>
 		            		<td><input type="number" class="form-control" name="memberCount" value="${v.memberCount}"></td>
 		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">신청인원</td>
-		            		<td></td>
+		            		<td><input type="number" class="form-control" name="memberCount" value="20(db)"></td>
 		            	</tr>
 		            	<tr>
 		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">담당자</td>
@@ -191,7 +192,7 @@
 		            	<tr>
 		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사주소</td>
 		            		<td colspan="3">
-		            		<div class=col-12>
+		            		<div class=col-12 align="left">
 						        <input name="address" value="${address[0] }"class="form-control w-25 m-4 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_postcode" placeholder="우편번호" readonly>
 						        <input class="btn btn-outline-secondary btn-sm" type="button" class="btn btn-outline-secondary btn-sm" style="display:inline-block;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
 						        <input name="address" value="${address[1] }"class="form-control w-50 m-4 mt-1 mb-1" type="text"  id="sample6_address" placeholder="주소" readonly>
@@ -212,9 +213,6 @@
 		            	<button style="border:1px solid gray; text-decoration:line-through;">가</button>
 		            	<button >이미지</button>	
 		            	
-		            		
-		            
-		            
 		            
 		            </div>
 		            <div id="editDiv" class="form-control workseditor-editor"style="width:100%; min-height:500px" contenteditable="true">
@@ -226,9 +224,8 @@
 		</div>
 	
 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
-		<button type="button" class ="btn btm-lg btn-success m-5" style="width:150px; border-radius:16px;font-size:24px;" onclick="updateBoard()">수정완료</button>
+		<button type="button" class ="btn btm-lg btn-success m-5" style="width:150px; border-radius:16px;font-size:24px;" onclick="adminUpdateBoard()">수정완료</button>
 		<button type="button" class ="btn btm-lg btn-secondary m-5" style="width:150px; border-radius:16px;font-size:24px;" onclick="javascript:history.back();">뒤로가기</button>
-		<button type="button" class ="btn btm-lg btn-danger m-5" style="width:150px; border-radius:16px;font-size:24px;" id="deleteModal">삭제하기</button>
 	</div>
 	
 			</form>
@@ -411,8 +408,8 @@
 	
 	const form = document.getElementById('form')
 	
-	function updateBoard(){
-		form.action = '${contextPath}/updateBoard.bo';
+	function adminUpdateBoard(){
+		form.action = '${contextPath}/adminUpdateBoard.ad';
 		document.getElementsByName('content')[0].value= editDiv.innerHTML;
 		form.submit();
 	}
@@ -500,11 +497,10 @@
             }
         }).open();
         
-        function goback(){
-	        location.href="admin.me";
-        }
-        	
     }
+	 function goBack(){
+	     location.href="admin.me";
+	 }
 
     </script>
 </body>

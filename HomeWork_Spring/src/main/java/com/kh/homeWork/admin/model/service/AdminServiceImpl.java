@@ -150,6 +150,16 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.adminSelectVolunteerDetail(sqlSession, bId);
 	}
 
+	@Override
+	public int adminUpdateBoard(Board b) {
+		return aDAO.adminUpdateBoard(sqlSession, b);
+	}
+
+	@Override
+	public int adminUpdateVolunteerDetail(VolunteerDetail v) {
+		return aDAO.adminUpdateVolunteerDetail(sqlSession, v);
+	}
+
 	
 
 

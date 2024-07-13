@@ -7,8 +7,6 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
-import javax.websocket.Session;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -302,6 +300,23 @@ public class AdminController {
 		model.addAttribute("page",page);
 		
 		return "adminEditBoard";
+	}
+	
+	@RequestMapping("adminUpdateBoard.ad")
+	public String updateBoard(@ModelAttribute Board b, @ModelAttribute VolunteerDetail v,@RequestParam("page") int page) {
+		int result1 = aService.adminUpdateBoard(b);
+		System.out.println(result1); 
+		int result2 = aService.adminUpdateVolunteerDetail(v);
+		System.out.println(result2); 
+		
+		if(result1>0 && result2>0) {
+			switch(b.getBoardType()) {
+			case 1: return "redirect:admindomestic.ad?page="+page;
+			case 2: return "redirect:adminglobal.ad?page="+page;
+			case 3: return "redirect:adminreview.ad?page="+page;
+			}
+		}
+		throw new BoardException("게시글 수정에 실패하였습니다");
 	}
 	
 	@RequestMapping("adminSelectMember.ad")

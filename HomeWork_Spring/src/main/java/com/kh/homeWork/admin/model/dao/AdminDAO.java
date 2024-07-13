@@ -127,6 +127,14 @@ public class AdminDAO {
 		return sqlSession.selectOne("adminMapper.adminSelectVolunteerDetail", bId);
 	}
 
+	public int adminUpdateBoard(SqlSessionTemplate sqlSession, Board b) {
+		return sqlSession.update("adminMapper.adminUpdateBoard", b);
+	}
+
+	public int adminUpdateVolunteerDetail(SqlSessionTemplate sqlSession, VolunteerDetail v) {
+		return sqlSession.update("adminMapper.adminUpdateVolunteerDetail", v);
+	}
+
 	
 
 	

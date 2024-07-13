@@ -58,6 +58,10 @@ public interface AdminService {
 
 	VolunteerDetail adminSlectVolunteerDetail(int bId);
 
+	int adminUpdateBoard(Board b);
+
+	int adminUpdateVolunteerDetail(VolunteerDetail v);
+
 	
 
 
