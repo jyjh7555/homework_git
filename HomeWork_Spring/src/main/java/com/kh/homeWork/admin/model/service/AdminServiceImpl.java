@@ -160,6 +160,11 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.adminUpdateVolunteerDetail(sqlSession, v);
 	}
 
+	@Override
+	public int getListCountVolunteer() {
+		return aDAO.getListCountVolunteer(sqlSession);
+	}
+
 	
 
 

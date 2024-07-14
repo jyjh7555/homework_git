@@ -123,7 +123,7 @@
 	
 	<div id="container">
 		<div align="center" id=adminMenu>
-			<div style="border:1px solid skyblue; background:skyblue; height:32px"></div>
+			<div style="border:1px solid skyblue; background:skyblue; height:32px"><a onClick="window.location.reload()">홈</a></div>
 			
 			<div class="mainCate" style="margin-top:10px" >회원정보관리</div>
 				<ul class="hidden" style="list-style-type:none; text-align:left;">
@@ -140,17 +140,17 @@
 				</ul>
 			<div class=mainCate>게시판관리</div>
 				<ul class="hidden" style="list-style-type:none; text-align:left;">
-					<li id="board1">국내게시판</a></li>
+					<li id="board1">국내게시판</li>
 					<li id="board2">해외게시판</li>
 					<li id="board3">후기게시판</li>
 				</ul>
 			<div class=mainCate>봉사신청관리</div>
 				<ul class="hidden" style="list-style-type:none; text-align:left;">
-					<li id="vollunteer1">봉사신청자</li>
+					<li id="volunteer1">봉사신청자</li>
 				</ul>
 			
 		</div>
-				
+					
 		<div id=selectDiv>
 			<div style="border:2px solid #CCCCCC; height:40px">
 			<form id="searchForm">
@@ -160,11 +160,45 @@
 					<option value="nickName">닉네임</option> 
 				</select>
 				<input type="text" placeholder="회원정보 입력" style="width:35%" id="searchText">
-				<button type="button" onclick="searchMember()")>검색</button><br>
+				<button type="button" onclick="searchMember()">검색</button><br>
 			</form>
 			</div>
-			<div align="center" id=adminContent>
 			
+			<div align="center" id=adminContent>
+				<div class="infoList" id="infoList">
+						<table id="infoList" class="table table-bordered">
+				            <thead>
+				                <tr>
+				                    <th>통계 항목</th>
+				                    <th>값</th>
+				                </tr>
+				            </thead>
+				            <tbody>
+				                <tr>
+				                    <td>총 회원 수</td>
+				                    <td id="totalMembers"></td>
+				                </tr>
+				                <tr>
+				                    <td>활동 중인 회원 수</td>
+				                    <td id="activeMembers"></td>
+				                </tr>
+				                <tr>
+				                    <td>활동 중지된 회원 수</td>
+				                    <td id="inactiveMembers"></td>
+				                </tr>
+				                <tr>
+				                    <td>총 게시물 수</td>
+				                    <td id="totalPosts">/td>
+				                </tr>
+				                <tr>
+				                    <td>총 후원액</td>
+				                    <td id="totalAmounts"></td>
+				                </tr>
+				            </tbody>
+				        </table>
+		    		</div>	
+		    	
+	    	
 				<div class="searchResult hidden" id=searchResult>
 		    		<table id="searchList">
 		    			<thead>
@@ -342,9 +376,36 @@
 					<table id="globalBoardTable">
 					</table>
 				</div>
+				<div class="volunteer hidden" id="volunteerList">
+					<table id="volunteerTable">
+						<thead>
+							<tr>
+								<th width="10%">회원번호</th>
+								<th width="10%">이름</th>
+								<th width="10%">제목?</th>
+								<th width="10%">현재상태</th>
+								<th width="10%">버튼</th>
+							</tr>
+						</thead>
+						<tbody>
+			
+						</tbody>
+						<tfoot>
+					        <tr>
+					            <td colspan="10">
+					                <nav aria-label="Standard pagination example" style="float: center;">
+					                    <ul id="pagination4" class="pagination">
+					                    
+					                    </ul>
+					                </nav>
+					            </td>
+					        </tr>
+					    </tfoot>
+					</table>
+					</div>
+				</div>
 			</div>
 		</div>
-	</div>
 	
 	<script>
 		window.onload =() =>{
@@ -365,6 +426,8 @@
 	                this.nextElementSibling.classList.toggle('hidden');
 	                
 	            });
+			fetchStatistics();
+		}
 			
 			 
 			 
@@ -377,6 +440,8 @@
 				    document.getElementById('searchResult').classList.add('hidden');
 				    document.getElementById('domesticBoardList').classList.add('hidden');
 				    document.getElementById('globalBoardList').classList.add('hidden');
+				    document.getElementById('volunteerList').classList.add('hidden');
+				    document.getElementById('infoList').classList.add('hidden');
 
 				    let currentPage = 1;
 				    const pageSize = 10;
@@ -485,6 +550,8 @@
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');
+				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('infoList').classList.add('hidden');
 				 
 				let currentPage = 1;
 			    let page = 1;
@@ -625,6 +692,8 @@
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');
+				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('infoList').classList.add('hidden');
 				 
 				 let currentPage = 1;
 				 let page = 1;
@@ -732,6 +801,8 @@
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');
+				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('infoList').classList.add('hidden');
 					let currentPage = 1;
 				    let page = 1;
 				    const pageSize = 10;
@@ -832,7 +903,8 @@
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');
-				 
+				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('infoList').classList.add('hidden');
 			 })
 			 
 			 document.getElementById('board1').addEventListener('click', function(){
@@ -843,6 +915,8 @@
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');	
+				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('infoList').classList.add('hidden');
 				 location.href="admindomestic.ad";
 				 
 			 })
@@ -855,6 +929,8 @@
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
+				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('infoList').classList.add('hidden');
 				 location.href="adminglobal.ad";
 				
 			 })
@@ -867,10 +943,126 @@
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
+				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('infoList').classList.add('hidden');
 				 location.href="adminreview.ad"	
 			 })
 			 
-		}
+			document.getElementById('volunteer1').addEventListener('click', function() {
+		    document.getElementById('volunteerList').classList.toggle('hidden');
+		    document.getElementById('userInfo').classList.add('hidden');
+		    document.getElementById('userUpdate').classList.add('hidden');
+		    document.getElementById('userDelete').classList.add('hidden');
+		    document.getElementById('supportList').classList.add('hidden');
+		    document.getElementById('searchResult').classList.add('hidden');
+		    document.getElementById('regularSupportList').classList.add('hidden');
+		    document.getElementById('domesticBoardList').classList.add('hidden');
+		    document.getElementById('infoList').classList.add('hidden');
+		
+		    let currentPage = 1;
+		    const pageSize = 10;
+		
+		    function loadPage5(page) {
+		        const url = '${contextPath}/adminVolunteerList.ad?page=' + page + '&size=' + pageSize;
+		
+		        $.ajax({
+		            url: url,
+		            method: 'GET',
+		            success: function(data) {
+		                if (data && data.member) {
+		                    document.getElementById('volunteerList').classList.remove('hidden');
+		                    const volunteerList = document.getElementById('volunteerList');
+		                    const tbody = volunteerList.querySelector('tbody');
+		                    tbody.innerHTML = '';
+		
+		                    data.member.forEach(m => {
+		                        const tr = document.createElement('tr');
+		
+		                        const noTd = document.createElement('td');
+		                        noTd.innerText = m.memberNo;
+		                        const nameTd = document.createElement('td');
+		                        nameTd.innerText = m.memberName;
+		                        const boardTd = document.createElement('td');
+		                        boardTd.innerText = m.category;
+		                        const statusTd = document.createElement('td');
+		                        switch (m.status) {
+		                            case 'W':
+		                                statusTd.innerText = '대기중';
+		                                break;
+		                            case 'Y':
+		                                statusTd.innerText = '승인완료';
+		                                break;
+		                            case 'N':
+		                                statusTd.innerText = '승인거부';
+		                                break;
+		                            default:
+		                                statusTd.innerText = '알 수 없음';
+		                        }
+		
+		                        const btnTd = document.createElement('td');
+		                        const approveBtn = document.createElement('button');
+		                        approveBtn.textContent = '승인';
+		                        approveBtn.className = 'btn btn-success';
+		                        approveBtn.onclick = function() {
+		                            alert('승인 버튼 클릭됨 for member ' + m.memberNo);
+		                        };
+		
+		                        const rejectBtn = document.createElement('button');
+		                        rejectBtn.textContent = '거부';
+		                        rejectBtn.className = 'btn btn-danger';
+		                        rejectBtn.onclick = function() {
+		                            alert('거부 버튼 클릭됨 for member ' + m.memberNo);
+		                        };
+		
+		                        btnTd.appendChild(approveBtn);
+		                        btnTd.appendChild(rejectBtn);
+		
+		                        const tds = [noTd, nameTd, boardTd, statusTd, btnTd];
+		                        tr.append(...tds);
+		                        tbody.append(tr);
+		                    });
+		
+		                    const pagination = document.getElementById('pagination5');
+		                    pagination.innerHTML = '';
+		
+		                    if (data.maxPage > 1) {
+		                        for (let i = 1; i <= data.maxPage; i++) {
+		                            const pageItem = document.createElement('li');
+		                            pageItem.classList.add('page-item');
+		                            const pageLink = document.createElement('a');
+		                            pageLink.classList.add('page-link');
+		                            pageLink.href = '#';
+		                            pageLink.innerText = i;
+		                            (function(pageNumber) {
+		                                pageLink.addEventListener('click', function(event) {
+		                                    event.preventDefault();
+		                                    loadPage5(pageNumber);
+		                                });
+		                            })(i);
+		
+		                            if (i === page) {
+		                                pageItem.classList.add('active');
+		                            } else {
+		                                pageItem.classList.remove('active');
+		                            }
+		                            pageItem.append(pageLink);
+		                            pagination.append(pageItem);
+		                        }
+		                    }
+		                } else {
+		                    console.error(data);
+		                }
+		            },
+		            error: function(error) {
+		                console.error(error);
+		            }
+		        });
+		    }
+		
+		    loadPage5(currentPage);
+		});
+
+			 
 		
 		function deleteMember(memberNo){
 			if (confirm("정말 탈퇴하시겠습니까?")) {
@@ -954,6 +1146,8 @@
 			 document.getElementById('userDelete').classList.add('hidden');
 			 document.getElementById('supportList').classList.add('hidden');
 			 document.getElementById('regularSupportList').classList.add('hidden');
+			 document.getElementById('volunteerList').classList.add('hidden');
+			 document.getElementById('infoList').classList.add('hidden');
 		}
 		
 		function searchMember() {
@@ -1013,7 +1207,26 @@
 				},
 				error: data => console.log(data)
 				
-			})
+			});
+	        function fetchStatistics() {
+	            $.ajax({
+	                url: '${contextPath}/adminStatistics',
+	                method: 'GET',
+	                success: function(data) {
+	                    document.getElementById('totalMembers').innerText = data.totalMembers;
+	                    document.getElementById('activeMembers').innerText = data.activeMembers;
+	                    document.getElementById('inactiveMembers').innerText = data.inactiveMembers;
+	                    document.getElementById('totalPosts').innerText = data.totalPosts;
+	                    document.getElementById('totalAdmins').innerText = data.totalAdmins;
+	                    document.getElementById('createdAt').innerText = data.createdAt;
+	                },
+	                error: function(error) {
+	                    console.error('Error fetching statistics:', error);
+	                }
+	            });
+	        }
+
+	        
 		}
 	</script>
 </body>

@@ -62,6 +62,8 @@ public interface AdminService {
 
 	int adminUpdateVolunteerDetail(VolunteerDetail v);
 
+	int getListCountVolunteer();
+
 	
 
 

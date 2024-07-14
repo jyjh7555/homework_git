@@ -135,6 +135,10 @@ public class AdminDAO {
 		return sqlSession.update("adminMapper.adminUpdateVolunteerDetail", v);
 	}
 
+	public int getListCountVolunteer(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.getListVolunteer");
+	}
+
 	
 
 	

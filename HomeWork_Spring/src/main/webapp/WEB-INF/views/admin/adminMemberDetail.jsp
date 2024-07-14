@@ -215,34 +215,46 @@
 						</div>
 						
 						<div class="col-12">
-							<div class="row">
-								<div class="col-12">
-									<label for="activeYn" class="form-label">활동여부
-									</label>
-								</div>
-							</div>
-							<div class="col-12">
-								<div class="row">
-									<input class="custom-check-input" type="checkbox" id="statusYn" name="status"> &nbsp;
-									<label class="custom-check-label align-middle" for="activeYn">활동중지 / 활동중</label>
-								</div>
-							</div>
-						</div>
+				            <div class="row">
+				                <div class="col-12">
+				                    <label for="statusYn" class="form-label">활동여부</label>
+				                </div>
+				            </div>
+				            <div class="col-12">
+				                <div class="row">
+				                    <c:choose>
+				                        <c:when test="${m.status == 'Y'}">
+				                            <input class="custom-check-input" type="checkbox" id="statusYn" name="status" value="Y" checked> &nbsp;
+				                        </c:when>
+				                        <c:otherwise>
+				                            <input class="custom-check-input" type="checkbox" id="statusYn" name="status" value="N"> &nbsp;
+				                        </c:otherwise>
+				                    </c:choose>
+				                    <label class="custom-check-label align-middle" for="statusYn">활동중지 / 활동중</label>
+				                </div>
+				            </div>
+				        </div>
 						
 						<div class="col-12">
-							<div class="row">
-								<div class="col-12">
-									<label for="activeYn" class="form-label">회원상태
-									</label>
-								</div>
-							</div>
-							<div class="col-12">
-								<div class="row">
-									<input class="custom-check-input" type="checkbox" id="adminYn" name="isAdmin"> &nbsp;
-									<label class="custom-check-label align-middle" for="activeYn">사용자 / 관리자</label>
-								</div>
-							</div>
-						</div>
+				            <div class="row">
+				                <div class="col-12">
+				                    <label for="adminYn" class="form-label">회원상태</label>
+				                </div>
+				            </div>
+				            <div class="col-12">
+				                <div class="row">
+				                    <c:choose>
+				                        <c:when test="${m.isAdmin == 'Y'}">
+				                            <input class="custom-check-input" type="checkbox" id="adminYn" name="isAdmin" value="Y" checked> &nbsp;
+				                        </c:when>
+				                        <c:otherwise>
+				                            <input class="custom-check-input" type="checkbox" id="adminYn" name="isAdmin" value="N"> &nbsp;
+				                        </c:otherwise>
+				                    </c:choose>
+				                    <label class="custom-check-label align-middle" for="adminYn">사용자 / 관리자</label>
+				                </div>
+				            </div>
+				        </div>
 						
 						<br><br>
 						<div class="col-12">
@@ -280,10 +292,10 @@
 						<table class="hidden table table-hover" id="volunteerTable">
 							<thead>
 								<tr>
-									<th width="20px">b boardType 국내해외 구분</th>
-									<th width="40px">l location 지역</th>
-									<th width="80px">v category</th>
-									<th width="100px">v startTime~endTime 봉사기간</th>
+									<th width="20px"></th>
+									<th width="40px"></th>
+									<th width="80px"></th>
+									<th width="100px"></th>
 								</tr>
 							</thead>
 							<tbody>
@@ -296,7 +308,7 @@
 							</tbody>
 						</table>
 	            <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" align="center">
-	        		<button type="button" class ="btn btn-info m-5" style="width:150px; border-radius:16px;font-size:20px; background:" onclick="location.href='${contextPath}/adminMemberUpdate.ad'">수정하기</button>
+	        		<button type="submit" class ="btn btn-info m-5" style="width:150px; border-radius:16px;font-size:20px;">수정하기</button>
 				</div>
 					</div>
 				</div>
@@ -338,6 +350,22 @@
             var adminCheckbox = document.getElementById('adminYn');
             adminCheckbox.checked = isAdmin === 'Y'; 
         }
+        
+        function updateCheckboxValue(checkbox) {
+            checkbox.value = checkbox.checked ? 'Y' : 'N';
+        }
+
+        function validateForm() {
+            const statusCheckbox = document.getElementById('statusYn');
+            statusCheckbox.value = statusCheckbox.checked ? 'Y' : 'N';
+            
+            const adminCheckbox = document.getElementById('adminYn');
+            adminCheckbox.value = adminCheckbox.checked ? 'Y' : 'N';
+            
+            return true; 
+        }  
+        
+        
         
         function goBack() {
             location.href="admin.me";

@@ -7,6 +7,7 @@ import java.util.HashMap;
 
 import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -21,7 +22,6 @@ import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.kh.homeWork.admin.model.service.AdminService;
 import com.kh.homeWork.board.model.exception.BoardException;
-import com.kh.homeWork.board.model.service.BoardService;
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
 import com.kh.homeWork.board.model.vo.Reply;
@@ -332,16 +332,56 @@ public class AdminController {
 		return "adminMemberDetail";
 	}
 	
-	@RequestMapping("adminMemberUpdate.ad")
+	@RequestMapping("adminUpdateMember.ad")
 	public String adminUpdateMember(@ModelAttribute Member m, Model model) {
 		int result = aService.adminUpdateMember(m);
-		
+		System.out.println(m);
 		if(result > 0) {
 			return "redirect:adminSelectMember.ad";
 		} else {
 			throw new MemberException("정보수정을 실패했습니다.");
 		}
 	}
+	/*
+	@RequestMapping("/adminVolunteerList.ad")
+	@ResponseBody
+	public void adminVolunteerList(@RequestParam(value="page", defaultValue = "1") int page,
+								@RequestParam(value="size", defaultValue = "10") int size,
+								HttpServletResponse response
+							    ) {
+	    
+		int listCount = aService.getListCountVolunteer();
+		
+		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
+		
+		ArrayList<Volunteer> list = aService.adminVolunteerList(pi);
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+	    result.put("volunteer", list);
+	    result.put("maxPage", pi.getMaxPage()); 
+	    result.put("currentPage", pi.getCurrentPage());
+	    result.put("currentPage", pi.getCurrentPage());
+		try {
+			gson.toJson(result, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	*/
+	
+	/*
+	@RequestMapping("/adminVolunteerUpdate.ad")
+	@ResponseBody
+	public String adminVolunteerUpdate(@ModelAttribute Volunteer v) {
+		int result = aService.adminVolunteerUpdate(v);
+		return result == 1? "success" : "fail";
+	}
+	*/
 	
 	
 	

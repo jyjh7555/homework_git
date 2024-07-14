@@ -85,8 +85,6 @@
 	</update>
 	
 	
-
-	
 	<select id="adminPayList" resultType="Pay">
 		select *
 		from pay
@@ -222,5 +220,11 @@
  		where board_no = #{bId} and delete_yn ='N'
  		order by reply_no desc
  	</select>
+ 	
+ 	<select id="getListCountVolunteer" resultType="_int">
+		select count(*)
+		from volunteer
+		where status = 'W'
+	</select>
  	
 </mapper>
