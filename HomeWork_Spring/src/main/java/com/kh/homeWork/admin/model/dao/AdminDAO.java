@@ -139,6 +139,22 @@ public class AdminDAO {
 		return sqlSession.selectOne("adminMapper.getListVolunteer");
 	}
 
+	public int totalMember(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.totalMember");
+	}
+
+	public int activeMember(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.activeMember");
+	}
+
+	public int totalBoard(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.totalBoard");
+	}
+
+	public int totalAmount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.totalAmount");
+	}
+
 	
 
 	

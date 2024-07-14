@@ -64,6 +64,14 @@ public interface AdminService {
 
 	int getListCountVolunteer();
 
+	int totalMember();
+
+	int activeMember();
+
+	int totalBoard();
+
+	int totalAmount();
+
 	
 
 

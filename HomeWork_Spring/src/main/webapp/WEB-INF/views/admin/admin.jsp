@@ -188,11 +188,11 @@
 				                </tr>
 				                <tr>
 				                    <td>총 게시물 수</td>
-				                    <td id="totalPosts">/td>
+				                    <td id="totalBoard"></td>
 				                </tr>
 				                <tr>
 				                    <td>총 후원액</td>
-				                    <td id="totalAmounts"></td>
+				                    <td id="totalAmount"></td>
 				                </tr>
 				            </tbody>
 				        </table>
@@ -408,7 +408,24 @@
 		</div>
 	
 	<script>
+	function statistics() {
+        $.ajax({
+            url: '${contextPath}/adminStatistics.ad',
+            method: 'GET',
+            success: data=> {
+                document.getElementById('totalMembers').innerText = data.totalMember+"명";
+                document.getElementById('activeMembers').innerText = data.activeMember+"명";
+                document.getElementById('inactiveMembers').innerText = data.inactiveMember+"명";
+                document.getElementById('totalBoard').innerText = data.totalBoard+"개";
+                document.getElementById('totalAmount').innerText = data.amount+"원";
+            },
+            error: function(error) {
+                console.error('Error fetching statistics:', error);
+            }
+        });
+    }
 		window.onload =() =>{
+			statistics();
 			const mainCate = document.getElementsByClassName('mainCate');
 			 mainCate[0].addEventListener('click', function() {
 	                this.nextElementSibling.classList.toggle('hidden');
@@ -426,7 +443,6 @@
 	                this.nextElementSibling.classList.toggle('hidden');
 	                
 	            });
-			fetchStatistics();
 		}
 			
 			 
@@ -1208,25 +1224,11 @@
 				error: data => console.log(data)
 				
 			});
-	        function fetchStatistics() {
-	            $.ajax({
-	                url: '${contextPath}/adminStatistics',
-	                method: 'GET',
-	                success: function(data) {
-	                    document.getElementById('totalMembers').innerText = data.totalMembers;
-	                    document.getElementById('activeMembers').innerText = data.activeMembers;
-	                    document.getElementById('inactiveMembers').innerText = data.inactiveMembers;
-	                    document.getElementById('totalPosts').innerText = data.totalPosts;
-	                    document.getElementById('totalAdmins').innerText = data.totalAdmins;
-	                    document.getElementById('createdAt').innerText = data.createdAt;
-	                },
-	                error: function(error) {
-	                    console.error('Error fetching statistics:', error);
-	                }
-	            });
-	        }
-
 	        
+	        
+	        window.onload = () => {
+	        	statistics();
+			}
 		}
 	</script>
 </body>

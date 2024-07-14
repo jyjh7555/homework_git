@@ -165,6 +165,26 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.getListCountVolunteer(sqlSession);
 	}
 
+	@Override
+	public int totalMember() {
+		return aDAO.totalMember(sqlSession);
+	}
+
+	@Override
+	public int activeMember() {
+		return aDAO.activeMember(sqlSession);
+	}
+
+	@Override
+	public int totalBoard() {
+		return aDAO.totalBoard(sqlSession);
+	}
+
+	@Override
+	public int totalAmount() {
+		return aDAO.totalAmount(sqlSession);
+	}
+
 	
 
 

@@ -226,5 +226,26 @@
 		from volunteer
 		where status = 'W'
 	</select>
+	
+	<select id="totalMember" resultType="_int">
+		select count(*)
+		from member
+	</select>
+	
+	<select id="activeMember" resultType="_int">
+		select count(*)
+		from member
+		where status = 'Y'
+	</select>
+	
+	<select id="totalBoard" resultType="_int">
+		select count(*)
+		from board
+	</select>
+	
+	<select id="totalAmount" resultType="_int">
+		select sum(amount)
+		from pay
+	</select>
  	
 </mapper>

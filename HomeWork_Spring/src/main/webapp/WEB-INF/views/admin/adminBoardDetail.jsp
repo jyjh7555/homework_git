@@ -145,7 +145,7 @@
 									<td width="150px"><b>${r.nickName }</b></td>
 									<td style="width:60%; font-size:12px; padding-top:15px">${r.reDate}</td>
 									<td width="150px"></td>
-									<td width="150px"><a class="fs-6">수정</a>/<a class="fs-6">삭제</a></td>
+									<td width="150px"><a class="fs-6">삭제</a></td>
 								</tr>
 								<tr style="border-bottom: 1px solid #E3E3E3;">
 									<td colspan="3">${r.content }</td>

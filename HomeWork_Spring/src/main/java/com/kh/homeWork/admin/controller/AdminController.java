@@ -334,12 +334,47 @@ public class AdminController {
 	
 	@RequestMapping("adminUpdateMember.ad")
 	public String adminUpdateMember(@ModelAttribute Member m, Model model) {
+		if (m.getStatus() == null || m.getStatus().isEmpty()) {
+	        m.setStatus("N");
+	    }
+	    if (m.getIsAdmin() == null || m.getIsAdmin().isEmpty()) {
+	        m.setIsAdmin("N");
+	    }
 		int result = aService.adminUpdateMember(m);
-		System.out.println(m);
 		if(result > 0) {
-			return "redirect:adminSelectMember.ad";
+			return "redirect:adminSelectMember.ad?memberNo=" + m.getMemberNo();
 		} else {
 			throw new MemberException("정보수정을 실패했습니다.");
+		}
+	}
+	
+	@RequestMapping("adminStatistics.ad")
+	@ResponseBody
+	public void adminPayList(HttpServletResponse response ) {
+		
+		int totalMember = aService.totalMember();
+		int activeMember = aService.activeMember();
+		int inactiveMember = totalMember-activeMember;
+		int totalBoard = aService.totalBoard();
+		int amount = aService.totalAmount();
+		
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+	    result.put("totalMember", totalMember);
+	    result.put("activeMember", activeMember);
+	    result.put("inactiveMember", inactiveMember);
+	    result.put("totalBoard", totalBoard);
+	    result.put("amount", amount);
+	    
+		try {
+			gson.toJson(result, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
 		}
 	}
 	/*

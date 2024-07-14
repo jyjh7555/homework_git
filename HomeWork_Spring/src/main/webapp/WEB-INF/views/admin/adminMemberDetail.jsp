@@ -215,46 +215,18 @@
 						</div>
 						
 						<div class="col-12">
-				            <div class="row">
-				                <div class="col-12">
-				                    <label for="statusYn" class="form-label">활동여부</label>
-				                </div>
-				            </div>
-				            <div class="col-12">
-				                <div class="row">
-				                    <c:choose>
-				                        <c:when test="${m.status == 'Y'}">
-				                            <input class="custom-check-input" type="checkbox" id="statusYn" name="status" value="Y" checked> &nbsp;
-				                        </c:when>
-				                        <c:otherwise>
-				                            <input class="custom-check-input" type="checkbox" id="statusYn" name="status" value="N"> &nbsp;
-				                        </c:otherwise>
-				                    </c:choose>
-				                    <label class="custom-check-label align-middle" for="statusYn">활동중지 / 활동중</label>
-				                </div>
-				            </div>
-				        </div>
-						
-						<div class="col-12">
-				            <div class="row">
-				                <div class="col-12">
-				                    <label for="adminYn" class="form-label">회원상태</label>
-				                </div>
-				            </div>
-				            <div class="col-12">
-				                <div class="row">
-				                    <c:choose>
-				                        <c:when test="${m.isAdmin == 'Y'}">
-				                            <input class="custom-check-input" type="checkbox" id="adminYn" name="isAdmin" value="Y" checked> &nbsp;
-				                        </c:when>
-				                        <c:otherwise>
-				                            <input class="custom-check-input" type="checkbox" id="adminYn" name="isAdmin" value="N"> &nbsp;
-				                        </c:otherwise>
-				                    </c:choose>
-				                    <label class="custom-check-label align-middle" for="adminYn">사용자 / 관리자</label>
-				                </div>
-				            </div>
-				        </div>
+                        <label for="statusYn" class="form-label">활동여부</label><br>
+                        <input class="custom-check-input" type="checkbox" id="statusYn" name="status" value="N" onclick="updateCheckboxValue(this)"> &nbsp;
+                        <label class="custom-check-label align-middle" for="statusYn">활동중지 / 활동중</label>
+                    </div>
+                    
+                    <div class="col-12">
+                        <label for="adminYn" class="form-label">회원상태</label><br>
+                        <input class="custom-check-input" type="checkbox" id="adminYn" name="isAdmin" value="N" onclick="updateCheckboxValue(this)"> &nbsp;
+                        <label class="custom-check-label align-middle" for="adminYn">사용자 / 관리자</label>
+                    </div>
+
+             
 						
 						<br><br>
 						<div class="col-12">
@@ -344,10 +316,16 @@
 
             var status = "${m.status}"; 
             var checkbox = document.getElementById('statusYn');
+            if (status === "undefined" || status == null) {
+                status = "N";
+            }
             checkbox.checked = status === 'Y'; 
             
             var isAdmin = "${m.isAdmin}"; 
             var adminCheckbox = document.getElementById('adminYn');
+            if (isAdmin === "undefined" || isAdmin == null) {
+                isAdmin = "N";
+            }
             adminCheckbox.checked = isAdmin === 'Y'; 
         }
         
