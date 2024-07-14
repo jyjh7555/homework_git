@@ -4,6 +4,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Random;
 
 import javax.servlet.http.HttpServletRequest;
@@ -22,6 +23,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.kh.homeWork.Volunteer.model.Volunteer;
+import com.kh.homeWork.Volunteer.service.VolunteerService;
 import com.kh.homeWork.member.model.service.MemberService;
 import com.kh.homeWork.member.model.vo.Member;
 
@@ -35,6 +38,8 @@ public class MemberController {
 	
 	@Autowired
 	private MemberService mService;
+	@Autowired
+	private VolunteerService vService;
 	
 	@RequestMapping("loginView.me")
 	public String loginView(@ModelAttribute Member m) {
@@ -46,7 +51,7 @@ public class MemberController {
 	public String loginCheck(Member m, Model model, HttpSession session) {
 		
 		Member loginUser = mService.loginCheck(m);
-		System.out.println(loginUser.getAge());
+		System.out.println(loginUser);
 		if(bcrypt.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
 			session.setAttribute("loginUser", loginUser);			
 			return "../../../index";				
@@ -80,8 +85,14 @@ public class MemberController {
 	}
 	
 	@RequestMapping("myPage.me")
-	public String myPage() {
-		return "myPage";
+	public String myPage(HttpSession session, Model model) {
+	    Member loginUser = (Member) session.getAttribute("loginUser");
+	    if (loginUser != null) {
+	        List<Volunteer> recentVolunteers = vService.getRecentVolunteers(loginUser.getMemberNo());
+	        System.out.println(recentVolunteers);
+	        model.addAttribute("recentVolunteers", recentVolunteers);
+	    }
+	    return "myPage";
 	}
 	
 	@RequestMapping("insertMember.me")

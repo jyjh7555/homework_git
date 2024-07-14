@@ -100,6 +100,7 @@
 									<th class="w-10">작성자</th>
 									<th class="w-10">작성일자</th>
 									<th class="w-10">조회수</th>
+									<th class="w-10">신청</th>
 			          			</tr>
 			          		</thead>
 			         		<tbody> 
@@ -111,6 +112,7 @@
 				            			<td>관리자</td>
 				            			<td>${b.updateDate }</td>
 				            			<td>${b.boardCount }</td>
+				            			<td><a class="btn btn-success" href="${ contextPath }/insertVolunteer.vo?boardNo=${b.boardNo}">신청하기</a></td>
 			          				</tr>
 			         			</c:forEach>
 			          		</tbody>
@@ -228,6 +230,13 @@
 		        tr.appendChild(createTd('관리자'));
 		        tr.appendChild(createTd(b.updateDate));
 		        tr.appendChild(createTd(b.boardCount));
+		        const applyTd = document.createElement('td');
+		        const applyButton = document.createElement('a');
+		        applyButton.className = 'btn btn-success';
+		        applyButton.textContent = '신청하기';
+		        applyTd.appendChild(applyButton);
+		        tr.appendChild(applyTd);
+		        applyButton.href = `${contextPath}/insertVolunteer.vo?boardNo=${b.boardNo}`;
 		        tbody.appendChild(tr);
 		    }
 		}
@@ -246,16 +255,32 @@
 		    		console.log(false);
 		    	}
 		    	
-		        let paginationHTML = `
+/* 		        let paginationHTML = `
 		            <div class="d-flex flex-row justify-content-end mb-3 w-50 mt-3" style="width:1400px;">
 		                <ul align="center" class="pagination">
 		                	<li class="page-item ${pi2.currentPage == 1 ? 'disabled' : ''}">
 		                        <a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{pi2.currentPage - 1}')"aria-label="Previous">
 		                            <span aria-hidden="true">&laquo;</span>
 		                        </a>
-		                    </li>`;
+		                    </li>`; */
+               let paginationHTML = `
+         			<div class="d-flex flex-row justify-content-end mb-3 w-50 mt-3" style="width:1400px;">
+             			<ul align="center" class="pagination">`;
+             
+             				paginationHTML += '<li class="page-item ' + (pi2.currentPage == 1 ? 'disabled' : '') + '">';
+             				
+             				paginationHTML += `<a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{pi2.currentPage - 1}')"aria-label="Previous">
+                         			<span aria-hidden="true">&laquo;</span>
+                    			 </a>
+                 			</li>`;
+                    			
 
 					
+                 			
+                 			
+                 			
+                 			
+                 			
 		        for (let p = pi2.startPage; p <= pi2.endPage; p++) {
 		            paginationHTML += `
 		                <li class="page-item ${p == pi2.currentPage ? 'active' : ''}">
@@ -264,10 +289,8 @@
 		            
 		        }
 		        
-				
+		       	    paginationHTML += '<li class="page-item ' + (pi2.currentPage == pi2.maxPage ? 'disabled' : '') + '">';
 					paginationHTML += `
-		                    <li class="page-item disabled">
-		                    
 		                        <a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{pi2.currentPage + 1}')" aria-label="Next">
 		                            <span aria-hidden="true">&raquo;</span>
 		                        </a>
