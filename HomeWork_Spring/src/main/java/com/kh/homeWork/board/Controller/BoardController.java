@@ -96,15 +96,14 @@ public class BoardController {
 		VolunteerDetail v = bService.selectVolunteerDetail(bId);
 		model.addAttribute("b",b);
 		
-		v.setAddress(v.getAddress().replace(","," "));
-		model.addAttribute("v",v);
-		model.addAttribute("page",page);
-		System.out.println(LocalDate.now());
 		if(v != null) {
 			boolean dateCheck = LocalDate.now().isAfter(v.getEndDate().toLocalDate());
 			model.addAttribute("dateCheck",dateCheck);
+			v.setAddress(v.getAddress().replace(","," "));
 			
 		}
+		model.addAttribute("v",v);
+		model.addAttribute("page",page);
 		
 		//댓글도 넣는다.
 		if(b.getBoardType()==3) {

@@ -10,6 +10,13 @@
 		</layout>
 	</appender>
 	
+	<appender name="myConsole" class="org.apache.log4j.ConsoleAppender">
+		<param name="Target" value="System.out" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="로그%-5p: %c - %m%n" />
+		</layout>
+	</appender>
+	
 	<!-- Application Loggers -->
 	<logger name="com.kh.homeWork">
 		<level value="info" />
@@ -31,6 +38,10 @@
 	<logger name="org.springframework.web">
 		<level value="info" />
 	</logger>
+	<logger name="com.kh.homeWork.common.InterceptorLogin" additivity="false">
+		<level value="info"/>
+		<appender-ref ref="myConsole"/>
+	</logger>	
 
 	<!-- Root Logger -->
 	<root>
