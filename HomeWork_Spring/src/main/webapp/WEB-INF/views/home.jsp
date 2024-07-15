@@ -18,8 +18,8 @@
 	}
 	#topAndNavbar {
 		background-image:linear-gradient(
-	        rgba(0, 0, 0, 0.5),
-	        rgba(0, 0, 0, 0.5)
+	        rgba(0, 0, 0, 0.2),
+	        rgba(0, 0, 0, 0.2)
 	      )
 	      ,url('resources/image/topImage.png');
 	    background-size: cover; 
