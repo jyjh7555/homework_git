@@ -191,6 +191,11 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.adminVolunteerList(sqlSession, pi);
 	}
 
+	@Override
+	public int adminVolunteerUpdate(Volunteer v) {
+		return aDAO.adminVolunteerUpdate(sqlSession, v);
+	}
+
 	
 
 

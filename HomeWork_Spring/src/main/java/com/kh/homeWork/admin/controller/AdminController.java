@@ -410,14 +410,16 @@ public class AdminController {
 	}
 	
 	
-	/*
-	@RequestMapping("/adminVolunteerUpdate.ad")
+	
+	@RequestMapping("/updateVolunteerStatus.ad")
 	@ResponseBody
 	public String adminVolunteerUpdate(@ModelAttribute Volunteer v) {
+		System.out.println(v);
 		int result = aService.adminVolunteerUpdate(v);
+		System.out.println(result);
 		return result == 1? "success" : "fail";
 	}
-	*/
+	
 	
 	
 	

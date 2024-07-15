@@ -75,6 +75,8 @@ public interface AdminService {
 
 	ArrayList<Volunteer> adminVolunteerList(PageInfo pi);
 
+	int adminVolunteerUpdate(Volunteer v);
+
 	
 
 

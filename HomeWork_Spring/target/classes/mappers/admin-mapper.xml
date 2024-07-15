@@ -249,10 +249,22 @@
 	</select>
 	
 	<select id="adminVolunteerList" resultType="Volunteer">
-		select volunteer.member_no, member.member_name, volunteer_detail.category,volunteer.status
-		from volunteer
-			join member ON volunteer.member_no = member.member_no
-			join volunteer_detail ON volunteer.volunteer_no = volunteer_detail.volunteer_no
+		select v.member_no, m.member_name, b.title, v.status, v.board_No
+		from volunteer v
+			join member m on v.member_no = m.member_no
+			join board b on v.board_no = b.board_no
+		ORDER BY 
+  		CASE 
+        	WHEN v.status = 'W' THEN 1
+        ELSE 2
+    END, 
+    v.status
 	</select>
+	
+	<update id="adminVolunteerUpdate">
+		update volunteer
+		set status = #{status}
+		where board_No = #{boardNo}
+	</update>
  	
 </mapper>

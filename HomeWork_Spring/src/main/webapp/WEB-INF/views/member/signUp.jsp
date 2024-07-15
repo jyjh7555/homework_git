@@ -79,7 +79,7 @@
 	
 	<div align="center" >
 		<div class="row d-flex flex-column justify-content-center mb-3 border border-5 w-50 mt-5 " align="center">
-	        <label style="margin:20px; margin-left:15px; font-size:48px;"><b>Home Work</b> </label>
+	        <label style="margin:20px; margin-left:15px; font-size:48px;"><b>회원가입</b> </label>
 			<form align="left" action="${contextPath }/insertMember.me" method="post">
 				<div class="form-floating">
 		        <input class="form-control w-50 m-4" type="text" id="id"name="memberId"  required placeholder="아이디를 입력해주세요">

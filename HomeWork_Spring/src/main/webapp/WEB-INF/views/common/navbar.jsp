@@ -33,6 +33,7 @@
 	   .logo {
 	       display: flex;
 	       align-items: center;
+	       width: 300px;
 	   }
 	
 	   .logo-container {

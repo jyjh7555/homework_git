@@ -16,6 +16,7 @@ import lombok.ToString;
 public class Volunteer {
 	private int memberNo;
 	private int volunteerNo;
+	private String memberName;
 	private int boardNo;
 	private String title;
 	private String status;

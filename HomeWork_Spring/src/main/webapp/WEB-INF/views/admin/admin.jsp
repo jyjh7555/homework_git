@@ -382,7 +382,7 @@
 							<tr>
 								<th width="10%">회원번호</th>
 								<th width="10%">이름</th>
-								<th width="10%">제목?</th>
+								<th width="10%">제목</th>
 								<th width="10%">현재상태</th>
 								<th width="10%">버튼</th>
 							</tr>
@@ -394,7 +394,7 @@
 					        <tr>
 					            <td colspan="10">
 					                <nav aria-label="Standard pagination example" style="float: center;">
-					                    <ul id="pagination4" class="pagination">
+					                    <ul id="pagination5" class="pagination">
 					                    
 					                    </ul>
 					                </nav>
@@ -423,6 +423,18 @@
                 console.error('Error fetching statistics:', error);
             }
         });
+    }
+	function statusText(status) {
+        switch (status) {
+            case 'W':
+                return '대기중';
+            case 'Y':
+                return '승인완료';
+            case 'N':
+                return '승인거부';
+            default:
+            	return '오류';
+        }
     }
 		window.onload =() =>{
 			statistics();
@@ -978,16 +990,7 @@
 		    let currentPage = 1;
 		    const pageSize = 10;
 		    
-		    function statusText(status) {
-		        switch (status) {
-		            case 'W':
-		                return '대기중';
-		            case 'Y':
-		                return '승인완료';
-		            case 'N':
-		                return '승인거부';
-		        }
-		    }
+		    
 		    function loadPage5(page) {
 		        const url = '${contextPath}/adminVolunteerList.ad?page=' + page + '&size=' + pageSize;
 		
@@ -1009,7 +1012,7 @@
 		                        const nameTd = document.createElement('td');
 		                        nameTd.innerText = v.memberName;
 		                        const boardTd = document.createElement('td');
-		                        boardTd.innerText = v.category;
+		                        boardTd.innerText = v.title;
 		                        const statusTd = document.createElement('td');
 		                        statusTd.innerText = statusText(v.status);
 		
@@ -1018,7 +1021,7 @@
 		                        approveBtn.textContent = '승인';
 		                        approveBtn.className = 'btn btn-success';
 		                        approveBtn.addEventListener('click', function() {
-		                            updateStatus(m.memberNo, 'Y');
+		                            updateStatus(v.boardNo, 'Y', statusTd);
 		                        });
 		                        
 		
@@ -1026,7 +1029,7 @@
 		                        refusalBtn.textContent = '거부';
 		                        refusalBtn.className = 'btn btn-danger';
 		                        refusalBtn.addEventListener('click', function() {
-		                            updateStatus(m.memberNo, 'N');
+		                            updateStatus(v.boardNo, 'N', statusTd);
 		                        });
 		                        
 		
@@ -1080,17 +1083,16 @@
 		 
 		 
 			 
-		 function updateStatus(memberNo, status, statusTd) {
-		        const url = `${contextPath}/updateVolunteerStatus.ad`; // 업데이트 URL
+		 function updateStatus(boardNo, status, statusTd) {
 		        $.ajax({
-		            url: url,
+		            url: '${contextPath}/updateVolunteerStatus.ad',
 		            method: 'POST',
 		            data: {
-		                memberNo: memberNo,
+		                boardNo: boardNo,
 		                status: status
 		            },
 		            success: function(data) {
-		                	statusTd.innerText = getStatusText(status);
+		                	statusTd.innerText = statusText(status);
 		            },
 		            error: function(error) {
 		                console.error('상태 업데이트 오류:', error);

@@ -163,6 +163,10 @@ public class AdminDAO {
 		return (ArrayList)sqlSession.selectList("adminMapper.adminVolunteerList", null, rowBounds);
 	}
 
+	public int adminVolunteerUpdate(SqlSessionTemplate sqlSession, Volunteer v) {
+		return sqlSession.update("adminMapper.adminVolunteerUpdate", v);
+	}
+
 	
 
 	
