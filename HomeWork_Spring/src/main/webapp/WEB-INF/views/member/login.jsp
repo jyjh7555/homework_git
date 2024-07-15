@@ -144,7 +144,13 @@
         function findPwd(){
         	location.href="findPwd.me";
         }
+        
+       	const msg = '${msg}';
+       	if(msg != ''){
+       		alert('msg');
+       	}
         </script>
+        <% session.removeAttribute("msg"); %>
   </body>
   </html>
 

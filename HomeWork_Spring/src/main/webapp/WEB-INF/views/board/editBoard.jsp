@@ -168,11 +168,10 @@
 		            </table>
 		            <div class="editor_head col-12">
 		            	
-		            	<button style="border:1px solid gray;">가</button>
-		            	<button style="border:1px solid gray; font-weight: bold;"><b>가</b></button>
-		            	<button style="border:1px solid gray; font-style:italic;">가</button>
-		            	<button style="border:1px solid gray; text-decoration:underline;">가</button>
-		            	<button style="border:1px solid gray; text-decoration:line-through;">가</button>
+		            	<button type="button" id="bold" style="border:1px solid gray; font-weight: bold;"><b>가</b></button>
+		            	<button type="button" id="italic" style="border:1px solid gray; font-style:italic;">가</button>
+		            	<button type="button" id="underline" style="border:1px solid gray; text-decoration:underline;">가</button>
+		            	<button type="button" id="fonfSize" style="border:1px solid gray; text-decoration:underline;">글자크기?</button>
 		            	<button >이미지</button>	
 		            	
 		            		
@@ -222,6 +221,54 @@
 	
 	
 	<script>
+		
+		//작성할때 텍스트 변화 주기
+		document.getElementById('bold').addEventListener('click', function() {
+			applyStyle('bold');
+        });
+
+        document.getElementById('italic').addEventListener('click', function() {
+        	applyStyle('italic');
+        });
+
+        document.getElementById('underline').addEventListener('click', function() {
+        	applyStyle('underline');
+        });
+        
+        document.getElementById('fonfSize').addEventListener('click', function() {
+        //	document.execCommand('fontSize', false, '14px');
+        });
+	
+	
+		function applyStyle(style){
+			const selection = window.getSelection();  //이거 내가 드래그한 텍스트 파일인듯
+			console.log(selection);		//파일이라기보단. range 로 나오는거 확인!!
+			
+			if(selection.rangeCount>0){
+				console.log(selection.rangeCount); //0 또는 1만 존재하는군
+				const range = selection.getRangeAt(0);	//뭐여이건
+		        const selectedText = range.extractContents();	//내용을 가져온다
+		        let span = document.createElement('span');
+		        //console.log(range);
+		        //console.log(selectedText);
+		        
+		        switch(style) {
+	            case 'bold':
+	                span.style.fontWeight = 'bold';
+	                break;
+	            case 'italic':
+	                span.style.fontStyle = 'italic';
+	                break;
+	            case 'underline':
+	                span.style.textDecoration = 'underline';
+	                break;
+		        }
+		        
+		        span.appendChild(selectedText);
+		        range.insertNode(span);
+		        //selection.removeAllRanges();
+				}
+		}
 	
 		
 	
