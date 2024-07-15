@@ -77,7 +77,8 @@
 		<hr>
 		<div class="text-container2-2 d-flex justify-content-center gap-5  ">
 			<div class="align-self-center w-35">
-				<h3 class="fs-2 fw-semibold mb-3">식수개선사업</h3>
+				<p style="font-size:32px; color:skyblue; font-weight:bold;">식수개선사업</p>
+				<div class="border"></div>
 				<h4 class="fs-5 lh-base">
                 	깨끗한 식수 시설을 설치해<br>
 					지역주민들의 깨끗한 물에 대한 접근성을 향상시키고<br>
@@ -93,7 +94,8 @@
 		<div class="text-container2-2 d-flex justify-content-center gap-5  ">
 			<div class="global-image2-2 w-75 h-75 mt-5" style="background-image:url('resources/image/global2-3.jpg');"></div>
 			<div class="align-self-center w-35  ">
-				<h3 class="fs-2 fw-semibold mb-3">위생증진사업</h3>
+				<p style="font-size:32px; color:skyblue; font-weight:bold;">위생증진사업</p>
+				<div class="border"></div>
 				<h4 class="fs-5 lh-base">
              							 
               							 안전하고 위생적인 화장실을 구축하고, 

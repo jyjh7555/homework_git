@@ -16,6 +16,7 @@
 		   color: white;
 		   text-decoration: none;
 		   font-size:30px;
+		   font-family:GowunBatang-Regular;
 	   
 	   }
 	   
@@ -23,8 +24,17 @@
 	        text-align: center;
 	        padding: 20px;
 	        height:100px;
+	        font-family:GowunBatang-Regular;
 	      
 	    }
+	    
+	    @font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	
     
  
 </style>
@@ -32,7 +42,7 @@
 <body>
 	<c:set var="contextPath" value="${ pageContext.servletContext.contextPath }" scope = "application"></c:set>
 	<div id="top">
-		 <h2> HOME WORK</h2> 
+		 <h2><b>HOME WORK</b></h2> 
 		 <br>
 		 <em>기적을 짓는 시간과 땀의 헌신</em>
 	</div>

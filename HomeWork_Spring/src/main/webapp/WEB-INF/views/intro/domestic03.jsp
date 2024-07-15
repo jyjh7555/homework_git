@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${ contextPath }/CSS/domestic2.css" rel="stylesheet" type="text/css">
+<link href="${ contextPath }/CSS/global1.css" rel="stylesheet" type="text/css">
 <style>
 
 
@@ -38,8 +38,11 @@
 	em{
 		font-size:30px;
 		color:skyblue;
-		font-weight:bold;
+		
 	}
+	
+	p{
+	font-family:GowunBatang-Regular;}
 	
 	
 
@@ -65,7 +68,7 @@
 			<li class=categoryDomestic><a style="border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="domestic03.in">긴급/재난</a></li>
 		</ul>
 	</div>
-	<p align="center"style="font-size:42px;"><b> 긴급/재난</b><p>
+	<p align="center" class=" semi-title fs-1 fw-bold" style="font-size:42px;"><b> 긴급/재난</b><p>
 	<p align="center" style="font-size:30px;"> 재난과 재해로 거처를 잃은 이웃들을 위한 이동식 주택을 짓습니다.</p>
 	
 	<br>
@@ -73,14 +76,14 @@
 	<div align="center">
 		
 		<div class="domeMainImage" align="center" style="background-image:url('resources/image/dome03image1.jpg');">
-			<div style="color:white; font-size:48px; padding:100px; font-weight:bold;">재난 구조</div>
+			<div style="color:white; font-size:48px; padding:150px; font-weight:bold;"></div>
 		</div>
 		
 		<div class="content" align="left" >
 		<br><br><br><br><br> 
 			<div align="left" style="display:inline-block; border-left: 10px solid #e3e3e3; margin-left:100px; padding:10px;width:500px;">
-			<h1>긴급/재난</h1>
-			<h3>재난,재해 등 긴급한 주거 구호 활동을 위한 <br>
+			<p style="font-size:42px; color:skyblue; font-weight:bold;">긴급/재난</p>
+			<h3>재난,재해 등 긴급한 주거 구호 활동을 위한
 				이동식 주택 집짓기 활동을 전개하고 있습니다</h3>
 			</div>
 			
@@ -97,7 +100,7 @@
 			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
 				<img src="resources/image/dome03image2.jpg"></img>
 				<div align="center" style="display:flex;flex-direction: column; width:500px; margin-left:50px; justify-content: center;">
-					<em>밤새워 집을 ‘배달’하다
+					<em style="color:skyblue;font-weight:bold;">밤새워 집을 ‘배달’하다
 						수해지역 사랑의 집짓기</em>
 						<div class="border"></div>
 					
@@ -107,8 +110,7 @@
 			</div>
 			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
 				<div align="center" style="display:flex;flex-direction: column; width:500px; margin-right:50px; justify-content: center;">
-					<em>이동식 결핵 병실,
-						배에 실려 북으로 향하다</em>
+					<em style="color:skyblue;font-weight:bold;">이동식 결핵병실,배에실려 북으로 향하다</em>
 					<div class="border"></div>
 					<p>2009년 북한의 결핵 환자들 요양 시설로 6채의 이동식 주택을
 						전달하였습니다.</p>
@@ -121,7 +123,7 @@
 			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
 				<img src="resources/image/dome03image4.jpg"></img>
 				<div align="center" style="display:flex;flex-direction: column; width:500px; margin-left:50px; justify-content: center;">
-					<em>희망의 집은 내일을 살아가는
+					<em style="color:skyblue;font-weight:bold;">희망의 집은 내일을 살아가는
 						든든한 힘이 됩니다.</em>
 					<div class="border"></div>
 					<p>2011년 서울광장에서 경북 영양 흙집에 살았던
@@ -130,7 +132,7 @@
 			</div>
 			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
 				<div align="center" style="display:flex;flex-direction: column; width:500px; margin-right:50px; justify-content: center;">
-					<em>산불피해 이재민 지원</em>
+					<em style="color:skyblue;font-weight:bold;">산불피해 이재민 지원</em>
 					<div class="border"></div>
 					
 					<p>2019년 산불로 피해를 입은 강원도 고성에 12채의

@@ -82,7 +82,7 @@
 		<hr>
 		<div class="text-container2-2 d-flex justify-content-center gap-5  ">
 			<div class="align-self-center w-35  ">
-				<h3 class="fs-2 fw-semibold mb-3">공공식수위생시설 지원</h3>
+				<p style="font-size:28px; color:skyblue; font-weight:bold;">공공식수위생시설 지원</p><div class="border"></div>
 				<h4 class="fs-5 lh-base">
                 	안전한 식수 이용이 가능하도록 <br>
                 	공용 화장실과 식수펌프를 설치합니다.	
@@ -97,7 +97,8 @@
 		<div class="text-container2-2 d-flex justify-content-center gap-5  ">
 			<div class="global-image2-2 w-75 h-75 mt-5" style="background-image:url('resources/image/global3-3.jpg');"></div>
 			<div class="align-self-center w-35  ">
-				<h3 class="fs-2 fw-semibold mb-3">보도건축 및 배수로 개선</h3>
+				<p style="font-size:32px; color:skyblue; font-weight:bold;">보도건축 및 배수로 개선</p>
+				<div class="border"></div>
 				<h4 class="fs-5 lh-base">
               							 우기에도 길이 침수되지 않고 아이들과 주민들이 
              							 <br>
@@ -113,7 +114,8 @@
 		
 		<div class="text-container2-2 d-flex justify-content-center gap-5  ">
 			<div class="align-self-center w-35  ">
-				<h3 class="fs-2 fw-semibold mb-3">폐기물 처리 인식 증진</h3>
+				<p style="font-size:32px; color:skyblue; font-weight:bold;">폐기물 처리 인식 증진</p>
+				<div class="border"></div>
 				<h4 class="fs-5 lh-base">
                 	       깨끗한 마을 환경 조성을 위해서는 폐기물 처리에 대한  <br>
                 		   인식증진이 필수적입니다. 올바른 폐기법을 안내하고 <br>

@@ -6,7 +6,7 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 
-<link href="${ contextPath }/CSS/domestic2.css" rel="stylesheet" type="text/css">
+<link href="${ contextPath }/CSS/global1.css" rel="stylesheet" type="text/css">
 <style>
 
 	.categoryDomestic{display: inline-block;  margin-right: 2px; 
@@ -22,7 +22,6 @@
 	em{
 		font-size:30px;
 		color:skyblue;
-		font-weight:bold;
 	}
 
 	#topAndNavbar {
@@ -42,6 +41,9 @@
 		height: 200px;
 	}
 	
+	
+	p{
+	font-family:GowunBatang-Regular;}
 	
 
 </style>
@@ -72,20 +74,20 @@
 			<li class=categoryDomestic><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:2px solid #EEEEEE;border-bottom:3px solid #00AFD7;" href="domestic03.in">긴급/재난</a></li>
 		</ul>
 	</div>
-	<p align="center"style="font-size:42px;"><b>집짓기</b></p>
+	<p align="center" class=" semi-title fs-1 fw-bold" style="font-size:42px; "><b>집짓기</b></p>
 	<p align="center" style="font-size:30px;"> 여러분의 땀과 열정으로 집과 희망을 짓습니다.</p>
 	
 	<br>
 	
 	<div align="center">
 		
-		<div class="domeMainImage" align="center" style="background-image:url('resources/image/dome01Image1.jpg');">
-			<div style="color:white; font-size:48px; padding:100px; font-weight:bold;">희망의 집짓기!</div>
+		<div class="domeMainImage " align="center" style="background-image:url('resources/image/dome01Image1.jpg');">
+			<div style="color:white; font-size:48px; padding:150px; font-weight:bold;"></div>
 		</div>
-		<div class="content" align="left" >
+		<div style="margin-top:-100px"class="content" align="left" >
 		<br><br><br><br><br> 
 			<div align="left" style="display:inline-block; border-left: 10px solid #e3e3e3; margin-left:100px; padding:10px;width:500px;">
-			<h1>희망의 집짓기</h1>
+			<p style="font-size:42px; color:skyblue; font-weight:bold;">희망의 집짓기</p>
 			<h3>국내 주거환경의 개선을 위해 <br>
 				새로운 주택을 짓습니다.</h3>
 			</div>
@@ -102,7 +104,7 @@
 			<div style="margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
 				<div class="imageDiv" align="center" ><img src="resources/image/dome01Image2.jpg"/></div>
 				<div class="domeCon" align="left" style="width:500px; margin-left:50px;">
-					<em>4월 건물 기초만들기</em>
+					<em style="color:skyblue; font-weight:bold;">4월 건물 기초만들기</em>
 					<div class="border"></div>
 					
 					<p>대지 위의 설계대로 건물터를 잡고 가장 중요한 기초를 만듭니다.
@@ -113,7 +115,7 @@
 			</div>
 			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
 				<div class="domeCon" align="right" style="width:500px; margin-right:50px;">
-					<em>5월 콘크리트 골조 만들기</em>
+					<em style="color:skyblue;font-weight:bold;">5월 콘크리트 골조 만들기</em>
 					<div class="border"></div>
 					
 					<p>1층 바닥 위에 벽과 기둥, 계단실의 위치를 잡고 거푸집을 만들어 철근과
@@ -131,7 +133,7 @@
 			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
 				<div class="imageDiv" align="center" ><img src="resources/image/dome01Image4.jpg"/></div>
 				<div class="domeCon" align="left" style="width:500px; margin-left:50px;">
-					<em>6월 목조 벽체 만들기</em>
+					<em style="color:skyblue;font-weight:bold;">6월 목조 벽체 만들기</em>
 					<div class="border"></div>
 					
 					<p>해비타트 주택은 철근 콘크리트 구조와 목재 구조가 함께 만난 형태이며
@@ -142,7 +144,7 @@
 			</div>
 			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
 				<div class="domeCon" align="right" style="width:500px; margin-right:50px;">
-					<em>7월 지붕 만들기(트러스 제작)</em>
+					<em style="color:skyblue;font-weight:bold;">7월 지붕 만들기(트러스 제작)</em>
 					<div class="border"></div>
 					
 					<p>2층 벽까지 완성되면 지붕을 만들 수가 있으며, 지붕의 골격을 담당하는
@@ -159,7 +161,7 @@
 			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
 				<div class="imageDiv" align="center" ><img src="resources/image/dome01Image6.jpg"/></div>
 				<div class="domeCon" align="left" style="width:500px; margin-left:50px;">
-					<em>8월~9월 외부 마감하기</em>
+					<em style="color:skyblue;font-weight:bold;">8월~9월 외부 마감하기</em>
 					<div class="border"></div>
 					
 					<p>1~3층 벽체의 외부 마감은 먼저 목조 벽체 위에 합판을 박아 튼튼하게
@@ -170,7 +172,7 @@
 			</div>
 			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
 				<div class="domeCon" align="right" style="width:500px; margin-right:50px;">
-					<em>9월~10월 내부 마감하기</em>
+					<em style="color:skyblue;font-weight:bold;">9월~10월 내부 마감하기</em>
 					<div class="border"></div>
 					
 					<p>내부 벽체의 나무와 나무 사이에 공간에는 단열재를 꼼꼼하게 넣어
@@ -185,9 +187,9 @@
 				</div>
 			</div>
 			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
-				<div class="imageDiv" align="center" ><img src="resources/image/dome01Image8.jpg"/></div>
+				<div class="imageDiv" align="center" ><img src="resources/image/dome01Image9.jpg"/></div>
 				<div class="domeCon" align="left" style="width:500px; margin-left:50px;">
-					<em>11월 조경 및 주변 정리하기</em>
+					<em style="color:skyblue;font-weight:bold;">11월 조경 및 주변 정리하기</em>
 					<div class="border"></div>
 					
 					<p>내부가 끝나면 건물 외부를 정리합니다. 나무와 꽃을 심어 주변을 가꾸고

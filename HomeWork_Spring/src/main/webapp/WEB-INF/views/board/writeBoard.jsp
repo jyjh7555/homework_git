@@ -403,7 +403,6 @@
 				document.getElementsByName('address')[0].value=null;
 				
 			}
-			if()
 			form.submit();
 		}
 	
