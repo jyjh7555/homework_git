@@ -176,7 +176,7 @@
 		    		  document.getElementById('payCheck').value = response.success;
 		    		  document.getElementsByName('merchantUid')[0].value = response.merchant_uid;
 		    		  form.action = '${contextPath}/successPay.su';
-		  	    	  form.submit();
+		  	    	  //form.submit();
 		    		  
 		    		  
 		    	  }else{
