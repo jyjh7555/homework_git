@@ -119,7 +119,6 @@
 			        	</table>
 	       			</div>
 
-<<<<<<< HEAD
 		 	
 		 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
 
@@ -149,7 +148,6 @@
 	    		</ul>
       	  </nav>
       	  
-=======
 				 	
 				 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
 						<div class="d-flex flex-row justify-content-end mb-3  w-50 mt-3 " style="width:1400px;">
@@ -186,7 +184,6 @@
 			 			</div>
 				 	</div>
  		</div>
->>>>>>> refs/remotes/origin/kimkiryong
 
  	  </div>
 	

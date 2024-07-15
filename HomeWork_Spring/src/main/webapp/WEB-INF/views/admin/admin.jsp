@@ -123,7 +123,7 @@
 	
 	<div id="container">
 		<div align="center" id=adminMenu>
-			<div style="border:1px solid skyblue; background:skyblue; height:32px"><a onClick="window.location.reload()">홈</a></div>
+			<div style="border:1px solid skyblue; background:skyblue; height:32px"><a onClick="window.location.reload()">통계</a></div>
 			
 			<div class="mainCate" style="margin-top:10px" >회원정보관리</div>
 				<ul class="hidden" style="list-style-type:none; text-align:left;">
@@ -189,6 +189,10 @@
 				                <tr>
 				                    <td>총 게시물 수</td>
 				                    <td id="totalBoard"></td>
+				                </tr>
+				                <tr>
+				                	<td>진행중인 봉사수</td>
+				                	<td id="volunteerCount"></td>
 				                </tr>
 				                <tr>
 				                    <td>총 후원액</td>
@@ -406,8 +410,25 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="modal fade" tabindex="-1" role="dialog" id="modalStatus">
+		<div class="modal-dialog" role="document">
+    		<div class="modal-content rounded-3 shadow">
+      			<div class="modal-body p-4 text-center">
+        			<h3 class="mb-0">승인하시겠습니까?</h3>
+      			</div>
+      			<div class="modal-footer flex-nowrap p-0">
+        			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" id="statusModal">
+        				<strong>네</strong>
+        			</button>
+        			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal">아니오</button>
+      			</div>
+    		</div>
+  		</div>
+	</div>
 	
 	<script>
+	
 	function statistics() {
         $.ajax({
             url: '${contextPath}/adminStatistics.ad',
@@ -455,6 +476,14 @@
 	                this.nextElementSibling.classList.toggle('hidden');
 	                
 	            });
+			 document.getElementById('volunteerBtn').addEventListener('click',()=>{
+					$('#modalStatus').modal('show');
+				});
+
+				document.getElementById('statusModal').addEventListener('click',()=>{
+					form.action= '${contextPath}/updateVolunteerStatus.ad';
+					form.submit();
+				});
 		}
 			
 			 
@@ -1020,6 +1049,7 @@
 		                        const approveBtn = document.createElement('button');
 		                        approveBtn.textContent = '승인';
 		                        approveBtn.className = 'btn btn-success';
+		                        approveBtn.id = `approveBtn-${volunteerNo}`
 		                        approveBtn.addEventListener('click', function() {
 		                            updateStatus(v.boardNo, 'Y', statusTd);
 		                        });
@@ -1028,6 +1058,7 @@
 		                        const refusalBtn = document.createElement('button');
 		                        refusalBtn.textContent = '거부';
 		                        refusalBtn.className = 'btn btn-danger';
+		                        refusalBtn.id = `approveBtn-${volunteerNo}`
 		                        refusalBtn.addEventListener('click', function() {
 		                            updateStatus(v.boardNo, 'N', statusTd);
 		                        });
