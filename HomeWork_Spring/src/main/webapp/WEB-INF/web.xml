@@ -104,7 +104,6 @@
 		<url-pattern>*.bo</url-pattern>
 	</servlet-mapping>
 	
-<<<<<<< HEAD
 	<!-- 관리자 -->
 	<servlet>
 		<servlet-name>adminPage</servlet-name>
@@ -120,7 +119,6 @@
 		<servlet-name>adminPage</servlet-name>
 		<url-pattern>*.ad</url-pattern>
 	</servlet-mapping>
-=======
 	<!-- vlounteer꺼 -->
 		<servlet>
 		<servlet-name>volunteerPage</servlet-name>
@@ -138,7 +136,6 @@
 	</servlet-mapping>
 	
 	
->>>>>>> refs/remotes/origin/kimkiryong
 
 
 	<!-- 한글 인코딩 -->
