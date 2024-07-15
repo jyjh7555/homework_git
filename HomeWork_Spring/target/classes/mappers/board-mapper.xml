@@ -141,4 +141,21 @@
  		set delete_yn = 'Y'
  		where reply_no =#{replyNo}
  	</update>
+ 	<select id="regionBoardList" resultType="Board">
+ 		select *
+ 		from board
+ 			join location using(location_no)
+ 		where location = #{region}
+ 		order by board_no desc
+ 	</select>
+ 	
+ 	<select id="getRegionListCount" resultType="_int">
+ 		select count(*)
+ 		from board
+ 			join location using(location_no)
+ 		where delete_yn = 'N' and location = #{region}
+	</select>
+ 	
+
+ 	
 </mapper>

@@ -38,5 +38,11 @@ public interface BoardService {
 	Reply selectOneReply(Reply r);
 
 	int deleteReply(Reply r);
+	ArrayList<Board> regionBoardList(String region, PageInfo pi);
+
+	int getRegionListCount(String region);
+
+
+
 	
 }

@@ -256,12 +256,25 @@
 	        </div>
 		</div>
 		<div class="recent-activity-section">
-            <h5>최근 활동 내역</h5>
-            <ul>
-                <li><a href="#">최근 로그인 : 2024-06-10</a></li>
-                <li><a href="#">최근 작성한 게시물 : 자원봉사 후기</a></li>
-                <li><a href="#">최근 신청한 서비스 : 집 고치기 신청</a></li>
-            </ul>
+            <h5>신청 대기 중인 봉사활동 내역</h5>
+            <table>
+        <thead>
+            <tr>
+                <th>게시글 번호</th>
+                <th>제목</th>
+                <th>상태</th>
+            </tr>
+        </thead>
+        <tbody>
+            <c:forEach items="${recentVolunteers}" var="volunteer">
+                <tr>
+                    <td>${volunteer.boardNo}</td>
+                    <td>${volunteer.title}</td>
+                    <td>${volunteer.status}</td>
+                </tr>
+            </c:forEach>
+        </tbody>
+    </table>
         </div>
 		
 		<div id="footer">

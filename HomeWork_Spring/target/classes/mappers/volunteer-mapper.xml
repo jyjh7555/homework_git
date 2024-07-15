@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="volunteerMapper">
+	<insert id="insertVolunteer">
+	    INSERT INTO HOMEWORK.VOLUNTEER (MEMBER_NO, VOLUNTEER_NO, STATUS)
+	    VALUES (#{memberNo}, #{volunteerNo}, #{status})
+	</insert>
+	
+	<select id="getVolunteerNoByBoardNo" resultType="_int">
+	    SELECT VOLUNTEER_NO 
+	    FROM VOLUNTEER_DETAIL
+	    WHERE BOARD_NO = #{boardNo}
+	</select>
+	
+	<select id="getRecentVolunteers" resultType="Volunteer">
+        SELECT v.VOLUNTEER_NO, v.STATUS, vd.BOARD_NO, b.TITLE
+        FROM VOLUNTEER v
+        JOIN VOLUNTEER_DETAIL vd ON v.VOLUNTEER_NO = vd.VOLUNTEER_NO
+        JOIN BOARD b ON vd.BOARD_NO = b.BOARD_NO
+        WHERE v.MEMBER_NO = #{memberNo}
+        ORDER BY v.VOLUNTEER_NO DESC
+        
+    </select>
+	
+
+</mapper>

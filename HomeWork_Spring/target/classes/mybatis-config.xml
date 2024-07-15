@@ -16,6 +16,8 @@
 		<typeAlias type="com.kh.homeWork.surpport.model.vo.Pay" alias="Pay"/>
 		<typeAlias type="com.kh.homeWork.board.model.vo.VolunteerDetail" alias="VolunteerDetail"/>
 		<typeAlias type="com.kh.homeWork.board.model.vo.Reply" alias="Reply"/>
+		<typeAlias type="com.kh.homeWork.Volunteer.model.Volunteer" alias="Volunteer"/>
+		
 
 	</typeAliases>
 
@@ -24,5 +26,6 @@
 		<mapper resource="mappers/board-mapper.xml"/>
 		<mapper resource="mappers/pay-mapper.xml"/>
 		<mapper resource="mappers/admin-mapper.xml"/>
+		<mapper resource="mappers/volunteer-mapper.xml"/>
 	</mappers>
 </configuration>

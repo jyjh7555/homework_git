@@ -1,11 +1,18 @@
 package com.kh.homeWork.board.Controller;
 
 import java.io.IOException;
+<<<<<<< HEAD
 import java.sql.Timestamp;
 import java.time.LocalDate;
+=======
+>>>>>>> refs/remotes/origin/kimkiryong
 import java.util.ArrayList;
 import java.util.HashMap;
+<<<<<<< HEAD
 import java.util.Calendar;
+=======
+import java.util.Map;
+>>>>>>> refs/remotes/origin/kimkiryong
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -23,7 +30,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+<<<<<<< HEAD
 import com.kh.homeWork.board.model.exception.BoardException;
+=======
+>>>>>>> refs/remotes/origin/kimkiryong
 import com.kh.homeWork.board.model.service.BoardService;
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
@@ -66,6 +76,7 @@ public class BoardController {
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 5);		
 		ArrayList<Board> list = bService.selectBoardList(pi,boardTypeNum);
 		//System.out.println(list);
+
 		
 		if(list !=null) {
 			model.addAttribute("list",list);
@@ -131,6 +142,7 @@ public class BoardController {
 	
 	@RequestMapping("writeBoard.bo")
 	public String writeBoard() {
+		System.out.println("hi");
 		return "writeBoard";
 	}
 	
@@ -151,6 +163,7 @@ public class BoardController {
 		return "redirect:domestic.bo";
 	}
 	
+
 	@RequestMapping("editBoard.bo")
 	public String editBoard(@RequestParam("bId") int bId,@RequestParam("page")int page,Model model) {
 		Board b = bService.selectBoard(bId, 0);
@@ -195,9 +208,57 @@ public class BoardController {
 		}
 		
 		throw new BoardException("게시글 삭제에 실패하였습니다");
+	}	
 		
+
+	@RequestMapping("test.bo")
+	public String test2(@RequestParam("startTime") String st, @RequestParam("endTime") String et) {
+		return "redirect:domesticList.bo";
+
+	}
+	
+	@RequestMapping("regionBoardList.bo")
+	public void regionBoardList(HttpServletResponse response,
+								@RequestParam(value = "region", required = false) String region,
+								@RequestParam(value = "page", defaultValue = "1") int currentPage) {
+		int listCount = bService.getRegionListCount(region);
+		PageInfo pi2 = Pagination.getPageInfo(currentPage, listCount,5);
+		
+		ArrayList<Board> list = bService.regionBoardList(region,pi2);
+	    Map<String, Object> resultMap = new HashMap<>();
+	    resultMap.put("list", list);
+	    resultMap.put("pi2", pi2);
+	    
+		GsonBuilder gb = new GsonBuilder().setDateFormat("YYYY-MM-dd");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		try {
+			gson.toJson(resultMap,response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
 	}
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
+	
 	
 	
 	@RequestMapping("insertReply.bo")

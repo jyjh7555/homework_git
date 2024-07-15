@@ -105,5 +105,15 @@ public class BoardServiceimpl implements BoardService {
 	public int deleteReply(Reply r) {
 		return bDAO.deleteReply(sqlSession,r);
 	}
+	public ArrayList<Board> regionBoardList(String region,PageInfo pi) {
+		return bDAO.regionBoardList(sqlSession,region,pi);
+	}
+
+
+	@Override
+	public int getRegionListCount(String region) {
+		return bDAO.getRegionListCount(sqlSession,region);
+	}
+
 
 }
