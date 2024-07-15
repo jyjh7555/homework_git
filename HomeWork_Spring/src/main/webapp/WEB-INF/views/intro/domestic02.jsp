@@ -7,7 +7,19 @@
 <title>Insert title here</title>
 <link href="${ contextPath }/CSS/domestic2.css" rel="stylesheet" type="text/css">
 <style>
+	body {
+		font-family: "Nanum Gothic", sans-serif;
+  		font-weight: 400;
+  		font-style: normal;
+	}
 
+	@font-face {
+	    font-family: 'GowunBatang-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	
 	.categoryDomestic{display: inline-block;  margin-right: 2px; 
 		width:400px; line-height:50px; margin-left:-11px;  text-align:center;
 		}
@@ -28,12 +40,6 @@
 		height: 200px;
 	}
 	
-	body {
-		font-family: "Nanum Gothic", sans-serif;
-  		font-weight: 400;
-  		font-style: normal;
-	}
-	
 	em{
 		font-size:30px;
 		color:skyblue;
@@ -42,13 +48,13 @@
 	
 	.volunteerBanner{
 			background-image:url('${ contextPath }/image/volunteerBanner.jpg');
-			
-			
-            
 			border: 8px solid #E3E3E3;
 			padding : 10px;
 	
 	}
+	#domestic-container>h1,h3,h4,em,p,.text-box1 {
+		font-family:GowunBatang-Regular;
+    }
 
 </style>
 </head>
@@ -71,9 +77,9 @@
 
 	
 	
-	<div align="center">
+	<div id="domestic-container" align="center">
 		<ul>
-			<li class=categoryDomestic><a style="border-left:2px solid #EEEEEE; border-top:2px solid #EEEEEE;border-right:3px solid #00AFD7; border-bottom:3px solid #00AFD7" href="domestic01.in">집짓기</a></li>
+			<li class=categoryDomestic><a style="border-left:2px solid #EEEEEE; border-top:2px solid #EEEEEE;border-right:3px solid #00AFD7; border-bottom:3px solid #00AFD7" text-decoration: underline href="domestic01.in">집짓기</a></li>
 			<li class=categoryDomestic><a style="border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="domestic02.in">주거환경개선</a></li>
 			<li class=categoryDomestic><a style="border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #00AFD7; border-bottom:3px solid #00AFD7" href="domestic03.in">긴급/재난</a></li>
 		</ul>
@@ -83,7 +89,7 @@
 	
 	<br>
 	
-	<div align="center">
+	<div class="domestic-container" align="center">
 		
 		<div class="domeMainImage" align="center" style="background-image:url('resources/image/dome02Image1.jpg');">
 			<div style="color:white; font-size:48px; padding:100px; font-weight:bold;">주거환경개선</div>

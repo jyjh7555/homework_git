@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.kh.homeWork.Volunteer.model.Volunteer;
 import com.kh.homeWork.admin.model.service.AdminService;
 import com.kh.homeWork.board.model.exception.BoardException;
 import com.kh.homeWork.board.model.vo.Board;
@@ -377,7 +378,7 @@ public class AdminController {
 			e.printStackTrace();
 		}
 	}
-	/*
+	
 	@RequestMapping("/adminVolunteerList.ad")
 	@ResponseBody
 	public void adminVolunteerList(@RequestParam(value="page", defaultValue = "1") int page,
@@ -407,7 +408,7 @@ public class AdminController {
 			e.printStackTrace();
 		}
 	}
-	*/
+	
 	
 	/*
 	@RequestMapping("/adminVolunteerUpdate.ad")

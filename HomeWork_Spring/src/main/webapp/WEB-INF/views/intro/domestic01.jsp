@@ -65,7 +65,7 @@
 
 	<br><br>
 	
-	<div align="center">
+	<div class="domestic-container" align="center">
 		<ul>
 			<li class=categoryDomestic><a style=" border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="domestic01.in">집짓기</a></li>
 			<li class=categoryDomestic><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #00AFD7;border-bottom:3px solid #00AFD7;" href="domestic02.in">주거환경개선</a></li>
@@ -77,7 +77,7 @@
 	
 	<br>
 	
-	<div align="center">
+	<div class="domestic-container" align="center">
 		
 		<div class="domeMainImage" align="center" style="background-image:url('resources/image/dome01Image1.jpg');">
 			<div style="color:white; font-size:48px; padding:100px; font-weight:bold;">희망의 집짓기!</div>

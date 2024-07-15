@@ -10,8 +10,9 @@
 <title>Insert title here</title>
 <style>
 	   #navbar{
+	    color: white; 
      	display: flex;
-    	 flex-direction:row;
+    	flex-direction:row;
       	justify-content:end;
       	margin-left:500px;
       	white-space: nowrap;
@@ -19,7 +20,7 @@
 
 	   }
 	   #navbar a {
-	       color: white; /* White text color */
+	      color: white; /* White text color */
 	      text-decoration: none;
 	      margin: 0 50px;
 	      font-weight: bold;
@@ -53,11 +54,10 @@
 	   
 	   #navbar-section {
 	         background-color: transparent; /* transparent background */
-	          display: flex;
-	          align-items: center;
-	          justify-content: space-around;
-	          padding: 10px 20px;
-	          transition: background-color 0.5s ease;
+	         display: flex;
+	         align-items: center;
+	         justify-content: space-around;
+	         padding: 10px 20px;
 	         border-bottom: 0.5px solid lightgray;
 	         height:80px;
 	   }
@@ -65,41 +65,31 @@
 </style>
 </head>
 <body>
-	<c:if test="${ empty loginUser }">
 	 <div id="navbar-section">
             <div class="logo">
                 <div class="logo-container">
                     <a href="${ contextPath }"><img id="logo-image" src="resources/image/newLogo.png" alt="로고"></a>
                 </div>
-                <a class="btn btn-outline-secondary btn-lg"href="${contextPath}/surpport.su">후원하기</a>
+                <a href="${contextPath}/surpport.su">후원하기</a>
             </div>
+		<c:if test="${ empty loginUser }">
             <div id="navbar">
-                
                 <a href="${contextPath}/loginView.me">Login</a>
                 <a href="${contextPath}/signUp.me">회원가입</a>
                 <a href="${contextPath}/myPage.me">마이 페이지</a>
             </div>
-     </div>
-	</c:if>
-	<c:if test="${ !empty loginUser }">
-		<div id="navbar-section">
-	    	<div class="logo">
-		    	<div class="logo-container">
-	                    <a href="${ contextPath }"><img id="logo-image" src="resources/image/newLogo.png" alt="로고"></a>         
-	            </div>
-	            <a class="btn btn-outline-secondary btn-lg"href="${contextPath}/surpport.su">후원하기</a>
-	    	</div>
+		</c:if>
+		<c:if test="${ !empty loginUser }">
         	<div id="navbar">
-	              
-	              <a>${loginUser.nickName}님, 반갑습니다.</a>
+	              <a><span style="font-size: 24px;">${loginUser.nickName}님</span>, 반갑습니다.</a>
 	              <c:if test='${ loginUser.isAdmin ==  "Y"}'>
 		              <a href="${contextPath}/admin.me">관리자 페이지</a>
 	              </c:if>
 	              <a href="${contextPath}/myPage.me">마이 페이지</a>
 	              <a href="${contextPath}/logout.me">로그아웃</a>
-         	</div> 
-		</div>
-	</c:if>
+	       	</div> 
+		</c:if>
+     </div>
 	
 	
 	

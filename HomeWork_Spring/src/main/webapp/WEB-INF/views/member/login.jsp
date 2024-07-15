@@ -75,7 +75,7 @@
 	<div align="center">
 	    <div class="container mt-5" id="main-page">
 	        <h2>로그인</h2>
-	        <form action="loginCheck.me">
+	        <form action="loginCheck.me" method="post">
 		        <input type="text" name="memberId" id="id" style="width:400px" placeholder="아이디"><br><br>
 		        <input type="password" name="memberPwd" style="width:400px" id="login-password" placeholder="패스워드">
 		        <button style="width:400px">로그인</button>

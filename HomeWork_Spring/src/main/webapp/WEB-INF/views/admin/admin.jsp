@@ -977,7 +977,17 @@
 		
 		    let currentPage = 1;
 		    const pageSize = 10;
-		
+		    
+		    function statusText(status) {
+		        switch (status) {
+		            case 'W':
+		                return '대기중';
+		            case 'Y':
+		                return '승인완료';
+		            case 'N':
+		                return '승인거부';
+		        }
+		    }
 		    function loadPage5(page) {
 		        const url = '${contextPath}/adminVolunteerList.ad?page=' + page + '&size=' + pageSize;
 		
@@ -985,23 +995,23 @@
 		            url: url,
 		            method: 'GET',
 		            success: function(data) {
-		                if (data && data.member) {
+		                if (data && data.volunteer) {
 		                    document.getElementById('volunteerList').classList.remove('hidden');
 		                    const volunteerList = document.getElementById('volunteerList');
 		                    const tbody = volunteerList.querySelector('tbody');
 		                    tbody.innerHTML = '';
 		
-		                    data.member.forEach(m => {
+		                    data.volunteer.forEach(v => {
 		                        const tr = document.createElement('tr');
 		
 		                        const noTd = document.createElement('td');
-		                        noTd.innerText = m.memberNo;
+		                        noTd.innerText = v.memberNo;
 		                        const nameTd = document.createElement('td');
-		                        nameTd.innerText = m.memberName;
+		                        nameTd.innerText = v.memberName;
 		                        const boardTd = document.createElement('td');
-		                        boardTd.innerText = m.category;
+		                        boardTd.innerText = v.category;
 		                        const statusTd = document.createElement('td');
-		                        statusTd.innerText = getStatusText(m.status);
+		                        statusTd.innerText = statusText(v.status);
 		
 		                        const btnTd = document.createElement('td');
 		                        const approveBtn = document.createElement('button');
@@ -1067,17 +1077,8 @@
 		
 		    loadPage5(currentPage);
 		});
-		<%-- 
-		 function statusText(status) {
-		        switch (status) {
-		            case 'W':
-		                return '대기중';
-		            case 'Y':
-		                return '승인완료';
-		            case 'N':
-		                return '승인거부';
-		        }
-		    }
+		 
+		 
 			 
 		 function updateStatus(memberNo, status, statusTd) {
 		        const url = `${contextPath}/updateVolunteerStatus.ad`; // 업데이트 URL
@@ -1089,7 +1090,6 @@
 		                status: status
 		            },
 		            success: function(data) {
-		                if (data.success) {
 		                	statusTd.innerText = getStatusText(status);
 		            },
 		            error: function(error) {
@@ -1098,9 +1098,6 @@
 		        });
 		    }
 
-		    loadPage5(currentPage);
-		});
---%>
 			 
 		
 		function deleteMember(memberNo){
