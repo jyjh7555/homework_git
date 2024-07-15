@@ -147,7 +147,7 @@
         
        	const msg = '${msg}';
        	if(msg != ''){
-       		alert('msg');
+       		alert(msg);
        	}
         </script>
         <% session.removeAttribute("msg"); %>

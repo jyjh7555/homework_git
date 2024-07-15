@@ -101,3 +101,17 @@
 	}
 	
 	.border{border-bottom: 1px groove #888888;}
+
+	
+	#navbar a {
+	      color: white; /* White text color */
+	      text-decoration: none;
+	      margin: 0 50px;
+	      font-weight: bold;
+	      transition: color 0.5s ease;
+	      font-size: 18px;
+	   
+	   }
+	   
+	#navbar>a:hover{font-weight: bold; text-decoration: underline;}
+	

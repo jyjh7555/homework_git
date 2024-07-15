@@ -28,13 +28,19 @@ public class InterceptorLogin implements HandlerInterceptor{
 			System.out.println(url);
 			if(url.contains("selectBoard.bo")) {
 				msg = "로그인 이후 확인 가능합니다!";
+				session.setAttribute("msg", msg);
+				response.sendRedirect("loginView.me");
+				return false;
+			}else if(url.contains("domestic.bo")||url.contains("global.bo")||url.contains("review.bo")){
+				return HandlerInterceptor.super.preHandle(request, response, handler);
 			}else {
 				msg = "로그인 세션이 만료되었습니다";
+				session.setAttribute("msg", msg);
+				response.sendRedirect("loginView.me");
+				return false;
 			}
 			
-			session.setAttribute("msg", msg);
-			response.sendRedirect("loginView.me");
-			return false;
+			
 		}
 		
 		
