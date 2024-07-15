@@ -1,18 +1,12 @@
 package com.kh.homeWork.board.Controller;
 
 import java.io.IOException;
-<<<<<<< HEAD
 import java.sql.Timestamp;
 import java.time.LocalDate;
-=======
->>>>>>> refs/remotes/origin/kimkiryong
 import java.util.ArrayList;
 import java.util.HashMap;
-<<<<<<< HEAD
 import java.util.Calendar;
-=======
 import java.util.Map;
->>>>>>> refs/remotes/origin/kimkiryong
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -30,10 +24,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
-<<<<<<< HEAD
 import com.kh.homeWork.board.model.exception.BoardException;
-=======
->>>>>>> refs/remotes/origin/kimkiryong
 import com.kh.homeWork.board.model.service.BoardService;
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
