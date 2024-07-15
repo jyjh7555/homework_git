@@ -159,10 +159,13 @@ public class BoardController {
 	public String editBoard(@RequestParam("bId") int bId,@RequestParam("page")int page,Model model) {
 		Board b = bService.selectBoard(bId, 0);
 		VolunteerDetail v = bService.selectVolunteerDetail(bId);
-		String[] address = v.getAddress().split(",");
+		
+		if(v == null) {
+			String[] address = v.getAddress().split(",");
+			model.addAttribute("address",address);
+		}
 		model.addAttribute("b",b);
 		model.addAttribute("v",v);
-		model.addAttribute("address",address);
 		model.addAttribute("page",page);
 		
 		return "editBoard";

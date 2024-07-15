@@ -125,17 +125,6 @@
             document.getElementById(pageId).style.display = 'block';
         }
 
-        function login() {
-            const id = document.getElementById('login-id').value;
-            const password = document.getElementById('login-password').value;
-            if (id !== 'homework') {
-                alert('아이디가 틀렸습니다. 다시 입력해 주세요');
-            } else if (password !== '@homework1') {
-                alert('비밀번호가 틀렸습니다. 다시 입력해 주세요');
-            } else {
-                alert('로그인 성공');
-            }
-        }
 
         function findId(){
         	location.href="findId.me";
@@ -145,6 +134,10 @@
         	location.href="findPwd.me";
         }
         
+        
+        const beforeURL = document.referrer;		//이전에 있던 url 가져오는 새로운 메소드네?? ○★★★ㅁ8
+		console.log(beforeURL);
+        console.log('야!!');
        	const msg = '${msg}';
        	if(msg != ''){
        		alert(msg);

@@ -158,12 +158,25 @@
 		            </table>
 		            <div class="editor_head col-12">
 		            	
-		            	<button style="border:1px solid gray;">가</button>
-		            	<button style="border:1px solid gray; font-weight: bold;"><b>가</b></button>
-		            	<button style="border:1px solid gray; font-style:italic;">가</button>
-		            	<button style="border:1px solid gray; text-decoration:underline;">가</button>
-		            	<button style="border:1px solid gray; text-decoration:line-through;">가</button>
-		            	<button >이미지</button>	
+		            	<button type="button" id="bold"style="border:1px solid gray; font-weight: bold;"><b>가</b></button>
+		            	<button type="button" id="italic"style="border:1px solid gray; font-style:italic;">가</button>
+		            	<button type="button" id="underline"style="border:1px solid gray; text-decoration:underline;">가</button>
+		            	<select id="fontSize">
+					        <option value="10px">10px</option>
+					        <option value="12px">12px</option>
+					        <option value="14px">14px</option>
+					        <option selected value="16px">16px</option>
+					        <option value="18px">18px</option>
+					        <option value="20px">20px</option>
+					        <option value="24px">24px</option>
+					        <option value="28px">28px</option>
+					        <option value="32px">32px</option>
+					        <option value="36px">36px</option>
+					        <option value="40px">40px</option>
+					    </select>
+					    <button type="button" id="alignLeft"style="border:1px solid gray;">왼쪽정렬</button>
+					    <button type="button" id="alignCenter"style="border:1px solid gray;">중앙정렬</button>
+					    <button type="button" id="alignRight"style="border:1px solid gray;">오른쪽정렬</button>
 		            	
 		            		
 		            
@@ -192,6 +205,89 @@
 	
 	
 	<script>
+	
+		//작성할때 텍스트 변화 주기
+		document.getElementById('bold').addEventListener('click', function() {
+			applyStyle('bold');
+			
+	    });
+	
+	    document.getElementById('italic').addEventListener('click', function() {
+	    	applyStyle('italic');
+	    });
+	
+	    document.getElementById('underline').addEventListener('click', function() {
+	    	applyStyle('underline');
+	    });
+	    
+	    document.getElementById('fontSize').addEventListener('change', function() {
+	    	applyStyle('fontSize');
+	    });
+	    
+	    document.getElementById('alignCenter').addEventListener('click', function() {
+	    	applyStyle('alignCenter');
+	    });
+	    document.getElementById('alignLeft').addEventListener('click', function() {
+	    	applyStyle('alignLeft');
+	    });
+	    document.getElementById('alignRight').addEventListener('click', function() {
+	    	applyStyle('alignRight');
+	    });
+
+		//작성할때 텍스트 변화 함수
+		function applyStyle(style){
+			const selection = window.getSelection();  //이거 내가 드래그한 텍스트 파일인듯
+			console.log(selection);		//파일이라기보단. range 로 나오는거 확인!!
+			
+			
+			
+			
+			if(selection.rangeCount>0){
+				//console.log(selection.rangeCount); //0 또는 1만 존재하는군
+				const range = selection.getRangeAt(0);	//뭐여이건
+		        const selectedText = range.extractContents();	//내용을 가져온다
+		        let span = document.createElement('span');
+		        
+		        const commonAncestorContainer = range.commonAncestorContainer;
+		        const parentElement = commonAncestorContainer.nodeType === 1 
+                					? commonAncestorContainer 
+                					: commonAncestorContainer.parentNode;
+		        
+		        switch(style) {
+	            case 'bold':
+	            	console.log(parentElement);
+	            	console.log(parentElement.style.fontWeight);
+	            	span.style.fontWeight = parentElement.style.fontWeight === 'bold' ? 'normal' : 'bold';
+	                break;
+	            case 'italic':
+	            	span.style.fontStyle = parentElement.style.fontStyle === 'italic' ? 'normal' : 'italic';
+	                break;
+	            case 'underline':
+	            	span.style.textDecoration = parentElement.style.textDecoration === 'underline' ? 'none' : 'underline';
+	                break;
+	            case 'fontSize':
+	            	span.style.fontSize =  document.getElementById('fontSize').value;
+	                break;
+	            case 'alignCenter':
+	            	parentElement.style.textAlign = 'center';
+	                break;
+	            case 'alignLeft':
+	            	parentElement.style.textAlign = 'left';
+	                break;
+	            case 'alignRight':
+	            	parentElement.style.textAlign = 'right';
+	                break;
+	                
+		        }
+		        
+		        span.appendChild(selectedText);
+		        range.insertNode(span);
+		        //selection.removeAllRanges();		//내가선택한영역 제거하기 난 필요없다
+				}else{
+					
+				}
+		}
+		
 	
 	
 		//리뷰게시판 작성하려구해~

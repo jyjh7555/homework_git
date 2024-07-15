@@ -239,7 +239,7 @@
         //	document.execCommand('fontSize', false, '14px');
         });
 	
-	
+		//작성할때 텍스트 변화 함수
 		function applyStyle(style){
 			const selection = window.getSelection();  //이거 내가 드래그한 텍스트 파일인듯
 			console.log(selection);		//파일이라기보단. range 로 나오는거 확인!!
