@@ -327,7 +327,10 @@
 	</div>
 	
 	<script>
-		
+	window.onload =() =>{
+		const logoImage = document.getElementById('logo-image');
+		logoImage.style.filter = "invert(1)";
+	}
 	 function changeBackground() {
 	        const navbarSection = document.getElementById('navbar-section');
 	        navbarSection.style.backgroundColor = "white";

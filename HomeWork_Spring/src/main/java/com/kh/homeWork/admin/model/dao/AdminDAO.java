@@ -7,6 +7,7 @@ import org.apache.ibatis.session.RowBounds;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.stereotype.Repository;
 
+import com.kh.homeWork.Volunteer.model.Volunteer;
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
 import com.kh.homeWork.board.model.vo.Reply;
@@ -136,7 +137,7 @@ public class AdminDAO {
 	}
 
 	public int getListCountVolunteer(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("adminMapper.getListVolunteer");
+		return sqlSession.selectOne("adminMapper.getListCountVolunteer");
 	}
 
 	public int totalMember(SqlSessionTemplate sqlSession) {
@@ -153,6 +154,13 @@ public class AdminDAO {
 
 	public int totalAmount(SqlSessionTemplate sqlSession) {
 		return sqlSession.selectOne("adminMapper.totalAmount");
+	}
+
+	public ArrayList<Volunteer> adminVolunteerList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.adminVolunteerList", null, rowBounds);
 	}
 
 	

@@ -7,6 +7,7 @@ import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kh.homeWork.Volunteer.model.Volunteer;
 import com.kh.homeWork.admin.model.dao.AdminDAO;
 import com.kh.homeWork.board.model.dao.BoardDAO;
 import com.kh.homeWork.board.model.vo.Board;
@@ -183,6 +184,11 @@ public class AdminServiceImpl implements AdminService {
 	@Override
 	public int totalAmount() {
 		return aDAO.totalAmount(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Volunteer> adminVolunteerList(PageInfo pi) {
+		return aDAO.adminVolunteerList(sqlSession, pi);
 	}
 
 	

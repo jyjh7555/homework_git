@@ -1,5 +1,17 @@
 @charset "UTF-8";
+	body {
+		font-family: "Nanum Gothic", sans-serif;
+  		font-weight: 400;
+  		font-style: normal;
+	}
 
+	@font-face {
+	    font-family: 'GowunBatang-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
+	}
+	
 	a{display:block; color:#555555; font-size: 17px; text-decoration: none;}
 	
 	ul{ list-style: none;}
@@ -43,7 +55,6 @@
 	a{display:block; color:#555555; font-size: 17px; text-decoration: none;}
 	}	
 	
-	.semi-title {
-		text-decoration: underline;
-		text-underline-offset: 15px;
-	}
+	#domestic-container>h1,h3,h4,em,p,.text-box1 {
+		font-family:GowunBatang-Regular;
+    }

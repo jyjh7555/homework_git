@@ -3,6 +3,7 @@ package com.kh.homeWork.admin.model.service;
 import java.util.ArrayList;
 import java.util.HashMap;
 
+import com.kh.homeWork.Volunteer.model.Volunteer;
 import com.kh.homeWork.board.model.vo.Board;
 import com.kh.homeWork.board.model.vo.PageInfo;
 import com.kh.homeWork.board.model.vo.Reply;
@@ -71,6 +72,8 @@ public interface AdminService {
 	int totalBoard();
 
 	int totalAmount();
+
+	ArrayList<Volunteer> adminVolunteerList(PageInfo pi);
 
 	
 
