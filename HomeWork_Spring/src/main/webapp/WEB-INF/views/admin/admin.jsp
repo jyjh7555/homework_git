@@ -1001,37 +1001,27 @@
 		                        const boardTd = document.createElement('td');
 		                        boardTd.innerText = m.category;
 		                        const statusTd = document.createElement('td');
-		                        switch (m.status) {
-		                            case 'W':
-		                                statusTd.innerText = '대기중';
-		                                break;
-		                            case 'Y':
-		                                statusTd.innerText = '승인완료';
-		                                break;
-		                            case 'N':
-		                                statusTd.innerText = '승인거부';
-		                                break;
-		                            default:
-		                                statusTd.innerText = '알 수 없음';
-		                        }
+		                        statusTd.innerText = getStatusText(m.status);
 		
 		                        const btnTd = document.createElement('td');
 		                        const approveBtn = document.createElement('button');
 		                        approveBtn.textContent = '승인';
 		                        approveBtn.className = 'btn btn-success';
-		                        approveBtn.onclick = function() {
-		                            alert('승인 버튼 클릭됨 for member ' + m.memberNo);
-		                        };
+		                        approveBtn.addEventListener('click', function() {
+		                            updateStatus(m.memberNo, 'Y');
+		                        });
+		                        
 		
-		                        const rejectBtn = document.createElement('button');
-		                        rejectBtn.textContent = '거부';
-		                        rejectBtn.className = 'btn btn-danger';
-		                        rejectBtn.onclick = function() {
-		                            alert('거부 버튼 클릭됨 for member ' + m.memberNo);
-		                        };
+		                        const refusalBtn = document.createElement('button');
+		                        refusalBtn.textContent = '거부';
+		                        refusalBtn.className = 'btn btn-danger';
+		                        refusalBtn.addEventListener('click', function() {
+		                            updateStatus(m.memberNo, 'N');
+		                        });
+		                        
 		
 		                        btnTd.appendChild(approveBtn);
-		                        btnTd.appendChild(rejectBtn);
+		                        btnTd.appendChild(refusalBtn);
 		
 		                        const tds = [noTd, nameTd, boardTd, statusTd, btnTd];
 		                        tr.append(...tds);
@@ -1075,6 +1065,39 @@
 		        });
 		    }
 		
+		    loadPage5(currentPage);
+		});
+			 
+		 function statusText(status) {
+		        switch (status) {
+		            case 'W':
+		                return '대기중';
+		            case 'Y':
+		                return '승인완료';
+		            case 'N':
+		                return '승인거부';
+		        }
+		    }
+			 
+		 function updateStatus(memberNo, status, statusTd) {
+		        const url = `${contextPath}/updateVolunteerStatus.ad`; // 업데이트 URL
+		        $.ajax({
+		            url: url,
+		            method: 'POST',
+		            data: {
+		                memberNo: memberNo,
+		                status: status
+		            },
+		            success: function(data) {
+		                if (data.success) {
+		                	statusTd.innerText = getStatusText(status);
+		            },
+		            error: function(error) {
+		                console.error('상태 업데이트 오류:', error);
+		            }
+		        });
+		    }
+
 		    loadPage5(currentPage);
 		});
 
