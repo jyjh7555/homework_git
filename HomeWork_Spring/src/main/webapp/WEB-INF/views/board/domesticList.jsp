@@ -42,6 +42,28 @@
 	a{display:block; color:#555555; font-size: 17px; text-decoration: none;}
 	
 	area{cursor: pointer;}
+	
+	th,td {
+		white-space: nowrap;
+	    overflow: hidden;
+	    text-overflow: ellipsis;
+	}
+	 .region-title-container {
+        text-align: start;
+        margin-bottom: 20px; /* mapAndBoard와의 간격 조절 */
+    }
+
+    .region-title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #4a6741; /* 원하는 색상으로 변경 */
+        padding: 5px 15px;
+        border: 2px solid #4a6741;
+        border-radius: 20px;
+        display: inline-block;
+        margin-left:200px;
+    }
+	
 </style>
 <title>Insert title here</title>
 </head>
@@ -77,9 +99,12 @@
 	 			<li>건축봉사활동 특성상, 현장 상황에 따라 공사는 진행되어도 봉사자 모집은 없을 수 있습니다.</li>
 	 		</ul>
 	 		</div>
- 		
- 		<div class="mapAndBoard d-flex flex-row border border-2 h-75 align-items-center ">
- 				<div class="w-75">
+			<div class="border border-2">
+				<div class="region-title-container mt-3">
+   					<span class="region-title">국내 전체</span>
+				</div>
+				<div class="mapAndBoard d-flex flex-row h-75 align-items-center">
+ 				<div class="w-25">
 					<img src="resources/image/korMapGood.png" alt="한국 지도"  usemap="#menuMap" /> 
 					<map name="menuMap" id="menuMap"> 
 				     	<area shape="poly" coords="225,63,238,49,256,65,240,99" alt="서울" data-region="서울" onclick="showTarget(event)"/>
@@ -89,7 +114,7 @@
 					</map> 
 				</div>
 					
-		 		<div class="domestic-container container text-center me-5">
+		 		<div class="domestic-container container text-center w-50 ms-6">
 			 		<div class="bd-example">
 						<table class="table table-hover">
 							<thead>
@@ -97,7 +122,7 @@
 									<th class="w-10">글 번호</th>
 									<th class="w-10">지역</th>
 									<th class="w-10">글 제목</th>
-									<th class="w-10">작성자</th>
+									<th class="w-10">현재 신청 인원 / 모집 인원</th>
 									<th class="w-10">작성일자</th>
 									<th class="w-10">조회수</th>
 									<th class="w-10">신청</th>
@@ -109,7 +134,7 @@
 				            			<td>${b.boardNo }</td>
 				            			<td>${b.location }</td>
 				            			<td>${b.title }</td>
-				            			<td>관리자</td>
+				            			<td>${b.nowCount} / ${b.fullCount}</td>
 				            			<td>${b.updateDate }</td>
 				            			<td>${b.boardCount }</td>
 				            			<td><a class="btn btn-success" href="${ contextPath }/insertVolunteer.vo?boardNo=${b.boardNo}">신청하기</a></td>
@@ -119,37 +144,6 @@
 			        	</table>
 	       			</div>
 
-<<<<<<< HEAD
-		 	
-		 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
-
-        		<ul align="center"class="pagination">
-		            <li class="page-item">
-		            	<c:url var="goBack" value="${ loc }">
-	        			<c:param name="page" value="${ pi.currentPage -1 }"/>
-	        			</c:url>
-		            	<a class="page-link" href="${ goBack }" aria-label="Previous">
-		            		<span aria-hidden="true">&laquo;</span>
-		              	</a>
-		            </li>
-		            <c:forEach begin="${pi.startPage }" end="${pi.endPage }" var="p">
-		            	<c:url var="goNum" value="${ loc }">
-		            		<c:param name="page" value="${ p }"/>
-		            	</c:url>
-		            	<li class="page-item"><a class="page-link" href="${ goNum }">${ p }</a></li>
-		            </c:forEach>
-		            <li class="page-item">
-		            	<c:url var="goNext" value="${ loc }">
-		            		<c:param name="page" value="${ pi.currentPage +1 }"/>
-		            	</c:url>
-		            	<a class="page-link" href="${ goNext }" aria-label="Next">
-		            		<span aria-hidden="true">&raquo;</span>
-		            	</a>
-		            </li>
-	    		</ul>
-      	  </nav>
-      	  
-=======
 				 	
 				 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
 						<div class="d-flex flex-row justify-content-end mb-3  w-50 mt-3 " style="width:1400px;">
@@ -186,13 +180,15 @@
 			 			</div>
 				 	</div>
  		</div>
->>>>>>> refs/remotes/origin/kimkiryong
+
 
  	  </div>
+			</div>
+ 			
 	
 	
 	</div>
- 		</div>
+
  		
 
       	  
@@ -225,6 +221,7 @@
 
 		    event.preventDefault();
 		    const region = event.target.getAttribute('data-region');
+		    console.log(region);
 		    loadRegionBoard(region,1);  // 초기 페이지는 1로 설정
 		}
 
@@ -234,8 +231,9 @@
 		        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 		        data: { region: region, page: page },
 		        success: data => {
-		       
+		       		
 		            updateTable(data.list);
+		            
 		         
 		            updatePagination(data.pi2, region);
 		            selectBoard();
@@ -259,7 +257,7 @@
 		        tr.appendChild(createTd(b.boardNo));
 		        tr.appendChild(createTd(b.location));
 		        tr.appendChild(createTd(b.title));
-		        tr.appendChild(createTd('관리자'));
+		        tr.appendChild(createTd(b.nowCount));
 		        tr.appendChild(createTd(b.updateDate));
 		        tr.appendChild(createTd(b.boardCount));
 		        const applyTd = document.createElement('td');

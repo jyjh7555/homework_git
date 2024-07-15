@@ -1,11 +1,8 @@
 package com.kh.homeWork.member.model.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import com.kh.homeWork.board.model.vo.PageInfo;
 import com.kh.homeWork.member.model.vo.Member;
-import com.kh.homeWork.surpport.model.vo.Pay;
 
 public interface MemberService{
 
@@ -24,6 +21,12 @@ public interface MemberService{
 	int checkMemberId(String id);
 
 	int checkMemberNickName(String nickName);
+
+	int updatePassword(HashMap<String, String> map);
+
+	
+
+	
 
 
 

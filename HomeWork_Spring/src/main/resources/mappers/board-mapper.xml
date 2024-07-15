@@ -156,6 +156,6 @@
  		where delete_yn = 'N' and location = #{region}
 	</select>
  	
-
+	
  	
 </mapper>

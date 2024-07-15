@@ -1,5 +1,6 @@
 package com.kh.homeWork.Volunteer.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -34,6 +35,11 @@ public class VolunteerServiceImpl implements VolunteerService {
 	@Override
 	public List<Volunteer> getRecentVolunteers(int memberNo) {
 		return vDAO.getRecentVolunteers(sqlSession,memberNo);
+	}
+
+	@Override
+	public int getVolunteerCount(int vNum) {
+		return vDAO.getVolunteerCount(sqlSession,vNum);
 	}
 
 }

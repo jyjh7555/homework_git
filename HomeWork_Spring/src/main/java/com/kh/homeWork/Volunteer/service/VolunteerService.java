@@ -1,5 +1,6 @@
 package com.kh.homeWork.Volunteer.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -12,5 +13,7 @@ public interface VolunteerService {
 	Integer getVolunteerNoByBoardNo(int boardNo);
 
 	List<Volunteer> getRecentVolunteers(int memberNo);
+
+	int getVolunteerCount(int vNum);
 
 }

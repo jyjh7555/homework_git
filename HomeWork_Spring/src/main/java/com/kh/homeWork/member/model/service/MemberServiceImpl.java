@@ -1,17 +1,13 @@
 package com.kh.homeWork.member.model.service;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 
-import org.apache.ibatis.session.SqlSession;
 import org.mybatis.spring.SqlSessionTemplate;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.kh.homeWork.board.model.vo.PageInfo;
 import com.kh.homeWork.member.model.dao.MemberDAO;
 import com.kh.homeWork.member.model.vo.Member;
-import com.kh.homeWork.surpport.model.vo.Pay;
 
 @Service("mService")
 public class MemberServiceImpl implements MemberService {
@@ -56,6 +52,15 @@ public class MemberServiceImpl implements MemberService {
 	public int checkMemberNickName(String nickName) {
 		return mDAO.checkMemberNickName(sqlSession,nickName);
 	}
+
+	@Override
+	public int updatePassword(HashMap<String, String> map) {
+		return mDAO.updatePassword(sqlSession,map);
+	}
+	
+
+
+
 
 
 	
