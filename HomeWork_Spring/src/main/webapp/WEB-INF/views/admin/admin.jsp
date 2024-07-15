@@ -1067,7 +1067,7 @@
 		
 		    loadPage5(currentPage);
 		});
-			 
+		<%-- 
 		 function statusText(status) {
 		        switch (status) {
 		            case 'W':
@@ -1100,7 +1100,7 @@
 
 		    loadPage5(currentPage);
 		});
-
+--%>
 			 
 		
 		function deleteMember(memberNo){
