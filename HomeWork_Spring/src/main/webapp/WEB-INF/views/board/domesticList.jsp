@@ -80,7 +80,7 @@
  		
  		<div class="mapAndBoard d-flex flex-row border border-2 h-75 align-items-center ">
  				<div class="w-75">
-					<img src="resources/image/korMapGood.png" alt="한국 지도"  usemap="#menuMap" /> 
+					<img src="resources/image/korMapGood.png" alt="세계 지도"  usemap="#menuMap" /> 
 					<map name="menuMap" id="menuMap"> 
 				     	<area shape="poly" coords="225,63,238,49,256,65,240,99" alt="서울" data-region="서울" onclick="showTarget(event)"/>
 					    <area shape="poly" coords="309,61,324,46,338,60,323,96" alt="강원도" data-region="강원도" onclick="showTarget(event)"/>
