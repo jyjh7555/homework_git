@@ -119,6 +119,7 @@ public class MemberController {
 	
 	@RequestMapping("updateMemberPage.me")
 	public String updateMember() {
+		
 		return "edit";
 	}
 	
