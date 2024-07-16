@@ -1,5 +1,6 @@
 package com.kh.homeWork.Volunteer.dao;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
 
@@ -20,6 +21,10 @@ public class VolunteerDAO {
 
 	public List<Volunteer> getRecentVolunteers(SqlSessionTemplate sqlSession, int memberNo) {
 		return sqlSession.selectList("volunteerMapper.getRecentVolunteers",memberNo);
+	}
+
+	public int getVolunteerCount(SqlSessionTemplate sqlSession, int vNum) {
+		return sqlSession.selectOne("volunteerMapper.getVolunteerCount",vNum);
 	}
 
 }
