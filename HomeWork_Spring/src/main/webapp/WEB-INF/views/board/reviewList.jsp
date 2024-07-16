@@ -60,7 +60,7 @@
 							<thead>
 								<tr class="pb-3">
 									<th width="10%">글 번호</th>
-									<th width="10%">지역</th>
+									<th width="10%">게시글타입</th>
 									<th width="30%">글 제목</th>
 									<th width="10%">작성자</th>
 									<th width="20%">작성일자</th>

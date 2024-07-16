@@ -51,7 +51,6 @@
 			   	<h1 class="title ms-3 m-4" style="font-family:'Pretendard-Regular'"><b>후원 정보</b></h1>
 		        <div class="field mb-3">
 		            <label class="label me-3 ms-4">후원주기</label>
-		            <button type="button" class="button selected  btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">정기</button>
 		            <button type="button" class="button btn btn-outline-secondary btn-sm" onclick="toggleButtonColor(this)">일시</button>
 		        </div>
 		        <div class="field mb-3">
@@ -164,10 +163,9 @@
 			        pg: "html5_inicis.INIpayTest",
 			        pay_method: "card",
 			        merchant_uid: formattedTime,
-			        name: "크테스트후원결제",
+			        name: "HomeWork후원결제",
 			        amount: money,
 			        buyer_tel: "${ loginUser.phone}",
-			        m_redirect_url: "www.naver.com",
 		    	},function(response){
 		    	  console.log(response);
 		    	  console.log(response.success);
@@ -176,7 +174,7 @@
 		    		  document.getElementById('payCheck').value = response.success;
 		    		  document.getElementsByName('merchantUid')[0].value = response.merchant_uid;
 		    		  form.action = '${contextPath}/successPay.su';
-		  	    	  //form.submit();
+		  	    	  form.submit();
 		    		  
 		    		  
 		    	  }else{
@@ -219,6 +217,15 @@
 	        });
 	        button.classList.remove('btn-outline-secondary');
 	        button.classList.add('btn-primary', 'text-dark', 'bg-info');
+	        if(buttons.length == 2 ){
+				if(buttons[0].classList.contains('bg-info')){
+					document.getElementsByName('product')[0].value = "국내건축후원";
+				}else{
+					document.getElementsByName('product')[0].value = "해외건축후원";
+				}
+				
+	        }
+	        
 	      }
 
 	    function showCustomAmountField() {

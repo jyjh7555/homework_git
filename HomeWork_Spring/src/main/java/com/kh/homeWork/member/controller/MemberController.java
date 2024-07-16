@@ -56,9 +56,14 @@ public class MemberController {
 		
 		Member loginUser = mService.loginCheck(m);
 		System.out.println(loginUser);
+		
+		if(loginUser == null) {
+			throw new MemberException("아이디 또는 비밀번호가 일치하지 않습니다");
+		}
+		
 		if(bcrypt.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
 			session.setAttribute("loginUser", loginUser);			
-			return "../../../index";				
+			return "redirect:home.do";				
 		}else {
 			throw new MemberException("로그인을 실패했습니다.");
 		}
