@@ -27,4 +27,6 @@ public class Board {
 	private int boardType;
 	private int fullCount;
 	private int nowCount;
+	private Date recruitStart;
+	private Date recruitEnd;
 }

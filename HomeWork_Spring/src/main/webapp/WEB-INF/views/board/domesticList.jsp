@@ -138,7 +138,7 @@
                                  <td>${b.nowCount} / ${b.fullCount}</td>
                                  <td>${b.updateDate }</td>
                                  <td>${b.boardCount }</td>
-                                 <td><a class="btn btn-success" href="${ contextPath }/insertVolunteer.vo?boardNo=${b.boardNo}">신청하기</a></td>
+                                 <td><a class="btn btn-secondary" href="${ contextPath }/insertVolunteer.vo?boardNo=${b.boardNo}">신청하기</a></td>
                                </tr>
                            </c:forEach>
                          </tbody>
@@ -236,7 +236,7 @@
               contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
               data: { region: region, page: page },
               success: data => {
-                 
+                  console.log(data.pi2);
                   updateTable(data.list);
                   
                

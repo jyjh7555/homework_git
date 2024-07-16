@@ -28,5 +28,6 @@ public class Member {
 	private String status;
 	private Date createDate;
 	private String memberName;
+	
 
 }

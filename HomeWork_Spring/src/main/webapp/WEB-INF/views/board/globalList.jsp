@@ -59,7 +59,7 @@
 				</div>	
 		 	</div>
 		 	
- 		<div class="container" style="height:1000px">
+ 		<div class="container" style="min-height:1000px">
  			<div class="mt-5 ms-0 me-0 ps-0 pe-0 w-100"align="center">
 				<ul>
 					<li class="categoryDomestic"><a style="border-left:2px solid #EEEEEE; border-top:2px solid #EEEEEE;border-right:3px solid #00AFD7; border-bottom:3px solid #00AFD7;" href="domestic.bo">국내봉사일정</a></li>
@@ -78,9 +78,9 @@
 	 		</ul>
 	 		</div>
  		
- 		<div class="mapAndBoard d-flex flex-row border border-2 h-75 align-items-center ">
+ 			<div class="mapAndBoard border border-2 align-items-center ">
  				<div class="w-75">
-					<img src="resources/image/globalMap1.png" alt="한국 지도"  usemap="#menuMap" /> 
+					<img src="resources/image/globalMap1.png" alt="대륙 지도"  usemap="#menuMap" /> 
 					<map name="menuMap" id="menuMap"> 
 				     	<area shape="rect" coords="820,184,868,206" alt="아시아" data-region="아시아" onclick="showTarget(event)"/>
 				     	<area shape="rect" coords="592,324,660,348" alt="아프리카" data-region="아메리카" onclick="showTarget(event)"/>
@@ -88,20 +88,19 @@
 				     	<area shape="rect" coords="355,375,435,427" alt="남아메리카" data-region="남아메리카" onclick="showTarget(event)"/>
 				     	<area shape="rect" coords="901,430,999,452" alt="오세아니아" data-region="오세아니아" onclick="showTarget(event)"/>
 				     	<area shape="rect" coords="605,186,670,206" alt="유럽" data-region="유럽" onclick="showTarget(event)"/>
-					       
 					</map> 
-					
 				</div>
-		 		<div class="domestic-container container text-center me-5">
+				
+				<div class="domestic-container container text-center me-5">
 			 		<div class="bd-example">
 						<table class="table table-hover">
 							<thead>
 								<tr class="pb-3">
 									<th class="w-10">글 번호</th>
-									<th class="w-10">지역</th>
+									<th cla	s="w-10">지역</th>
 									<th class="w-10">글 제목</th>
-									<th class="w-10">작성자</th>
-									<th class="w-10">작성일자</th>
+									<th class="w-10">현재 신청 인원 / 모집 인원</th>
+									<th class="w-10">모집기간</th>
 									<th class="w-10">조회수</th>
 									<th class="w-10">신청</th>
 			          			</tr>
@@ -112,21 +111,19 @@
 				            			<td>${b.boardNo }</td>
 				            			<td>${b.location }</td>
 				            			<td>${b.title }</td>
-				            			<td>관리자</td>
-				            			<td>${b.updateDate }</td>
+				            			<td>${b.nowCount} / ${b.fullCount}</td>
+				            			<td>${b.recruitStart} ~ ${b.recruitEnd}</td>
 				            			<td>${b.boardCount }</td>
-				            			<td><a class="btn btn-success" href="${ contextPath }/insertVolunteer.vo?boardNo=${b.boardNo}">신청하기</a></td>
+				            			<td><a class="btn btn-secondary" href="${ contextPath }/insertVolunteer.vo?boardNo=${b.boardNo}">신청하기</a></td>
 			          				</tr>
 			         			</c:forEach>
 			          		</tbody>
 			        	</table>
 	       			</div>
 
-
-				 	
-				 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
-						<div class="d-flex flex-row justify-content-end mb-3  w-50 mt-3 " style="width:1400px;">
-				       		<ul align="center"class="pagination">
+				<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
+						<div  align="center" class="d-flex flex-row align-items-center justify-content-center mb-3  w-50 mt-3 " style="width:1400px;">
+				       		<ul class="pagination">
 					            <li class="page-item">
 					            	<c:url var="goBack" value="${ loc }">
 				        				<c:param name="page" value="${ pi.currentPage -1 }"/>
@@ -153,16 +150,21 @@
 		      	  
 		
 							<c:if test="${ !empty loginUser }">
-					        	<button class="btn btn-sm btn-outline-success ms-3" style="width:70px; height:40px; border-radius:16px;font-size:12px;" type="button" onclick="location.href='${ contextPath }/writeBoard.bo'">글 작성</button>
+					        	<button class="btn btn-sm btn-outline-success ms-3" style="margin-bottom:15px; width:70px; height:40px; border-radius:16px;font-size:12px;" type="button" onclick="location.href='${ contextPath }/writeBoard.bo'">글쓰기</button>
 					        </c:if>
 			 			</div>
-				 	</div>
- 		</div>
-
- 	  </div>
+				 </div>
+				 	
+				 	
+ 			</div>
+				
+				
+ 	  		</div>
+ 	  		
+ 	  		
 	
 	
-	</div>
+		</div>
  		
 
       	  
@@ -204,8 +206,8 @@
 		        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 		        data: { region: region, page: page },
 		        success: data => {
-		       
-		            updateTable(data.list);
+
+		        	updateTable(data.list);
 		         
 		            updatePagination(data.pi2, region);
 		            selectBoard();
