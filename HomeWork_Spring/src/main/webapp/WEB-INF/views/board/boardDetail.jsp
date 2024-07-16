@@ -142,9 +142,6 @@
 			        		<button class ="btn btm-lg btn-light m-5" style="width:250px; border-radius:16px;font-size:24px;">수정하기</button>
 						</form>
 		        	</c:if>
-		        	<c:if test="${loginUser.status =='Y' && dateCheck}">
-		        		<button class ="btn btm-lg btn-light m-5" style="width:200px; border-radius:16px;font-size:22px;">후기 작성하기!</button>
-		        	</c:if>
 		        	
 		        	<button type="button" class ="btn btm-lg btn-secondary m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="location.href='${contextPath}/domestic.bo?page=${page}'">목록보기</button>
 				</div>		

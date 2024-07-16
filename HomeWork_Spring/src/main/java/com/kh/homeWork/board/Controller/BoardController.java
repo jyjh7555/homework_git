@@ -160,7 +160,7 @@ public class BoardController {
 		Board b = bService.selectBoard(bId, 0);
 		VolunteerDetail v = bService.selectVolunteerDetail(bId);
 		
-		if(v == null) {
+		if(v != null) {
 			String[] address = v.getAddress().split(",");
 			model.addAttribute("address",address);
 		}

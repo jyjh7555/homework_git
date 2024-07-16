@@ -184,9 +184,7 @@
 		            
 		            </div>
 		            <div id="editDiv" class="form-control workseditor-editor"style="width:100%; min-height:500px" contenteditable="true">
-		            [공지사항]
-		            입력해주세요!
-					
+		            <div>내용을 입력해주세요!</div>
 					</div>
 					<input type="hidden" name="content">
 				</div>		
@@ -249,14 +247,13 @@
 		        let span = document.createElement('span');
 		        
 		        const commonAncestorContainer = range.commonAncestorContainer;
-		        const parentElement = commonAncestorContainer.nodeType === 1 
+		        let parentElement = commonAncestorContainer.nodeType === 1 
                 					? commonAncestorContainer 
                 					: commonAncestorContainer.parentNode;
 		        
 		        switch(style) {
 	            case 'bold':
-	            	console.log(parentElement);
-	            	console.log(parentElement.style.fontWeight);
+	            	//console.log(parentElement.style.fontWeight);
 	            	span.style.fontWeight = parentElement.style.fontWeight === 'bold' ? 'normal' : 'bold';
 	                break;
 	            case 'italic':
@@ -269,12 +266,32 @@
 	            	span.style.fontSize =  document.getElementById('fontSize').value;
 	                break;
 	            case 'alignCenter':
+	            	/* console.log(parentElement.tagName);
+	            	console.log(parentElement.tagName == 'DIV');
+	            	console.log(parentElement.parentElement); */
+	            	
+	            	while(parentElement.tagName=='SPAN'){
+	            		console.log(parentElement.tagName);
+	            		parentElement = parentElement.parentElement;
+	            		console.log(parentElement);
+	            	}
 	            	parentElement.style.textAlign = 'center';
 	                break;
 	            case 'alignLeft':
+	            	
+	            	while(parentElement.tagName=='SPAN'){
+	            		console.log(parentElement.tagName);
+	            		parentElement = parentElement.parentElement;
+	            		console.log(parentElement);
+	            	}
 	            	parentElement.style.textAlign = 'left';
 	                break;
 	            case 'alignRight':
+	            	while(parentElement.tagName=='SPAN'){
+	            		console.log(parentElement.tagName);
+	            		parentElement = parentElement.parentElement;
+	            		console.log(parentElement);
+	            	}
 	            	parentElement.style.textAlign = 'right';
 	                break;
 	                
@@ -285,7 +302,7 @@
 		        //selection.removeAllRanges();		//내가선택한영역 제거하기 난 필요없다
 				}else{
 					
-				}
+			}
 		}
 		
 	
