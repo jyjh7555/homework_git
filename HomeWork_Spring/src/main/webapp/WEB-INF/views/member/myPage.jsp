@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <style>
 	body {
 		font-family: "Nanum Gothic", sans-serif;
@@ -249,29 +250,58 @@
 	            	<a class="border border-2" href="updatePwdPage.me">비밀번호 수정</a>
 	            </div>
 	        </div>
-	        <div class="section-divider"></div>
-       		<div class="recent-activity-section">
-	            <h5 class="d-block activity-title mb-4">신청 대기 중인 봉사활동 내역</h5>
+       		<div align="center"class="item-center recent-activity-section">
+	            <h5 class="d-block activity-title">신청 대기 중인 봉사활동 내역</h5>
 	            <table class="activity-table">
 			        <thead>
-			            <tr class="border-bottom border-2 mb-3">
+			            <tr align="center">
 			                <th>게시글 번호</th>
 			                <th>제목</th>
-			                <th>상태</th>
+			                <th style="margin-left:-5px;">상태 </th>
+			                <th> 취소</th>
 			            </tr>
 			        </thead>
 			        <tbody>
 			            <c:forEach items="${recentVolunteers}" var="volunteer">
-			                <tr class="border-bottom mb-2">
-			                    <td>${volunteer.boardNo}</td>
-			                    <td>${volunteer.title}</td>
-			                    <td>${volunteer.status}</td>
-			                </tr>
+			            		<c:if test="${volunteer.status != 'N'}">
+					                <tr align="center">
+					                    <td>${volunteer.boardNo}</td>
+					                    <td>${volunteer.title}</td>
+					                    <td>${volunteer.status}</td>
+					                    <td><button class="btn btm-sm btn-success" onclick="showModal(this)">취소</button></td>
+				                	</tr>
+			                	</c:if>
 			            </c:forEach>
 			        </tbody>
 	   		   </table>
         	</div>
 		</div>
+		
+		<form id="form">
+		<input type="hidden" name ="memberNo">
+		<input type="hidden" name ="boardNo">
+		<input type="hidden" name ="status" value="N">
+		</form>
+		
+		<!-- 모달 -->
+		<div class="modal fade" tabindex="-1" role="dialog" id="modalRefusal">
+			<div class="modal-dialog" role="document">
+	    		<div class="modal-content rounded-3 shadow">
+	      			<div class="modal-body p-4 text-center">
+	        			<h3 class="mb-0">취소하시겠습니까?</h3>
+	      			</div>
+	      			<div class="modal-footer flex-nowrap p-0">
+	        			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" onclick="volunteerStatusN()">
+	        				<strong>네</strong>
+	        			</button>
+	        			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal" aria-label="Close"  id="refusalClose">아니오</button>
+	      			</div>
+	    		</div>
+	  		</div>
+		</div>
+		
+		
+		
 
 		
 		<div id="footer">
@@ -297,18 +327,39 @@
 	      };;
 	    }
 
-	    function resetBackground() {
-	        const navbarSection = document.getElementById('navbar-section');
-	        navbarSection.style.backgroundColor = "transparent";
-	        const links = navbarSection.querySelectorAll('a');
-	        links.forEach(function(link) {
-	            link.style.color = "white";
-	        })
-	        const logoImage = document.getElementById('logo-image');
-	         if (logoImage) {
-	            logoImage.style.filter = "invert(1)";
-	      };
-	    }
+     function resetBackground() {
+        const navbarSection = document.getElementById('navbar-section');
+        navbarSection.style.backgroundColor = "transparent";
+        const links = navbarSection.querySelectorAll('a');
+        links.forEach(function(link) {
+            link.style.color = "white";
+        })
+        const logoImage = document.getElementById('logo-image');
+         if (logoImage) {
+            logoImage.style.filter = "invert(1)";
+      };
+     }
+     
+     // 봉사신청 취소하기
+     let boardNo ='';
+	 function showModal(btn){
+		 $('#modalRefusal').modal('show'); 
+		 boardNo = btn.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.innerText;
+		 console.log(boardNo);
+	 };
+	 const form = document.getElementById('form');
+	 function volunteerStatusN(){
+		 form.action = '${contextPath}/deleteVolunteer.ad'
+		 const memberNo = '${loginUser.memberNo}';
+		 document.getElementsByName('boardNo')[0].value = boardNo;
+		 document.getElementsByName('memberNo')[0].value = memberNo;
+		 form.submit();
+	 }
+	 
+     
+	    
+	    
+	    
     </script>
 </body>
 </html>

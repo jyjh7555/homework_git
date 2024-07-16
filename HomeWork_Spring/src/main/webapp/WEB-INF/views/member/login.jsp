@@ -75,41 +75,17 @@
 
 	<div align="center">
 	    <div class="container mt-5" id="main-page">
-	        <h2>로그인</h2>
+	        <label style="margin:20px; margin-left:15px; font-size:48px;"><b>L O G I N</b> </label>
 	        <form action="loginCheck.me" method="post">
 		        <input type="text" name="memberId" id="id" style="width:400px" placeholder="아이디"><br><br>
 		        <input type="password" name="memberPwd" style="width:400px" id="login-password" placeholder="패스워드">
 		        <button style="width:400px">로그인</button>
 	        </form>
-	        <button style="width:400px" onclick="showPage('qr-code-page')">QR코드 로그인</button>
-	        <button style="width:400px" onclick="showPage('signup-page')">회원가입</button>
-	        <button style="width:400px" onclick="findId()">아이디 찾기</button>
-	        <button style="width:400px" onclick="findPwd()">비밀번호 찾기</button>
+	        <button  style="width:400px" onclick="findId()">아이디 찾기</button>
+	        <button  style="width:400px" onclick="findPwd()">비밀번호 찾기</button>
 	    </div>
 	    
-	    <div class="container qr-code" id="qr-code-page" style="display:none;">
-	        <h2>QR코드 로그인</h2>
-	        <div>
-	            <img src="https://via.placeholder.com/150" alt="QR 코드" id="qr-code">
-	        </div>
-	        <button onclick="showPage('main-page')">로그인 상태 유지</button>
-	        <p>남은 시간 : 05:00</p>
-	    </div>
 	
-	    <div class="container" id="signup-page" style="display:none;">
-	        <h2>신규 가입</h2>
-	        <input type="text" placeholder="ID">
-	        <input type="password" placeholder="PW">
-	        <input type="text" placeholder="이름">
-	        <input type="number" placeholder="주민등록 번호">
-	        <input type="text" placeholder="이메일">
-	        <input type="text" placeholder="주소">
-	        <input type="number" placeholder="번호">
-	        <input type="number" placeholder="휴대폰 번호">
-	        <button onclick="showPage('main-page')">완료</button>
-	        <button onclick="showPage('main-page')">처음으로</button>
-	        
-	    </div>
 	</div>
 	
 	<div id="footer">

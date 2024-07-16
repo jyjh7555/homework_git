@@ -282,7 +282,7 @@
 	            	console.log(parentElement.tagName == 'DIV');
 	            	console.log(parentElement.parentElement); */
 	            	
-	            	while(parentElement.tagName=='SPAN'){
+	            	while(parentElement.tagName=='SPAN'|| parentElement.tagName=='IMG'){
 	            		console.log(parentElement.tagName);
 	            		parentElement = parentElement.parentElement;
 	            		console.log(parentElement);
@@ -291,7 +291,7 @@
 	                break;
 	            case 'alignLeft':
 	            	
-	            	while(parentElement.tagName=='SPAN'){
+	            	while(parentElement.tagName=='SPAN'|| parentElement.tagName=='IMG'){
 	            		console.log(parentElement.tagName);
 	            		parentElement = parentElement.parentElement;
 	            		console.log(parentElement);
@@ -299,7 +299,7 @@
 	            	parentElement.style.textAlign = 'left';
 	                break;
 	            case 'alignRight':
-	            	while(parentElement.tagName=='SPAN'){
+	            	while(parentElement.tagName=='SPAN'|| parentElement.tagName=='IMG'){
 	            		console.log(parentElement.tagName);
 	            		parentElement = parentElement.parentElement;
 	            		console.log(parentElement);

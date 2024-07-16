@@ -85,6 +85,8 @@ public interface AdminService {
 
 	int adminDeleteReply(Reply r);
 
+	int findVolunteerNo(int boardNo);
+
 	
 
 

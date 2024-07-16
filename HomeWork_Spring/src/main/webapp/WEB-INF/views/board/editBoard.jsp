@@ -109,6 +109,9 @@
 			            				<option value="60" <c:if test="${b.locationNo =='260' }">checked</c:if>>오세아니아</option>
 			            				<option value="70" <c:if test="${b.locationNo =='270' }">checked</c:if>>유럽</option>
 			            			</c:if>
+			            			<c:if test="${b.boardType=='3' }">
+			            				<option value="1000" selected>-</option>
+			            			</c:if>
 			            			</select>
 			            		</div>
 		            		</td>
@@ -251,6 +254,36 @@
 		window.onload =()=>{
 			reviewCheckFn();		//후기게시판 처음에 가져올때 한번 실행하자
 		}
+		
+		
+		//작성할때 텍스트 변화 주기
+		document.getElementById('bold').addEventListener('click', function() {
+			applyStyle('bold');
+			
+	    });
+	
+	    document.getElementById('italic').addEventListener('click', function() {
+	    	applyStyle('italic');
+	    });
+	
+	    document.getElementById('underline').addEventListener('click', function() {
+	    	applyStyle('underline');
+	    });
+	    
+	    document.getElementById('fontSize').addEventListener('change', function() {
+	    	applyStyle('fontSize');
+	    });
+	    
+	    document.getElementById('alignCenter').addEventListener('click', function() {
+	    	applyStyle('alignCenter');
+	    });
+	    document.getElementById('alignLeft').addEventListener('click', function() {
+	    	applyStyle('alignLeft');
+	    });
+	    document.getElementById('alignRight').addEventListener('click', function() {
+	    	applyStyle('alignRight');
+	    });
+		
 	
 	
 		//작성할때 텍스트 변화 함수
@@ -274,7 +307,7 @@
 		        
 		        switch(style) {
 	            case 'bold':
-	            	//console.log(parentElement.style.fontWeight);
+	            	
 	            	span.style.fontWeight = parentElement.style.fontWeight === 'bold' ? 'normal' : 'bold';
 	                break;
 	            case 'italic':
@@ -291,7 +324,7 @@
 	            	console.log(parentElement.tagName == 'DIV');
 	            	console.log(parentElement.parentElement); */
 	            	
-	            	while(parentElement.tagName=='SPAN'){
+	            	while(parentElement.tagName=='SPAN'|| parentElement.tagName=='IMG'){
 	            		console.log(parentElement.tagName);
 	            		parentElement = parentElement.parentElement;
 	            		console.log(parentElement);
@@ -300,7 +333,7 @@
 	                break;
 	            case 'alignLeft':
 	            	
-	            	while(parentElement.tagName=='SPAN'){
+	            	while(parentElement.tagName=='SPAN'|| parentElement.tagName=='IMG'){
 	            		console.log(parentElement.tagName);
 	            		parentElement = parentElement.parentElement;
 	            		console.log(parentElement);
@@ -308,7 +341,7 @@
 	            	parentElement.style.textAlign = 'left';
 	                break;
 	            case 'alignRight':
-	            	while(parentElement.tagName=='SPAN'){
+	            	while(parentElement.tagName=='SPAN' || parentElement.tagName=='IMG'){
 	            		console.log(parentElement.tagName);
 	            		parentElement = parentElement.parentElement;
 	            		console.log(parentElement);
@@ -361,13 +394,10 @@
 			event.preventDefault();
 			
 			const file = event.dataTransfer.files[0];
-			console.log(file);
 			uploadFile(file);
 		})
 		
 		function uploadFile(file) {
-			console.log(file);
-			console.log('여기까지맞니?');
             const reader = new FileReader();		//객체부여하고
             reader.readAsDataURL(file);				//내가 드랍한 파일객체만든거를 넣어,파일의데이터를나타내는 URL을생성한다
             reader.onloadend = () => {				// 내가 읽든안읽은 자동으로실행, load메소드쓰면 읽어와야 실행
@@ -515,10 +545,26 @@
 		
 		
 		const form = document.getElementById('form')
-		
+		document.getElementsByName('locationNo')[0].value = '1000';
+		console.log(document.getElementsByName('locationNo')[0]);
 		function updateBoard(){
 			form.action = '${contextPath}/updateBoard.bo';
 			document.getElementsByName('content')[0].value= editDiv.innerHTML;
+			if(reviewCheck.checked){
+				document.getElementsByName('boardType')[0].value= '3';
+				document.getElementById('category').value= null;
+				document.getElementsByName('locationNo')[0].value= '1000';
+				
+				document.getElementsByName('startDate')[0].value='2000-01-01';
+				document.getElementsByName('endDate')[0].value='2000-01-01';
+				document.getElementsByName('recruitStart')[0].value='2000-01-01';
+				document.getElementsByName('recruitEnd')[0].value='2000-01-01';
+				document.getElementsByName('memberCount')[0].value=0;
+				document.getElementsByName('mgr')[0].value=null;
+				document.getElementsByName('mgrPhone')[0].value=null;
+				document.getElementsByName('address')[0].value=null;
+				
+			}
 			form.submit();
 		}
 		

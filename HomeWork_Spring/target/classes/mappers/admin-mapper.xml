@@ -322,4 +322,10 @@
  		from volunteer
  		where status = 'W'
  	</select>
+ 	
+ 	<select id="findVolunteerNo" resultType="_int">
+ 		select volunteer_no
+ 		from volunteer_detail
+ 		where board_no = #{boardNo}
+ 	</select>
 </mapper>

@@ -71,7 +71,6 @@ public class BoardController {
 		int listCount = bService.getListCount(boardTypeNum);
 		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 5);		
 		ArrayList<Board> list = bService.selectBoardList(pi,boardTypeNum);
-		//System.out.println(list);
 
 		
 		if(list !=null) {
@@ -213,10 +212,11 @@ public class BoardController {
 			@RequestParam("page") int page) {
 
 		int result1 = bService.updateBoard(b);
-
-		int result2 = bService.updateVolunteerDetail(v);
-
-		if (result1 > 0 && result2 > 0) {
+		
+		if(b.getBoardType() !=3) {
+			bService.updateVolunteerDetail(v);
+		}
+		if (result1 > 0) {
 			switch (b.getBoardType()) {
 			case 1:
 				return "redirect:domestic.bo?page=" + page;

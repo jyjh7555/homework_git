@@ -216,6 +216,11 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.admindeleteReply(sqlSession, r);
 	}
 
+	@Override
+	public int findVolunteerNo(int boardNo) {
+		return aDAO.findVolunteerNo(sqlSession,boardNo);
+	}
+
 	
 
 	

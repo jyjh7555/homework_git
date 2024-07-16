@@ -18,6 +18,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
+import com.kh.homeWork.board.model.exception.BoardException;
 import com.kh.homeWork.board.model.vo.PageInfo;
 import com.kh.homeWork.common.Pagination;
 import com.kh.homeWork.member.model.vo.Member;
@@ -67,7 +68,7 @@ public class surpportController {
 			
 			int result = pService.insertPay(pay);		//DB삽입
 			if(result>0){
-				return "redirect:domestic01.in";		//추후 메인페이지
+				return "redirect:home.do";		//추후 메인페이지
 			}else {
 				System.out.println("데이터 저장 실패");		//에러throw하기
 			}
@@ -76,7 +77,7 @@ public class surpportController {
 			System.out.println("에러페이지 적용하기");		//에러throw하기
 		}
 		
-		return "terms";
+		throw new BoardException("후원이 실패하였습니다");
 	}
 	
 	
