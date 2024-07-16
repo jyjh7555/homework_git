@@ -52,7 +52,7 @@
 	
 	
 	
-	.userInfo, .userUpdate, .userDelete, .supportPage, .regularSupportPage, .searchResult {
+	.userInfo, .userUpdate, .userDelete, .supportPage, .regularSupportPage, .searchResult, .infoList {
             
             padding: 20px;
             border: 1px solid #ddd;
