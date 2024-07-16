@@ -504,7 +504,29 @@ public class AdminController {
 		}
 	}
 	
-	
+	@RequestMapping("deleteVolunteer.ad")
+	public String deleteVolunteer(@RequestParam("status") String status,
+								  @RequestParam("memberNo") int memberNo,
+								  @RequestParam("boardNo") int boardNo){
+		
+		int volunteerNo = aService.findVolunteerNo(boardNo);
+		
+		if(volunteerNo>0) {
+			HashMap<String, Object> v = new HashMap<String, Object>();
+			v.put("volunteerNo", volunteerNo);
+			v.put("memberNo", memberNo);
+			v.put("status", status);
+			int result = aService.adminVolunteerUpdate(v);
+			if(result>0) {
+				return "redirect:myPage.me";
+			}else {
+				throw new AdminException("오류 발생");
+			}
+		}else {
+			throw new AdminException("오류 발생");
+		}
+		
+	}
 	
 	
 }

@@ -183,6 +183,10 @@ public class AdminDAO {
 		return sqlSession.update("adminMapper.adminDeleteReply", r);
 	}
 
+	public int findVolunteerNo(SqlSessionTemplate sqlSession, int boardNo) {
+		return sqlSession.selectOne("adminMapper.findVolunteerNo",boardNo);
+	}
+
 	
 
 	
