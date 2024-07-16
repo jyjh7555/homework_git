@@ -37,6 +37,7 @@
 	   .logo {
 	       display: flex;
 	       align-items: center;
+	       width: 300px;
 	   }
 	
 	   .logo-container {
@@ -55,6 +56,24 @@
 	       height: 100%;
 	       object-fit: contain;
 	   }
+	    #login-info {
+        display: flex;
+        align-items: center;
+	    }
+	
+	    #login-info span {
+	        font-size: 24px;
+	        font-weight: bold;
+	        margin-right: 10px;
+	    }
+	    #navbar a {
+        color: white;
+        text-decoration: none;
+        margin: 0 50px;
+        font-weight: bold;
+        transition: color 0.5s ease;
+        font-size: 18px;
+    }
 	   
 	   #navbar-section {
 	         background-color: transparent; /* transparent background */
@@ -86,12 +105,14 @@
 		</c:if>
 		<c:if test="${ !empty loginUser }">
         	<div id="navbar">
-	              <a><span style="font-size: 24px;">${loginUser.nickName}님</span>, 반갑습니다.</a>
-	              <c:if test='${ loginUser.isAdmin ==  "Y"}'>
-		              <a href="${contextPath}/admin.me">관리자 페이지</a>
-	              </c:if>
-	              <a href="${contextPath}/myPage.me">마이 페이지</a>
-	              <a href="${contextPath}/logout.me">로그아웃</a>
+        		<div id="login-info">
+		              <a><span style="font-size: 24px;">${loginUser.nickName}님</span>, 반갑습니다.</a>
+		              <c:if test='${ loginUser.isAdmin ==  "Y"}'>
+			              <a href="${contextPath}/admin.me">관리자 페이지</a>
+		              </c:if>
+		              <a href="${contextPath}/myPage.me">마이 페이지</a>
+		              <a href="${contextPath}/logout.me">로그아웃</a>
+	              </div>
 	       	</div> 
 		</c:if>
      </div>

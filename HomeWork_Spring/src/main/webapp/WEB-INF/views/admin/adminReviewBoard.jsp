@@ -80,7 +80,7 @@
 	<br>
 	<h3 align="center">[후기게시판 관리]</h3>
     <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3">
-        <div class="d-flex flex-column justify-content-center mb-3 border border-1 border-info w-50 mt-3" style="width:1400px;">
+        <div class="d-flex flex-column justify-content-center mb-3 border border-1 border-info w-50 mt-3" style="width:1600px;">
             <table id="domesticBoardTable" class="table table-bordered border-primary" table-hover ">
                <thead>
 					<tr class="pb-3">
@@ -131,11 +131,6 @@
 		            </li>
 	    		</ul>
       	  </nav>
-            <c:if test="${!empty loginUser}">
-            	<div align="right">
-	                <button class="btn btn-lg btn-outline-info" style="width:100px; border-radius:10px;font-size:15px;" type="button" onclick="location.href='${contextPath}/adminWriteBoard.ad'">글 작성</button>
-            	</div>
-            </c:if>
         </div>
     </div>
     

@@ -123,7 +123,7 @@
 	
 	<div id="container">
 		<div align="center" id=adminMenu>
-			<div style="border:1px solid skyblue; background:skyblue; height:32px"><a onClick="window.location.reload()">홈</a></div>
+			<div style="border:1px solid skyblue; background:skyblue; height:32px"><a onClick="window.location.reload()">통계</a></div>
 			
 			<div class="mainCate" style="margin-top:10px" >회원정보관리</div>
 				<ul class="hidden" style="list-style-type:none; text-align:left;">
@@ -146,7 +146,12 @@
 				</ul>
 			<div class=mainCate>봉사신청관리</div>
 				<ul class="hidden" style="list-style-type:none; text-align:left;">
-					<li id="volunteer1">봉사신청자</li>
+					<li id="volunteer1">
+						봉사신청자
+						<button type="button" class="btn btn-danger btn-sm">
+						  <span class="badge text-bg-danger " id="volunteerApplicant"></span>
+						</button>
+					</li>
 				</ul>
 			
 		</div>
@@ -190,9 +195,18 @@
 				                    <td>총 게시물 수</td>
 				                    <td id="totalBoard"></td>
 				                </tr>
+				                
 				                <tr>
 				                    <td>총 후원액</td>
 				                    <td id="totalAmount"></td>
+				                </tr>
+				                <tr>
+				                	<td>국내 후원액</td>
+				                	<td id=domesticAmount></td>
+				                </tr>
+				                <tr>
+				                	<td>해외 후원액</td>
+				                	<td id=globalAmount></td>
 				                </tr>
 				            </tbody>
 				        </table>
@@ -380,11 +394,12 @@
 					<table id="volunteerTable">
 						<thead>
 							<tr>
+								<th width="10%">봉사번호</th>
 								<th width="10%">회원번호</th>
 								<th width="10%">이름</th>
-								<th width="10%">제목?</th>
+								<th width="10%">제목</th>
 								<th width="10%">현재상태</th>
-								<th width="10%">버튼</th>
+								<th width="10%">처리</th>
 							</tr>
 						</thead>
 						<tbody>
@@ -394,7 +409,7 @@
 					        <tr>
 					            <td colspan="10">
 					                <nav aria-label="Standard pagination example" style="float: center;">
-					                    <ul id="pagination4" class="pagination">
+					                    <ul id="pagination5" class="pagination">
 					                    
 					                    </ul>
 					                </nav>
@@ -406,8 +421,40 @@
 				</div>
 			</div>
 		</div>
+		
+		<div class="modal fade" tabindex="-1" role="dialog" id="modalApprove">
+			<div class="modal-dialog" role="document">
+	    		<div class="modal-content rounded-3 shadow">
+	      			<div class="modal-body p-4 text-center">
+	        			<h3 class="mb-0">승인하시겠습니까?</h3>
+	      			</div>
+	      			<div class="modal-footer flex-nowrap p-0">
+	        			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" id="approveModal">
+	        				<strong>네</strong>
+	        			</button>
+	        			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal"  id="approveClose">아니오</button>
+	      			</div>
+	    		</div>
+	  		</div>
+		</div>
+		<div class="modal fade" tabindex="-1" role="dialog" id="modalRefusal">
+			<div class="modal-dialog" role="document">
+	    		<div class="modal-content rounded-3 shadow">
+	      			<div class="modal-body p-4 text-center">
+	        			<h3 class="mb-0">거부하시겠습니까?</h3>
+	      			</div>
+	      			<div class="modal-footer flex-nowrap p-0">
+	        			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" id="refusalModal">
+	        				<strong>네</strong>
+	        			</button>
+	        			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal" aria-label="Close"  id="refusalClose">아니오</button>
+	      			</div>
+	    		</div>
+	  		</div>
+		</div>
 	
 	<script>
+	
 	function statistics() {
         $.ajax({
             url: '${contextPath}/adminStatistics.ad',
@@ -417,12 +464,28 @@
                 document.getElementById('activeMembers').innerText = data.activeMember+"명";
                 document.getElementById('inactiveMembers').innerText = data.inactiveMember+"명";
                 document.getElementById('totalBoard').innerText = data.totalBoard+"개";
-                document.getElementById('totalAmount').innerText = data.amount+"원";
+                document.getElementById('totalAmount').innerText = data.totalAmount+"원";
+                document.getElementById('domesticAmount').innerText = data.domesticAmount+"원";
+                document.getElementById('globalAmount').innerText = data.globalAmount+"원";
+                document.getElementById('volunteerApplicant').innerText = data.volunteerApplicant;
+                
             },
             error: function(error) {
                 console.error('Error fetching statistics:', error);
             }
         });
+    }
+	function statusText(status) {
+        switch (status) {
+            case 'W':
+                return '대기중';
+            case 'Y':
+                return '승인완료';
+            case 'N':
+                return '승인거부';
+            default:
+            	return '오류';
+        }
     }
 		window.onload =() =>{
 			statistics();
@@ -443,6 +506,40 @@
 	                this.nextElementSibling.classList.toggle('hidden');
 	                
 	            });
+			 
+			document.getElementById('approveModal').addEventListener('click',()=>{
+		        $('#modalApprove').modal('hide');
+		        $('#approveClose').modal('hide');
+				const modal = document.getElementById('modalApprove');
+		        const volunteerNo = modal.dataset.volunteerNo;
+		        const memberNo= modal.dataset.memberNo;
+		        const status = modal.dataset.status;
+		        const statusTdId = modal.dataset.statusTdId;
+		        const statusTd = document.getElementById(statusTdId);
+		        updateStatus(volunteerNo, memberNo, status, statusTd);
+		        console.log(statusTdId);
+		        console.log(statusTd)
+			});
+			document.getElementById('refusalModal').addEventListener('click',()=>{
+		        $('#modalRefusal').modal('hide');
+		        $('#refusalClose').modal('hide');
+				const modal = document.getElementById('modalRefusal');
+		        const volunteerNo = modal.dataset.volunteerNo;
+		        const memberNo= modal.dataset.memberNo;
+		        const status = modal.dataset.status;
+		        const statusTdId = modal.dataset.statusTdId;
+		        const statusTd = document.getElementById(statusTdId);
+		        updateStatus(volunteerNo, memberNo, status, statusTd);
+			});
+			
+			 $('#approveClose').click(function() {
+	                $('#modalApprove').modal('hide');
+	            });
+
+	            $('#refusalClose').click(function() {
+	                $('#modalRefusal').modal('hide');
+	            });
+			 
 		}
 			
 			 
@@ -978,16 +1075,7 @@
 		    let currentPage = 1;
 		    const pageSize = 10;
 		    
-		    function statusText(status) {
-		        switch (status) {
-		            case 'W':
-		                return '대기중';
-		            case 'Y':
-		                return '승인완료';
-		            case 'N':
-		                return '승인거부';
-		        }
-		    }
+		    
 		    function loadPage5(page) {
 		        const url = '${contextPath}/adminVolunteerList.ad?page=' + page + '&size=' + pageSize;
 		
@@ -1002,38 +1090,57 @@
 		                    tbody.innerHTML = '';
 		
 		                    data.volunteer.forEach(v => {
+		                        
+		                        
 		                        const tr = document.createElement('tr');
 		
-		                        const noTd = document.createElement('td');
-		                        noTd.innerText = v.memberNo;
+		                        const vNoTd = document.createElement('td');
+		                        vNoTd.innerText = v.volunteerNo;
+		                        const mNoTd = document.createElement('td');
+		                        mNoTd.innerText = v.memberNo;
 		                        const nameTd = document.createElement('td');
 		                        nameTd.innerText = v.memberName;
 		                        const boardTd = document.createElement('td');
-		                        boardTd.innerText = v.category;
+		                        boardTd.innerText = v.title;
 		                        const statusTd = document.createElement('td');
+		                        statusTd.id = 'statusTd-' + v.volunteerNo + '-' + v.memberNo;
 		                        statusTd.innerText = statusText(v.status);
 		
 		                        const btnTd = document.createElement('td');
 		                        const approveBtn = document.createElement('button');
 		                        approveBtn.textContent = '승인';
 		                        approveBtn.className = 'btn btn-success';
+		                        approveBtn.name = 'volunteerStatusButton';
+		                        approveBtn.id = 'approveBtn';
 		                        approveBtn.addEventListener('click', function() {
-		                            updateStatus(m.memberNo, 'Y');
+		                            //updateStatus(v.volunteerNo, 'Y', statusTd);
+		                        	$('#modalApprove').modal('show');
+		                        	document.getElementById('modalApprove').dataset.volunteerNo = v.volunteerNo;
+		                        	document.getElementById('modalApprove').dataset.memberNo = v.memberNo;
+		                            document.getElementById('modalApprove').dataset.status = 'Y';
+		                            document.getElementById('modalApprove').dataset.statusTdId = 'statusTd-' + v.volunteerNo + '-' + v.memberNo;		                        	
 		                        });
 		                        
 		
 		                        const refusalBtn = document.createElement('button');
 		                        refusalBtn.textContent = '거부';
 		                        refusalBtn.className = 'btn btn-danger';
+		                        refusalBtn.name = 'volunteerStatusButton';
+		                        refusalBtn.id = `refusalBtn`
 		                        refusalBtn.addEventListener('click', function() {
-		                            updateStatus(m.memberNo, 'N');
+		                            //updateStatus(v.volunteerNo, 'N', statusTd);
+		                        	$('#modalRefusal').modal('show');
+		                        	document.getElementById('modalRefusal').dataset.volunteerNo = v.volunteerNo;
+		                        	document.getElementById('modalRefusal').dataset.memberNo = v.memberNo;
+		                            document.getElementById('modalRefusal').dataset.status = 'N';
+		                            document.getElementById('modalRefusal').dataset.statusTdId = 'statusTd-' + v.volunteerNo + '-' + v.memberNo;
 		                        });
 		                        
 		
 		                        btnTd.appendChild(approveBtn);
 		                        btnTd.appendChild(refusalBtn);
 		
-		                        const tds = [noTd, nameTd, boardTd, statusTd, btnTd];
+		                        const tds = [vNoTd,mNoTd, nameTd, boardTd, statusTd, btnTd];
 		                        tr.append(...tds);
 		                        tbody.append(tr);
 		                    });
@@ -1080,17 +1187,20 @@
 		 
 		 
 			 
-		 function updateStatus(memberNo, status, statusTd) {
-		        const url = `${contextPath}/updateVolunteerStatus.ad`; // 업데이트 URL
+		 function updateStatus(volunteerNo, memberNo, status, statusTd) {
+			 console.log(statusTd);
 		        $.ajax({
-		            url: url,
+		            url: '${contextPath}/updateVolunteerStatus.ad',
 		            method: 'POST',
 		            data: {
+		                volunteerNo: volunteerNo,
 		                memberNo: memberNo,
 		                status: status
 		            },
-		            success: function(data) {
-		                	statusTd.innerText = getStatusText(status);
+		            success: function(response) {
+		                	statusTd.innerText = statusText(response.status);
+		                	$('#modalApprove').modal('hide');
+		                    $('#modalRefusal').modal('hide');
 		            },
 		            error: function(error) {
 		                console.error('상태 업데이트 오류:', error);
@@ -1244,10 +1354,12 @@
 				error: data => console.log(data)
 				
 			});
-	        
+		       
 	        
 	        window.onload = () => {
 	        	statistics();
+	        	
+				
 			}
 		}
 	</script>

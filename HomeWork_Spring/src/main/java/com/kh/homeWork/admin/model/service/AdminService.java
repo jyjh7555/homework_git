@@ -53,6 +53,8 @@ public interface AdminService {
 
 	ArrayList<Reply> selectReply(int bId);
 
+	int adminInsertReply(Reply r);
+	
 	int adminSelectBoardNoCheck();
 
 	int adminInsertVolunteer(VolunteerDetail v);
@@ -71,9 +73,20 @@ public interface AdminService {
 
 	int totalBoard();
 
-	int totalAmount();
+	int domesticAmount();
+
+	int globalAmount();
 
 	ArrayList<Volunteer> adminVolunteerList(PageInfo pi);
+
+	int adminVolunteerUpdate(HashMap<String, Object> v);
+
+	int volunteerApplicant();
+
+	int adminDeleteReply(Reply r);
+
+	
+
 
 	
 

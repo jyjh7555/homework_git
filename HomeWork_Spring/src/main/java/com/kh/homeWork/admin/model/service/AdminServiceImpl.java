@@ -182,14 +182,41 @@ public class AdminServiceImpl implements AdminService {
 	}
 
 	@Override
-	public int totalAmount() {
-		return aDAO.totalAmount(sqlSession);
+	public int domesticAmount() {
+		return aDAO.domesticAmount(sqlSession);
+	}
+	
+	@Override
+	public int globalAmount() {
+		return aDAO.globalAmount(sqlSession);
 	}
 
 	@Override
 	public ArrayList<Volunteer> adminVolunteerList(PageInfo pi) {
 		return aDAO.adminVolunteerList(sqlSession, pi);
 	}
+
+	@Override
+	public int adminVolunteerUpdate(HashMap<String, Object> v) {
+		return aDAO.adminVolunteerUpdate(sqlSession, v);
+	}
+
+	@Override
+	public int volunteerApplicant() {
+		return aDAO.volunteerApplicant(sqlSession);
+	}
+
+	@Override
+	public int adminInsertReply(Reply r) {
+		return aDAO.adminInsertReply(sqlSession, r);
+	}
+
+	@Override
+	public int adminDeleteReply(Reply r) {
+		return aDAO.admindeleteReply(sqlSession, r);
+	}
+
+	
 
 	
 
