@@ -66,6 +66,13 @@
 		from member
 		where nickName = #{nickName} 
 	</select>
+	
+	<update id="updatePassWord">
+		update member
+		set member_pwd=#{newPwd}
+		where member_id=#{id}
+	</update>
+	
 
 
 </mapper>

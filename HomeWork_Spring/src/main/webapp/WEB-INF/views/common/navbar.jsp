@@ -30,6 +30,10 @@
 	   }
 	   #navbar>a:hover{font-weight: bold; text-decoration: underline;}
 	   
+	   #navbar-section a{
+	   	color:white;
+	   }
+	   
 	   .logo {
 	       display: flex;
 	       align-items: center;
@@ -79,6 +83,7 @@
 	         padding: 10px 20px;
 	         border-bottom: 0.5px solid lightgray;
 	         height:80px;
+	         transition: background-color 0.5s ease;
 	   }
 
 </style>
@@ -87,9 +92,9 @@
 	 <div id="navbar-section">
             <div class="logo">
                 <div class="logo-container">
-                    <a href="${ contextPath }"><img id="logo-image" src="resources/image/newLogo.png" alt="로고"></a>
+                    <a href="${ contextPath }"><img style="filter:invert(1); color:white; width:130px; height:130px;"id="logo-image" src="resources/image/newLogo.png" alt="로고"></a>
                 </div>
-                <a href="${contextPath}/surpport.su">후원하기</a>
+                <a href="${contextPath}/surpport.su"><b>후원하기</b></a>
             </div>
 		<c:if test="${ empty loginUser }">
             <div id="navbar">
@@ -117,22 +122,33 @@
 	<script>
 	
 	function changeBackground() {
-        const navbarSection = document.getElementById('navbar-section');
-        navbarSection.style.backgroundColor = "white";
-        const links = navbarSection.querySelectorAll('a');
-        links.forEach(function(link) {
-            link.style.color = "black";
-        });
-    }
+	        const navbarSection = document.getElementById('navbar-section');
+	        navbarSection.style.backgroundColor = "white";
+	        const links = navbarSection.querySelectorAll('a');
+	        links.forEach(function(link) {
+	            link.style.color = "black";
+	        })
+	         const logoImage = document.getElementById('logo-image');
+	         if (logoImage) {
+	            logoImage.style.filter = "invert(0)";
+	      };;
+	    }
 
-    function resetBackground() {
-        const navbarSection = document.getElementById('navbar-section');
-        navbarSection.style.backgroundColor = "transparent";
-        const links = navbarSection.querySelectorAll('a');
-        links.forEach(function(link) {
-            link.style.color = "white";
-        });
-    }
+	    function resetBackground() {
+	        const navbarSection = document.getElementById('navbar-section');
+	        navbarSection.style.backgroundColor = "transparent";
+	        const links = navbarSection.querySelectorAll('a');
+	        links.forEach(function(link) {
+	            link.style.color = "white";
+	        })
+	        const logoImage = document.getElementById('logo-image');
+	         if (logoImage) {
+	            logoImage.style.filter = "invert(1)";
+	      };
+	    }
+    
+    
+    
 	
 	</script>
 	

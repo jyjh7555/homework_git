@@ -18,8 +18,8 @@
 	    background-position: center;
 	    background-repeat: no-repeat;
 	    transition: background-color 0.5s ease;
-	    
-	
+	    font-family: 'GowunBatang-Regular';
+	   
 	}	
 </style>
 <body >
@@ -78,8 +78,9 @@
 		<hr>
 		<div class="text-container1 d-flex justify-content-center gap-5  ">
 			<div class="align-self-center w-25  ">
-				<h3 class="fs-2 fw-semibold mb-3">주택 신축 사업</h3>
-				<h4 class="fs-4 lh-base">각국에는 해비타트의 표준 주택모델이 있습니다.<br>
+				<p style="font-size:32px; color:skyblue; font-weight:bold;">주택 신축 사업</p>
+				<div class="border"></div>
+				<h4 class="fs-5 lh-base">각국에는 해비타트의 표준 주택모델이 있습니다.<br>
 					지역에서 조달가능한 자재를 활용하여 적정주택을 제공합니다.<br>
 					지역정부 및 마을 대표와 함께 논의하여 신축 사업의 대상자를<br>
 					선정합니다.
@@ -94,8 +95,9 @@
 		<div class="text-container1 d-flex justify-content-center gap-5  ">
 			<div class="global-image2 w-75 h-75 mt-5" style="background-image:url('resources/image/global1-3.PNG');"></div>
 			<div class="align-self-center w-25  ">
-				<h3 class="fs-2 fw-semibold mb-3">교육 환경 개선</h3>
-				<h4 class="fs-4 lh-base">
+				<p style="font-size:32px; color:skyblue; font-weight:bold;">교육 환경 개선</p>
+				<div class="border"></div>
+				<h4 class="fs-5 lh-base">
                							 마을 내 학교에 대한 접근성을 개선하여 안전하게
                							 <br>
                							 교육받을 수 있는 환경을 조성합니다.

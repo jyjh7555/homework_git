@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.servlet.HandlerInterceptor;
 
+import com.kh.homeWork.member.model.exception.MemberException;
 import com.kh.homeWork.member.model.vo.Member;
 
 public class InterceptorLogin implements HandlerInterceptor{
@@ -22,20 +23,31 @@ public class InterceptorLogin implements HandlerInterceptor{
 		HttpSession session = request.getSession();
 		Member loginUser = (Member)session.getAttribute("loginUser");
 		
-		if(loginUser ==null) {
-			String url = request.getRequestURI();
-			String msg = null;
+		String url = request.getRequestURI();
+		String msg = null;
+
+		if(loginUser ==null ) {
 			System.out.println(url);
-			if(url.contains("selectBoard.bo")) {
+			if(url.contains("selectBoard.bo")||url.contains("myPage.me")) {
 				msg = "로그인 이후 확인 가능합니다!";
+				session.setAttribute("msg", msg);
+				response.sendRedirect("loginView.me");
+				return false;
+			}else if(url.contains("domestic.bo")||url.contains("global.bo")||url.contains("review.bo")||url.contains("regionBoardList.bo")){
+				return HandlerInterceptor.super.preHandle(request, response, handler);
+			}else if(url.contains("admin.me")){
+				throw new MemberException("잘못된 접근입니다.");
 			}else {
 				msg = "로그인 세션이 만료되었습니다";
+				session.setAttribute("msg", msg);
+				response.sendRedirect("loginView.me");
+				return false;
 			}
 			
-			session.setAttribute("msg", msg);
-			response.sendRedirect("loginView.me");
-			return false;
+			
 		}
+		
+		
 		
 		
 		return HandlerInterceptor.super.preHandle(request, response, handler);

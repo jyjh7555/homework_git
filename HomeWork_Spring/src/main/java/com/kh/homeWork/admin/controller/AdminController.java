@@ -265,10 +265,10 @@ public class AdminController {
 		return "adminWriteBoard";
 	}
 	
-	@RequestMapping("adminInsertBoard.ad")
+	@RequestMapping("/adminInsertBoard.ad")
 	public String insertBoard(@ModelAttribute Board b, @ModelAttribute VolunteerDetail v) {
 		int result = aService.adminInsertBoard(b);
-		if(result>0 && b.getBoardType() !=3) {
+		if (result > 0 && b.getBoardType() != 3) {
 			int bNo = aService.adminSelectBoardNoCheck();
 			v.setBoardNo(bNo);
 			int result2 = aService.adminInsertVolunteer(v);
@@ -504,7 +504,29 @@ public class AdminController {
 		}
 	}
 	
-	
+	@RequestMapping("deleteVolunteer.ad")
+	public String deleteVolunteer(@RequestParam("status") String status,
+								  @RequestParam("memberNo") int memberNo,
+								  @RequestParam("boardNo") int boardNo){
+		
+		int volunteerNo = aService.findVolunteerNo(boardNo);
+		
+		if(volunteerNo>0) {
+			HashMap<String, Object> v = new HashMap<String, Object>();
+			v.put("volunteerNo", volunteerNo);
+			v.put("memberNo", memberNo);
+			v.put("status", status);
+			int result = aService.adminVolunteerUpdate(v);
+			if(result>0) {
+				return "redirect:myPage.me";
+			}else {
+				throw new AdminException("오류 발생");
+			}
+		}else {
+			throw new AdminException("오류 발생");
+		}
+		
+	}
 	
 	
 }

@@ -11,17 +11,29 @@
 <!-- 카카오지도 -->
 
 <style>
-#topAndNavbar {
-			background-image:linear-gradient(
-		        rgba(0, 0, 0, 0.2),
-		        rgba(0, 0, 0, 0.2)
-		      )
-		      ,url('resources/image/topImage.png');
-		    background-size: cover; 
-		    background-position: center;
-		    background-repeat: no-repeat;
-		    transition: background-color 0.5s ease;
-		}
+	#topAndNavbar {
+		background-image:linear-gradient(
+	        rgba(0, 0, 0, 0.2),
+	        rgba(0, 0, 0, 0.2)
+	      )
+	      ,url('resources/image/topImage.png');
+	    background-size: cover; 
+	    background-position: center;
+	    background-repeat: no-repeat;
+	    transition: background-color 0.5s ease;
+	    font-family: 'GowunBatang-Regular';
+	}
+	
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
+	
+	#form {
+		font-family: 'Pretendard-Regular';
+	}
 
 </style>
 
@@ -55,8 +67,8 @@
 				</div>
 				
 				<div align="left" class="right m-4 mb-1 mt-1">
-					<input class="form-check-input" type="checkbox" onclick="reviewCheckFn()" value="reviewCheck" id="reviewCheck">
-				  <label class="form-check-label" for="reviewCheck" >해당 봉사를 후기게시판으로 등록하기(고려)</label>
+					<input class="form-check-input" type="checkbox" <c:if test="${b.boardType ==3}"> checked</c:if> onclick="reviewCheckFn()" value="reviewCheck" id="reviewCheck">
+				  <label class="form-check-label" for="reviewCheck" >후기게시판 작성하기</label> 
 				</div> 
 				<div class="bd-example m-4 p-2" style="border-top: 2px solid black;">
 		            <table class="table" id="editTable">
@@ -96,6 +108,9 @@
 			            				<option value="50" <c:if test="${b.locationNo =='250' }">checked</c:if>>중동</option>
 			            				<option value="60" <c:if test="${b.locationNo =='260' }">checked</c:if>>오세아니아</option>
 			            				<option value="70" <c:if test="${b.locationNo =='270' }">checked</c:if>>유럽</option>
+			            			</c:if>
+			            			<c:if test="${b.boardType=='3' }">
+			            				<option value="1000" selected>-</option>
 			            			</c:if>
 			            			</select>
 			            		</div>
@@ -168,11 +183,25 @@
 		            </table>
 		            <div class="editor_head col-12">
 		            	
-		            	<button type="button" id="bold" style="border:1px solid gray; font-weight: bold;"><b>가</b></button>
-		            	<button type="button" id="italic" style="border:1px solid gray; font-style:italic;">가</button>
-		            	<button type="button" id="underline" style="border:1px solid gray; text-decoration:underline;">가</button>
-		            	<button type="button" id="fonfSize" style="border:1px solid gray; text-decoration:underline;">글자크기?</button>
-		            	<button >이미지</button>	
+		            	<button type="button" id="bold"style="border:1px solid gray; font-weight: bold;"><b>가</b></button>
+		            	<button type="button" id="italic"style="border:1px solid gray; font-style:italic;">가</button>
+		            	<button type="button" id="underline"style="border:1px solid gray; text-decoration:underline;">가</button>
+		            	<select id="fontSize">
+					        <option value="10px">10px</option>
+					        <option value="12px">12px</option>
+					        <option value="14px">14px</option>
+					        <option selected value="16px">16px</option>
+					        <option value="18px">18px</option>
+					        <option value="20px">20px</option>
+					        <option value="24px">24px</option>
+					        <option value="28px">28px</option>
+					        <option value="32px">32px</option>
+					        <option value="36px">36px</option>
+					        <option value="40px">40px</option>
+					    </select>
+					    <button type="button" id="alignLeft"style="border:1px solid gray;">왼쪽정렬</button>
+					    <button type="button" id="alignCenter"style="border:1px solid gray;">중앙정렬</button>
+					    <button type="button" id="alignRight"style="border:1px solid gray;">오른쪽정렬</button>
 		            	
 		            		
 		            
@@ -222,57 +251,118 @@
 	
 	<script>
 		
+		window.onload =()=>{
+			reviewCheckFn();		//후기게시판 처음에 가져올때 한번 실행하자
+		}
+		
+		
 		//작성할때 텍스트 변화 주기
 		document.getElementById('bold').addEventListener('click', function() {
 			applyStyle('bold');
-        });
-
-        document.getElementById('italic').addEventListener('click', function() {
-        	applyStyle('italic');
-        });
-
-        document.getElementById('underline').addEventListener('click', function() {
-        	applyStyle('underline');
-        });
-        
-        document.getElementById('fonfSize').addEventListener('click', function() {
-        //	document.execCommand('fontSize', false, '14px');
-        });
+			
+	    });
+	
+	    document.getElementById('italic').addEventListener('click', function() {
+	    	applyStyle('italic');
+	    });
+	
+	    document.getElementById('underline').addEventListener('click', function() {
+	    	applyStyle('underline');
+	    });
+	    
+	    document.getElementById('fontSize').addEventListener('change', function() {
+	    	applyStyle('fontSize');
+	    });
+	    
+	    document.getElementById('alignCenter').addEventListener('click', function() {
+	    	applyStyle('alignCenter');
+	    });
+	    document.getElementById('alignLeft').addEventListener('click', function() {
+	    	applyStyle('alignLeft');
+	    });
+	    document.getElementById('alignRight').addEventListener('click', function() {
+	    	applyStyle('alignRight');
+	    });
+		
 	
 	
+		//작성할때 텍스트 변화 함수
 		function applyStyle(style){
 			const selection = window.getSelection();  //이거 내가 드래그한 텍스트 파일인듯
 			console.log(selection);		//파일이라기보단. range 로 나오는거 확인!!
 			
+			
+			
+			
 			if(selection.rangeCount>0){
-				console.log(selection.rangeCount); //0 또는 1만 존재하는군
+				//console.log(selection.rangeCount); //0 또는 1만 존재하는군
 				const range = selection.getRangeAt(0);	//뭐여이건
 		        const selectedText = range.extractContents();	//내용을 가져온다
 		        let span = document.createElement('span');
-		        //console.log(range);
-		        //console.log(selectedText);
+		        
+		        const commonAncestorContainer = range.commonAncestorContainer;
+		        let parentElement = commonAncestorContainer.nodeType === 1 
+	            					? commonAncestorContainer 
+	            					: commonAncestorContainer.parentNode;
 		        
 		        switch(style) {
 	            case 'bold':
-	                span.style.fontWeight = 'bold';
+	            	
+	            	span.style.fontWeight = parentElement.style.fontWeight === 'bold' ? 'normal' : 'bold';
 	                break;
 	            case 'italic':
-	                span.style.fontStyle = 'italic';
+	            	span.style.fontStyle = parentElement.style.fontStyle === 'italic' ? 'normal' : 'italic';
 	                break;
 	            case 'underline':
-	                span.style.textDecoration = 'underline';
+	            	span.style.textDecoration = parentElement.style.textDecoration === 'underline' ? 'none' : 'underline';
 	                break;
+	            case 'fontSize':
+	            	span.style.fontSize =  document.getElementById('fontSize').value;
+	                break;
+	            case 'alignCenter':
+	            	/* console.log(parentElement.tagName);
+	            	console.log(parentElement.tagName == 'DIV');
+	            	console.log(parentElement.parentElement); */
+	            	
+	            	while(parentElement.tagName=='SPAN'|| parentElement.tagName=='IMG'){
+	            		console.log(parentElement.tagName);
+	            		parentElement = parentElement.parentElement;
+	            		console.log(parentElement);
+	            	}
+	            	parentElement.style.textAlign = 'center';
+	                break;
+	            case 'alignLeft':
+	            	
+	            	while(parentElement.tagName=='SPAN'|| parentElement.tagName=='IMG'){
+	            		console.log(parentElement.tagName);
+	            		parentElement = parentElement.parentElement;
+	            		console.log(parentElement);
+	            	}
+	            	parentElement.style.textAlign = 'left';
+	                break;
+	            case 'alignRight':
+	            	while(parentElement.tagName=='SPAN' || parentElement.tagName=='IMG'){
+	            		console.log(parentElement.tagName);
+	            		parentElement = parentElement.parentElement;
+	            		console.log(parentElement);
+	            	}
+	            	parentElement.style.textAlign = 'right';
+	                break;
+	                
 		        }
 		        
 		        span.appendChild(selectedText);
 		        range.insertNode(span);
-		        //selection.removeAllRanges();
-				}
+		        //selection.removeAllRanges();		//내가선택한영역 제거하기 난 필요없다
+				}else{
+					
+			}
 		}
 	
 		
 	
 		//리뷰게시판 작성하려구해~
+		
 		const reviewCheck = document.getElementById('reviewCheck');
 		function reviewCheckFn(){
 			if(reviewCheck.checked){
@@ -304,13 +394,10 @@
 			event.preventDefault();
 			
 			const file = event.dataTransfer.files[0];
-			console.log(file);
 			uploadFile(file);
 		})
 		
 		function uploadFile(file) {
-			console.log(file);
-			console.log('여기까지맞니?');
             const reader = new FileReader();		//객체부여하고
             reader.readAsDataURL(file);				//내가 드랍한 파일객체만든거를 넣어,파일의데이터를나타내는 URL을생성한다
             reader.onloadend = () => {				// 내가 읽든안읽은 자동으로실행, load메소드쓰면 읽어와야 실행
@@ -458,10 +545,26 @@
 		
 		
 		const form = document.getElementById('form')
-		
+		document.getElementsByName('locationNo')[0].value = '1000';
+		console.log(document.getElementsByName('locationNo')[0]);
 		function updateBoard(){
 			form.action = '${contextPath}/updateBoard.bo';
 			document.getElementsByName('content')[0].value= editDiv.innerHTML;
+			if(reviewCheck.checked){
+				document.getElementsByName('boardType')[0].value= '3';
+				document.getElementById('category').value= null;
+				document.getElementsByName('locationNo')[0].value= '1000';
+				
+				document.getElementsByName('startDate')[0].value='2000-01-01';
+				document.getElementsByName('endDate')[0].value='2000-01-01';
+				document.getElementsByName('recruitStart')[0].value='2000-01-01';
+				document.getElementsByName('recruitEnd')[0].value='2000-01-01';
+				document.getElementsByName('memberCount')[0].value=0;
+				document.getElementsByName('mgr')[0].value=null;
+				document.getElementsByName('mgrPhone')[0].value=null;
+				document.getElementsByName('address')[0].value=null;
+				
+			}
 			form.submit();
 		}
 		

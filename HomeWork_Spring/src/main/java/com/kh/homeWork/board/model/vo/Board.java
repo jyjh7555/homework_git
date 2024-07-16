@@ -25,4 +25,8 @@ public class Board {
 	private Date updateDate;
 	private int memberNo;
 	private int boardType;
+	private int fullCount;
+	private int nowCount;
+	private Date recruitStart;
+	private Date recruitEnd;
 }

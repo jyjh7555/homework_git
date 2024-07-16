@@ -10,17 +10,31 @@
 
 
 <style>
-#topAndNavbar {
-			background-image:linear-gradient(
-		        rgba(0, 0, 0, 0.2),
-		        rgba(0, 0, 0, 0.2)
-		      )
-		      ,url('resources/image/topImage.png');
-		    background-size: cover; 
-		    background-position: center;
-		    background-repeat: no-repeat;
-		    transition: background-color 0.5s ease;
+	#topAndNavbar {
+		background-image:linear-gradient(
+	        rgba(0, 0, 0, 0.2),
+	        rgba(0, 0, 0, 0.2)
+	      )
+	      ,url('resources/image/topImage.png');
+	    background-size: cover; 
+	    background-position: center;
+	    background-repeat: no-repeat;
+	    transition: background-color 0.5s ease;
+	    font-family: 'GowunBatang-Regular';
 		}
+		
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
+	
+	#container {
+		font-family: 'Pretendard-Regular';
+	}
+		
+		
 
 </style>
 
@@ -44,7 +58,7 @@
 	
 	
 	
-	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
+	<div id="container" class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
 		<div class="d-flex flex-column justify-content-center mb-3 border border-4 w-50 mt-3 ">
 				<div class="m-4 p-4"style="border-bottom: 1px solid gray; border-top: 5px solid black; ">
 					<b>${b.title }</b>
@@ -55,40 +69,40 @@
 					<c:if test="${v != null }">
 			            <table class="table" >
 			            	<tr>
-			            		<td style="background:#E3E3E3;width:120px">봉사구분</td>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사구분</td>
 			            		<td width="">${b.title }</td>
-			            		<td style="background:#E3E3E3;width:120px">국내/해외</td>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">국내/해외</td>
 			            		<td>
 				            		<c:if test="${b.boardType == 1 }">국내</c:if>
 				            		<c:if test="${b.boardType == 2 }">해외</c:if>
 			            		</td>
 			            	</tr>
 			            	<tr>
-			            		<td style="background:#E3E3E3;width:120px">봉사기간</td>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사기간</td>
 			            		<td>${v.startDate} ~ ${v.endDate}</td>
-			            		<td style="background:#E3E3E3;width:120px">봉사시간</td>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사시간</td>
 			            		<td>${v.startTime} ~ ${v.endTime} </td>
 			            	</tr>
 			            	<tr>
-			            		<td style="background:#E3E3E3;width:120px">모집기간</td>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">모집기간</td>
 			            		<td>${v.recruitStart} ~ ${v.recruitEnd}</td>
-			            		<td style="background:#E3E3E3;width:120px">단체여부</td>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">단체여부</td>
 			            		<td>${v.groupYn}</td>
 			            	</tr>
 			            	<tr>
-			            		<td style="background:#E3E3E3;width:120px">모집인원</td>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">모집인원</td>
 			            		<td>${v.memberCount }</td>
-			            		<td style="background:#E3E3E3;width:120px">신청인원</td>
-			            		<td>미구현멤버인원vo노생성</td>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">신청인원</td>
+			            		<td>${b.nowCount}</td>
 			            	</tr>
 			            	<tr>
-			            		<td style="background:#E3E3E3;width:120px">담당자</td>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">담당자</td>
 			            		<td>${v.mgr}</td>
-			            		<td style="background:#E3E3E3;width:120px">담당자번호</td>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">담당자번호</td>
 			            		<td>${v.mgrPhone }</td>
 			            	</tr>
 			            	<tr>
-			            		<td style="background:#E3E3E3;width:120px">봉사주소</td>
+			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사주소</td>
 			            		<td colspan="3">${v.address }</td>
 			            	</tr>
 			            	
@@ -141,9 +155,6 @@
 							<input type="hidden" name="page" value="${page }">
 			        		<button class ="btn btm-lg btn-light m-5" style="width:250px; border-radius:16px;font-size:24px;">수정하기</button>
 						</form>
-		        	</c:if>
-		        	<c:if test="${loginUser.status =='Y' && dateCheck}">
-		        		<button class ="btn btm-lg btn-light m-5" style="width:200px; border-radius:16px;font-size:22px;">후기 작성하기!</button>
 		        	</c:if>
 		        	
 		        	<button type="button" class ="btn btm-lg btn-secondary m-5" style="width:250px; border-radius:16px;font-size:24px;" onclick="location.href='${contextPath}/domestic.bo?page=${page}'">목록보기</button>

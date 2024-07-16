@@ -44,6 +44,12 @@ public class MemberDAO {
 		return sqlSession.selectOne("memberMapper.checkMemberNickName",nickName);
 	}
 
+	public int updatePassword(SqlSessionTemplate sqlSession, HashMap<String, String> map) {
+		return sqlSession.update("memberMapper.updatePassWord",map);
+	}
+
+
+
 
 
 

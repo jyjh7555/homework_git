@@ -31,6 +31,16 @@
 	.domeMainImage{background-size: cover; height:400px;}
 	
 	
+	@font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	
+	p {
+	font-family:GowunBatang-Regular;}
+	
 	#topAndNavbar {
 		background-image:linear-gradient(
 	        rgba(0, 0, 0, 0.2),

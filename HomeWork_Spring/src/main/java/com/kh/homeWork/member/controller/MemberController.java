@@ -56,9 +56,14 @@ public class MemberController {
 		
 		Member loginUser = mService.loginCheck(m);
 		System.out.println(loginUser);
+		
+		if(loginUser == null) {
+			throw new MemberException("아이디 또는 비밀번호가 일치하지 않습니다");
+		}
+		
 		if(bcrypt.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
 			session.setAttribute("loginUser", loginUser);			
-			return "../../../index";				
+			return "redirect:home.do";				
 		}else {
 			throw new MemberException("로그인을 실패했습니다.");
 		}
@@ -90,8 +95,9 @@ public class MemberController {
 	    Member loginUser = (Member) session.getAttribute("loginUser");
 	    if (loginUser != null) {
 	        List<Volunteer> recentVolunteers = vService.getRecentVolunteers(loginUser.getMemberNo());
-	        System.out.println(recentVolunteers);
+	        
 	        model.addAttribute("recentVolunteers", recentVolunteers);
+	        model.addAttribute("loginUser",loginUser);
 	    }
 	    return "myPage";
 	}
@@ -119,6 +125,7 @@ public class MemberController {
 	
 	@RequestMapping("updateMemberPage.me")
 	public String updateMember() {
+		
 		return "edit";
 	}
 	
@@ -139,6 +146,36 @@ public class MemberController {
 			return "redirect:myPage.me";
 		} else {
 			throw new MemberException("정보수정을 실패했습니다.");
+		}
+	}
+	@RequestMapping("updatePwdPage.me")
+	public String updatePwdPage() {
+		return "updatePwd";
+	}
+	
+	@RequestMapping("updatePwd.me")
+	public String updatePwd(String currentPwd, String newPwd, Model model,HttpSession session) {
+		Member m = (Member) session.getAttribute("loginUser");
+		 if (m == null) {
+		        throw new MemberException("로그인 정보를 찾을 수 없습니다.");
+		    }
+		System.out.println(currentPwd);
+		System.out.println(newPwd);
+		if(bcrypt.matches(currentPwd, m.getMemberPwd())) {
+			HashMap<String, String> map = new HashMap<String, String>();
+			map.put("id", m.getMemberId());
+			map.put("newPwd",bcrypt.encode(newPwd));
+			
+			int result = mService.updatePassword(map);
+			System.out.println(result);
+			if(result >0) {
+				model.addAttribute("loginUser",mService.loginCheck(m));
+				return "redirect:index.jsp";
+			}else {
+				throw new MemberException("비밀번호 수정을 실패했습니다.");
+			}
+		} else {
+			throw new MemberException("비밀번호 수정을 실패하였습니다.");
 		}
 	}
 	

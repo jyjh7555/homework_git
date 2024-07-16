@@ -131,7 +131,11 @@
 			            </li>
 		    		</ul>
 	      	  </nav>
-		        	<button class="btn btn-sm btn-outline-success ms-3" style="width:70px; height:40px; border-radius:16px;font-size:12px;" type="button" onclick="location.href='${ contextPath }/adminWriteBoard.ad'">글 작성</button>
+		        	<c:if test="${!empty loginUser}">
+            			<div align="right">
+	                		<button class="btn btn-lg btn-outline-info" style="width:100px; border-radius:10px;font-size:15px;" type="button" onclick="location.href='${contextPath}/adminWriteBoard.ad'">글 작성</button>
+            			</div>
+            		</c:if>
 			 	</div>
 		</div>
  	  </div>

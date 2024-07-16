@@ -5,7 +5,7 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
-<link href="${ contextPath }/CSS/domestic2.css" rel="stylesheet" type="text/css">
+<link href="${ contextPath }/CSS/global1.css" rel="stylesheet" type="text/css">
 <style>
 	body {
 		font-family: "Nanum Gothic", sans-serif;
@@ -34,6 +34,7 @@
 	    background-position: center;
 	    background-repeat: no-repeat;
 	    transition: background-color 0.5s ease;
+	    font-family: 'GowunBatang-Regular';
 	}
 	
 	#voulnteer2 {
@@ -43,7 +44,7 @@
 	em{
 		font-size:30px;
 		color:skyblue;
-		font-weight:bold;
+		
 	}
 	
 	.volunteerBanner{
@@ -52,6 +53,10 @@
 			padding : 10px;
 	
 	}
+	
+	p{
+	font-family:GowunBatang-Regular;}
+	
 	#domestic-container>h1,h3,h4,em,p,.text-box1 {
 		font-family:GowunBatang-Regular;
     }
@@ -84,7 +89,7 @@
 			<li class=categoryDomestic><a style="border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #00AFD7; border-bottom:3px solid #00AFD7" href="domestic03.in">긴급/재난</a></li>
 		</ul>
 	</div>
-	<p align="center"style="font-size:42px;"><b>주거환경개선</b></p>
+	<p align="center" class=" semi-title fs-1 fw-bold" style="font-size:42px; "><b>주거환경개선</b></p>
 	<p align="center" style="font-size:30px;"> 짧은 시간에 이웃에게 꼭 필요한 최소한의 주거환경을 조성합니다.</p>
 	
 	<br>
@@ -92,12 +97,12 @@
 	<div class="domestic-container" align="center">
 		
 		<div class="domeMainImage" align="center" style="background-image:url('resources/image/dome02Image1.jpg');">
-			<div style="color:white; font-size:48px; padding:100px; font-weight:bold;">주거환경개선</div>
+			<div style="color:white; font-size:48px; padding:150px; font-weight:bold;"></div>
 		</div>
 		<div class="content" align="left" >
 		<br><br><br><br><br> 
 			<div align="left" style="display:inline-block; border-left: 10px solid #e3e3e3; margin-left:100px; padding:10px;width:500px;">
-			<h1>주거환경개선</h1>
+			<p style="font-size:42px; color:skyblue; font-weight:bold;">주거환경개선</p>
 			<h3>열악한 주거환경에 처해있는 소외계층과
 				저소득층의 집과 시설을 개선하고 있습니다.</h3>
 			</div>
@@ -115,7 +120,7 @@
 			<div style="margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
 				<div class="imageDiv" align="center" ><img src="resources/image/dome02Image3.jpg" style="width:550px; height:300px;"/></div>
 				<div class="domeCon" align="left" style="width:500px; margin-left:50px;">
-					<em>만드는 즐거움, 그 안에 담긴 정성, 소중한 나눔</em>
+					<em style="color:skyblue;font-weight:bold;">만드는 즐거움, 그 안에 담긴 정성, 소중한 나눔</em>
 					<div class="border"></div>
 					
 					<p>가족, 친구 등 봉사자들이 한자리에 모여 집과 관련된 가구 및 소품을
@@ -124,7 +129,7 @@
 			</div>
 			<div style=" margin-top: 100px;display:flex; flex-direction: row; margin: 100px;">
 				<div class="domeCon" align="right" style="width:500px; margin-right:50px;">
-					<em>주거취약가정에게 기쁨을.</em>
+					<em style="color:skyblue;font-weight:bold;">주거취약가정에게 기쁨을.</em>
 					<div class="border"></div>
 					
 					<p>위생적이고 안전한 환경에서 지낼 수 있도록 침수 피해를 예방하기 위한 창호, 방수 설비 설치 등 변화를 줄 수 있습니다</p>

@@ -52,7 +52,7 @@
 	
 	
 	
-	.userInfo, .userUpdate, .userDelete, .supportPage, .regularSupportPage, .searchResult, .infoList {
+	.userInfo, .userUpdate, .userDelete, .supportPage, .searchResult, .infoList {
             
             padding: 20px;
             border: 1px solid #ddd;
@@ -135,7 +135,6 @@
 			<div class=mainCate>후원정보관리</div>
 				<ul class="hidden" style="list-style-type:none; text-align:left;">
 					<li id="support1">후원 목록</li>
-					<li id="support2">정기후원목록</li>
 					
 				</ul>
 			<div class=mainCate>게시판관리</div>
@@ -147,11 +146,12 @@
 			<div class=mainCate>봉사신청관리</div>
 				<ul class="hidden" style="list-style-type:none; text-align:left;">
 					<li id="volunteer1">
-						봉사신청자
+						봉사대기목록
 						<button type="button" class="btn btn-danger btn-sm">
-						  <span class="badge text-bg-danger " id="volunteerApplicant"></span>
+						 	 <span class="badge text-bg-danger " id="volunteerApplicant"></span>
 						</button>
 					</li>
+					<li id="volunteer2">봉사승인목록</li>
 				</ul>
 			
 		</div>
@@ -357,30 +357,6 @@
 					    </tfoot>
 					</table>
 				</div>
-			<div class="regularSupportPage hidden" id="regularSupportList">
-					<table id="regulartSupportTable">
-						<tr>
-							<th width="10%">회원번호</th>
-							<th width="10%">이름</th>
-							<th width="10%">이메일</th>
-							<th width="15%">휴대폰번호</th>
-							<th width="18%">후원시작날짜</th>
-							<th width="10%">정기후원일</th>
-							<th width="10%">후원금액(원)</th>
-							<th width="5">취소</th>
-						</tr>
-						<tr>
-							<td>001</td>
-							<td>강건강</td>
-							<td>gang@naver.com</td>
-							<td>010-1234-5678</td>
-							<td>24-06-11</td>
-							<td>11일</td>
-							<td>10000원</td>
-							<td><button id="supportCancle">정기결제취소</button></td>
-						</tr>
-					</table>
-				</div>
 				<div class="domesticBoardPage hidden" id="domesticBoardList">
 					<table id="domesticBoardTable">
 					</table>
@@ -392,6 +368,34 @@
 				</div>
 				<div class="volunteer hidden" id="volunteerList">
 					<table id="volunteerTable">
+						<thead>
+							<tr>
+								<th width="10%">봉사번호</th>
+								<th width="10%">회원번호</th>
+								<th width="10%">이름</th>
+								<th width="10%">제목</th>
+								<th width="10%">현재상태</th>
+								<th width="10%">처리</th>
+							</tr>
+						</thead>
+						<tbody>
+			
+						</tbody>
+						<tfoot>
+					        <tr>
+					            <td colspan="10">
+					                <nav aria-label="Standard pagination example" style="float: center;">
+					                    <ul id="pagination5" class="pagination">
+					                    
+					                    </ul>
+					                </nav>
+					            </td>
+					        </tr>
+					    </tfoot>
+					</table>
+					</div>
+					<div class="volunteer hidden" id="volunteerApproveList">
+					<table id="volunteerApproveTable">
 						<thead>
 							<tr>
 								<th width="10%">봉사번호</th>
@@ -467,6 +471,7 @@
                 document.getElementById('totalAmount').innerText = data.totalAmount+"원";
                 document.getElementById('domesticAmount').innerText = data.domesticAmount+"원";
                 document.getElementById('globalAmount').innerText = data.globalAmount+"원";
+                document.getElementById('volunteerApplicant').innerText = data.volunteerApplicant;
                 document.getElementById('volunteerApplicant').innerText = data.volunteerApplicant;
                 
             },
@@ -549,11 +554,11 @@
 				    document.getElementById('userUpdate').classList.add('hidden');
 				    document.getElementById('userDelete').classList.add('hidden');
 				    document.getElementById('supportList').classList.add('hidden');
-				    document.getElementById('regularSupportList').classList.add('hidden');
 				    document.getElementById('searchResult').classList.add('hidden');
 				    document.getElementById('domesticBoardList').classList.add('hidden');
 				    document.getElementById('globalBoardList').classList.add('hidden');
 				    document.getElementById('volunteerList').classList.add('hidden');
+				    document.getElementById('volunteerApproveList').classList.add('hidden');
 				    document.getElementById('infoList').classList.add('hidden');
 
 				    let currentPage = 1;
@@ -659,11 +664,11 @@
 				 document.getElementById('userInfo').classList.add('hidden');
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
-				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');
 				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('volunteerApproveList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 				 
 				let currentPage = 1;
@@ -801,11 +806,11 @@
 				 document.getElementById('userInfo').classList.add('hidden');
 				 document.getElementById('userUpdate').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
-				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');
 				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('volunteerApproveList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 				 
 				 let currentPage = 1;
@@ -910,11 +915,11 @@
 				 document.getElementById('userInfo').classList.add('hidden');
 				 document.getElementById('userUpdate').classList.add('hidden');
 				 document.getElementById('userDelete').classList.add('hidden');
-				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');
 				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('volunteerApproveList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 					let currentPage = 1;
 				    let page = 1;
@@ -1007,18 +1012,7 @@
 				    loadPage4(currentPage); 
 				});
 			 
-			 document.getElementById('support2').addEventListener('click', function(){
-				 document.getElementById('regularSupportList').classList.toggle('hidden');
-				 document.getElementById('userInfo').classList.add('hidden');
-				 document.getElementById('userUpdate').classList.add('hidden');
-				 document.getElementById('userDelete').classList.add('hidden');
-				 document.getElementById('supportList').classList.add('hidden');
-				 document.getElementById('searchResult').classList.add('hidden');
-				 document.getElementById('domesticBoardList').classList.add('hidden');
-				 document.getElementById('globalBoardList').classList.add('hidden');
-				 document.getElementById('volunteerList').classList.add('hidden');
-				 document.getElementById('infoList').classList.add('hidden');
-			 })
+			 
 			 
 			 document.getElementById('board1').addEventListener('click', function(){
 				 document.getElementById('userInfo').classList.add('hidden');
@@ -1026,9 +1020,9 @@
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
-				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');	
 				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('volunteerApproveList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 				 location.href="admindomestic.ad";
 				 
@@ -1040,9 +1034,9 @@
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
-				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('volunteerApproveList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 				 location.href="adminglobal.ad";
 				
@@ -1054,9 +1048,9 @@
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
-				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('volunteerApproveList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 				 location.href="adminreview.ad"	
 			 })
@@ -1068,9 +1062,9 @@
 		    document.getElementById('userDelete').classList.add('hidden');
 		    document.getElementById('supportList').classList.add('hidden');
 		    document.getElementById('searchResult').classList.add('hidden');
-		    document.getElementById('regularSupportList').classList.add('hidden');
 		    document.getElementById('domesticBoardList').classList.add('hidden');
 		    document.getElementById('infoList').classList.add('hidden');
+		    document.getElementById('volunteerApproveList').classList.add('hidden');
 		
 		    let currentPage = 1;
 		    const pageSize = 10;
@@ -1291,8 +1285,8 @@
 			 document.getElementById('userUpdate').classList.add('hidden');
 			 document.getElementById('userDelete').classList.add('hidden');
 			 document.getElementById('supportList').classList.add('hidden');
-			 document.getElementById('regularSupportList').classList.add('hidden');
 			 document.getElementById('volunteerList').classList.add('hidden');
+			 document.getElementById('volunteerApproveList').classList.add('hidden');
 			 document.getElementById('infoList').classList.add('hidden');
 		}
 		

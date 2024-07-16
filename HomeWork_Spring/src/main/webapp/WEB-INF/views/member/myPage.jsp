@@ -9,6 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Nanum+Gothic&display=swap" rel="stylesheet">
+<script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <style>
 	body {
 		font-family: "Nanum Gothic", sans-serif;
@@ -34,20 +35,6 @@
 		padding-right: 70px; /* Adjusted to account for the right padding of the last child */
 	}
 	
-	#categoryMypageContainer li:not(:last-child)::after {
-		content: "";
-		position: absolute;
-		right:-50px;
-		bottom:7px;
-		width: 1px;
-		height:4rem;
-		background-color: lightgray;
-	}
-
-	#categoryMypageContainer li:last-child {
-		padding-right: 0; /* Remove right padding from the last child */
-	}
-	
 	#categoryMypageContainer li>a:hover {
 		color:skyblue;
 	}
@@ -65,22 +52,37 @@
 		height:300px;
 		display:flex;
 		justify-content:center;
-		border: 8px solid #E3E3E3;
+		border: 4px solid #c8c8c8;
 		margin:auto;
 		margin-bottom:30px;
+		align-items: stretch;
+	}
+	.section-divider {
+    width: 1px;
+    height: 80%; /* 또는 원하는 높이 */
+    background-color: #e0e0e0; /* 구분선 색상 */
+    margin: 0 20px; /* 좌우 여백 */
+    align-self: center; /* Flexbox 컨테이너 내에서 수직 중앙 정렬 */
+	}
+	
+	.welcome-section, .recent-activity-section {
+	    flex: 1; /* 두 섹션이 동일한 너비를 가지도록 설정 */
 	}
     .welcome-section {
-        text-align: left;
-        margin-right:40px;
-        margin-top:60px;
+        text-align: center;
+        margin-right:0;
+        margin-top:50px;
+        margin-bottom:15px;
         margin-left:40px;
         white-space: nowrap;
+        
     }
     
     .mdfbtn {
     	margin-top:20px;
     	display:flex;
     	flex-direction:column;
+    	align-items:center;
     }
     
 
@@ -93,13 +95,11 @@
         display: inline-block;
         margin-top: 10px;
         margin-bottom:10px;
-        padding: 10px 20px;
-        border: 1px solid #ccc;
+        padding:5px 5px;
+        font-size:18px;
         text-decoration: none;
         color: #333;
-        border-radius: 4px;
-        margin-right: 10px;
-        width:120px;
+        width:200px;
         font-weight:bold;
         white-space: nowrap;
     }
@@ -156,6 +156,8 @@
     	display:flex;
     	justify-content:center;
     	margin-bottom: 30px;
+    	margin-left:40px;
+    	margin-right:30px;
     }
     
     .recent-activity-section>h5 {
@@ -164,16 +166,7 @@
     	margin-right:50px;	
     }
     
-    .recent-activity-section>h5::after {
-    	content: "";
-		position: absolute;
-		right:-50px;
-		top:-40px;
-		bottom:15px;
-		width: 1px;
-		height:8rem;
-		background-color: lightgray;
-    }
+ 
     
  
     
@@ -203,11 +196,36 @@
 	    background-position: center;
 	    background-repeat: no-repeat;
 	    transition: background-color 0.5s ease;
+	    font-family: 'GowunBatang-Regular';
 	    
 	}
 	
 	#voulnteer2 {
 		height: 200px;
+	}
+	
+	.recent-activity-section {
+    display: flex;
+    flex-direction: column;
+	}
+
+	.activity-title {
+	    margin-bottom: 15px; /* 제목과 테이블 사이의 간격 조정 */
+	}
+	
+	.activity-table {
+	    width: 100%; /* 테이블이 컨테이너의 전체 너비를 차지하도록 */
+	}
+	
+	#container {
+		font-family: 'Pretendard-Regular';
+	}
+	
+	@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
 	}
 </style>
 </head>
@@ -223,59 +241,68 @@
 			<jsp:include page="../common/volunteer.jsp"/>
 		</div>	
  	</div>
-	<div id="container">
- 		<div align="center">
-		<ul id="categoryMypageContainer">
-			<li class=categoryMyPage><a  href="#">마이홈</a></li>
-			<li class=categoryMyPage><a  href="#">나의 봉사내역</a></li>
-			<li class=categoryMyPage><a  href="#">집고치기 신청내역 </a></li>
-		</ul>
-	</div>
+	<div id="container" class="mt-4">
 		<div id=inner-container>
 			<div class="welcome-section">
-	            <h5><strong>김기룡</strong> 회원님 환영합니다!</h5>
+	            <h5><strong>${loginUser.memberName }</strong> 회원님 환영합니다!</h5>
 	            <div class="mdfbtn">
-	            	<a href="updateMemberPage.me">회원정보 수정&nbsp;&nbsp;&nbsp; ></a>
-	            	<a href="https://donate.habitat.or.kr/habitat/mypage/login" onclick="gtag('event', '버튼클릭', {'event_category': '기부금영수증','event_label': 'mypage기부금영수증'});">기부금 영수증&nbsp;&nbsp;&nbsp; ></a>
-	            </div>
-	            
-	        </div>
-	        <div class="info-section">
-	            <div class="info-box">
-	                <a href="/news/report"></a>
-	                <strong>연차보고서</strong>
-	                <p>자세한 후원금 사용내역은 <br> 연차보고서로 확인하세요.</p>
-	                <a href="/news/report" class="more">MORE VIEW</a>
-	            </div>
-	            <div class="info-box">
-	                <a href="/welfare/schedule"></a>
-	                <strong>자원봉사 신청</strong>
-	                <p>국내, 해외 자원봉사를 통해 <br> 손길을 전해보세요.</p>
-	                <a href="/welfare/schedule" class="more">MORE VIEW</a>
+	            	<a class="border border-2" href="updateMemberPage.me">회원정보 수정</a>
+	            	<a class="border border-2" href="updatePwdPage.me">비밀번호 수정</a>
 	            </div>
 	        </div>
+       		<div align="center"class="item-center recent-activity-section">
+	            <h5 class="d-block activity-title">신청 대기 중인 봉사활동 내역</h5>
+	            <table class="activity-table">
+			        <thead>
+			            <tr align="center">
+			                <th>게시글 번호</th>
+			                <th>제목</th>
+			                <th style="margin-left:-5px;">상태 </th>
+			                <th> 취소</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            <c:forEach items="${recentVolunteers}" var="volunteer">
+			            		<c:if test="${volunteer.status != 'N'}">
+					                <tr align="center">
+					                    <td>${volunteer.boardNo}</td>
+					                    <td>${volunteer.title}</td>
+					                    <td>${volunteer.status}</td>
+					                    <td><button class="btn btm-sm btn-success" onclick="showModal(this)">취소</button></td>
+				                	</tr>
+			                	</c:if>
+			            </c:forEach>
+			        </tbody>
+	   		   </table>
+        	</div>
 		</div>
-		<div class="recent-activity-section">
-            <h5>신청 대기 중인 봉사활동 내역</h5>
-            <table>
-        <thead>
-            <tr>
-                <th>게시글 번호</th>
-                <th>제목</th>
-                <th>상태</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach items="${recentVolunteers}" var="volunteer">
-                <tr>
-                    <td>${volunteer.boardNo}</td>
-                    <td>${volunteer.title}</td>
-                    <td>${volunteer.status}</td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-        </div>
+		
+		<form id="form">
+		<input type="hidden" name ="memberNo">
+		<input type="hidden" name ="boardNo">
+		<input type="hidden" name ="status" value="N">
+		</form>
+		
+		<!-- 모달 -->
+		<div class="modal fade" tabindex="-1" role="dialog" id="modalRefusal">
+			<div class="modal-dialog" role="document">
+	    		<div class="modal-content rounded-3 shadow">
+	      			<div class="modal-body p-4 text-center">
+	        			<h3 class="mb-0">취소하시겠습니까?</h3>
+	      			</div>
+	      			<div class="modal-footer flex-nowrap p-0">
+	        			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0 border-end" onclick="volunteerStatusN()">
+	        				<strong>네</strong>
+	        			</button>
+	        			<button type="button" class="btn btn-lg btn-link fs-6 text-decoration-none col-6 m-0 rounded-0" data-bs-dismiss="modal" aria-label="Close"  id="refusalClose">아니오</button>
+	      			</div>
+	    		</div>
+	  		</div>
+		</div>
+		
+		
+		
+
 		
 		<div id="footer">
 			<jsp:include page="../common/footer.jsp"/>
@@ -300,18 +327,39 @@
 	      };;
 	    }
 
-	    function resetBackground() {
-	        const navbarSection = document.getElementById('navbar-section');
-	        navbarSection.style.backgroundColor = "transparent";
-	        const links = navbarSection.querySelectorAll('a');
-	        links.forEach(function(link) {
-	            link.style.color = "white";
-	        })
-	        const logoImage = document.getElementById('logo-image');
-	         if (logoImage) {
-	            logoImage.style.filter = "invert(1)";
-	      };
-	    }
+     function resetBackground() {
+        const navbarSection = document.getElementById('navbar-section');
+        navbarSection.style.backgroundColor = "transparent";
+        const links = navbarSection.querySelectorAll('a');
+        links.forEach(function(link) {
+            link.style.color = "white";
+        })
+        const logoImage = document.getElementById('logo-image');
+         if (logoImage) {
+            logoImage.style.filter = "invert(1)";
+      };
+     }
+     
+     // 봉사신청 취소하기
+     let boardNo ='';
+	 function showModal(btn){
+		 $('#modalRefusal').modal('show'); 
+		 boardNo = btn.parentElement.previousElementSibling.previousElementSibling.previousElementSibling.innerText;
+		 console.log(boardNo);
+	 };
+	 const form = document.getElementById('form');
+	 function volunteerStatusN(){
+		 form.action = '${contextPath}/deleteVolunteer.ad'
+		 const memberNo = '${loginUser.memberNo}';
+		 document.getElementsByName('boardNo')[0].value = boardNo;
+		 document.getElementsByName('memberNo')[0].value = memberNo;
+		 form.submit();
+	 }
+	 
+     
+	    
+	    
+	    
     </script>
 </body>
 </html>
