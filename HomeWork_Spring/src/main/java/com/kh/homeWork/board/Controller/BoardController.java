@@ -86,10 +86,13 @@ public class BoardController {
 		for (Board b : list) {
 			if(b.getBoardType()!=3) {
 			VolunteerDetail vd = bService.selectVolunteerDetail(b.getBoardNo());
-			int vNum = vd.getVolunteerNo();
-			int nowCount = vService.getVolunteerCount(vNum);
-			b.setFullCount(vd.getMemberCount());
-			b.setNowCount(nowCount);
+			if(vd !=null) {
+				int vNum = vd.getVolunteerNo();
+				int nowCount = vService.getVolunteerCount(vNum);
+				b.setFullCount(vd.getMemberCount());
+				b.setNowCount(nowCount);
+			}
+			
 			}
 		}
 
@@ -251,16 +254,19 @@ public class BoardController {
 		PageInfo pi2 = Pagination.getPageInfo(currentPage, listCount, 5);
 
 		ArrayList<Board> list = bService.regionBoardList(region, pi2);
-
-		for (Board b : list) {
-			VolunteerDetail vd = bService.selectVolunteerDetail(b.getBoardNo());
-			int vNum = vd.getVolunteerNo();
-			int nowCount = vService.getVolunteerCount(vNum);
-			b.setFullCount(vd.getMemberCount());
-			b.setNowCount(nowCount);
-			System.out.println(b.getFullCount());
-			System.out.println(b.getNowCount());
+		
+			for (Board b : list) {
+	        VolunteerDetail vd = bService.selectVolunteerDetail(b.getBoardNo());
+	        System.out.println(vd);
+	        if (vd != null) {
+	            int vNum = vd.getVolunteerNo();
+	            int nowCount = vService.getVolunteerCount(vNum);
+	            b.setFullCount(vd.getMemberCount());
+	            b.setNowCount(nowCount);
+	        }
+	    
 		}
+		
 		 
 
 		 
@@ -269,7 +275,7 @@ public class BoardController {
 		resultMap.put("pi2", pi2);
 		
 
-		GsonBuilder gb = new GsonBuilder().setDateFormat("YYYY-MM-dd");
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson = gb.create();
 		response.setContentType("application/json; charset=UTF-8");
 		try {

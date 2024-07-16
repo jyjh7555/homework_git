@@ -22,15 +22,20 @@
     </select>
     
     <select id="getVolunteerCount" resultType="_int">
-    	SELECT 
+    
+	    SELECT COUNT(v.member_no)
+		FROM volunteer v
+		JOIN volunteer_detail vd ON v.volunteer_no = vd.volunteer_no
+		WHERE vd.volunteer_no = #{vNum} AND v.status IN ('W', 'Y')
+    	<!-- SELECT 
 			    (SELECT COUNT(v.member_no)
 			     FROM volunteer_detail vd
 			     JOIN volunteer v using(volunteer_no)
-			     WHERE volunteer_no = #{vNum} AND status = 'W')
+			     WHERE volunteer_no = #{vNum} AND (status = 'W' or status = 'Y'))
 		FROM 
 		    volunteer_detail vd
 		WHERE 
-		    vd.volunteer_no = #{vNum}
+		    vd.volunteer_no = #{vNum} -->
     </select>
 	
 

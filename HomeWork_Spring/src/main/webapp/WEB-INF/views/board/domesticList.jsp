@@ -48,22 +48,56 @@
        overflow: hidden;
        text-overflow: ellipsis;
    }
-    .region-title-container {
-        text-align: start;
-        margin-bottom: 20px; /* mapAndBoard와의 간격 조절 */
-    }
-
-    #region-title {
-        font-size: 24px;
-        font-weight: bold;
-        color: #4a6741; /* 원하는 색상으로 변경 */
-        padding: 5px 15px;
-        border: 2px solid #4a6741;
-        border-radius: 20px;
-        display: inline-block;
-        margin-left:210px;
-       
-    }
+	.region-title-container {
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    width: 100%;
+	}
+	
+	.title-wrapper {
+	    display: flex;
+	    align-items: center;
+	    width: 100%;
+	    margin-left:200px;
+	    max-width: 500px; /* 컨테이너의 최대 너비 설정 */
+	}
+	
+	#region-title {
+	    font-size: 24px;
+	    font-weight: bold;
+	    color: #505050;
+	    padding: 5px 15px;
+	    border: 3px solid #b4b4b4		;
+	    border-radius: 20px;
+	    display: inline-block;
+	    margin-left: 190px; /* 오른쪽 정렬을 위해 */
+	    background:	#FFCD28	;
+	}
+	
+	.domestic-btn {
+	    width: 80px;  
+	    height: 30px; 
+	    display: flex;
+	    justify-content: center;
+	    align-items:center;
+	    text-align: center;
+	    line-height: 1.5; 
+	    padding: 0;
+	    font-size: 14px; 
+	    white-space: nowrap;
+	    border-radius:5px;
+	}
+	
+	.domestic-btn:hover {
+		background-color:#787878;
+		font-weight:bold;
+		color:white;
+	}
+	
+	#d-container {
+		border-color:#E8F5FF;
+	}
    
 </style>
 <title>Insert title here</title>
@@ -85,9 +119,9 @@
        <div class="container" style="height:1000px">
           <div class="mt-5 ms-0 me-0 ps-0 pe-0 w-100"align="center">
             <ul>
-               <li class="categoryDomestic"><a style=" border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="domesticBoard">국내봉사일정</a></li>
-               <li class="categoryDomestic"><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #00AFD7;border-bottom:3px solid #00AFD7;" href="globalBoard">해외봉사일정</a></li>
-               <li class="categoryDomestic"><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:2px solid #EEEEEE;border-bottom:3px solid #00AFD7;" href="domestic03.do">게시판 모아보기</a></li>
+               <li class="categoryDomestic"><a style=" border-top:3px solid #5ACCFF; border-left:3px solid #5ACCFF; border-right:3px solid #5ACCFF;" href="domesticBoard">국내봉사일정</a></li>
+               <li class="categoryDomestic"><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #5ACCFF;border-bottom:3px solid #5ACCFF;" href="globalBoard">해외봉사일정</a></li>
+               <li class="categoryDomestic"><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:2px solid #EEEEEE;border-bottom:3px solid #5ACCFF;" href="domestic03.do">게시판 모아보기</a></li>
             </ul>
          </div>
        
@@ -100,10 +134,13 @@
              <li>건축봉사활동 특성상, 현장 상황에 따라 공사는 진행되어도 봉사자 모집은 없을 수 있습니다.</li>
           </ul>
           </div>
-         <div class="border border-2">
-            <div class="region-title-container mt-4">
-                  <span id="region-title">국내 전체</span>
-            </div>
+         <div id="d-container"class="border border-2">
+            <div class="region-title-container mt-4 mb-2">
+			    <div class="title-wrapper">
+			        <button type="button" class="domestic-btn border border-1 mt-5 mb-n3" onclick="location.href='${contextPath}/domestic.bo'">전체 보기</button>
+			        <span id="region-title">국내 전체</span>
+			    </div>
+			</div>
             <div class="mapAndBoard d-flex flex-row h-75 align-items-center">
              <div class="w-25">
                <img src="resources/image/korMapGood.png" alt="한국 지도"  usemap="#menuMap" /> 
