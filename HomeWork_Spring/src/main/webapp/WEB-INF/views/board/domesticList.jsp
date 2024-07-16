@@ -85,9 +85,9 @@
        <div class="container" style="height:1000px">
           <div class="mt-5 ms-0 me-0 ps-0 pe-0 w-100"align="center">
             <ul>
-               <li class="categoryDomestic"><a style=" border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="domesticBoard">국내봉사일정</a></li>
-               <li class="categoryDomestic"><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #00AFD7;border-bottom:3px solid #00AFD7;" href="globalBoard">해외봉사일정</a></li>
-               <li class="categoryDomestic"><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:2px solid #EEEEEE;border-bottom:3px solid #00AFD7;" href="domestic03.do">게시판 모아보기</a></li>
+               <li class="categoryDomestic"><a style=" border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="domesitc.bo">국내봉사일정</a></li>
+               <li class="categoryDomestic"><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #00AFD7;border-bottom:3px solid #00AFD7;" href="global.bo">해외봉사일정</a></li>
+               <li class="categoryDomestic"><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:2px solid #EEEEEE;border-bottom:3px solid #00AFD7;" href="review.bo">후기 게시판</a></li>
             </ul>
          </div>
        

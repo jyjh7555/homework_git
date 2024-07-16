@@ -118,16 +118,23 @@ public class BoardController {
 		}
 
 		Board b = bService.selectBoard(bId, memberNo); // 조회수 해결했는데?
-		VolunteerDetail v = bService.selectVolunteerDetail(bId);
-		model.addAttribute("b", b);
-
-		if (v != null) {
-			boolean dateCheck = LocalDate.now().isAfter(v.getEndDate().toLocalDate());
-			model.addAttribute("dateCheck", dateCheck);
-			v.setAddress(v.getAddress().replace(",", " "));
-
+		if(b.getBoardType() !=3 ) {
+			VolunteerDetail v = bService.selectVolunteerDetail(bId);
+			int vNum = v.getVolunteerNo();
+			int nowCount = vService.getVolunteerCount(vNum);
+			b.setFullCount(v.getMemberCount());
+			b.setNowCount(nowCount);
+		
+	
+			if (v != null) {
+				boolean dateCheck = LocalDate.now().isAfter(v.getEndDate().toLocalDate());
+				model.addAttribute("dateCheck", dateCheck);
+				v.setAddress(v.getAddress().replace(",", " "));
+	
+			}
+			model.addAttribute("v", v);
 		}
-		model.addAttribute("v", v);
+		model.addAttribute("b", b);
 		model.addAttribute("page", page);
 
 		// 댓글도 넣는다.
@@ -187,10 +194,8 @@ public class BoardController {
 		model.addAttribute("v",v);
 		model.addAttribute("page",page);
 		
-		String[] address = v.getAddress().split(",");
 		model.addAttribute("b", b);
 		model.addAttribute("v", v);
-		model.addAttribute("address", address);
 		model.addAttribute("page", page);
 
 		return "editBoard";

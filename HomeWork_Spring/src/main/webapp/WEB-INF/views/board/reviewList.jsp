@@ -22,6 +22,12 @@
 	#voulnteer2 {
 		height: 200px;
 	}
+	
+	.categoryDomestic{display: inline-block;  margin-right: 2px; 
+      width:400px; line-height:50px; margin-left:-11px;  text-align:center;
+      }
+   a{display:block; color:#555555; font-size: 17px; text-decoration: none;}
+	
 </style>
 <title>Insert title here</title>
 </head>
@@ -38,7 +44,16 @@
 					<jsp:include page="../common/volunteer.jsp"/>
 				</div>	
 		 	</div>
-
+				
+			<div class="mt-5 ms-0 me-0 ps-0 pe-0 w-100"align="center">
+				<ul>
+					<li class="categoryDomestic"><a style=" border-left:2px solid #EEEEEE; border-top:2px solid #EEEEEE;border-bottom:3px solid #00AFD7;" href="domestic.bo">국내봉사일정</a></li>
+					<li class="categoryDomestic"><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #00AFD7;border-bottom:3px solid #00AFD7;" href="global.bo">해외봉사일정</a></li>
+					<li class="categoryDomestic"><a style=" border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="review.bo">후기 게시판</a></li>
+				</ul>
+			</div>
+				
+				
 		 	<div class="domestic-container container text-center mt-5">
 			 		<div class="bd-example">
 						<table class="table table-hover">
@@ -94,7 +109,6 @@
 		            	</a>
 		            </li>
 	    		</ul>
-      	  </nav>
       	  
 
 	<c:if test="${ !empty loginUser }">
@@ -107,8 +121,6 @@
 
 		</div>
  	  </div>
-      	  
-      	  
 	<div id="footer">
 		<jsp:include page="../common/footer.jsp"/>
 	</div>
