@@ -86,6 +86,7 @@ public class BoardController {
 		for (Board b : list) {
 			if(b.getBoardType()!=3) {
 			VolunteerDetail vd = bService.selectVolunteerDetail(b.getBoardNo());
+			if(vd !=null) {
 			
 			int vNum = vd.getVolunteerNo();
 			int nowCount = vService.getVolunteerCount(vNum);
@@ -94,6 +95,8 @@ public class BoardController {
 			
 			b.setFullCount(vd.getMemberCount());
 			b.setNowCount(nowCount);
+			}
+			
 			}
 		}
 
@@ -253,50 +256,46 @@ public class BoardController {
 	}
 
 	@RequestMapping("regionBoardList.bo")
-	@ResponseBody
-    public void regionBoardList(HttpServletResponse response,
-                        @RequestParam(value = "region", required = false) String region,
-                        @RequestParam(value = "page", defaultValue = "1") int currentPage) {
+	public void regionBoardList(HttpServletResponse response,
+								@RequestParam(value = "region", required = false) String region,
+								@RequestParam(value = "page", defaultValue = "1") int currentPage) {
 		
-	  System.out.println("첫부분");
-      int listCount = bService.getRegionListCount(region);
-      PageInfo pi2 = Pagination.getPageInfo(currentPage, listCount,5);
-      
-      
-      
-      ArrayList<Board> list = bService.regionBoardList(region,pi2);
-      for (Board b : list) {
-          VolunteerDetail vd = bService.selectVolunteerDetail(b.getBoardNo());
-          if (vd != null) {
-              int vNum = vd.getVolunteerNo();
-              int nowCount = vService.getVolunteerCount(vNum);
-              b.setRecruitStart(vd.getRecruitStart());
-  			  b.setRecruitEnd(vd.getRecruitEnd());
-              b.setFullCount(vd.getMemberCount());
-              b.setNowCount(nowCount);
-          }
-      }
+		System.out.println("첫부분");
+	    int listCount = bService.getRegionListCount(region);
+	    PageInfo pi2 = Pagination.getPageInfo(currentPage, listCount,5);
+  
+  
+  
+  		ArrayList<Board> list = bService.regionBoardList(region,pi2);
+  		for (Board b : list) {
+    	  	VolunteerDetail vd = bService.selectVolunteerDetail(b.getBoardNo());
+          	if (vd != null) {
+	            int vNum = vd.getVolunteerNo();
+	            int nowCount = vService.getVolunteerCount(vNum);
+	            b.setRecruitStart(vd.getRecruitStart());
+	            b.setRecruitEnd(vd.getRecruitEnd());
+	            b.setFullCount(vd.getMemberCount());
+	            b.setNowCount(nowCount);
+          	}	
+  		}
+	
+	
+	    Map<String, Object> resultMap = new HashMap<>();
+	    resultMap.put("list", list);
+	    resultMap.put("pi2", pi2);
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		try {
+			gson.toJson(resultMap, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 
-      Map<String, Object> resultMap = new HashMap<>();
-      resultMap.put("list", list);
-      resultMap.put("pi2", pi2);
-       
-      
-      
-      
-      GsonBuilder gb = new GsonBuilder().setDateFormat("YYYY-MM-dd");
-      Gson gson = gb.create();
-      response.setContentType("application/json; charset=UTF-8");
-      try {
-         gson.toJson(resultMap,response.getWriter());
-      } catch (JsonIOException e) {
-         e.printStackTrace();
-      } catch (IOException e) {
-         e.printStackTrace();
-      }
-      
-      System.out.println("마지막부분");
-   }
+	}
+
 
 	@RequestMapping("insertReply.bo")
 	@ResponseBody

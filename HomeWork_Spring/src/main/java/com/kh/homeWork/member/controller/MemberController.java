@@ -90,8 +90,9 @@ public class MemberController {
 	    Member loginUser = (Member) session.getAttribute("loginUser");
 	    if (loginUser != null) {
 	        List<Volunteer> recentVolunteers = vService.getRecentVolunteers(loginUser.getMemberNo());
-	        System.out.println(recentVolunteers);
+	        
 	        model.addAttribute("recentVolunteers", recentVolunteers);
+	        model.addAttribute("loginUser",loginUser);
 	    }
 	    return "myPage";
 	}

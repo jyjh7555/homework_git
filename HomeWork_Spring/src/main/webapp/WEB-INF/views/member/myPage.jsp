@@ -34,20 +34,6 @@
 		padding-right: 70px; /* Adjusted to account for the right padding of the last child */
 	}
 	
-	#categoryMypageContainer li:not(:last-child)::after {
-		content: "";
-		position: absolute;
-		right:-50px;
-		bottom:7px;
-		width: 1px;
-		height:4rem;
-		background-color: lightgray;
-	}
-
-	#categoryMypageContainer li:last-child {
-		padding-right: 0; /* Remove right padding from the last child */
-	}
-	
 	#categoryMypageContainer li>a:hover {
 		color:skyblue;
 	}
@@ -65,22 +51,25 @@
 		height:300px;
 		display:flex;
 		justify-content:center;
-		border: 8px solid #E3E3E3;
+		border: 4px solid #c8c8c8;
 		margin:auto;
 		margin-bottom:30px;
 	}
     .welcome-section {
-        text-align: left;
+        text-align: center;
         margin-right:40px;
-        margin-top:60px;
+        margin-top:50px;
+        margin-bottom:15px;
         margin-left:40px;
         white-space: nowrap;
+        
     }
     
     .mdfbtn {
     	margin-top:20px;
     	display:flex;
     	flex-direction:column;
+    	align-items:center;
     }
     
 
@@ -93,13 +82,11 @@
         display: inline-block;
         margin-top: 10px;
         margin-bottom:10px;
-        padding: 10px 20px;
-        border: 1px solid #ccc;
+        padding:5px 5px;
+        font-size:18px;
         text-decoration: none;
         color: #333;
-        border-radius: 4px;
-        margin-right: 10px;
-        width:120px;
+        width:200px;
         font-weight:bold;
         white-space: nowrap;
     }
@@ -156,6 +143,7 @@
     	display:flex;
     	justify-content:center;
     	margin-bottom: 30px;
+    	margin-left:20px;
     }
     
     .recent-activity-section>h5 {
@@ -164,16 +152,7 @@
     	margin-right:50px;	
     }
     
-    .recent-activity-section>h5::after {
-    	content: "";
-		position: absolute;
-		right:-50px;
-		top:-40px;
-		bottom:15px;
-		width: 1px;
-		height:8rem;
-		background-color: lightgray;
-    }
+ 
     
  
     
@@ -209,6 +188,19 @@
 	#voulnteer2 {
 		height: 200px;
 	}
+	
+	.recent-activity-section {
+    display: flex;
+    flex-direction: column;
+	}
+
+	.activity-title {
+	    margin-bottom: 15px; /* 제목과 테이블 사이의 간격 조정 */
+	}
+	
+	.activity-table {
+	    width: 100%; /* 테이블이 컨테이너의 전체 너비를 차지하도록 */
+	}
 </style>
 </head>
 <body>
@@ -223,59 +215,38 @@
 			<jsp:include page="../common/volunteer.jsp"/>
 		</div>	
  	</div>
-	<div id="container">
- 		<div align="center">
-		<ul id="categoryMypageContainer">
-			<li class=categoryMyPage><a  href="#">마이홈</a></li>
-			<li class=categoryMyPage><a  href="#">나의 봉사내역</a></li>
-			<li class=categoryMyPage><a  href="#">집고치기 신청내역 </a></li>
-		</ul>
-	</div>
+	<div id="container" class="mt-4">
 		<div id=inner-container>
 			<div class="welcome-section">
-	            <h5><strong>김기룡</strong> 회원님 환영합니다!</h5>
+	            <h5><strong>${loginUser.memberName }</strong> 회원님 환영합니다!</h5>
 	            <div class="mdfbtn">
-	            	<a href="updateMemberPage.me">회원정보 수정></a>
-	            	<a href="updatePwdPage.me">비밀번호 수정></a>
-	            </div>
-	            
-	        </div>
-	        <div class="info-section">
-	            <div class="info-box">
-	                <a href="/news/report"></a>
-	                <strong>연차보고서</strong>
-	                <p>자세한 후원금 사용내역은 <br> 연차보고서로 확인하세요.</p>
-	                <a href="/news/report" class="more">MORE VIEW</a>
-	            </div>
-	            <div class="info-box">
-	                <a href="/welfare/schedule"></a>
-	                <strong>자원봉사 신청</strong>
-	                <p>국내, 해외 자원봉사를 통해 <br> 손길을 전해보세요.</p>
-	                <a href="/welfare/schedule" class="more">MORE VIEW</a>
+	            	<a class="border border-2" href="updateMemberPage.me">회원정보 수정</a>
+	            	<a class="border border-2" href="updatePwdPage.me">비밀번호 수정</a>
 	            </div>
 	        </div>
+       		<div class="recent-activity-section">
+	            <h5 class="d-block activity-title">신청 대기 중인 봉사활동 내역</h5>
+	            <table class="activity-table">
+			        <thead>
+			            <tr>
+			                <th>게시글 번호</th>
+			                <th>제목</th>
+			                <th>상태</th>
+			            </tr>
+			        </thead>
+			        <tbody>
+			            <c:forEach items="${recentVolunteers}" var="volunteer">
+			                <tr>
+			                    <td>${volunteer.boardNo}</td>
+			                    <td>${volunteer.title}</td>
+			                    <td>${volunteer.status}</td>
+			                </tr>
+			            </c:forEach>
+			        </tbody>
+	   		   </table>
+        	</div>
 		</div>
-		<div class="recent-activity-section">
-            <h5>신청 대기 중인 봉사활동 내역</h5>
-            <table>
-        <thead>
-            <tr>
-                <th>게시글 번호</th>
-                <th>제목</th>
-                <th>상태</th>
-            </tr>
-        </thead>
-        <tbody>
-            <c:forEach items="${recentVolunteers}" var="volunteer">
-                <tr>
-                    <td>${volunteer.boardNo}</td>
-                    <td>${volunteer.title}</td>
-                    <td>${volunteer.status}</td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
-        </div>
+
 		
 		<div id="footer">
 			<jsp:include page="../common/footer.jsp"/>
