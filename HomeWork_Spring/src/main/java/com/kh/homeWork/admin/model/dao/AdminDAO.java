@@ -191,6 +191,24 @@ public class AdminDAO {
 		return sqlSession.selectOne("adminMapper.getListCountVolunteerY");
 	}
 
+	public ArrayList<Volunteer> adminApproveVolunteerList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.adminApproveVolunteerList");
+	}
+
+	public int getListCountVolunteerN(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.getListCountVolunteerN");
+	}
+
+	public ArrayList<Volunteer> adminRafusalVolunteerList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.adminRafusalVolunteerList");
+	}
+
 	
 
 	

@@ -127,7 +127,12 @@
 	            		<td colspan="3">${v.address }</td>
 	            	</tr>
 	            </table>
-            
+            	<div style="white-space: pre-wrap;">${b.content }</div>
+	            <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
+	        		<button type="button" id="editButton" class ="btn btn-info m-5" style="width:150px; border-radius:16px;font-size:20px;">수정하기</button>
+	        		<button type="button" class ="btn btn-secondary m-5" style="width:150px; border-radius:16px;font-size:20px;" onclick="location.href='${contextPath}/admindomestic.ad'">목록보기</button>
+	        		<button type="button" id="deleteModal" class ="btn btn-danger m-5" style="width:150px; border-radius:16px;font-size:20px;">삭제하기</button>
+				</div>
 				<c:if test="${b.boardType ==3 }">
 					<div class="bd-example m-4 p-2" style="background: #fbfbfb;">
 						<div>
@@ -159,12 +164,7 @@
 					</div>
 				</c:if>
 					
-	            <div style="white-space: pre-wrap;">${b.content }</div>
-	            <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
-	        		<button type="button" id="editButton" class ="btn btn-info m-5" style="width:150px; border-radius:16px;font-size:20px;">수정하기</button>
-	        		<button type="button" class ="btn btn-secondary m-5" style="width:150px; border-radius:16px;font-size:20px;" onclick="location.href='${contextPath}/admindomestic.ad'">목록보기</button>
-	        		<button type="button" id="deleteModal" class ="btn btn-danger m-5" style="width:150px; border-radius:16px;font-size:20px;">삭제하기</button>
-				</div>
+	            
 				</form>
         </div>
     </div>

@@ -322,4 +322,34 @@
  		from volunteer_detail
  		where board_no = #{boardNo}
  	</select>
+ 	
+ 	<select id="getListCountVolunteerY" resultType="_int">
+		select count(*)
+		from volunteer
+		where status = 'Y'
+	</select>
+	
+	<select id="adminApproveVolunteerList" resultType="Volunteer">
+ 		select v.volunteer_no,v.member_no, m.member_name, b.title, v.status, d.board_No
+		from volunteer v
+			join member m on v.member_no = m.member_no
+			join volunteer_detail d on v.volunteer_no = d.volunteer_no
+            join board b on b.board_no = d.board_no
+        where v.status = 'Y' 
+ 	</select>
+ 	
+ 	<select id="getListCountVolunteerN" resultType="_int">
+		select count(*)
+		from volunteer
+		where status = 'N'
+	</select>
+	
+	<select id="adminRafusalVolunteerList" resultType="Volunteer">
+ 		select v.volunteer_no,v.member_no, m.member_name, b.title, v.status, d.board_No
+		from volunteer v
+			join member m on v.member_no = m.member_no
+			join volunteer_detail d on v.volunteer_no = d.volunteer_no
+            join board b on b.board_no = d.board_no
+        where v.status = 'N' 
+ 	</select>
 </mapper>

@@ -482,7 +482,8 @@ public class AdminController {
 		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
 		
-		ArrayList<Volunteer> list = aService.adminVolunteerList(pi);
+		ArrayList<Volunteer> list = aService.adminApproveVolunteerList(pi);
+		System.out.println(list);
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson = gb.create();
 		response.setContentType("application/json; charset=UTF-8");
@@ -501,6 +502,36 @@ public class AdminController {
 		}
 	}
 	
+	@RequestMapping("/adminVolunteerRafusalList.ad")
+	@ResponseBody
+	public void adminVolunteerRafusalList(@RequestParam(value="page", defaultValue = "1") int page,
+								@RequestParam(value="size", defaultValue = "10") int size,
+								HttpServletResponse response
+							    ) {
+	    
+		int listCount = aService.getListCountVolunteerN();
+		System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
+		
+		ArrayList<Volunteer> list = aService.adminRafusalVolunteerList(pi);
+		System.out.println(list);
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+	    result.put("volunteer", list);
+	    result.put("maxPage", pi.getMaxPage()); 
+	    result.put("currentPage", pi.getCurrentPage());
+	    result.put("currentPage", pi.getCurrentPage());
+		try {
+			gson.toJson(result, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	@RequestMapping("/updateVolunteerStatus.ad")

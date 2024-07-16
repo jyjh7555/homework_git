@@ -52,7 +52,7 @@
 	
 	
 	
-	.userInfo, .userUpdate, .userDelete, .supportPage, .searchResult, .infoList {
+	.userInfo, .userUpdate, .userDelete, .supportPage, .searchResult, .infoList, .volunteer, {
             
             padding: 20px;
             border: 1px solid #ddd;
@@ -151,7 +151,8 @@
 						 	 <span class="badge text-bg-danger " id="volunteerApplicant"></span>
 						</button>
 					</li>
-					<li id="volunteer2">봉사승인목록</li>
+					<li id="volunteer2">승인목록</li>
+					<li id="volunteer3">거부목록</li>
 				</ul>
 			
 		</div>
@@ -422,6 +423,34 @@
 					    </tfoot>
 					</table>
 					</div>
+					<div class="volunteer hidden" id="volunteerRafusalList">
+					<table id="volunteerRefusalTable">
+						<thead>
+							<tr>
+								<th width="10%">봉사번호</th>
+								<th width="10%">회원번호</th>
+								<th width="10%">이름</th>
+								<th width="10%">제목</th>
+								<th width="10%">현재상태</th>
+								<th width="10%">처리</th>
+							</tr>
+						</thead>
+						<tbody>
+			
+						</tbody>
+						<tfoot>
+					        <tr>
+					            <td colspan="10">
+					                <nav aria-label="Standard pagination example" style="float: center;">
+					                    <ul id="pagination7" class="pagination">
+					                    
+					                    </ul>
+					                </nav>
+					            </td>
+					        </tr>
+					    </tfoot>
+					</table>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -559,6 +588,7 @@
 				    document.getElementById('globalBoardList').classList.add('hidden');
 				    document.getElementById('volunteerList').classList.add('hidden');
 				    document.getElementById('volunteerApproveList').classList.add('hidden');
+				    document.getElementById('volunteerRafusalList').classList.add('hidden');
 				    document.getElementById('infoList').classList.add('hidden');
 
 				    let currentPage = 1;
@@ -669,6 +699,7 @@
 				 document.getElementById('globalBoardList').classList.add('hidden');
 				 document.getElementById('volunteerList').classList.add('hidden');
 				 document.getElementById('volunteerApproveList').classList.add('hidden');
+				 document.getElementById('volunteerRafusalList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 				 
 				let currentPage = 1;
@@ -811,6 +842,7 @@
 				 document.getElementById('globalBoardList').classList.add('hidden');
 				 document.getElementById('volunteerList').classList.add('hidden');
 				 document.getElementById('volunteerApproveList').classList.add('hidden');
+				 document.getElementById('volunteerRafusalList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 				 
 				 let currentPage = 1;
@@ -920,6 +952,7 @@
 				 document.getElementById('globalBoardList').classList.add('hidden');
 				 document.getElementById('volunteerList').classList.add('hidden');
 				 document.getElementById('volunteerApproveList').classList.add('hidden');
+				 document.getElementById('volunteerRafusalList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 					let currentPage = 1;
 				    let page = 1;
@@ -1023,6 +1056,7 @@
 				 document.getElementById('globalBoardList').classList.add('hidden');	
 				 document.getElementById('volunteerList').classList.add('hidden');
 				 document.getElementById('volunteerApproveList').classList.add('hidden');
+				 document.getElementById('volunteerRafusalList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 				 location.href="admindomestic.ad";
 				 
@@ -1037,6 +1071,7 @@
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('volunteerList').classList.add('hidden');
 				 document.getElementById('volunteerApproveList').classList.add('hidden');
+				 document.getElementById('volunteerRafusalList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 				 location.href="adminglobal.ad";
 				
@@ -1051,6 +1086,7 @@
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('volunteerList').classList.add('hidden');
 				 document.getElementById('volunteerApproveList').classList.add('hidden');
+				 document.getElementById('volunteerRafusalList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 				 location.href="adminreview.ad"	
 			 })
@@ -1065,6 +1101,7 @@
 		    document.getElementById('domesticBoardList').classList.add('hidden');
 		    document.getElementById('infoList').classList.add('hidden');
 		    document.getElementById('volunteerApproveList').classList.add('hidden');
+		    document.getElementById('volunteerRafusalList').classList.add('hidden');
 		
 		    let currentPage = 1;
 		    const pageSize = 10;
@@ -1189,6 +1226,7 @@
 				    document.getElementById('domesticBoardList').classList.add('hidden');
 				    document.getElementById('infoList').classList.add('hidden');
 				    document.getElementById('volunteerList').classList.add('hidden');
+				    document.getElementById('volunteerRafusalList').classList.add('hidden');
 				
 				    let currentPage = 1;
 				    const pageSize = 10;
@@ -1303,6 +1341,130 @@
 				    loadPage6(currentPage);
 				});
 		 
+			 document.getElementById('volunteer3').addEventListener('click', function() {
+				    document.getElementById('volunteerRafusalList').classList.toggle('hidden');
+				    document.getElementById('userInfo').classList.add('hidden');
+				    document.getElementById('userUpdate').classList.add('hidden');
+				    document.getElementById('userDelete').classList.add('hidden');
+				    document.getElementById('supportList').classList.add('hidden');
+				    document.getElementById('searchResult').classList.add('hidden');
+				    document.getElementById('domesticBoardList').classList.add('hidden');
+				    document.getElementById('infoList').classList.add('hidden');
+				    document.getElementById('volunteerList').classList.add('hidden');
+				    document.getElementById('volunteerApproveList').classList.add('hidden');
+				
+				    let currentPage = 1;
+				    const pageSize = 10;
+				    
+				    
+				    function loadPage7(page) {
+				        const url = '${contextPath}/adminVolunteerRafusalList.ad?page=' + page + '&size=' + pageSize;
+				
+				        $.ajax({
+				            url: url,
+				            method: 'GET',
+				            success: function(data) {
+				                if (data && data.volunteer) {
+				                    document.getElementById('volunteerRafusalList').classList.remove('hidden');
+				                    const volunteerRafusalList = document.getElementById('volunteerRafusalList');
+				                    const tbody = volunteerRafusalList.querySelector('tbody');
+				                    tbody.innerHTML = '';
+				
+				                    data.volunteer.forEach(v => {
+				                        
+				                        
+				                        const tr = document.createElement('tr');
+				
+				                        const vNoTd = document.createElement('td');
+				                        vNoTd.innerText = v.volunteerNo;
+				                        const mNoTd = document.createElement('td');
+				                        mNoTd.innerText = v.memberNo;
+				                        const nameTd = document.createElement('td');
+				                        nameTd.innerText = v.memberName;
+				                        const boardTd = document.createElement('td');
+				                        boardTd.innerText = v.title;
+				                        const statusTd = document.createElement('td');
+				                        statusTd.id = 'statusTd-' + v.volunteerNo + '-' + v.memberNo;
+				                        statusTd.innerText = statusText(v.status);
+				
+				                        const btnTd = document.createElement('td');
+				                        const approveBtn = document.createElement('button');
+				                        approveBtn.textContent = '승인';
+				                        approveBtn.className = 'btn btn-success';
+				                        approveBtn.name = 'volunteerStatusButton';
+				                        approveBtn.id = 'approveBtn';
+				                        approveBtn.addEventListener('click', function() {
+				                            //updateStatus(v.volunteerNo, 'Y', statusTd);
+				                        	$('#modalApprove').modal('show');
+				                        	document.getElementById('modalApprove').dataset.volunteerNo = v.volunteerNo;
+				                        	document.getElementById('modalApprove').dataset.memberNo = v.memberNo;
+				                            document.getElementById('modalApprove').dataset.status = 'Y';
+				                            document.getElementById('modalApprove').dataset.statusTdId = 'statusTd-' + v.volunteerNo + '-' + v.memberNo;		                        	
+				                        });
+				                        
+				
+				                        const refusalBtn = document.createElement('button');
+				                        refusalBtn.textContent = '거부';
+				                        refusalBtn.className = 'btn btn-danger';
+				                        refusalBtn.name = 'volunteerStatusButton';
+				                        refusalBtn.id = `refusalBtn`
+				                        refusalBtn.addEventListener('click', function() {
+				                            //updateStatus(v.volunteerNo, 'N', statusTd);
+				                        	$('#modalRefusal').modal('show');
+				                        	document.getElementById('modalRefusal').dataset.volunteerNo = v.volunteerNo;
+				                        	document.getElementById('modalRefusal').dataset.memberNo = v.memberNo;
+				                            document.getElementById('modalRefusal').dataset.status = 'N';
+				                            document.getElementById('modalRefusal').dataset.statusTdId = 'statusTd-' + v.volunteerNo + '-' + v.memberNo;
+				                        });
+				                        
+				
+				                        btnTd.appendChild(approveBtn);
+				                        btnTd.appendChild(refusalBtn);
+				
+				                        const tds = [vNoTd,mNoTd, nameTd, boardTd, statusTd, btnTd];
+				                        tr.append(...tds);
+				                        tbody.append(tr);
+				                    });
+				
+				                    const pagination = document.getElementById('pagination6');
+				                    pagination.innerHTML = '';
+				
+				                    if (data.maxPage > 1) {
+				                        for (let i = 1; i <= data.maxPage; i++) {
+				                            const pageItem = document.createElement('li');
+				                            pageItem.classList.add('page-item');
+				                            const pageLink = document.createElement('a');
+				                            pageLink.classList.add('page-link');
+				                            pageLink.href = '#';
+				                            pageLink.innerText = i;
+				                            (function(pageNumber) {
+				                                pageLink.addEventListener('click', function(event) {
+				                                    event.preventDefault();
+				                                    loadPage7(pageNumber);
+				                                });
+				                            })(i);
+				
+				                            if (i === page) {
+				                                pageItem.classList.add('active');
+				                            } else {
+				                                pageItem.classList.remove('active');
+				                            }
+				                            pageItem.append(pageLink);
+				                            pagination.append(pageItem);
+				                        }
+				                    }
+				                } else {
+				                    console.error(data);
+				                }
+				            },
+				            error: function(error) {
+				                console.error(error);
+				            }
+				        });
+				    }
+				
+				    loadPage7(currentPage);
+				});
 		 
 			 
 		 function updateStatus(volunteerNo, memberNo, status, statusTd) {
@@ -1411,6 +1573,7 @@
 			 document.getElementById('supportList').classList.add('hidden');
 			 document.getElementById('volunteerList').classList.add('hidden');
 			 document.getElementById('volunteerApproveList').classList.add('hidden');
+			 document.getElementById('volunteerRafusalList').classList.add('hidden');
 			 document.getElementById('infoList').classList.add('hidden');
 		}
 		

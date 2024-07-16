@@ -226,6 +226,22 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.getListCountVolunteerY(sqlSession);
 	}
 
+	@Override
+	public ArrayList<Volunteer> adminApproveVolunteerList(PageInfo pi) {
+		return aDAO.adminApproveVolunteerList(sqlSession, pi);
+	}
+
+	@Override
+	public int getListCountVolunteerN() {
+		return aDAO.getListCountVolunteerN(sqlSession);
+	}
+
+	@Override
+	public ArrayList<Volunteer> adminRafusalVolunteerList(PageInfo pi) {
+		return aDAO.adminRafusalVolunteerList(sqlSession, pi);
+	}
+
+
 	
 
 	
