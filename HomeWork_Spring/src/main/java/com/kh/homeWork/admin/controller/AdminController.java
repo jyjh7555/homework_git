@@ -272,7 +272,7 @@ public class AdminController {
 			v.setBoardNo(bNo);
 			int result2 = aService.adminInsertVolunteer(v);
 		}
-		return "redirect:adminDomestic.ad";
+		return "redirect:admindomestic.ad";
 	}
 
 	
@@ -289,7 +289,7 @@ public class AdminController {
 			throw new BoardException("게시글 삭제에 실패하였습니다.");
 	}
 	
-	@RequestMapping("adminBoardEdit.ad")
+	@RequestMapping("/adminBoardEdit.ad")
 	public String editBoard(@RequestParam("boardNo") int bId,@RequestParam("page")int page,Model model) {
 		Board b = aService.selectBoard(bId, 0);
 		VolunteerDetail v = aService.adminSlectVolunteerDetail(bId);
@@ -317,6 +317,36 @@ public class AdminController {
 			}
 		}
 		throw new BoardException("게시글 수정에 실패하였습니다");
+	}
+	
+	@RequestMapping("adminInsertReply.ad")
+	@ResponseBody
+	public void insertReply(@ModelAttribute Reply r,HttpServletResponse response) {
+		
+		int result = aService.adminInsertReply(r);
+		
+		if(result>0) {
+			ArrayList<Reply> rList = aService.selectReply(r.getBoardNo());
+			
+			for(Reply rp : rList) {
+				
+				rp.setContent(rp.getContent().replace("\n","<br>"));
+			}
+			
+			
+			GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy.MM.dd HH:mm:ss");
+			Gson gson = gb.create();
+			response.setContentType("application/json; charset=UTF-8");
+			try {
+				gson.toJson(rList,response.getWriter());
+			} catch (JsonIOException | IOException  e) {
+				e.printStackTrace();
+			}
+		}else {
+			System.out.println("error");
+		}
+		
+		
 	}
 	
 	@RequestMapping("adminSelectMember.ad")
@@ -357,7 +387,10 @@ public class AdminController {
 		int activeMember = aService.activeMember();
 		int inactiveMember = totalMember-activeMember;
 		int totalBoard = aService.totalBoard();
-		int amount = aService.totalAmount();
+		int domesticAmount = aService.domesticAmount();
+		int globalAmount = aService.globalAmount();
+		int totalAmount = globalAmount + domesticAmount; 
+		int volunteerApplicant = aService.volunteerApplicant();
 		
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson = gb.create();
@@ -368,7 +401,10 @@ public class AdminController {
 	    result.put("activeMember", activeMember);
 	    result.put("inactiveMember", inactiveMember);
 	    result.put("totalBoard", totalBoard);
-	    result.put("amount", amount);
+	    result.put("totalAmount", totalAmount);
+	    result.put("domesticAmount", domesticAmount);
+	    result.put("globalAmount", globalAmount);
+	    result.put("volunteerApplicant", volunteerApplicant);
 	    
 		try {
 			gson.toJson(result, response.getWriter());
@@ -387,7 +423,7 @@ public class AdminController {
 							    ) {
 	    
 		int listCount = aService.getListCountVolunteer();
-		
+		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
 		
 		ArrayList<Volunteer> list = aService.adminVolunteerList(pi);
@@ -413,11 +449,33 @@ public class AdminController {
 	
 	@RequestMapping("/updateVolunteerStatus.ad")
 	@ResponseBody
-	public String adminVolunteerUpdate(@ModelAttribute Volunteer v) {
-		System.out.println(v);
+	public void adminVolunteerUpdate(
+									   @RequestParam("volunteerNo") int volunteerNo, 
+									   @RequestParam("memberNo") int memberNo,
+            						   @RequestParam("status") String status,
+            						   HttpServletResponse response
+            						   ) {
+		HashMap<String, Object> v = new HashMap<String, Object>();
+		v.put("volunteerNo", volunteerNo);
+		v.put("memberNo", memberNo);
+		v.put("status", status);
 		int result = aService.adminVolunteerUpdate(v);
-		System.out.println(result);
-		return result == 1? "success" : "fail";
+		
+		
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		
+		HashMap<String, Object> resultStatus = new HashMap<String, Object>();
+		resultStatus.put("result", result == 1? "success" : "fail");
+		resultStatus.put("status", status);
+		try {
+			gson.toJson(resultStatus, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 	}
 	
 	

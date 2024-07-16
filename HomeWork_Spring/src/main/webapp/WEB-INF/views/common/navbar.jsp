@@ -84,10 +84,10 @@
         	<div id="navbar">
 	              <a><span style="font-size: 24px;">${loginUser.nickName}님</span>, 반갑습니다.</a>
 	              <c:if test='${ loginUser.isAdmin ==  "Y"}'>
-		              <a href="${contextPath}/admin.me">관리자 페이지</a>
+		              <a href="${contextPath}/admin.me"><span>관리자 페이지</span></a>
 	              </c:if>
-	              <a href="${contextPath}/myPage.me">마이 페이지</a>
-	              <a href="${contextPath}/logout.me">로그아웃</a>
+	              <a href="${contextPath}/myPage.me"><span>마이 페이지</span></a>
+	              <a href="${contextPath}/logout.me"><span>로그아웃</span></a>
 	       	</div> 
 		</c:if>
      </div>

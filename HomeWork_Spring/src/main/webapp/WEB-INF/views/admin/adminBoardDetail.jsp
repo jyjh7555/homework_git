@@ -82,7 +82,7 @@
 	
 	
     <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3">
-        <div class="d-flex flex-column justify-content-center mb-3 border border-1 border-info w-50 mt-3" style="width:1400px;">
+        <div class="d-flex flex-column justify-content-center mb-3 border border-1 border-info w-50 mt-3" style="width:1600px;">
         <form method="post" id="admimVolunteerInfo">
         	<input type="hidden" name="boardNo" value="${b.boardNo }">
 			<input type="hidden" name="boardType" value="${b.boardType }">

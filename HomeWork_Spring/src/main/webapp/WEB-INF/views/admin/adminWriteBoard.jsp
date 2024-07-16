@@ -79,7 +79,7 @@
     </div>
 	<h1 align="center"> 관리자페이지 </h1>
 	<br>
-	<h3 align="center">[국내게시판 관리]</h3>
+	<h3 align="center">[게시판 관리]</h3>
 	<form method="post" id="form">
 	    <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3">
 	        <div class="d-flex flex-column justify-content-center mb-3 border border-1 border-info w-60 mt-3" style="width:1400px;">

@@ -139,6 +139,28 @@
  		)
  	</insert>
  	
+ 	<insert id="adminInsertVolunteer">
+		insert into volunteer_detail values(
+			seq_vol.nextval,
+			#{memberCount},
+			#{boardNo},
+			#{category},
+			#{groupYn},
+			#{address},
+			#{mgr},
+			#{mgrPhone},
+			sysdate,
+			sysdate,
+			#{memberNo},
+			#{recruitStart},
+			#{recruitEnd},
+			#{startDate},
+			#{endDate},
+			#{startTime},
+			#{endTime}
+		) 		
+ 	</insert>
+ 	
  	<select id="adminSelectBoardNoCheck" resultType="_int">
  		select *
 		from (
@@ -221,10 +243,21 @@
  		order by reply_no desc
  	</select>
  	
+ 	<insert id="adminInsertReply">
+ 		insert into reply values(
+ 			seq_reply.nextval,
+ 			sysdate,
+ 			sysdate,
+ 			default,
+ 			#{content},
+ 			#{boardNo},
+ 			#{memberNo}
+ 		)
+ 	</insert>
+ 	
  	<select id="getListCountVolunteer" resultType="_int">
 		select count(*)
 		from volunteer
-		where status = 'W'
 	</select>
 	
 	<select id="totalMember" resultType="_int">
@@ -243,28 +276,44 @@
 		from board
 	</select>
 	
-	<select id="totalAmount" resultType="_int">
-		select sum(amount)
+	<select id="domesticAmount" resultType="_int">
+		select COALESCE(SUM(amount), 0)
 		from pay
+		where product = '국내건축후원하기'
+	</select>
+	
+	<select id="globalAmount" resultType="_int">
+		select COALESCE(SUM(amount), 0)
+		from pay
+		where product = '해외건축후원하기'
 	</select>
 	
 	<select id="adminVolunteerList" resultType="Volunteer">
-		select v.member_no, m.member_name, b.title, v.status, v.board_No
+		select v.volunteer_no,v.member_no, m.member_name, b.title, v.status, d.board_No
 		from volunteer v
 			join member m on v.member_no = m.member_no
-			join board b on v.board_no = b.board_no
+			join volunteer_detail d on v.volunteer_no = d.volunteer_no
+            join board b on b.board_no = d.board_no
 		ORDER BY 
-  		CASE 
-        	WHEN v.status = 'W' THEN 1
-        ELSE 2
-    END, 
-    v.status
+	  		CASE 
+	        	WHEN v.status = 'W' THEN 1
+	        	WHEN v.status = 'Y' THEN 2
+	        	WHEN v.status = 'N' THEN 3
+	       		ELSE 4
+		    END, 
+		    v.volunteer_no
 	</select>
 	
 	<update id="adminVolunteerUpdate">
 		update volunteer
 		set status = #{status}
-		where board_No = #{boardNo}
+		where volunteer_no = #{volunteerNo}
+		and member_no = #{memberNo}
 	</update>
  	
+ 	<select id="volunteerApplicant" resultType="_int">
+ 		select count(*)
+ 		from volunteer
+ 		where status = 'W'
+ 	</select>
 </mapper>

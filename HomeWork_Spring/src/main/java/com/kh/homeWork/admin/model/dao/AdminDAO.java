@@ -152,8 +152,12 @@ public class AdminDAO {
 		return sqlSession.selectOne("adminMapper.totalBoard");
 	}
 
-	public int totalAmount(SqlSessionTemplate sqlSession) {
-		return sqlSession.selectOne("adminMapper.totalAmount");
+	public int domesticAmount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.domesticAmount");
+	}
+	
+	public int globalAmount(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.globalAmount");
 	}
 
 	public ArrayList<Volunteer> adminVolunteerList(SqlSessionTemplate sqlSession, PageInfo pi) {
@@ -163,9 +167,19 @@ public class AdminDAO {
 		return (ArrayList)sqlSession.selectList("adminMapper.adminVolunteerList", null, rowBounds);
 	}
 
-	public int adminVolunteerUpdate(SqlSessionTemplate sqlSession, Volunteer v) {
+	public int adminVolunteerUpdate(SqlSessionTemplate sqlSession, HashMap<String, Object> v) {
 		return sqlSession.update("adminMapper.adminVolunteerUpdate", v);
 	}
+
+	public int volunteerApplicant(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.volunteerApplicant");
+	}
+
+	public int adminInsertReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.insert("adminMapper.adminInsertReply", r);
+	}
+
+	
 
 	
 
