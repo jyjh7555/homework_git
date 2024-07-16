@@ -264,6 +264,7 @@
  	<select id="getListCountVolunteer" resultType="_int">
 		select count(*)
 		from volunteer
+		where status = 'W'
 	</select>
 	
 	<select id="totalMember" resultType="_int">
@@ -300,14 +301,7 @@
 			join member m on v.member_no = m.member_no
 			join volunteer_detail d on v.volunteer_no = d.volunteer_no
             join board b on b.board_no = d.board_no
-		ORDER BY 
-	  		CASE 
-	        	WHEN v.status = 'W' THEN 1
-	        	WHEN v.status = 'Y' THEN 2
-	        	WHEN v.status = 'N' THEN 3
-	       		ELSE 4
-		    END, 
-		    v.volunteer_no
+        where v.status = 'W' 
 	</select>
 	
 	<update id="adminVolunteerUpdate">

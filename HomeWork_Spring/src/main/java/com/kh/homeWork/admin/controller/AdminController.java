@@ -471,6 +471,36 @@ public class AdminController {
 		}
 	}
 	
+	@RequestMapping("/adminVolunteerApproveList.ad")
+	@ResponseBody
+	public void adminVolunteerApproveList(@RequestParam(value="page", defaultValue = "1") int page,
+								@RequestParam(value="size", defaultValue = "10") int size,
+								HttpServletResponse response
+							    ) {
+	    
+		int listCount = aService.getListCountVolunteerY();
+		System.out.println(listCount);
+		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
+		
+		ArrayList<Volunteer> list = aService.adminVolunteerList(pi);
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+	    result.put("volunteer", list);
+	    result.put("maxPage", pi.getMaxPage()); 
+	    result.put("currentPage", pi.getCurrentPage());
+	    result.put("currentPage", pi.getCurrentPage());
+		try {
+			gson.toJson(result, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
 	
 	
 	@RequestMapping("/updateVolunteerStatus.ad")

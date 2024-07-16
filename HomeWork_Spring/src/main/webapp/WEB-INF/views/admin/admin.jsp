@@ -413,7 +413,7 @@
 					        <tr>
 					            <td colspan="10">
 					                <nav aria-label="Standard pagination example" style="float: center;">
-					                    <ul id="pagination5" class="pagination">
+					                    <ul id="pagination6" class="pagination">
 					                    
 					                    </ul>
 					                </nav>
@@ -1178,6 +1178,130 @@
 		
 		    loadPage5(currentPage);
 		});
+			 
+			 document.getElementById('volunteer2').addEventListener('click', function() {
+				    document.getElementById('volunteerApproveList').classList.toggle('hidden');
+				    document.getElementById('userInfo').classList.add('hidden');
+				    document.getElementById('userUpdate').classList.add('hidden');
+				    document.getElementById('userDelete').classList.add('hidden');
+				    document.getElementById('supportList').classList.add('hidden');
+				    document.getElementById('searchResult').classList.add('hidden');
+				    document.getElementById('domesticBoardList').classList.add('hidden');
+				    document.getElementById('infoList').classList.add('hidden');
+				    document.getElementById('volunteerList').classList.add('hidden');
+				
+				    let currentPage = 1;
+				    const pageSize = 10;
+				    
+				    
+				    function loadPage6(page) {
+				        const url = '${contextPath}/adminVolunteerApproveList.ad?page=' + page + '&size=' + pageSize;
+				
+				        $.ajax({
+				            url: url,
+				            method: 'GET',
+				            success: function(data) {
+				                if (data && data.volunteer) {
+				                    document.getElementById('volunteerApproveList').classList.remove('hidden');
+				                    const volunteerApproveList = document.getElementById('volunteerApproveList');
+				                    const tbody = volunteerApproveList.querySelector('tbody');
+				                    tbody.innerHTML = '';
+				
+				                    data.volunteer.forEach(v => {
+				                        
+				                        
+				                        const tr = document.createElement('tr');
+				
+				                        const vNoTd = document.createElement('td');
+				                        vNoTd.innerText = v.volunteerNo;
+				                        const mNoTd = document.createElement('td');
+				                        mNoTd.innerText = v.memberNo;
+				                        const nameTd = document.createElement('td');
+				                        nameTd.innerText = v.memberName;
+				                        const boardTd = document.createElement('td');
+				                        boardTd.innerText = v.title;
+				                        const statusTd = document.createElement('td');
+				                        statusTd.id = 'statusTd-' + v.volunteerNo + '-' + v.memberNo;
+				                        statusTd.innerText = statusText(v.status);
+				
+				                        const btnTd = document.createElement('td');
+				                        const approveBtn = document.createElement('button');
+				                        approveBtn.textContent = '승인';
+				                        approveBtn.className = 'btn btn-success';
+				                        approveBtn.name = 'volunteerStatusButton';
+				                        approveBtn.id = 'approveBtn';
+				                        approveBtn.addEventListener('click', function() {
+				                            //updateStatus(v.volunteerNo, 'Y', statusTd);
+				                        	$('#modalApprove').modal('show');
+				                        	document.getElementById('modalApprove').dataset.volunteerNo = v.volunteerNo;
+				                        	document.getElementById('modalApprove').dataset.memberNo = v.memberNo;
+				                            document.getElementById('modalApprove').dataset.status = 'Y';
+				                            document.getElementById('modalApprove').dataset.statusTdId = 'statusTd-' + v.volunteerNo + '-' + v.memberNo;		                        	
+				                        });
+				                        
+				
+				                        const refusalBtn = document.createElement('button');
+				                        refusalBtn.textContent = '거부';
+				                        refusalBtn.className = 'btn btn-danger';
+				                        refusalBtn.name = 'volunteerStatusButton';
+				                        refusalBtn.id = `refusalBtn`
+				                        refusalBtn.addEventListener('click', function() {
+				                            //updateStatus(v.volunteerNo, 'N', statusTd);
+				                        	$('#modalRefusal').modal('show');
+				                        	document.getElementById('modalRefusal').dataset.volunteerNo = v.volunteerNo;
+				                        	document.getElementById('modalRefusal').dataset.memberNo = v.memberNo;
+				                            document.getElementById('modalRefusal').dataset.status = 'N';
+				                            document.getElementById('modalRefusal').dataset.statusTdId = 'statusTd-' + v.volunteerNo + '-' + v.memberNo;
+				                        });
+				                        
+				
+				                        btnTd.appendChild(approveBtn);
+				                        btnTd.appendChild(refusalBtn);
+				
+				                        const tds = [vNoTd,mNoTd, nameTd, boardTd, statusTd, btnTd];
+				                        tr.append(...tds);
+				                        tbody.append(tr);
+				                    });
+				
+				                    const pagination = document.getElementById('pagination6');
+				                    pagination.innerHTML = '';
+				
+				                    if (data.maxPage > 1) {
+				                        for (let i = 1; i <= data.maxPage; i++) {
+				                            const pageItem = document.createElement('li');
+				                            pageItem.classList.add('page-item');
+				                            const pageLink = document.createElement('a');
+				                            pageLink.classList.add('page-link');
+				                            pageLink.href = '#';
+				                            pageLink.innerText = i;
+				                            (function(pageNumber) {
+				                                pageLink.addEventListener('click', function(event) {
+				                                    event.preventDefault();
+				                                    loadPage6(pageNumber);
+				                                });
+				                            })(i);
+				
+				                            if (i === page) {
+				                                pageItem.classList.add('active');
+				                            } else {
+				                                pageItem.classList.remove('active');
+				                            }
+				                            pageItem.append(pageLink);
+				                            pagination.append(pageItem);
+				                        }
+				                    }
+				                } else {
+				                    console.error(data);
+				                }
+				            },
+				            error: function(error) {
+				                console.error(error);
+				            }
+				        });
+				    }
+				
+				    loadPage6(currentPage);
+				});
 		 
 		 
 			 

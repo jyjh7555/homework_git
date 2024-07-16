@@ -187,6 +187,10 @@ public class AdminDAO {
 		return sqlSession.selectOne("adminMapper.findVolunteerNo",boardNo);
 	}
 
+	public int getListCountVolunteerY(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.getListCountVolunteerY");
+	}
+
 	
 
 	

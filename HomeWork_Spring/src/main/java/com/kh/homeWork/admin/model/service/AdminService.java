@@ -87,6 +87,8 @@ public interface AdminService {
 
 	int findVolunteerNo(int boardNo);
 
+	int getListCountVolunteerY();
+
 	
 
 

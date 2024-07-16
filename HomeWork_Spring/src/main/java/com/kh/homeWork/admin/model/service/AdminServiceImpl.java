@@ -221,6 +221,11 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.findVolunteerNo(sqlSession,boardNo);
 	}
 
+	@Override
+	public int getListCountVolunteerY() {
+		return aDAO.getListCountVolunteerY(sqlSession);
+	}
+
 	
 
 	
