@@ -54,10 +54,22 @@
 		border: 4px solid #c8c8c8;
 		margin:auto;
 		margin-bottom:30px;
+		align-items: stretch;
+	}
+	.section-divider {
+    width: 1px;
+    height: 80%; /* 또는 원하는 높이 */
+    background-color: #e0e0e0; /* 구분선 색상 */
+    margin: 0 20px; /* 좌우 여백 */
+    align-self: center; /* Flexbox 컨테이너 내에서 수직 중앙 정렬 */
+	}
+	
+	.welcome-section, .recent-activity-section {
+	    flex: 1; /* 두 섹션이 동일한 너비를 가지도록 설정 */
 	}
     .welcome-section {
         text-align: center;
-        margin-right:40px;
+        margin-right:0;
         margin-top:50px;
         margin-bottom:15px;
         margin-left:40px;
@@ -143,7 +155,8 @@
     	display:flex;
     	justify-content:center;
     	margin-bottom: 30px;
-    	margin-left:20px;
+    	margin-left:40px;
+    	margin-right:30px;
     }
     
     .recent-activity-section>h5 {
@@ -182,6 +195,7 @@
 	    background-position: center;
 	    background-repeat: no-repeat;
 	    transition: background-color 0.5s ease;
+	    font-family: 'GowunBatang-Regular';
 	    
 	}
 	
@@ -201,6 +215,17 @@
 	.activity-table {
 	    width: 100%; /* 테이블이 컨테이너의 전체 너비를 차지하도록 */
 	}
+	
+	#container {
+		font-family: 'Pretendard-Regular';
+	}
+	
+	@font-face {
+    font-family: 'Pretendard-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+    font-weight: 400;
+    font-style: normal;
+	}
 </style>
 </head>
 <body>
@@ -216,7 +241,7 @@
 		</div>	
  	</div>
 	<div id="container" class="mt-4">
-		<div id=inner-container ">
+		<div id=inner-container>
 			<div class="welcome-section">
 	            <h5><strong>${loginUser.memberName }</strong> 회원님 환영합니다!</h5>
 	            <div class="mdfbtn">
@@ -224,11 +249,12 @@
 	            	<a class="border border-2" href="updatePwdPage.me">비밀번호 수정</a>
 	            </div>
 	        </div>
+	        <div class="section-divider"></div>
        		<div class="recent-activity-section">
-	            <h5 class="d-block activity-title">신청 대기 중인 봉사활동 내역</h5>
+	            <h5 class="d-block activity-title mb-4">신청 대기 중인 봉사활동 내역</h5>
 	            <table class="activity-table">
 			        <thead>
-			            <tr>
+			            <tr class="border-bottom border-2 mb-3">
 			                <th>게시글 번호</th>
 			                <th>제목</th>
 			                <th>상태</th>
@@ -236,7 +262,7 @@
 			        </thead>
 			        <tbody>
 			            <c:forEach items="${recentVolunteers}" var="volunteer">
-			                <tr>
+			                <tr class="border-bottom mb-2">
 			                    <td>${volunteer.boardNo}</td>
 			                    <td>${volunteer.title}</td>
 			                    <td>${volunteer.status}</td>

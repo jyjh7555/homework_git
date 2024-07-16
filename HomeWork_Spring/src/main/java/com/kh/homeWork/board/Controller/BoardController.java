@@ -105,7 +105,7 @@ public class BoardController {
 			model.addAttribute("pi", pi);
 			return viewName;
 		} else {
-			return "korMap";
+			throw new BoardException("게시글 조회에 실패하였습니다");
 		}
 	}
 

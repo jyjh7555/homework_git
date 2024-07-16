@@ -16,6 +16,14 @@
   		font-weight: 400;
   		font-style: normal;
 	}
+	
+		@font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	
 	#topAndNavbar {
 		background-image:linear-gradient(
 	        rgba(0, 0, 0, 0.2),
@@ -32,7 +40,12 @@
 		height: 200px;
 	}
 	
+	#container {
+		font-family: 'GowunBatang-Regular';
+		line-height:2;
+	}
 	
+
 	#content {
 		margin-top:70px;
 		display:flex;
@@ -164,6 +177,7 @@
 	     flex-direction:column;
 	}
 	#introduce5-1 {
+		 font-family: 'GowunBatang-Regular';
 		 list-style-type: none;
 		 border-bottom: 0.5px solid lightgray;
 		 text-align: center;
@@ -188,7 +202,7 @@
 		font-size:23px;
 		color:black;
 		width: 100%;
-		font-family: "Nanum Gothic", sans-serif;
+		font-family: 'GowunBatang-Regular';
   		font-weight: 400;
   		font-style: normal;
   		line-height:2;

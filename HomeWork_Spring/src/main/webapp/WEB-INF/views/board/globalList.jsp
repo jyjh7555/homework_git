@@ -8,7 +8,7 @@
 <script src="http://code.jquery.com/jquery-3.5.1.min.js"></script>
 <meta charset="UTF-8">
 <style>
-		#topAndNavbar {
+	#topAndNavbar {
 		background-image:linear-gradient(
 	        rgba(0, 0, 0, 0.2),
 	        rgba(0, 0, 0, 0.2)
@@ -18,7 +18,18 @@
 	    background-position: center;
 	    background-repeat: no-repeat;
 	    transition: background-color 0.5s ease;
-	    
+	    font-family: 'GowunBatang-Regular';
+	}
+	
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
+	
+	.container {
+		font-family: 'Pretendard-Regular';
 	}
 	
 	#voulnteer2 {
@@ -97,7 +108,7 @@
 							<thead>
 								<tr class="pb-3">
 									<th class="w-10">글 번호</th>
-									<th cla	s="w-10">지역</th>
+									<th class="w-10">지역</th>
 									<th class="w-10">글 제목</th>
 									<th class="w-10">현재 신청 인원 / 모집 인원</th>
 									<th class="w-10">모집기간</th>
@@ -259,14 +270,7 @@
 		    		console.log(false);
 		    	}
 		    	
-/* 		        let paginationHTML = `
-		            <div class="d-flex flex-row justify-content-end mb-3 w-50 mt-3" style="width:1400px;">
-		                <ul align="center" class="pagination">
-		                	<li class="page-item ${pi2.currentPage == 1 ? 'disabled' : ''}">
-		                        <a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{pi2.currentPage - 1}')"aria-label="Previous">
-		                            <span aria-hidden="true">&laquo;</span>
-		                        </a>
-		                    </li>`; */
+
                let paginationHTML = `
          			<div class="d-flex flex-row justify-content-center mb-3 w-50 mt-3" style="width:1400px;">
              			<ul align="center" class="pagination">`;

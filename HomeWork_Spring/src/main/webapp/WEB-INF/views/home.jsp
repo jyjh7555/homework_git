@@ -16,6 +16,14 @@
   		font-weight: 400;
   		font-style: normal;
 	}
+	
+	@font-face {
+    font-family: 'GowunBatang-Regular';
+    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+	}
+	
 	#topAndNavbar {
 		background-image:linear-gradient(
 	        rgba(0, 0, 0, 0.2),
@@ -41,6 +49,7 @@
 	}
 	
 	.introduce1 {
+		font-family: 'GowunBatang-Regular';
 		text-align:center;
 		line-height:2;
 		
@@ -193,6 +202,8 @@
   		font-style: normal;
   		line-height:2;
 	}
+	
+
 	
     
     
