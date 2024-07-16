@@ -179,6 +179,10 @@ public class AdminDAO {
 		return sqlSession.insert("adminMapper.adminInsertReply", r);
 	}
 
+	public int admindeleteReply(SqlSessionTemplate sqlSession, Reply r) {
+		return sqlSession.update("adminMapper.adminDeleteReply", r);
+	}
+
 	
 
 	

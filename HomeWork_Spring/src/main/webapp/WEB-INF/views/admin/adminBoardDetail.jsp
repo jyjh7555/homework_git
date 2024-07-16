@@ -185,6 +185,9 @@
 	  		</div>
 		</div>
     <script>      
+    function goBack() {
+        location.href="admin.me";
+    }
     window.onload = () => {
         const form = document.getElementById('admimVolunteerInfo');
         document.getElementById('editButton').addEventListener('click', () => {
@@ -201,10 +204,109 @@
 		form.submit();
 	});
 	
+	
+	const replyButton = document.getElementById('replyButton');
+	const replyTable = document.getElementById('replyTable');
+	if(${b.boardType == '3'}){
+		replyButton.addEventListener('click',function(){
+			 $.ajax({
+				url: '${contextPath}/adminInsertReply.ad',
+				data: {content:document.getElementById('replyContent').value,
+					   nickName:'${loginUser.nickName}',
+					   boardNo:'${b.boardNo}',
+					   memberNo:'${loginUser.memberNo}'},
+				success:data=>{
+					console.log(data, typeof data);
+					
+					document.getElementById('replyContent').value='';
+					replyTable.innerHTML='';
+					let reviewList = '';
+					let check ='';
+					
+					for(r of data){
+						if(r.memberNo == ${loginUser.memberNo}){
+							check ='<a class="fs-6">삭제</a></td>'; 
+						}else{
+							check = '';
+						}
+						reviewList =
+							'<tr>'+
+								'<td width="150px"><b>'+ r.nickName + '</b></td>'+
+								'<td style="width:60%; font-size:12px; padding-top:15px">'+r.updateDate+'</td>'+
+								'<td width="150px"></td>'+
+								check+
+							'</tr>'+
+							'<tr style="border-bottom: 1px solid #E3E3E3;">'+
+								'<td colspan="3">'+r.content+'</td>'+
+							'</tr>'+
+							'<input type="hidden" name="replyNo" value="'+r.replyNo+'"/>';		
+							
+							
+						replyTable.innerHTML += reviewList;
+						
+					}
+					whynot();
+				},
+				error:data=> console.log('오류')
+			}); 
+		});
+		
+		whynot();
+		//후기게시판 내 댓글 수정하기
+		
+		function whynot(){
+		let replyAlters = document.querySelectorAll('td a');
+
+		
+			replyAlters.forEach(replyAlter=>{
+				let beforeCon =replyAlter.parentElement.parentElement.nextElementSibling.children[0];
+				let afterUpdateDate =replyAlter.parentElement.previousElementSibling.previousElementSibling;
+				let beforeConVal =replyAlter.parentElement.parentElement.nextElementSibling.children[0].innerText;
+				console.log(replyAlter.innerText);
+				
+				 if(replyAlter.innerText =='삭제'){
+					
+					replyAlter.addEventListener('click',function(){
+						const updateReplyNoTag = this.parentElement.parentElement.nextElementSibling.nextElementSibling;
+						const updateReplyNo = this.parentElement.parentElement.nextElementSibling.nextElementSibling.value;
+						if(replyAlter.innerText =='삭제'){
+							$.ajax({
+								url:'${contextPath}/adminDeleteReply.ad',
+								data:{replyNo:updateReplyNo},
+								success:data=>{
+									console.log(data);
+									console.log(updateReplyNoTag)
+									updateReplyNoTag.previousElementSibling.remove();
+									updateReplyNoTag.previousElementSibling.remove();
+									updateReplyNoTag.remove();
+								},
+								error:data=>console.log('오류')
+							});
+							
+							
+						}else if(replyAlter.innerText =='취소'){
+							console.log(updateReplyNo);
+							this.innerText='삭제';
+							this.previousElementSibling.innerText='수정';
+							$.ajax({
+								url:'${contextPath}/selectOneReply.bo',
+								data:{replyNo:updateReplyNo},
+								success:data=>{
+									beforeCon.innerHTML='<td colspan="3">'+data.content+'</td>';
+								},
+								error:data=>console.log('안됨')
+							});	
+						
+						}
+					})						
+				}
+			});
+			
+		};
+	};
+	
     }
-    function goBack() {
-        location.href="admin.me";
-    }
+    
 
     </script>
 </body>

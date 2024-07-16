@@ -211,6 +211,11 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.adminInsertReply(sqlSession, r);
 	}
 
+	@Override
+	public int adminDeleteReply(Reply r) {
+		return aDAO.admindeleteReply(sqlSession, r);
+	}
+
 	
 
 	

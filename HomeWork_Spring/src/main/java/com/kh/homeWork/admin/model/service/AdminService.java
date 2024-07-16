@@ -83,6 +83,8 @@ public interface AdminService {
 
 	int volunteerApplicant();
 
+	int adminDeleteReply(Reply r);
+
 	
 
 

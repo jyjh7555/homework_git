@@ -21,6 +21,7 @@ import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonIOException;
 import com.kh.homeWork.Volunteer.model.Volunteer;
+import com.kh.homeWork.admin.exception.AdminException;
 import com.kh.homeWork.admin.model.service.AdminService;
 import com.kh.homeWork.board.model.exception.BoardException;
 import com.kh.homeWork.board.model.vo.Board;
@@ -286,7 +287,7 @@ public class AdminController {
 			case 3: return "redirect:adminreview.ad";
 			}
 		}
-			throw new BoardException("게시글 삭제에 실패하였습니다.");
+			throw new AdminException("게시글 삭제에 실패하였습니다.");
 	}
 	
 	@RequestMapping("/adminBoardEdit.ad")
@@ -316,7 +317,7 @@ public class AdminController {
 			case 3: return "redirect:adminreview.ad?page="+page;
 			}
 		}
-		throw new BoardException("게시글 수정에 실패하였습니다");
+		throw new AdminException("게시글 수정에 실패하였습니다");
 	}
 	
 	@RequestMapping("adminInsertReply.ad")
@@ -349,6 +350,31 @@ public class AdminController {
 		
 	}
 	
+	@RequestMapping("adminDeleteReply.ad")
+	@ResponseBody
+	public String deleteReply(Reply r) {
+		int result = aService.adminDeleteReply(r);
+		
+		
+		return result == 1 ? "success" : "fail"; 
+	}
+	
+	public Reply alterReply(Reply r) {
+		r.setContent(r.getContent().replace("\n","<br>"));
+		Calendar calendar = Calendar.getInstance();
+        calendar.setTime(r.getUpdateDate());
+
+        int year = calendar.get(Calendar.YEAR);
+        int month = calendar.get(Calendar.MONTH) + 1;
+        int day = calendar.get(Calendar.DAY_OF_MONTH);
+        int hours = calendar.get(Calendar.HOUR_OF_DAY);
+        int minutes = calendar.get(Calendar.MINUTE);
+        int seconds = calendar.get(Calendar.SECOND);
+        r.setReDate(""+year+"."+month+"."+day +" "+hours + ":" +minutes + ":" +seconds);
+        
+        return r;
+	}
+	
 	@RequestMapping("adminSelectMember.ad")
 	public String adminSelectMember(@RequestParam("memberNo") int memberNo,
 									HttpSession session) {
@@ -375,7 +401,7 @@ public class AdminController {
 		if(result > 0) {
 			return "redirect:adminSelectMember.ad?memberNo=" + m.getMemberNo();
 		} else {
-			throw new MemberException("정보수정을 실패했습니다.");
+			throw new AdminException("정보수정을 실패했습니다.");
 		}
 	}
 	

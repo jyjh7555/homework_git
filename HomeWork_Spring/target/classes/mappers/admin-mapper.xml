@@ -255,6 +255,12 @@
  		)
  	</insert>
  	
+ 	<update id="adminDeleteReply">
+ 		update reply
+ 		set delete_yn = 'Y'
+ 		where reply_no =#{replyNo}
+ 	</update>
+ 	
  	<select id="getListCountVolunteer" resultType="_int">
 		select count(*)
 		from volunteer
