@@ -216,7 +216,7 @@
 		</div>	
  	</div>
 	<div id="container" class="mt-4">
-		<div id=inner-container>
+		<div id=inner-container ">
 			<div class="welcome-section">
 	            <h5><strong>${loginUser.memberName }</strong> 회원님 환영합니다!</h5>
 	            <div class="mdfbtn">
