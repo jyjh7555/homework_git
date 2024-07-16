@@ -82,7 +82,7 @@
             </div>   
           </div>
           
-       <div class="container" style="height:1000px">
+       <div class="container" style="min-height:1000px">
           <div class="mt-5 ms-0 me-0 ps-0 pe-0 w-100"align="center">
             <ul>
                <li class="categoryDomestic"><a style=" border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="domesitc.bo">국내봉사일정</a></li>
@@ -115,18 +115,18 @@
                </map> 
             </div>
                
-             <div class="domestic-container container text-center w-50 ms-6">
+             <div class="domestic-container container text-center w-50 ms-5">
                 <div class="bd-example">
                   <table class="table table-hover">
                      <thead>
                         <tr class="pb-3">
-                           <th class="w-10">글 번호</th>
-                           <th class="w-10">지역</th>
-                           <th class="w-10">글 제목</th>
-                           <th class="w-10">현재 신청 인원 / 모집 인원</th>
-                           <th class="w-10">작성일자</th>
-                           <th class="w-10">조회수</th>
-                           <th class="w-10">신청</th>
+                           <th style="max-width:75px">글 번호</th>
+                           <th style="max-width:75px">지역</th>
+                           <th style="max-width:200px">글 제목</th>
+                           <th style="max-width:200px">신청 인원 / 모집 인원</th>
+						   <th style="max-width:100px">모집기간</th>
+                           <th style="max-width:75px">조회수</th>
+                           <th style="width:50px">신청</th>
                             </tr>
                          </thead>
                         <tbody> 
@@ -134,9 +134,9 @@
                               <tr>
                                  <td>${b.boardNo }</td>
                                  <td>${b.location }</td>
-                                 <td>${b.title }</td>
+                                 <td style="max-width:200px">${b.title }</td>
                                  <td>${b.nowCount} / ${b.fullCount}</td>
-                                 <td>${b.updateDate }</td>
+                                 <td>${b.recruitStart} ~ ${b.recruitEnd}</td>
                                  <td>${b.boardCount }</td>
                                  <td><a class="btn btn-secondary" href="${ contextPath }/insertVolunteer.vo?boardNo=${b.boardNo}">신청하기</a></td>
                                </tr>
@@ -233,10 +233,9 @@
          
           $.ajax({
               url: '${contextPath}/regionBoardList.bo',
-              contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
               data: { region: region, page: page },
               success: data => {
-                  console.log(data.pi2);
+                  console.log(data);
                   updateTable(data.list);
                   
                

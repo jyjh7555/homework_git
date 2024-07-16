@@ -31,7 +31,7 @@ public class InterceptorLogin implements HandlerInterceptor{
 				session.setAttribute("msg", msg);
 				response.sendRedirect("loginView.me");
 				return false;
-			}else if(url.contains("domestic.bo")||url.contains("global.bo")||url.contains("review.bo")){
+			}else if(url.contains("domestic.bo")||url.contains("global.bo")||url.contains("review.bo")||url.contains("regionBoardList.bo")){
 				return HandlerInterceptor.super.preHandle(request, response, handler);
 			}else {
 				msg = "로그인 세션이 만료되었습니다";
