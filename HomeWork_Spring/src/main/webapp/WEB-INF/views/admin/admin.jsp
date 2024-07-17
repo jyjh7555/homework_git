@@ -53,7 +53,6 @@
 	
 	
 	.userInfo, .userUpdate, .userDelete, .supportPage, .searchResult, .infoList, .volunteer, .volunteerApprove, .volunteerRafusal {
-            
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 8px;
@@ -159,8 +158,7 @@
 					<li id="volunteer2">승인목록</li>
 					<li id="volunteer3">거부목록</li>
 				</ul>
-			
-		</div>
+			</div>
 					
 		<div id=selectDiv>
 			<div style="border:2px solid #CCCCCC; height:40px">

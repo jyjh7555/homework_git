@@ -286,13 +286,13 @@
 	<select id="domesticAmount" resultType="_int">
 		select COALESCE(SUM(amount), 0)
 		from pay
-		where product = '국내건축후원하기'
+		where product like '%국내%'
 	</select>
 	
 	<select id="globalAmount" resultType="_int">
 		select COALESCE(SUM(amount), 0)
 		from pay
-		where product = '해외건축후원'
+		where product like '%해외%'
 	</select>
 	
 	<select id="adminVolunteerList" resultType="Volunteer">
