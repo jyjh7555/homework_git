@@ -145,7 +145,7 @@
  		select *
  		from board
  			join location using(location_no)
- 		where location = #{region}
+ 		where location = #{region} and board_type != 3 and delete_yn='N'
  		order by board_no desc
  	</select>
  	

@@ -32,4 +32,6 @@ public class Board {
 	private String category;
 	private Date startDate;
 	private Date endDate;
+	private boolean dateCheckEnd;
+	private boolean dateCheckStart;
 }

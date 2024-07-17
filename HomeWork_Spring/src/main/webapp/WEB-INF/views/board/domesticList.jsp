@@ -157,12 +157,15 @@
 			</div>
             <div class="mapAndBoard d-flex flex-row h-75 align-items-center">
 	             <div class="w-25">
-	               <img src="resources/image/korMapGood.png" alt="한국 지도"  usemap="#menuMap" /> 
+	               <img style="margin-top:-80px; margin-left:30px"src="resources/image/korMapLast3.png" alt="한국 지도"  usemap="#menuMap" /> 
 	               <map name="menuMap" id="menuMap"> 
-	                    <area shape="poly" coords="225,63,238,49,256,65,240,99" alt="서울" data-region="서울" onclick="showTarget(event)"/>
-	                   <area shape="poly" coords="309,61,324,46,338,60,323,96" alt="강원도" data-region="강원도" onclick="showTarget(event)"/>
-	                   <area shape="poly" coords="255,125,270,112,285,126,270,158" alt="충청도" data-region="충청도" onclick="showTarget(event)"/>
-	                   <area shape="poly" coords="292,224,307,208,323,224,307,258" alt="경상도" data-region="경상도" onclick="showTarget(event)"/>   
+	                    <area shape="rect" coords="63,38,112,62" alt="서울" data-region="서울" onclick="showTarget(event)"/>
+	                    <area shape="rect" coords="34,109,79,133" alt="인천" data-region="인천" onclick="showTarget(event)"/>
+	                    <area shape="rect" coords="123,114,168,129" alt="경기도" data-region="경기도" onclick="showTarget(event)"/>
+	                    <area shape="rect" coords="187,82,231,97" alt="강원도" data-region="강원도" onclick="showTarget(event)"/>
+	                    <area shape="rect" coords="123,168,168,184" alt="충청도" data-region="충청도" onclick="showTarget(event)"/>
+	                    <area shape="rect" coords="111,270,155,286" alt="전라도" data-region="전라도" onclick="showTarget(event)"/>
+	                    <area shape="rect" coords="205,183,250,198" alt="경기도" data-region="경기도" onclick="showTarget(event)"/>
 	               </map> 
 	            </div>
 	               
@@ -189,7 +192,17 @@
 	                                 <td>${b.nowCount} / ${b.fullCount}</td>
 	                                 <td>${b.recruitStart} ~ ${b.recruitEnd}</td>
 	                                 <td>${b.boardCount }</td>
-	                                 <td><a class="btn btn-secondary" href="${ contextPath }/insertVolunteer.vo?boardNo=${b.boardNo}">신청하기</a></td>
+	                                 <c:if test="${!b.dateCheckEnd && b.dateCheckStart}">
+		                                 <c:if test="${b.nowCount < b.fullCount }">
+		                                 	<td><a class="btn btn-success" href="${ contextPath }/insertVolunteer.vo?boardNo=${b.boardNo}">신청하기</a></td>
+		                                 </c:if>
+		                                 <c:if test="${b.nowCount >= b.fullCount }">
+		                                 	<td><button class="btn btn-secondary" >신청마감</button></td>
+		                                 </c:if>
+	                                 </c:if>
+	                                 <c:if test="${b.dateCheckEnd || !b.dateCheckStart}">
+	                                 	<td><button class="btn btn-secondary" >기간아님</button></td>
+	                                 </c:if>
 	                               </tr>
 	                           </c:forEach>
 	                         </tbody>
@@ -200,7 +213,7 @@
 					 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
 							<div class="d-flex flex-row justify-content-end mb-3  w-50 mt-3 " style="width:1400px;">
 					       		<ul align="center"class="pagination">
-						            <li class="page-item">
+						            <li class="page-item ${pi.currentPage == pi.startPage ? 'disabled' : '' }">
 						            	<c:url var="goBack" value="${ loc }">
 					        				<c:param name="page" value="${ pi.currentPage -1 }"/>
 					        			</c:url>
@@ -212,9 +225,9 @@
 						            	<c:url var="goNum" value="${ loc }">
 						            		<c:param name="page" value="${ p }"/>
 						            	</c:url>
-						            	<li class="page-item"><a class="page-link" href="${ goNum }">${ p }</a></li>		            	
+						            	<li class="page-item ${p == pi.currentPage ? 'active' : '' }"><a class="page-link" href="${ goNum }">${ p }</a></li>		            	
 						            </c:forEach>
-						            <li class="page-item">
+						            <li class="page-item ${ pi.currentPage == pi.endPage ? 'disabled' : '' }">
 						            	<c:url var="goNext" value="${ loc }">
 						            		<c:param name="page" value="${ pi.currentPage +1 }"/>
 						            	</c:url>
@@ -223,6 +236,7 @@
 						            	</a>
 						            </li>
 					    		</ul>
+					    		
 			      	  
 			      	  
 			
@@ -308,15 +322,32 @@
               tr.appendChild(createTd(b.location));
               tr.appendChild(createTd(b.title));
               tr.appendChild(createTd(b.nowCount + " / " + b.fullCount));
-              tr.appendChild(createTd(b.updateDate));
+              tr.appendChild(createTd(b.recruitStart + '~' + b.recruitEnd));
               tr.appendChild(createTd(b.boardCount));
               const applyTd = document.createElement('td');
-              const applyButton = document.createElement('a');
-              applyButton.className = 'btn btn-success';
-              applyButton.textContent = '신청하기';
-              applyTd.appendChild(applyButton);
-              tr.appendChild(applyTd);
-              applyButton.href = `${contextPath}/insertVolunteer.vo?boardNo=${b.boardNo}`;
+          	  const applyButton = document.createElement('a');
+          	  const applyButton2 = document.createElement('button');
+          	  if(!b.dateCheckEnd && b.dateCheckStart){
+          		  
+          		  if(b.nowCount < b.fullCount){
+		              applyButton.className = 'btn btn-success';
+		              applyButton.textContent = '신청하기';
+		              applyTd.appendChild(applyButton);
+		              tr.appendChild(applyTd);
+			          applyButton.href = `${contextPath}/insertVolunteer.vo?boardNo=${b.boardNo}`;
+          		  }else if(b.nowCount >= b.fullCount){
+          			  applyButton2.className = 'btn btn-secondary';
+		              applyButton2.textContent = '마감';
+		              applyTd.appendChild(applyButton2);
+		              tr.appendChild(applyTd);
+          		  }
+          	  }else{
+          		  applyButton2.className = 'btn btn-secondary';
+	              applyButton2.textContent = '기간아님';
+	              applyTd.appendChild(applyButton2);
+	              tr.appendChild(applyTd);
+          	  }
+          	  
               tbody.appendChild(tr);
           }
       }
@@ -332,14 +363,6 @@
                 console.log(false);
              }
              
-/*               let paginationHTML = `
-                  <div class="d-flex flex-row justify-content-end mb-3 w-50 mt-3" style="width:1400px;">
-                      <ul align="center" class="pagination">
-                         <li class="page-item ${pi2.currentPage == 1 ? 'disabled' : ''}">
-                              <a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{pi2.currentPage - 1}')"aria-label="Previous">
-                                  <span aria-hidden="true">&laquo;</span>
-                              </a>
-                          </li>`; */
                let paginationHTML = `
                   <div class="d-flex flex-row justify-content-end mb-3 w-50 mt-3" style="width:1400px;">
                       <ul align="center" class="pagination">`;
@@ -357,17 +380,14 @@
                           
                           
                           
-                          
               for (let p = pi2.startPage; p <= pi2.endPage; p++) {
-                  paginationHTML += `
-                      <li class="page-item ${p == pi2.currentPage ? 'active' : ''}">
-                        <a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{p}')">${'$'}{p}</a> 
-                      </li>`;
+            	  paginationHTML += '<li class="page-item ' + (p == pi2.currentPage  ? 'active' : '') + '">';
+                  paginationHTML += `<a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{p}')">${'$'}{p}</a> </li>`;
                   
               }
               
                     paginationHTML += '<li class="page-item ' + (pi2.currentPage == pi2.maxPage ? 'disabled' : '') + '">';
-               paginationHTML += `
+               		paginationHTML += `
                               <a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{pi2.currentPage + 1}')" aria-label="Next">
                                   <span aria-hidden="true">&raquo;</span>
                               </a>

@@ -359,8 +359,10 @@
  			join location l on (b.location_no = l.location_no)
  			join volunteer_detail vd on (b.board_no=vd.board_no)
  			join volunteer v on(vd.volunteer_no = v.volunteer_no)
-		where status = 'Y'
+ 			join member m on (v.member_no = m.member_no)
+		where v.status = 'Y'
 		and sysdate > end_date
+		and m.member_no = #{memberNo}
  	</select>
  	
  	<select id="startVolunteer" resultType="_int">

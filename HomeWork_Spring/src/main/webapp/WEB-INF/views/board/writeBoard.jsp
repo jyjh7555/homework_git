@@ -97,6 +97,7 @@
 			            				<option value="50">충청도</option>
 			            				<option value="60">전라도</option>
 			            				<option value="70">경상도</option>
+			            				<option style="display:none" value="1000">후기</option>
 			            			</select>
 			            		</div>
 		            		</td>
@@ -516,7 +517,7 @@
 			if(reviewCheck.checked){
 				document.getElementsByName('boardType')[0].value= '3';
 				document.getElementById('category').value= null;
-				document.getElementsByName('locationNo').value= '1000';
+				document.getElementsByName('locationNo')[0].value= '1000';
 				
 				document.getElementsByName('startDate')[0].value='2000-01-01';
 				document.getElementsByName('endDate')[0].value='2000-01-01';
