@@ -187,6 +187,40 @@ public class AdminDAO {
 		return sqlSession.selectOne("adminMapper.findVolunteerNo",boardNo);
 	}
 
+	public int getListCountVolunteerY(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.getListCountVolunteerY");
+	}
+
+	public ArrayList<Volunteer> adminApproveVolunteerList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.adminApproveVolunteerList", null, rowBounds);
+	}
+
+	public int getListCountVolunteerN(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.getListCountVolunteerN");
+	}
+
+	public ArrayList<Volunteer> adminRafusalVolunteerList(SqlSessionTemplate sqlSession, PageInfo pi) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("adminMapper.adminRafusalVolunteerList", null, rowBounds);
+	}
+
+	public ArrayList<Board> adminSelectVolunteer(SqlSessionTemplate sqlSession, int memberNo) {
+		return (ArrayList)sqlSession.selectList("adminMapper.adminSelectVolunteer", memberNo);
+	}
+
+	public int startVolunteer(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.startVolunteer");
+	}
+
+	public int endVolunteer(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.endVolunteer");
+	}
+
 	
 
 	

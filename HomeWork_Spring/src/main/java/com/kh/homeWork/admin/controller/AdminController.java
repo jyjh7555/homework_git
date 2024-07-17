@@ -265,10 +265,10 @@ public class AdminController {
 		return "adminWriteBoard";
 	}
 	
-	@RequestMapping("adminInsertBoard.ad")
+	@RequestMapping("/adminInsertBoard.ad")
 	public String insertBoard(@ModelAttribute Board b, @ModelAttribute VolunteerDetail v) {
 		int result = aService.adminInsertBoard(b);
-		if(result>0 && b.getBoardType() !=3) {
+		if (result > 0 && b.getBoardType() != 3) {
 			int bNo = aService.adminSelectBoardNoCheck();
 			v.setBoardNo(bNo);
 			int result2 = aService.adminInsertVolunteer(v);
@@ -294,10 +294,12 @@ public class AdminController {
 	public String editBoard(@RequestParam("boardNo") int bId,@RequestParam("page")int page,Model model) {
 		Board b = aService.selectBoard(bId, 0);
 		VolunteerDetail v = aService.adminSlectVolunteerDetail(bId);
-		String[] address = v.getAddress().split(",");
+		if(v !=null) {
+			String[] address = v.getAddress().split(",");
+			model.addAttribute("address",address);
+		}
 		model.addAttribute("b",b);
 		model.addAttribute("v",v);
-		model.addAttribute("address",address);
 		model.addAttribute("page",page);
 		
 		return "adminEditBoard";
@@ -306,11 +308,11 @@ public class AdminController {
 	@RequestMapping("adminUpdateBoard.ad")
 	public String updateBoard(@ModelAttribute Board b, @ModelAttribute VolunteerDetail v,@RequestParam("page") int page) {
 		int result1 = aService.adminUpdateBoard(b);
-		System.out.println(result1); 
-		int result2 = aService.adminUpdateVolunteerDetail(v);
-		System.out.println(result2); 
-		
-		if(result1>0 && result2>0) {
+
+		if(b.getBoardType() !=3) {
+			aService.adminUpdateVolunteerDetail(v);
+		}
+		if(result1>0 ) {
 			switch(b.getBoardType()) {
 			case 1: return "redirect:admindomestic.ad?page="+page;
 			case 2: return "redirect:adminglobal.ad?page="+page;
@@ -382,8 +384,11 @@ public class AdminController {
 		Member m = aService.adminSelectMember(memberNo);	
 		ArrayList<Pay> pay = aService.adminSelectPay(memberNo);
 		
+		ArrayList<Board> b = aService.adminSelectVolunteer(memberNo);
+		
 		session.setAttribute("m", m);
 		session.setAttribute("pay", pay);
+		session.setAttribute("b", b);
 		
 		
 		return "adminMemberDetail";
@@ -417,6 +422,9 @@ public class AdminController {
 		int globalAmount = aService.globalAmount();
 		int totalAmount = globalAmount + domesticAmount; 
 		int volunteerApplicant = aService.volunteerApplicant();
+		int startVolunteer = aService.startVolunteer();
+		int endVolunteer = aService.endVolunteer();
+		int proceedingVolunteer = totalBoard-startVolunteer-endVolunteer; 
 		
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson = gb.create();
@@ -431,6 +439,9 @@ public class AdminController {
 	    result.put("domesticAmount", domesticAmount);
 	    result.put("globalAmount", globalAmount);
 	    result.put("volunteerApplicant", volunteerApplicant);
+	    result.put("proceedingVolunteer", proceedingVolunteer);
+	    result.put("startVolunteer", startVolunteer);
+	    result.put("endVolunteer", endVolunteer);
 	    
 		try {
 			gson.toJson(result, response.getWriter());
@@ -449,7 +460,6 @@ public class AdminController {
 							    ) {
 	    
 		int listCount = aService.getListCountVolunteer();
-		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
 		
 		ArrayList<Volunteer> list = aService.adminVolunteerList(pi);
@@ -461,6 +471,37 @@ public class AdminController {
 	    result.put("volunteer", list);
 	    result.put("maxPage", pi.getMaxPage()); 
 	    result.put("currentPage", pi.getCurrentPage());
+		try {
+			gson.toJson(result, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
+	
+	@RequestMapping("/adminVolunteerApproveList.ad")
+	@ResponseBody
+	public void adminVolunteerApproveList(@RequestParam(value="page", defaultValue = "1") int page,
+								@RequestParam(value="size", defaultValue = "10") int size,
+								HttpServletResponse response
+							    ) {
+	    
+		int listCount = aService.getListCountVolunteerY();
+		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
+		
+		System.out.println(pi);
+		
+		ArrayList<Volunteer> list = aService.adminApproveVolunteerList(pi);
+		System.out.println(list);
+		
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+	    result.put("volunteer", list);
+	    result.put("maxPage", pi.getMaxPage()); 
 	    result.put("currentPage", pi.getCurrentPage());
 		try {
 			gson.toJson(result, response.getWriter());
@@ -471,6 +512,34 @@ public class AdminController {
 		}
 	}
 	
+	@RequestMapping("/adminVolunteerRafusalList.ad")
+	@ResponseBody
+	public void adminVolunteerRafusalList(@RequestParam(value="page", defaultValue = "1") int page,
+								@RequestParam(value="size", defaultValue = "10") int size,
+								HttpServletResponse response
+							    ) {
+	    
+		int listCount = aService.getListCountVolunteerN();
+		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
+		
+		ArrayList<Volunteer> list = aService.adminRafusalVolunteerList(pi);
+		System.out.println(list);
+		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
+		Gson gson = gb.create();
+		response.setContentType("application/json; charset=UTF-8");
+		
+		HashMap<String, Object> result = new HashMap<String, Object>();
+	    result.put("volunteer", list);
+	    result.put("maxPage", pi.getMaxPage()); 
+	    result.put("currentPage", pi.getCurrentPage());
+		try {
+			gson.toJson(result, response.getWriter());
+		} catch (JsonIOException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+	}
 	
 	
 	@RequestMapping("/updateVolunteerStatus.ad")

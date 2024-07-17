@@ -158,7 +158,7 @@
 			#{endDate},
 			#{startTime},
 			#{endTime}
-		) 		
+		) 	 		
  	</insert>
  	
  	<select id="adminSelectBoardNoCheck" resultType="_int">
@@ -264,6 +264,7 @@
  	<select id="getListCountVolunteer" resultType="_int">
 		select count(*)
 		from volunteer
+		where status = 'W'
 	</select>
 	
 	<select id="totalMember" resultType="_int">
@@ -279,19 +280,19 @@
 	
 	<select id="totalBoard" resultType="_int">
 		select count(*)
-		from board
+		from volunteer_detail
 	</select>
 	
 	<select id="domesticAmount" resultType="_int">
 		select COALESCE(SUM(amount), 0)
 		from pay
-		where product = '국내건축후원하기'
+		where product like '%국내%'
 	</select>
 	
 	<select id="globalAmount" resultType="_int">
 		select COALESCE(SUM(amount), 0)
 		from pay
-		where product = '해외건축후원하기'
+		where product like '%해외%'
 	</select>
 	
 	<select id="adminVolunteerList" resultType="Volunteer">
@@ -300,14 +301,7 @@
 			join member m on v.member_no = m.member_no
 			join volunteer_detail d on v.volunteer_no = d.volunteer_no
             join board b on b.board_no = d.board_no
-		ORDER BY 
-	  		CASE 
-	        	WHEN v.status = 'W' THEN 1
-	        	WHEN v.status = 'Y' THEN 2
-	        	WHEN v.status = 'N' THEN 3
-	       		ELSE 4
-		    END, 
-		    v.volunteer_no
+        where v.status = 'W' 
 	</select>
 	
 	<update id="adminVolunteerUpdate">
@@ -327,5 +321,59 @@
  		select volunteer_no
  		from volunteer_detail
  		where board_no = #{boardNo}
+ 	</select>
+ 	
+ 	<select id="getListCountVolunteerY" resultType="_int">
+		select count(*)
+		from volunteer
+		where status = 'Y'
+	</select>
+	
+	<select id="adminApproveVolunteerList" resultType="Volunteer">
+ 		select v.volunteer_no,v.member_no, m.member_name, b.title, v.status, d.board_No
+		from volunteer v
+			join member m on v.member_no = m.member_no
+			join volunteer_detail d on v.volunteer_no = d.volunteer_no
+            join board b on b.board_no = d.board_no
+        where v.status = 'Y' 
+ 	</select>
+ 	
+ 	<select id="getListCountVolunteerN" resultType="_int">
+		select count(*)
+		from volunteer
+		where status = 'N'
+	</select>
+	
+	<select id="adminRafusalVolunteerList" resultType="Volunteer">
+ 		select v.volunteer_no,v.member_no, m.member_name, b.title, v.status, d.board_No
+		from volunteer v
+			join member m on v.member_no = m.member_no
+			join volunteer_detail d on v.volunteer_no = d.volunteer_no
+            join board b on b.board_no = d.board_no
+        where v.status = 'N' 
+ 	</select>
+ 	
+ 	<select id="adminSelectVolunteer" resultType="board">
+ 		select title, location, category, start_date, end_date
+ 		from board b
+ 			join location l on (b.location_no = l.location_no)
+ 			join volunteer_detail vd on (b.board_no=vd.board_no)
+ 			join volunteer v on(vd.volunteer_no = v.volunteer_no)
+		where status = 'Y'
+		and sysdate > end_date
+ 	</select>
+ 	
+ 	<select id="startVolunteer" resultType="_int">
+ 		select
+    	count(board_no)
+		from volunteer_detail
+		where sysdate <![CDATA[<]]> start_date
+ 	</select>
+ 	
+ 	<select id="endVolunteer" resultType="_int">
+ 		select
+    	count(board_no)
+		from volunteer_detail
+		where sysdate > end_date
  	</select>
 </mapper>

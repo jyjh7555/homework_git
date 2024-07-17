@@ -396,13 +396,6 @@
                   </div>`;
             
               paginationContainer.innerHTML = paginationHTML;
-            
-            
-              
-              
-              
-              
-            
               
           }
       }

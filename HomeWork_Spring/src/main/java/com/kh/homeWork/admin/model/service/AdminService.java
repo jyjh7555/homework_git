@@ -87,6 +87,20 @@ public interface AdminService {
 
 	int findVolunteerNo(int boardNo);
 
+	int getListCountVolunteerY();
+
+	ArrayList<Volunteer> adminApproveVolunteerList(PageInfo pi);
+
+	int getListCountVolunteerN();
+
+	ArrayList<Volunteer> adminRafusalVolunteerList(PageInfo pi);
+
+	ArrayList<Board> adminSelectVolunteer(int memberNo);
+
+	int startVolunteer();
+
+	int endVolunteer();
+
 	
 
 

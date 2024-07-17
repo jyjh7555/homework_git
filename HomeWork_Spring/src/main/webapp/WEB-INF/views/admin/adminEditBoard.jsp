@@ -92,8 +92,8 @@
 				</div>
 				
 				<div align="left" class="right m-4 mb-1 mt-1">
-					<input class="form-check-input" type="checkbox" onclick="reviewCheckFn()" value="reviewCheck" id="reviewCheck">
-				  <label class="form-check-label" for="reviewCheck" >해당 봉사를 후기게시판으로 등록하기(고려)</label>
+					<input class="form-check-input" type="checkbox" <c:if test="${b.boardType ==3}"> checked</c:if> onclick="reviewCheckFn()" value="reviewCheck" id="reviewCheck">
+				  <label class="form-check-label" for="reviewCheck" >후기게시판 작성하기</label>
 				</div> 
 				<div class="bd-example m-4 p-2" style="border-top: 2px solid black;">
 		            <table class="table" id="editTable">
@@ -113,7 +113,7 @@
 			            			<select class="col-4 form-control" id="boardType"name="boardType" style="display:inline; width:100px">
 			            				<option  value="1"<c:if test="${b.boardType == '1' }">selected</c:if>>국내</option>
 			            				<option  value="2"<c:if test="${b.boardType == '2' }">selected</c:if>>해외</option>
-			            				<option style="display:none" value="3">후기</option>
+			            				<option style="display:none" <c:if test="${b.boardType == '3' }">selected</c:if> value="3">후기</option>
 			            			</select>
 			            			<select class="col-4 form-control" id="locationNo"name="locationNo"style="display:inline; width:100px">
 			            			<c:if test="${b.boardType=='1' }">
@@ -124,6 +124,7 @@
 			            				<option value="50" <c:if test="${b.locationNo =='50' }">checked</c:if>>충청도</option>
 			            				<option value="60" <c:if test="${b.locationNo =='60' }">checked</c:if>>전라도</option>
 			            				<option value="70" <c:if test="${b.locationNo =='70' }">checked</c:if>>경상도</option>
+			            				<option style="display:none" value="1000">후기</option>
 			            			</c:if>
 			            			<c:if test="${b.boardType=='2' }">
 			            				<option value="10" <c:if test="${b.locationNo =='210' }">checked</c:if>>아시아</option>
@@ -133,6 +134,10 @@
 			            				<option value="50" <c:if test="${b.locationNo =='250' }">checked</c:if>>중동</option>
 			            				<option value="60" <c:if test="${b.locationNo =='260' }">checked</c:if>>오세아니아</option>
 			            				<option value="70" <c:if test="${b.locationNo =='270' }">checked</c:if>>유럽</option>
+			            				<option style="display:none" value="1000">후기</option>
+			            			</c:if>
+			            			<c:if test="${b.boardType=='3' }">
+			            				<option style="display:none" value="1000">후기</option>
 			            			</c:if>
 			            			</select>
 			            		</div>
@@ -214,11 +219,11 @@
 		            	<button >이미지</button>	
 		            	
 		            
-		            </div>
 		            <div id="editDiv" class="form-control workseditor-editor"style="width:100%; min-height:500px" contenteditable="true">
 					${b.content }
 					</div>
 					<input type="hidden" name="content">
+		            </div>
 				</div>		
 			</div>
 		</div>
@@ -233,6 +238,22 @@
 	</div>
     
     <script>
+    
+    window.onload =()=>{
+		reviewCheckFn();		//후기게시판 처음에 가져올때 한번 실행하자
+	}
+    
+    
+    const reviewCheck = document.getElementById('reviewCheck');
+	function reviewCheckFn(){
+		if(reviewCheck.checked){
+			document.getElementById('editTable').style.display = 'none';
+		}else{
+			document.getElementById('editTable').style.display = 'block';
+		}
+	};
+    
+    
     const editDiv = document.getElementById('editDiv');
 	console.log(editDiv.innerHTML);
 	console.log(editDiv.innerText);
@@ -411,6 +432,23 @@
 	function adminUpdateBoard(){
 		form.action = '${contextPath}/adminUpdateBoard.ad';
 		document.getElementsByName('content')[0].value= editDiv.innerHTML;
+		if(reviewCheck.checked){
+			document.getElementsByName('boardType')[0].value= '3';
+			document.getElementById('category').value= null;
+			document.getElementsByName('locationNo')[0].value= '1000';
+			
+			document.getElementsByName('startDate')[0].value='2000-01-01';
+			document.getElementsByName('endDate')[0].value='2000-01-01';
+			document.getElementsByName('recruitStart')[0].value='2000-01-01';
+			document.getElementsByName('recruitEnd')[0].value='2000-01-01';
+			document.getElementsByName('memberCount')[0].value=0;
+			document.getElementsByName('mgr')[0].value=null;
+			document.getElementsByName('mgrPhone')[0].value=null;
+			document.getElementsByName('address')[0].value=null;
+			
+		}
+		
+		
 		form.submit();
 	}
 	

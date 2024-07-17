@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -52,19 +52,23 @@
 	
 	
 	
-	.userInfo, .userUpdate, .userDelete, .supportPage, .regularSupportPage, .searchResult {
-            
+	.userInfo, .userUpdate, .userDelete, .supportPage, .searchResult, .infoList, .volunteer, .volunteerApprove, .volunteerRafusal {
             padding: 20px;
             border: 1px solid #ddd;
             border-radius: 8px;
             box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1); /* 그리드 컨테이너 그림자 */
             margin-top: 20px;
             width:90%;
+            
         }
-
+	.userInfo, .searchResult td{
+		cursor: pointer;
+	}
     .userInfo div {
             margin-bottom: 10px;
         }
+    .menubar{
+    	cursor: pointer;}
 	
 	table{
 		text-align: center;
@@ -126,46 +130,46 @@
 			<div style="border:1px solid skyblue; background:skyblue; height:32px"><a onClick="window.location.reload()">통계</a></div>
 			
 			<div class="mainCate" style="margin-top:10px" >회원정보관리</div>
-				<ul class="hidden" style="list-style-type:none; text-align:left;">
+				<ul class="menubar hidden" style="list-style-type:none; text-align:left;">
 					<li id="user1">회원 정보 조회</li>
 					<li id="user2">회원 정보 수정</li>
 					<li id="user3">회원 탈퇴</li>
 				</ul>
 			
 			<div class=mainCate>후원정보관리</div>
-				<ul class="hidden" style="list-style-type:none; text-align:left;">
+				<ul class="menubar hidden" style="list-style-type:none; text-align:left;">
 					<li id="support1">후원 목록</li>
-					<li id="support2">정기후원목록</li>
 					
 				</ul>
 			<div class=mainCate>게시판관리</div>
-				<ul class="hidden" style="list-style-type:none; text-align:left;">
+				<ul class="menubar hidden" style="list-style-type:none; text-align:left;">
 					<li id="board1">국내게시판</li>
 					<li id="board2">해외게시판</li>
 					<li id="board3">후기게시판</li>
 				</ul>
 			<div class=mainCate>봉사신청관리</div>
-				<ul class="hidden" style="list-style-type:none; text-align:left;">
+				<ul class="menubar hidden" style="list-style-type:none; text-align:left;">
 					<li id="volunteer1">
-						봉사신청자
+						봉사대기목록
 						<button type="button" class="btn btn-danger btn-sm">
-						  <span class="badge text-bg-danger " id="volunteerApplicant"></span>
+						 	 <span class="badge rounded-pill text-bg-danger" id="volunteerApplicant"></span>
 						</button>
 					</li>
+					<li id="volunteer2">승인목록</li>
+					<li id="volunteer3">거부목록</li>
 				</ul>
-			
-		</div>
+			</div>
 					
 		<div id=selectDiv>
 			<div style="border:2px solid #CCCCCC; height:40px">
 			<form id="searchForm">
    				 <select id="searchType">
-					<option value="member_No">회원번호</option>
 					<option value="member_name">회원이름</option> 
+					<option value="member_No">회원번호</option>
 					<option value="nickName">닉네임</option> 
 				</select>
 				<input type="text" placeholder="회원정보 입력" style="width:35%" id="searchText">
-				<button type="button" onclick="searchMember()">검색</button><br>
+				<button id="searchBtn" type="button" onclick="searchMember()">검색</button><br>
 			</form>
 			</div>
 			
@@ -180,8 +184,8 @@
 				            </thead>
 				            <tbody>
 				                <tr>
-				                    <td>총 회원 수</td>
-				                    <td id="totalMembers"></td>
+				                    <th>총 회원 수</th>
+				                    <th id="totalMembers"></th>
 				                </tr>
 				                <tr>
 				                    <td>활동 중인 회원 수</td>
@@ -192,13 +196,25 @@
 				                    <td id="inactiveMembers"></td>
 				                </tr>
 				                <tr>
-				                    <td>총 게시물 수</td>
-				                    <td id="totalBoard"></td>
+				                    <th>총 봉사활동 수</th>
+				                    <th id="totalBoard"></th>
+				                </tr>
+				                <tr>
+				                    <td>대기중인 봉사활동 수</td>
+				                    <td id="startVolunteer"></td>
+				                </tr>
+				                <tr>
+				                    <td>진행중인 봉사활동 수</td>
+				                    <td id="proceedingVolunteer"></td>
+				                </tr>
+				                <tr>
+				                    <td>종료된 봉사활동 수</td>
+				                    <td id="endVolunteer"></td>
 				                </tr>
 				                
 				                <tr>
-				                    <td>총 후원액</td>
-				                    <td id="totalAmount"></td>
+				                    <th>총 후원액</th>
+				                    <th id="totalAmount"></th>
 				                </tr>
 				                <tr>
 				                	<td>국내 후원액</td>
@@ -357,30 +373,6 @@
 					    </tfoot>
 					</table>
 				</div>
-			<div class="regularSupportPage hidden" id="regularSupportList">
-					<table id="regulartSupportTable">
-						<tr>
-							<th width="10%">회원번호</th>
-							<th width="10%">이름</th>
-							<th width="10%">이메일</th>
-							<th width="15%">휴대폰번호</th>
-							<th width="18%">후원시작날짜</th>
-							<th width="10%">정기후원일</th>
-							<th width="10%">후원금액(원)</th>
-							<th width="5">취소</th>
-						</tr>
-						<tr>
-							<td>001</td>
-							<td>강건강</td>
-							<td>gang@naver.com</td>
-							<td>010-1234-5678</td>
-							<td>24-06-11</td>
-							<td>11일</td>
-							<td>10000원</td>
-							<td><button id="supportCancle">정기결제취소</button></td>
-						</tr>
-					</table>
-				</div>
 				<div class="domesticBoardPage hidden" id="domesticBoardList">
 					<table id="domesticBoardTable">
 					</table>
@@ -410,6 +402,62 @@
 					            <td colspan="10">
 					                <nav aria-label="Standard pagination example" style="float: center;">
 					                    <ul id="pagination5" class="pagination">
+					                    
+					                    </ul>
+					                </nav>
+					            </td>
+					        </tr>
+					    </tfoot>
+					</table>
+					</div>
+					<div class="volunteerApprove hidden" id="volunteerApproveList">
+					<table id="volunteerApproveTable">
+						<thead>
+							<tr>
+								<th width="10%">봉사번호</th>
+								<th width="10%">회원번호</th>
+								<th width="10%">이름</th>
+								<th width="10%">제목</th>
+								<th width="10%">현재상태</th>
+								<th width="10%">처리</th>
+							</tr>
+						</thead>
+						<tbody>
+			
+						</tbody>
+						<tfoot>
+					        <tr>
+					            <td colspan="10">
+					                <nav aria-label="Standard pagination example" style="float: center;">
+					                    <ul id="pagination6" class="pagination">
+					                    
+					                    </ul>
+					                </nav>
+					            </td>
+					        </tr>
+					    </tfoot>
+					</table>
+					</div>
+					<div class="volunteerRafusal hidden" id="volunteerRafusalList">
+					<table id="volunteerRafusalTable">
+						<thead>
+							<tr>
+								<th width="10%">봉사번호</th>
+								<th width="10%">회원번호</th>
+								<th width="10%">이름</th>
+								<th width="10%">제목</th>
+								<th width="10%">현재상태</th>
+								<th width="10%">처리</th>
+							</tr>
+						</thead>
+						<tbody>
+			
+						</tbody>
+						<tfoot>
+					        <tr>
+					            <td colspan="10">
+					                <nav aria-label="Standard pagination example" style="float: center;">
+					                    <ul id="pagination7" class="pagination">
 					                    
 					                    </ul>
 					                </nav>
@@ -463,11 +511,14 @@
                 document.getElementById('totalMembers').innerText = data.totalMember+"명";
                 document.getElementById('activeMembers').innerText = data.activeMember+"명";
                 document.getElementById('inactiveMembers').innerText = data.inactiveMember+"명";
-                document.getElementById('totalBoard').innerText = data.totalBoard+"개";
+                document.getElementById('totalBoard').innerText = data.totalBoard+"건";
                 document.getElementById('totalAmount').innerText = data.totalAmount+"원";
                 document.getElementById('domesticAmount').innerText = data.domesticAmount+"원";
                 document.getElementById('globalAmount').innerText = data.globalAmount+"원";
                 document.getElementById('volunteerApplicant').innerText = data.volunteerApplicant;
+                document.getElementById('startVolunteer').innerText = data.startVolunteer+"건";
+                document.getElementById('endVolunteer').innerText = data.endVolunteer+"건";
+                document.getElementById('proceedingVolunteer').innerText = data.proceedingVolunteer+"건";
                 
             },
             error: function(error) {
@@ -549,11 +600,12 @@
 				    document.getElementById('userUpdate').classList.add('hidden');
 				    document.getElementById('userDelete').classList.add('hidden');
 				    document.getElementById('supportList').classList.add('hidden');
-				    document.getElementById('regularSupportList').classList.add('hidden');
 				    document.getElementById('searchResult').classList.add('hidden');
 				    document.getElementById('domesticBoardList').classList.add('hidden');
 				    document.getElementById('globalBoardList').classList.add('hidden');
 				    document.getElementById('volunteerList').classList.add('hidden');
+				    document.getElementById('volunteerApproveList').classList.add('hidden');
+				    document.getElementById('volunteerRafusalList').classList.add('hidden');
 				    document.getElementById('infoList').classList.add('hidden');
 
 				    let currentPage = 1;
@@ -659,11 +711,12 @@
 				 document.getElementById('userInfo').classList.add('hidden');
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
-				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');
 				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('volunteerApproveList').classList.add('hidden');
+				 document.getElementById('volunteerRafusalList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 				 
 				let currentPage = 1;
@@ -801,11 +854,12 @@
 				 document.getElementById('userInfo').classList.add('hidden');
 				 document.getElementById('userUpdate').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
-				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');
 				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('volunteerApproveList').classList.add('hidden');
+				 document.getElementById('volunteerRafusalList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 				 
 				 let currentPage = 1;
@@ -910,11 +964,12 @@
 				 document.getElementById('userInfo').classList.add('hidden');
 				 document.getElementById('userUpdate').classList.add('hidden');
 				 document.getElementById('userDelete').classList.add('hidden');
-				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');
 				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('volunteerApproveList').classList.add('hidden');
+				 document.getElementById('volunteerRafusalList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 					let currentPage = 1;
 				    let page = 1;
@@ -1007,18 +1062,7 @@
 				    loadPage4(currentPage); 
 				});
 			 
-			 document.getElementById('support2').addEventListener('click', function(){
-				 document.getElementById('regularSupportList').classList.toggle('hidden');
-				 document.getElementById('userInfo').classList.add('hidden');
-				 document.getElementById('userUpdate').classList.add('hidden');
-				 document.getElementById('userDelete').classList.add('hidden');
-				 document.getElementById('supportList').classList.add('hidden');
-				 document.getElementById('searchResult').classList.add('hidden');
-				 document.getElementById('domesticBoardList').classList.add('hidden');
-				 document.getElementById('globalBoardList').classList.add('hidden');
-				 document.getElementById('volunteerList').classList.add('hidden');
-				 document.getElementById('infoList').classList.add('hidden');
-			 })
+			 
 			 
 			 document.getElementById('board1').addEventListener('click', function(){
 				 document.getElementById('userInfo').classList.add('hidden');
@@ -1026,9 +1070,10 @@
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
-				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('globalBoardList').classList.add('hidden');	
 				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('volunteerApproveList').classList.add('hidden');
+				 document.getElementById('volunteerRafusalList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 				 location.href="admindomestic.ad";
 				 
@@ -1040,9 +1085,10 @@
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
-				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('volunteerApproveList').classList.add('hidden');
+				 document.getElementById('volunteerRafusalList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 				 location.href="adminglobal.ad";
 				
@@ -1054,9 +1100,10 @@
 				 document.getElementById('userDelete').classList.add('hidden');
 				 document.getElementById('supportList').classList.add('hidden');
 				 document.getElementById('searchResult').classList.add('hidden');
-				 document.getElementById('regularSupportList').classList.add('hidden');
 				 document.getElementById('domesticBoardList').classList.add('hidden');
 				 document.getElementById('volunteerList').classList.add('hidden');
+				 document.getElementById('volunteerApproveList').classList.add('hidden');
+				 document.getElementById('volunteerRafusalList').classList.add('hidden');
 				 document.getElementById('infoList').classList.add('hidden');
 				 location.href="adminreview.ad"	
 			 })
@@ -1068,9 +1115,10 @@
 		    document.getElementById('userDelete').classList.add('hidden');
 		    document.getElementById('supportList').classList.add('hidden');
 		    document.getElementById('searchResult').classList.add('hidden');
-		    document.getElementById('regularSupportList').classList.add('hidden');
 		    document.getElementById('domesticBoardList').classList.add('hidden');
 		    document.getElementById('infoList').classList.add('hidden');
+		    document.getElementById('volunteerApproveList').classList.add('hidden');
+		    document.getElementById('volunteerRafusalList').classList.add('hidden');
 		
 		    let currentPage = 1;
 		    const pageSize = 10;
@@ -1113,7 +1161,6 @@
 		                        approveBtn.name = 'volunteerStatusButton';
 		                        approveBtn.id = 'approveBtn';
 		                        approveBtn.addEventListener('click', function() {
-		                            //updateStatus(v.volunteerNo, 'Y', statusTd);
 		                        	$('#modalApprove').modal('show');
 		                        	document.getElementById('modalApprove').dataset.volunteerNo = v.volunteerNo;
 		                        	document.getElementById('modalApprove').dataset.memberNo = v.memberNo;
@@ -1128,7 +1175,6 @@
 		                        refusalBtn.name = 'volunteerStatusButton';
 		                        refusalBtn.id = `refusalBtn`
 		                        refusalBtn.addEventListener('click', function() {
-		                            //updateStatus(v.volunteerNo, 'N', statusTd);
 		                        	$('#modalRefusal').modal('show');
 		                        	document.getElementById('modalRefusal').dataset.volunteerNo = v.volunteerNo;
 		                        	document.getElementById('modalRefusal').dataset.memberNo = v.memberNo;
@@ -1184,7 +1230,249 @@
 		
 		    loadPage5(currentPage);
 		});
+			 
+			 document.getElementById('volunteer2').addEventListener('click', function() {
+				    document.getElementById('volunteerApproveList').classList.toggle('hidden');
+				    document.getElementById('userInfo').classList.add('hidden');
+				    document.getElementById('userUpdate').classList.add('hidden');
+				    document.getElementById('userDelete').classList.add('hidden');
+				    document.getElementById('supportList').classList.add('hidden');
+				    document.getElementById('searchResult').classList.add('hidden');
+				    document.getElementById('domesticBoardList').classList.add('hidden');
+				    document.getElementById('infoList').classList.add('hidden');
+				    document.getElementById('volunteerList').classList.add('hidden');
+				    document.getElementById('volunteerRafusalList').classList.add('hidden');
+				
+				    let currentPage = 1;
+				    const pageSize = 10;
+				    
+				    
+				    function loadPage6(page) {
+						currentPage = page;
+				        const url = '${contextPath}/adminVolunteerApproveList.ad?page=' + page + '&size=' + pageSize;
+				        $.ajax({
+				            url: url,
+				            method: 'GET',
+				            success: function(data) {
+				                if (data && data.volunteer) {
+				                    document.getElementById('volunteerApproveList').classList.remove('hidden');
+				                    const volunteerApproveList = document.getElementById('volunteerApproveList');
+				                    const tbody = volunteerApproveList.querySelector('tbody');
+				                    tbody.innerHTML = '';
+				
+				                    data.volunteer.forEach(v => {
+				                        
+				                        
+				                        const tr = document.createElement('tr');
+				
+				                        const vNoTd = document.createElement('td');
+				                        vNoTd.innerText = v.volunteerNo;
+				                        const mNoTd = document.createElement('td');
+				                        mNoTd.innerText = v.memberNo;
+				                        const nameTd = document.createElement('td');
+				                        nameTd.innerText = v.memberName;
+				                        const boardTd = document.createElement('td');
+				                        boardTd.innerText = v.title;
+				                        const statusTd = document.createElement('td');
+				                        statusTd.id = 'statusTd-' + v.volunteerNo + '-' + v.memberNo;
+				                        statusTd.innerText = statusText(v.status);
+				
+				                        const btnTd = document.createElement('td');
+				                        const approveBtn = document.createElement('button');
+				                        approveBtn.textContent = '승인';
+				                        approveBtn.className = 'btn btn-success';
+				                        approveBtn.name = 'volunteerStatusButton';
+				                        approveBtn.id = 'approveBtn';
+				                        approveBtn.addEventListener('click', function() {
+				                            //updateStatus(v.volunteerNo, 'Y', statusTd);
+				                        	$('#modalApprove').modal('show');
+				                        	document.getElementById('modalApprove').dataset.volunteerNo = v.volunteerNo;
+				                        	document.getElementById('modalApprove').dataset.memberNo = v.memberNo;
+				                            document.getElementById('modalApprove').dataset.status = 'Y';
+				                            document.getElementById('modalApprove').dataset.statusTdId = 'statusTd-' + v.volunteerNo + '-' + v.memberNo;		                        	
+				                        });
+				                        
+				
+				                        const refusalBtn = document.createElement('button');
+				                        refusalBtn.textContent = '거부';
+				                        refusalBtn.className = 'btn btn-danger';
+				                        refusalBtn.name = 'volunteerStatusButton';
+				                        refusalBtn.id = `refusalBtn`
+				                        refusalBtn.addEventListener('click', function() {
+				                        	$('#modalRefusal').modal('show');
+				                        	document.getElementById('modalRefusal').dataset.volunteerNo = v.volunteerNo;
+				                        	document.getElementById('modalRefusal').dataset.memberNo = v.memberNo;
+				                            document.getElementById('modalRefusal').dataset.status = 'N';
+				                            document.getElementById('modalRefusal').dataset.statusTdId = 'statusTd-' + v.volunteerNo + '-' + v.memberNo;
+				                        });
+				                        
+				
+				                        btnTd.appendChild(approveBtn);
+				                        btnTd.appendChild(refusalBtn);
+				
+				                        const tds = [vNoTd,mNoTd, nameTd, boardTd, statusTd, btnTd];
+				                        tr.append(...tds);
+				                        tbody.append(tr);
+				                    });
+				
+				                    const pagination = document.getElementById('pagination6');
+				                    pagination.innerHTML = '';
+	
+				                    if (data.maxPage > 1) {
+				                        for (let i = 1; i <= data.maxPage; i++) {
+				                        	const pageItem = document.createElement('li');
+				                        	pageItem.classList.add('page-item');
+				                            const pageLink = document.createElement('a');
+				                            pageLink.classList.add('page-link');
+				                            pageLink.href = '#';
+				                            pageLink.innerText = i;
+				                            pageLink.addEventListener('click', function(event) {
+				                                event.preventDefault();
+				                                loadPage6(i);
+				                            });
+	
+				                            if (i === currentPage) {
+				                                pageItem.classList.add('active');
+				                            } else {
+				                                pageItem.classList.remove('active');
+				                            }
+											pageItem.append(pageLink)		
+				                            pagination.append(pageItem);
+				                        }
+				                    }
+				                } else {
+				                    console.error(data);
+				                }
+				            },
+				            error: function(error) {
+				                console.error(error);
+				            }
+				        });
+				    }
+	
+				    loadPage6(currentPage); 
+				});
 		 
+			 document.getElementById('volunteer3').addEventListener('click', function() {
+				    document.getElementById('volunteerRafusalList').classList.toggle('hidden');
+				    document.getElementById('userInfo').classList.add('hidden');
+				    document.getElementById('userUpdate').classList.add('hidden');
+				    document.getElementById('userDelete').classList.add('hidden');
+				    document.getElementById('supportList').classList.add('hidden');
+				    document.getElementById('searchResult').classList.add('hidden');
+				    document.getElementById('domesticBoardList').classList.add('hidden');
+				    document.getElementById('infoList').classList.add('hidden');
+				    document.getElementById('volunteerList').classList.add('hidden');
+				    document.getElementById('volunteerApproveList').classList.add('hidden');
+				
+				    let currentPage = 1;
+				    const pageSize = 10;
+				    
+				    
+				    function loadPage7(page) {
+				        const url = '${contextPath}/adminVolunteerRafusalList.ad?page=' + page + '&size=' + pageSize;
+				
+				        $.ajax({
+				            url: url,
+				            method: 'GET',
+				            success: function(data) {
+				                if (data && data.volunteer) {
+				                    document.getElementById('volunteerRafusalList').classList.remove('hidden');
+				                    const volunteerRafusalList = document.getElementById('volunteerRafusalList');
+				                    const tbody = volunteerRafusalList.querySelector('tbody');
+				                    tbody.innerHTML = '';
+				
+				                    data.volunteer.forEach(v => {
+				                        
+				                        
+				                        const tr = document.createElement('tr');
+				
+				                        const vNoTd = document.createElement('td');
+				                        vNoTd.innerText = v.volunteerNo;
+				                        const mNoTd = document.createElement('td');
+				                        mNoTd.innerText = v.memberNo;
+				                        const nameTd = document.createElement('td');
+				                        nameTd.innerText = v.memberName;
+				                        const boardTd = document.createElement('td');
+				                        boardTd.innerText = v.title;
+				                        const statusTd = document.createElement('td');
+				                        statusTd.id = 'statusTd-' + v.volunteerNo + '-' + v.memberNo;
+				                        statusTd.innerText = statusText(v.status);
+				
+				                        const btnTd = document.createElement('td');
+				                        const approveBtn = document.createElement('button');
+				                        approveBtn.textContent = '승인';
+				                        approveBtn.className = 'btn btn-success';
+				                        approveBtn.name = 'volunteerStatusButton';
+				                        approveBtn.id = 'approveBtn';
+				                        approveBtn.addEventListener('click', function() {
+				                        	$('#modalApprove').modal('show');
+				                        	document.getElementById('modalApprove').dataset.volunteerNo = v.volunteerNo;
+				                        	document.getElementById('modalApprove').dataset.memberNo = v.memberNo;
+				                            document.getElementById('modalApprove').dataset.status = 'Y';
+				                            document.getElementById('modalApprove').dataset.statusTdId = 'statusTd-' + v.volunteerNo + '-' + v.memberNo;		                        	
+				                        });
+				                        
+				
+				                        const refusalBtn = document.createElement('button');
+				                        refusalBtn.textContent = '거부';
+				                        refusalBtn.className = 'btn btn-danger';
+				                        refusalBtn.name = 'volunteerStatusButton';
+				                        refusalBtn.id = `refusalBtn`
+				                        refusalBtn.addEventListener('click', function() {
+				                        	$('#modalRefusal').modal('show');
+				                        	document.getElementById('modalRefusal').dataset.volunteerNo = v.volunteerNo;
+				                        	document.getElementById('modalRefusal').dataset.memberNo = v.memberNo;
+				                            document.getElementById('modalRefusal').dataset.status = 'N';
+				                            document.getElementById('modalRefusal').dataset.statusTdId = 'statusTd-' + v.volunteerNo + '-' + v.memberNo;
+				                        });
+				                        
+				
+				                        btnTd.appendChild(approveBtn);
+				                        btnTd.appendChild(refusalBtn);
+				
+				                        const tds = [vNoTd,mNoTd, nameTd, boardTd, statusTd, btnTd];
+				                        tr.append(...tds);
+				                        tbody.append(tr);
+				                    });
+				
+				                    const pagination = document.getElementById('pagination7');
+				                    pagination.innerHTML = '';
+	
+				                    if (data.maxPage > 1) {
+				                        for (let i = 1; i <= data.maxPage; i++) {
+				                        	const pageItem = document.createElement('li');
+				                        	pageItem.classList.add('page-item');
+				                            const pageLink = document.createElement('a');
+				                            pageLink.classList.add('page-link');
+				                            pageLink.href = '#';
+				                            pageLink.innerText = i;
+				                            pageLink.addEventListener('click', function(event) {
+				                                event.preventDefault();
+				                                loadPage7(i);
+				                            });
+	
+				                            if (i === data.currentPage) {
+				                                pageItem.classList.add('active');
+				                            } else {
+				                                pageItem.classList.remove('active');
+				                            }
+											pageItem.append(pageLink)		
+				                            pagination.append(pageItem);
+				                        }
+				                    }
+				                } else {
+				                    console.error(data);
+				                }
+				            },
+				            error: function(error) {
+				                console.error(error);
+				            }
+				        });
+				    }
+	
+				    loadPage7(currentPage); 
+				});
 		 
 			 
 		 function updateStatus(volunteerNo, memberNo, status, statusTd) {
@@ -1291,10 +1579,17 @@
 			 document.getElementById('userUpdate').classList.add('hidden');
 			 document.getElementById('userDelete').classList.add('hidden');
 			 document.getElementById('supportList').classList.add('hidden');
-			 document.getElementById('regularSupportList').classList.add('hidden');
 			 document.getElementById('volunteerList').classList.add('hidden');
+			 document.getElementById('volunteerApproveList').classList.add('hidden');
+			 document.getElementById('volunteerRafusalList').classList.add('hidden');
 			 document.getElementById('infoList').classList.add('hidden');
 		}
+		document.getElementById('searchText').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); 
+                document.getElementById('searchBtn').click();
+            }
+        });
 		
 		function searchMember() {
 	        var searchType = document.getElementById('searchType').value;

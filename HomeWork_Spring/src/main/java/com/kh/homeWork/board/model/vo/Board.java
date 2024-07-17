@@ -31,4 +31,7 @@ public class Board {
 	private Date recruitEnd;
 	private boolean dateCheckEnd;
 	private boolean dateCheckStart;
+	private String category;
+	private Date startDate;
+	private Date endDate;
 }
