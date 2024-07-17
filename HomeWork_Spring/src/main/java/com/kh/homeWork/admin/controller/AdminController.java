@@ -280,14 +280,22 @@ public class AdminController {
 	}
 	
 	@RequestMapping("/adminInsertBoard.ad")
-	public String insertBoard(@ModelAttribute Board b, @ModelAttribute VolunteerDetail v) {
+	public String adminInsertBoard(@ModelAttribute Board b, @ModelAttribute VolunteerDetail v) {
 		int result = aService.adminInsertBoard(b);
 		if (result > 0 && b.getBoardType() != 3) {
 			int bNo = aService.adminSelectBoardNoCheck();
 			v.setBoardNo(bNo);
 			int result2 = aService.adminInsertVolunteer(v);
 		}
-		return "redirect:admindomestic.ad";
+		switch (b.getBoardType()) {
+		case 1:
+			return "redirect:domestic.bo";
+		case 2:
+			return "redirect:global.bo";
+		case 3:
+			return "redirect:review.bo";
+		}
+		throw new AdminException("게시글 작성을 실패하였습니다");
 	}
 
 	
