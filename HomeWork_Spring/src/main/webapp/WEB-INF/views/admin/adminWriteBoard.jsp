@@ -168,7 +168,7 @@
 							</td>
 		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">단체여부</td>
 		            		<td>
-		            			<div class="col m-4 mb-1 mt-2">
+		            			<div class="col m-4 mb-1 mt-2" align="left">
 		            				<input class="form-check-input " checked  type="radio"  name="groupYn" id="group1" value="Y">
 						  			<label class="form-check-label " for="group1">단체가능</label><br>
 									<input class="form-check-input "  type="radio" name="groupYn" id="group2" value="N">
@@ -392,7 +392,6 @@
 		
 		function uploadFile(file) {
 			console.log(file);
-			console.log('여기까지맞니?');
             const reader = new FileReader();		//객체부여하고
             reader.readAsDataURL(file);				//내가 드랍한 파일객체만든거를 넣어,파일의데이터를나타내는 URL을생성한다
             reader.onloadend = () => {				// 내가 읽든안읽은 자동으로실행, load메소드쓰면 읽어와야 실행

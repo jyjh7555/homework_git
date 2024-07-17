@@ -56,9 +56,6 @@
 	}
 
 	#container{display:flex; flex-wrap: wrap; width:100%;}
-	table{
-		text-align: center;
-	}
 	th {
         border-bottom: 1px solid black;
     }
