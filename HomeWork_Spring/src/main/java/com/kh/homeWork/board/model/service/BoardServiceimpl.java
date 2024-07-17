@@ -115,5 +115,25 @@ public class BoardServiceimpl implements BoardService {
 		return bDAO.getRegionListCount(sqlSession,region);
 	}
 
+	@Override
+	public ArrayList<Board> selectBoardListCheckApply(PageInfo pi, int boardTypeNum) {
+		return bDAO.selectBoardListCheckApply(sqlSession,pi,boardTypeNum);
+	}
+
+	@Override
+	public int getListCountCheckApply(int boardTypeNum) {
+		return bDAO.getListCountCheckApply(sqlSession,boardTypeNum);
+	}
+
+	@Override
+	public ArrayList<Board> regionBoardListCheckApply(String region, PageInfo pi2) {
+		return bDAO.regionBoardListCheckApply(sqlSession,region,pi2);
+	}
+
+	@Override
+	public int getRegionListCountCheckApply(String region) {
+		return bDAO.getRegionListCountCheckApply(sqlSession,region);
+	}
+
 
 }

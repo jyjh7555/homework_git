@@ -42,6 +42,14 @@ public interface BoardService {
 
 	int getRegionListCount(String region);
 
+	ArrayList<Board> selectBoardListCheckApply(PageInfo pi, int boardTypeNum);
+
+	int getListCountCheckApply(int boardTypeNum);
+
+	ArrayList<Board> regionBoardListCheckApply(String region, PageInfo pi2);
+
+	int getRegionListCountCheckApply(String region);
+
 
 
 	

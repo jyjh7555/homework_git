@@ -154,7 +154,7 @@
 			    <div class="title-wrapper">
   				
 			        <button type="button" class="domestic-btn border border-1 mt-5 mb-n3" onclick="location.href='${contextPath}/domestic.bo'">전체 보기</button>
-			        <input type="checkbox" name="checkApply" class="border border-1 ml-n3 mt-5 mb-n3"  id="btncheck1" autocomplete="off">
+			        <input type="checkbox" name="checkApply" class="border border-1 ml-n3 mt-5 mb-n3" <c:if test="${checkApply}">checked</c:if> id="btncheck1" autocomplete="off">
 			        <label style="width:200px"class="border-1 mt-5 mb-n3"for="btncheck1">신청가능만</label>
 			        <span id="region-title" style="width:350px">국내 전체</span>
 			    </div>
@@ -306,7 +306,7 @@
          
           $.ajax({
               url: '${contextPath}/regionBoardList.bo',
-              data: { region: region, page: page },
+              data: { region: region, page: page, checkApply: checkApply.checked },
               success: data => {
                   console.log(data);
                   updateTable(data.list);

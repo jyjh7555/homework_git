@@ -156,6 +156,32 @@
  		where delete_yn = 'N' and location = #{region}
 	</select>
  	
-	
+	<select id="selectBoardListCheckApply" resultType="Board">	<!-- 승인가능만 -->
+		select * 
+    	from board
+    		join location using(location_no)
+    	where delete_yn = 'N' and board_type = #{boardTypeNum} and board_no in (select board_no from v_checkApply)
+    	order by board_no desc
+ 	</select>
  	
+ 	<select id="getListCountCheckApply" resultType="_int">
+ 		select count(*)
+ 		from board
+ 		where delete_yn = 'N' and board_type = #{boardTypeNum} and board_no in (select board_no from v_checkApply)
+	</select>
+ 	
+ 	<select id="regionBoardListCheckApply" resultType="Board">	<!-- 승인가능에이작스 -->
+ 		select *
+ 		from board
+ 			join location using(location_no)
+ 		where location = #{region} and board_type != 3 and delete_yn='N' and board_no in (select board_no from v_checkApply)
+ 		order by board_no desc
+ 	</select>
+ 	
+ 	<select id="getRegionListCountCheckApply" resultType="_int">
+ 		select count(*)
+ 		from board
+ 			join location using(location_no)
+ 		where delete_yn = 'N' and location = #{region} and board_no in (select board_no from v_checkApply)
+	</select>
 </mapper>

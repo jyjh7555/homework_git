@@ -68,13 +68,25 @@ public class BoardController {
 		default:
 			return "errorPage";
 		}
-
-		int listCount = bService.getListCount(boardTypeNum);
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 5);
+		
+		int listCount= 0;
+		PageInfo pi= null;
+		if(checkApply) {
+			listCount = bService.getListCountCheckApply(boardTypeNum);
+			pi = Pagination.getPageInfo(currentPage, listCount, 5);
+		}else {
+			listCount = bService.getListCount(boardTypeNum);
+			pi = Pagination.getPageInfo(currentPage, listCount, 5);
+		}
 		
 		
-		ArrayList<Board> list = bService.selectBoardList(pi,boardTypeNum);
-
+		ArrayList<Board> list = null;
+		if(checkApply) {
+			list = bService.selectBoardListCheckApply(pi,boardTypeNum);
+			model.addAttribute("checkApply", checkApply);
+ 		}else {
+			list = bService.selectBoardList(pi,boardTypeNum);
+		}
 		
 		if(list !=null) {
 			model.addAttribute("list",list);
@@ -278,15 +290,30 @@ public class BoardController {
 	@RequestMapping("regionBoardList.bo")
 	public void regionBoardList(HttpServletResponse response,
 								@RequestParam(value = "region", required = false) String region,
-								@RequestParam(value = "page", defaultValue = "1") int currentPage) {
+								@RequestParam(value = "page", defaultValue = "1") int currentPage,
+								@RequestParam(value = "checkApply", defaultValue="false") boolean checkApply) {
 		
 		System.out.println("첫부분");
-	    int listCount = bService.getRegionListCount(region);
-	    PageInfo pi2 = Pagination.getPageInfo(currentPage, listCount,5);
+		
+		int listCount = 0;
+		PageInfo pi2 = null;
+		if(checkApply) {
+			listCount = bService.getRegionListCountCheckApply(region);
+		    pi2 = Pagination.getPageInfo(currentPage, listCount,5);
+		}else {
+			listCount = bService.getRegionListCount(region);
+		    pi2 = Pagination.getPageInfo(currentPage, listCount,5);
+		}
+		
   
-  
-  
-  		ArrayList<Board> list = bService.regionBoardList(region,pi2);
+	    ArrayList<Board> list = null;
+	    if(checkApply) {
+	    	list = bService.regionBoardListCheckApply(region,pi2);
+	    }else {
+	    	list = bService.regionBoardList(region,pi2);
+	    }
+  		
+  		
   		for (Board b : list) {
     	  	VolunteerDetail vd = bService.selectVolunteerDetail(b.getBoardNo());
           	if (vd != null) {

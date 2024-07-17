@@ -91,5 +91,27 @@ public class BoardDAO {
 		return sqlSession.selectOne("boardMapper.getRegionListCount",region);
 	}
 
+	public ArrayList<Board> selectBoardListCheckApply(SqlSessionTemplate sqlSession, PageInfo pi, int boardTypeNum) {
+		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.selectBoardListCheckApply",boardTypeNum,rowBounds);
+	}
+
+	public int getListCountCheckApply(SqlSessionTemplate sqlSession, int boardTypeNum) {
+		return sqlSession.selectOne("boardMapper.getListCountCheckApply",boardTypeNum);
+	}
+
+	public ArrayList<Board> regionBoardListCheckApply(SqlSessionTemplate sqlSession, String region, PageInfo pi2) {
+		int offset = (pi2.getCurrentPage() - 1) * pi2.getBoardLimit();
+		RowBounds rowBounds = new RowBounds(offset,pi2.getBoardLimit());
+		
+		return (ArrayList)sqlSession.selectList("boardMapper.regionBoardListCheckApply",region,rowBounds);
+	}
+
+	public int getRegionListCountCheckApply(SqlSessionTemplate sqlSession, String region) {
+		return sqlSession.selectOne("boardMapper.getRegionListCountCheckApply",region);
+	}
+
 
 }
