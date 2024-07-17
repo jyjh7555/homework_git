@@ -333,14 +333,6 @@
                 console.log(false);
              }
              
-/*               let paginationHTML = `
-                  <div class="d-flex flex-row justify-content-end mb-3 w-50 mt-3" style="width:1400px;">
-                      <ul align="center" class="pagination">
-                         <li class="page-item ${pi2.currentPage == 1 ? 'disabled' : ''}">
-                              <a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{pi2.currentPage - 1}')"aria-label="Previous">
-                                  <span aria-hidden="true">&laquo;</span>
-                              </a>
-                          </li>`; */
                let paginationHTML = `
                   <div class="d-flex flex-row justify-content-end mb-3 w-50 mt-3" style="width:1400px;">
                       <ul align="center" class="pagination">`;
@@ -358,7 +350,6 @@
                           
                           
                           
-                          //<li class="page-item ${p == pi2.currentPage ? 'active' : ''}">
               for (let p = pi2.startPage; p <= pi2.endPage; p++) {
             	  paginationHTML += '<li class="page-item ' + (p == pi2.currentPage  ? 'active' : '') + '">';
                   paginationHTML += `<a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{p}')">${'$'}{p}</a> </li>`;
