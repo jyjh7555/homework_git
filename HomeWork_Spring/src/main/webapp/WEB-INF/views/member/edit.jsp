@@ -34,6 +34,7 @@
 	    background-position: center;
 	    background-repeat: no-repeat;
 	    transition: background-color 0.5s ease;
+	    font-family: 'GowunBatang-Regular';
 	    
 	}
 	
@@ -59,7 +60,7 @@
  	</div>
 	<div align="left" class="container border border-5 w-50 mt-5">
 		<main>
-			<div align="center"><label style="margin:20px; margin-left:15px; font-size:48px;"><b>회원정보 수정</b> </label></div>
+			<div align="left"><label style="margin:20px; margin-left:15px; font-size:48px;"><b>회원정보 수정</b> </label></div>
 			<div style="margin-left: 350px; margin-right: 350px;">
 				<form  class="needs-validation" action="${ contextPath }/updateMember.me" method="POST">
 					<div class="row g-3">

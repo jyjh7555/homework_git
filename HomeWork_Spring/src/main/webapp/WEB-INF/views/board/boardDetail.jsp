@@ -10,17 +10,31 @@
 
 
 <style>
-#topAndNavbar {
-			background-image:linear-gradient(
-		        rgba(0, 0, 0, 0.2),
-		        rgba(0, 0, 0, 0.2)
-		      )
-		      ,url('resources/image/topImage.png');
-		    background-size: cover; 
-		    background-position: center;
-		    background-repeat: no-repeat;
-		    transition: background-color 0.5s ease;
+	#topAndNavbar {
+		background-image:linear-gradient(
+	        rgba(0, 0, 0, 0.2),
+	        rgba(0, 0, 0, 0.2)
+	      )
+	      ,url('resources/image/topImage.png');
+	    background-size: cover; 
+	    background-position: center;
+	    background-repeat: no-repeat;
+	    transition: background-color 0.5s ease;
+	    font-family: 'GowunBatang-Regular';
 		}
+		
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
+	
+	#container {
+		font-family: 'Pretendard-Regular';
+	}
+		
+		
 
 </style>
 
@@ -44,7 +58,7 @@
 	
 	
 	
-	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
+	<div id="container" class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
 		<div class="d-flex flex-column justify-content-center mb-3 border border-4 w-50 mt-3 ">
 				<div class="m-4 p-4"style="border-bottom: 1px solid gray; border-top: 5px solid black; ">
 					<b>${b.title }</b>

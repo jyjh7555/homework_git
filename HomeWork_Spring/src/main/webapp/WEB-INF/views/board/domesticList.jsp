@@ -18,6 +18,7 @@
        background-position: center;
        background-repeat: no-repeat;
        transition: background-color 0.5s ease;
+       font-family: 'GowunBatang-Regular';
        
    }
    
@@ -60,19 +61,17 @@
 	    align-items: center;
 	    width: 100%;
 	    margin-left:200px;
-	    max-width: 500px; /* 컨테이너의 최대 너비 설정 */
+	    max-width: 500px; 
 	}
 	
 	#region-title {
-	    font-size: 24px;
+	    font-size: 35px;
 	    font-weight: bold;
 	    color: #505050;
 	    padding: 5px 15px;
-	    border: 3px solid #b4b4b4		;
-	    border-radius: 20px;
 	    display: inline-block;
-	    margin-left: 190px; /* 오른쪽 정렬을 위해 */
-	    background:	#FFCD28	;
+	    margin-left: 190px;
+	    
 	}
 	
 	.domestic-btn {
@@ -97,6 +96,21 @@
 	
 	#d-container {
 		border-color:#E8F5FF;
+	}
+	
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
+	
+	.container {
+		font-family: 'Pretendard-Regular';
+	}
+	
+	.domestic-container {
+		margin-right:50px;
 	}
    
 </style>
@@ -155,7 +169,7 @@
 	               </map> 
 	            </div>
 	               
-	             <div class="domestic-container container text-center w-50 ms-5">
+	             <div class="domestic-container container text-center w-50">
 	                <div class="bd-example">
 	                  <table class="table table-hover">
 	                     <thead>

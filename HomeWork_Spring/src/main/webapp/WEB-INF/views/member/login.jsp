@@ -17,6 +17,7 @@
 	    background-position: center;
 	    background-repeat: no-repeat;
 	    transition: background-color 0.5s ease;
+	    font-family: 'GowunBatang-Regular';
 	}
 		#voulnteer2 {
 			height: 200px;

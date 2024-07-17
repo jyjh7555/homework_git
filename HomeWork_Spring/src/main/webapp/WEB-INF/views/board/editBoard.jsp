@@ -11,17 +11,29 @@
 <!-- 카카오지도 -->
 
 <style>
-#topAndNavbar {
-			background-image:linear-gradient(
-		        rgba(0, 0, 0, 0.2),
-		        rgba(0, 0, 0, 0.2)
-		      )
-		      ,url('resources/image/topImage.png');
-		    background-size: cover; 
-		    background-position: center;
-		    background-repeat: no-repeat;
-		    transition: background-color 0.5s ease;
-		}
+	#topAndNavbar {
+		background-image:linear-gradient(
+	        rgba(0, 0, 0, 0.2),
+	        rgba(0, 0, 0, 0.2)
+	      )
+	      ,url('resources/image/topImage.png');
+	    background-size: cover; 
+	    background-position: center;
+	    background-repeat: no-repeat;
+	    transition: background-color 0.5s ease;
+	    font-family: 'GowunBatang-Regular';
+	}
+	
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
+	
+	#form {
+		font-family: 'Pretendard-Regular';
+	}
 
 </style>
 
