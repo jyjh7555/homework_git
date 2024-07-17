@@ -167,19 +167,58 @@
 	    		</div>
 	  		</div>
 		</div>
-    <script>      
+     <script>
     function goBack() {
-        location.href="admin.me";
+        location.href = "admin.me";
     }
+    
     window.onload = () => {
-
-        // 후기게시판 댓글 관련
         const replyButton = document.getElementById('replyButton');
         const replyTable = document.getElementById('replyTable');
+
+        function setDeleteEventListeners() {
+            let replyAlters = document.querySelectorAll('td a');
+
+            replyAlters.forEach(replyAlter => {
+                let beforeCon = replyAlter.parentElement.parentElement.nextElementSibling.children[0];
+                let beforeConVal = replyAlter.parentElement.parentElement.nextElementSibling.children[0].innerText;
+
+                if (replyAlter.innerText == '삭제') {
+                    replyAlter.addEventListener('click', function () {
+                        const updateReplyNoTag = this.parentElement.parentElement.nextElementSibling.nextElementSibling;
+                        const updateReplyNo = updateReplyNoTag.value;
+
+                        $.ajax({
+                            url: '${contextPath}/adminDeleteReply.ad',
+                            data: { replyNo: updateReplyNo },
+                            success: data => {
+                                updateReplyNoTag.previousElementSibling.remove();
+                                updateReplyNoTag.previousElementSibling.remove();
+                                updateReplyNoTag.remove();
+                            },
+                            error: data => console.log('안됨')
+                        });
+                    });
+                } else if (replyAlter.innerText == '취소') {
+                    console.log(updateReplyNo);
+                    this.innerText = '삭제';
+                    this.previousElementSibling.innerText = '수정';
+                    $.ajax({
+                        url: '${contextPath}/selectOneReply.bo',
+                        data: { replyNo: updateReplyNo },
+                        success: data => {
+                            beforeCon.innerHTML = '<td colspan="3">' + data.content + '</td>';
+                        },
+                        error: data => console.log('안됨')
+                    });
+                }
+            });
+        }
+
         if (${b.boardType == '3'}) {
             replyButton.addEventListener('click', function () {
                 $.ajax({
-                    url: '${contextPath}/insertReply.bo',
+                    url: '${contextPath}/adminInsertReply.ad',
                     data: {
                         content: document.getElementById('replyContent').value,
                         nickName: '${loginUser.nickName}',
@@ -187,16 +226,12 @@
                         memberNo: '${loginUser.memberNo}'
                     },
                     success: data => {
-                        console.log(data, typeof data);
-
                         document.getElementById('replyContent').value = '';
                         replyTable.innerHTML = '';
                         let reviewList = '';
                         let check = '';
 
-                        for (r of data) {
-                            console.log(r.replyNo);
-                            console.log('여기위가 내가체크하려는거임');
+                        for (let r of data) {
                             if (r.memberNo == ${loginUser.memberNo}) {
                                 check = '<a class="fs-6">삭제</a>';
                             } else {
@@ -207,60 +242,24 @@
                                 '<td width="150px"><b>' + r.nickName + '</b></td>' +
                                 '<td style="width:60%; font-size:12px; padding-top:15px">' + r.updateDate + '</td>' +
                                 '<td width="150px"></td>' +
-                                check +
+                                '<td width="150px">' + check + '</td>' +
                                 '</tr>' +
                                 '<tr style="border-bottom: 1px solid #E3E3E3;">' +
                                 '<td colspan="3">' + r.content + '</td>' +
                                 '</tr>' +
                                 '<input type="hidden" name="replyNo" value="' + r.replyNo + '"/>';
 
-
                             replyTable.innerHTML += reviewList;
-
                         }
-                        setDeleteEventListeners(); // 새로 추가된 댓글에 대해 삭제 이벤트 리스너 설정
+                        setDeleteEventListeners();
                     },
                     error: data => console.log('실패~')
                 });
             });
 
             setDeleteEventListeners();
-
-            function setDeleteEventListeners() {
-                let replyAlters = document.querySelectorAll('td a');
-
-                replyAlters.forEach(replyAlter => {
-                    let beforeCon = replyAlter.parentElement.parentElement.nextElementSibling.children[0];
-                    let beforeConVal = replyAlter.parentElement.parentElement.nextElementSibling.children[0].innerText;
-                    console.log(replyAlter.innerText);
-
-                    if (replyAlter.innerText == '삭제') {
-                        replyAlter.addEventListener('click', function () {
-                            const updateReplyNoTag = this.parentElement.parentElement.nextElementSibling.nextElementSibling;
-                            const updateReplyNo = this.parentElement.parentElement.nextElementSibling.nextElementSibling.value;
-                            if (replyAlter.innerText == '삭제') {
-                                $.ajax({
-                                    url: '${contextPath}/deleteReply.bo',
-                                    data: { replyNo: updateReplyNo },
-                                    success: data => {
-                                        console.log(data);
-                                        console.log(updateReplyNoTag)
-                                        updateReplyNoTag.previousElementSibling.remove();
-                                        updateReplyNoTag.previousElementSibling.remove();
-                                        updateReplyNoTag.remove();
-                                    },
-                                    error: data => console.log('안됨')
-                                });
-                            }
-                        });
-                    }
-                });
-            }
         }
-    };
-
-
-    
+    }
 
     </script>
 </body>
