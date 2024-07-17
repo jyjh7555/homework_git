@@ -292,7 +292,7 @@
 	<select id="globalAmount" resultType="_int">
 		select COALESCE(SUM(amount), 0)
 		from pay
-		where product = '해외건축후원하기'
+		where product = '해외건축후원'
 	</select>
 	
 	<select id="adminVolunteerList" resultType="Volunteer">

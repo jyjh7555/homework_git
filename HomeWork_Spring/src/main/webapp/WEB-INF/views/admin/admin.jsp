@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>관리자 페이지</title>
 <script src="https://code.jquery.com/jquery-3.6.1.min.js"></script>
 <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
@@ -60,11 +60,16 @@
             box-shadow: 3px 3px 5px rgba(0, 0, 0, 0.1); /* 그리드 컨테이너 그림자 */
             margin-top: 20px;
             width:90%;
+            
         }
-
+	.userInfo, .searchResult td{
+		cursor: pointer;
+	}
     .userInfo div {
             margin-bottom: 10px;
         }
+    .menubar{
+    	cursor: pointer;}
 	
 	table{
 		text-align: center;
@@ -126,29 +131,29 @@
 			<div style="border:1px solid skyblue; background:skyblue; height:32px"><a onClick="window.location.reload()">통계</a></div>
 			
 			<div class="mainCate" style="margin-top:10px" >회원정보관리</div>
-				<ul class="hidden" style="list-style-type:none; text-align:left;">
+				<ul class="menubar hidden" style="list-style-type:none; text-align:left;">
 					<li id="user1">회원 정보 조회</li>
 					<li id="user2">회원 정보 수정</li>
 					<li id="user3">회원 탈퇴</li>
 				</ul>
 			
 			<div class=mainCate>후원정보관리</div>
-				<ul class="hidden" style="list-style-type:none; text-align:left;">
+				<ul class="menubar hidden" style="list-style-type:none; text-align:left;">
 					<li id="support1">후원 목록</li>
 					
 				</ul>
 			<div class=mainCate>게시판관리</div>
-				<ul class="hidden" style="list-style-type:none; text-align:left;">
+				<ul class="menubar hidden" style="list-style-type:none; text-align:left;">
 					<li id="board1">국내게시판</li>
 					<li id="board2">해외게시판</li>
 					<li id="board3">후기게시판</li>
 				</ul>
 			<div class=mainCate>봉사신청관리</div>
-				<ul class="hidden" style="list-style-type:none; text-align:left;">
+				<ul class="menubar hidden" style="list-style-type:none; text-align:left;">
 					<li id="volunteer1">
 						봉사대기목록
 						<button type="button" class="btn btn-danger btn-sm">
-						 	 <span class="badge text-bg-danger " id="volunteerApplicant"></span>
+						 	 <span class="badge rounded-pill text-bg-danger" id="volunteerApplicant"></span>
 						</button>
 					</li>
 					<li id="volunteer2">승인목록</li>
@@ -161,12 +166,12 @@
 			<div style="border:2px solid #CCCCCC; height:40px">
 			<form id="searchForm">
    				 <select id="searchType">
-					<option value="member_No">회원번호</option>
 					<option value="member_name">회원이름</option> 
+					<option value="member_No">회원번호</option>
 					<option value="nickName">닉네임</option> 
 				</select>
 				<input type="text" placeholder="회원정보 입력" style="width:35%" id="searchText">
-				<button type="button" onclick="searchMember()">검색</button><br>
+				<button id="searchBtn" type="button" onclick="searchMember()">검색</button><br>
 			</form>
 			</div>
 			
@@ -1581,6 +1586,12 @@
 			 document.getElementById('volunteerRafusalList').classList.add('hidden');
 			 document.getElementById('infoList').classList.add('hidden');
 		}
+		document.getElementById('searchText').addEventListener('keydown', function(event) {
+            if (event.key === 'Enter') {
+                event.preventDefault(); 
+                document.getElementById('searchBtn').click();
+            }
+        });
 		
 		function searchMember() {
 	        var searchType = document.getElementById('searchType').value;
