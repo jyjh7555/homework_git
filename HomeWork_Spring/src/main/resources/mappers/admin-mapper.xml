@@ -280,7 +280,7 @@
 	
 	<select id="totalBoard" resultType="_int">
 		select count(*)
-		from board
+		from volunteer_detail
 	</select>
 	
 	<select id="domesticAmount" resultType="_int">
@@ -351,5 +351,29 @@
 			join volunteer_detail d on v.volunteer_no = d.volunteer_no
             join board b on b.board_no = d.board_no
         where v.status = 'N' 
+ 	</select>
+ 	
+ 	<select id="adminSelectVolunteer" resultType="board">
+ 		select title, location, category, start_date, end_date
+ 		from board b
+ 			join location l on (b.location_no = l.location_no)
+ 			join volunteer_detail vd on (b.board_no=vd.board_no)
+ 			join volunteer v on(vd.volunteer_no = v.volunteer_no)
+		where status = 'Y'
+		and sysdate > end_date
+ 	</select>
+ 	
+ 	<select id="startVolunteer" resultType="_int">
+ 		select
+    	count(board_no)
+		from volunteer_detail
+		where sysdate > start_date
+ 	</select>
+ 	
+ 	<select id="endVolunteer" resultType="_int">
+ 		select
+    	count(board_no)
+		from volunteer_detail
+		where sysdate > end_date
  	</select>
 </mapper>

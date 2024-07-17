@@ -29,4 +29,7 @@ public class Board {
 	private int nowCount;
 	private Date recruitStart;
 	private Date recruitEnd;
+	private String category;
+	private Date startDate;
+	private Date endDate;
 }

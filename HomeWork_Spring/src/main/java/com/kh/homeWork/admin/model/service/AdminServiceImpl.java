@@ -241,6 +241,21 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.adminRafusalVolunteerList(sqlSession, pi);
 	}
 
+	@Override
+	public ArrayList<Board> adminSelectVolunteer(int memberNo) {
+		return aDAO.adminSelectVolunteer(sqlSession, memberNo);
+	}
+
+	@Override
+	public int startVolunteer() {
+		return aDAO.startVolunteer(sqlSession);
+	}
+
+	@Override
+	public int endVolunteer() {
+		return aDAO.endVolunteer(sqlSession);
+	}
+
 
 	
 

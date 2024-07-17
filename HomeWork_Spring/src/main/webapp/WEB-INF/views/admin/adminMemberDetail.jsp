@@ -256,7 +256,7 @@
 						</div>
 			        	<div class="col-12">
 						<label for="volunteer" class="form-label" id="volunteerList">
-						봉사활동정보
+						완료한 봉사활동정보
 						<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-caret-down-square-fill" viewBox="0 0 16 16">
  								<path d="M0 2a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H2a2 2 0 0 1-2-2zm4 4a.5.5 0 0 0-.374.832l4 4.5a.5.5 0 0 0 .748 0l4-4.5A.5.5 0 0 0 12 6z"/>
 						</svg>
@@ -264,19 +264,21 @@
 						<table class="hidden table table-hover" id="volunteerTable">
 							<thead>
 								<tr>
-									<th width="20px"></th>
-									<th width="40px"></th>
-									<th width="80px"></th>
-									<th width="100px"></th>
+									<th width="20px">제목</th>
+									<th width="40px">지역</th>
+									<th width="80px">카테고리</th>
+									<th width="100px">봉사기간</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>b</td>
-									<td>l</td>
-									<td>v</td>
-									<td>c</td>
-								</tr>
+								<c:forEach items="${ b }" var="b">
+									<tr>
+										<td>${ b.title }</td>
+										<td>${ b.location }</td>
+										<td>${ b.category }</td>
+										<td>${ b.startDate } ~ ${b.endDate }</td>
+									</tr>
+								</c:forEach>
 							</tbody>
 						</table>
 	            <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" align="center">

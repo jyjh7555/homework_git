@@ -95,6 +95,12 @@ public interface AdminService {
 
 	ArrayList<Volunteer> adminRafusalVolunteerList(PageInfo pi);
 
+	ArrayList<Board> adminSelectVolunteer(int memberNo);
+
+	int startVolunteer();
+
+	int endVolunteer();
+
 	
 
 

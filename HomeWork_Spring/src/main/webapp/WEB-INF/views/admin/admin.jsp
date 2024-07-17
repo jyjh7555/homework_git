@@ -52,7 +52,7 @@
 	
 	
 	
-	.userInfo, .userUpdate, .userDelete, .supportPage, .searchResult, .infoList, .volunteer, {
+	.userInfo, .userUpdate, .userDelete, .supportPage, .searchResult, .infoList, .volunteer, .volunteerApprove, .volunteerRafusal {
             
             padding: 20px;
             border: 1px solid #ddd;
@@ -193,8 +193,20 @@
 				                    <td id="inactiveMembers"></td>
 				                </tr>
 				                <tr>
-				                    <td>총 게시물 수</td>
+				                    <td>총 봉사활동 수</td>
 				                    <td id="totalBoard"></td>
+				                </tr>
+				                <tr>
+				                    <td>대기중인 봉사활동 수</td>
+				                    <td id="startVolunteer"></td>
+				                </tr>
+				                <tr>
+				                    <td>진행중인 봉사활동 수</td>
+				                    <td id="proceedingVolunteer"></td>
+				                </tr>
+				                <tr>
+				                    <td>종료된 봉사활동 수</td>
+				                    <td id="endVolunteer"></td>
 				                </tr>
 				                
 				                <tr>
@@ -395,7 +407,7 @@
 					    </tfoot>
 					</table>
 					</div>
-					<div class="volunteer hidden" id="volunteerApproveList">
+					<div class="volunteerApprove hidden" id="volunteerApproveList">
 					<table id="volunteerApproveTable">
 						<thead>
 							<tr>
@@ -423,8 +435,8 @@
 					    </tfoot>
 					</table>
 					</div>
-					<div class="volunteer hidden" id="volunteerRafusalList">
-					<table id="volunteerRefusalTable">
+					<div class="volunteerRafusal hidden" id="volunteerRafusalList">
+					<table id="volunteerRafusalTable">
 						<thead>
 							<tr>
 								<th width="10%">봉사번호</th>
@@ -496,12 +508,14 @@
                 document.getElementById('totalMembers').innerText = data.totalMember+"명";
                 document.getElementById('activeMembers').innerText = data.activeMember+"명";
                 document.getElementById('inactiveMembers').innerText = data.inactiveMember+"명";
-                document.getElementById('totalBoard').innerText = data.totalBoard+"개";
+                document.getElementById('totalBoard').innerText = data.totalBoard+"건";
                 document.getElementById('totalAmount').innerText = data.totalAmount+"원";
                 document.getElementById('domesticAmount').innerText = data.domesticAmount+"원";
                 document.getElementById('globalAmount').innerText = data.globalAmount+"원";
                 document.getElementById('volunteerApplicant').innerText = data.volunteerApplicant;
-                document.getElementById('volunteerApplicant').innerText = data.volunteerApplicant;
+                document.getElementById('startVolunteer').innerText = data.startVolunteer+"건";
+                document.getElementById('endVolunteer').innerText = data.endVolunteer+"건";
+                document.getElementById('proceedingVolunteer').innerText = data.proceedingVolunteer+"건";
                 
             },
             error: function(error) {
@@ -1144,7 +1158,6 @@
 		                        approveBtn.name = 'volunteerStatusButton';
 		                        approveBtn.id = 'approveBtn';
 		                        approveBtn.addEventListener('click', function() {
-		                            //updateStatus(v.volunteerNo, 'Y', statusTd);
 		                        	$('#modalApprove').modal('show');
 		                        	document.getElementById('modalApprove').dataset.volunteerNo = v.volunteerNo;
 		                        	document.getElementById('modalApprove').dataset.memberNo = v.memberNo;
@@ -1159,7 +1172,6 @@
 		                        refusalBtn.name = 'volunteerStatusButton';
 		                        refusalBtn.id = `refusalBtn`
 		                        refusalBtn.addEventListener('click', function() {
-		                            //updateStatus(v.volunteerNo, 'N', statusTd);
 		                        	$('#modalRefusal').modal('show');
 		                        	document.getElementById('modalRefusal').dataset.volunteerNo = v.volunteerNo;
 		                        	document.getElementById('modalRefusal').dataset.memberNo = v.memberNo;
@@ -1233,8 +1245,8 @@
 				    
 				    
 				    function loadPage6(page) {
+						currentPage = page;
 				        const url = '${contextPath}/adminVolunteerApproveList.ad?page=' + page + '&size=' + pageSize;
-				
 				        $.ajax({
 				            url: url,
 				            method: 'GET',
@@ -1284,7 +1296,6 @@
 				                        refusalBtn.name = 'volunteerStatusButton';
 				                        refusalBtn.id = `refusalBtn`
 				                        refusalBtn.addEventListener('click', function() {
-				                            //updateStatus(v.volunteerNo, 'N', statusTd);
 				                        	$('#modalRefusal').modal('show');
 				                        	document.getElementById('modalRefusal').dataset.volunteerNo = v.volunteerNo;
 				                        	document.getElementById('modalRefusal').dataset.memberNo = v.memberNo;
@@ -1303,28 +1314,26 @@
 				
 				                    const pagination = document.getElementById('pagination6');
 				                    pagination.innerHTML = '';
-				
+	
 				                    if (data.maxPage > 1) {
 				                        for (let i = 1; i <= data.maxPage; i++) {
-				                            const pageItem = document.createElement('li');
-				                            pageItem.classList.add('page-item');
+				                        	const pageItem = document.createElement('li');
+				                        	pageItem.classList.add('page-item');
 				                            const pageLink = document.createElement('a');
 				                            pageLink.classList.add('page-link');
 				                            pageLink.href = '#';
 				                            pageLink.innerText = i;
-				                            (function(pageNumber) {
-				                                pageLink.addEventListener('click', function(event) {
-				                                    event.preventDefault();
-				                                    loadPage6(pageNumber);
-				                                });
-				                            })(i);
-				
-				                            if (i === page) {
+				                            pageLink.addEventListener('click', function(event) {
+				                                event.preventDefault();
+				                                loadPage6(i);
+				                            });
+	
+				                            if (i === currentPage) {
 				                                pageItem.classList.add('active');
 				                            } else {
 				                                pageItem.classList.remove('active');
 				                            }
-				                            pageItem.append(pageLink);
+											pageItem.append(pageLink)		
 				                            pagination.append(pageItem);
 				                        }
 				                    }
@@ -1337,8 +1346,8 @@
 				            }
 				        });
 				    }
-				
-				    loadPage6(currentPage);
+	
+				    loadPage6(currentPage); 
 				});
 		 
 			 document.getElementById('volunteer3').addEventListener('click', function() {
@@ -1394,7 +1403,6 @@
 				                        approveBtn.name = 'volunteerStatusButton';
 				                        approveBtn.id = 'approveBtn';
 				                        approveBtn.addEventListener('click', function() {
-				                            //updateStatus(v.volunteerNo, 'Y', statusTd);
 				                        	$('#modalApprove').modal('show');
 				                        	document.getElementById('modalApprove').dataset.volunteerNo = v.volunteerNo;
 				                        	document.getElementById('modalApprove').dataset.memberNo = v.memberNo;
@@ -1409,7 +1417,6 @@
 				                        refusalBtn.name = 'volunteerStatusButton';
 				                        refusalBtn.id = `refusalBtn`
 				                        refusalBtn.addEventListener('click', function() {
-				                            //updateStatus(v.volunteerNo, 'N', statusTd);
 				                        	$('#modalRefusal').modal('show');
 				                        	document.getElementById('modalRefusal').dataset.volunteerNo = v.volunteerNo;
 				                        	document.getElementById('modalRefusal').dataset.memberNo = v.memberNo;
@@ -1426,30 +1433,28 @@
 				                        tbody.append(tr);
 				                    });
 				
-				                    const pagination = document.getElementById('pagination6');
+				                    const pagination = document.getElementById('pagination7');
 				                    pagination.innerHTML = '';
-				
+	
 				                    if (data.maxPage > 1) {
 				                        for (let i = 1; i <= data.maxPage; i++) {
-				                            const pageItem = document.createElement('li');
-				                            pageItem.classList.add('page-item');
+				                        	const pageItem = document.createElement('li');
+				                        	pageItem.classList.add('page-item');
 				                            const pageLink = document.createElement('a');
 				                            pageLink.classList.add('page-link');
 				                            pageLink.href = '#';
 				                            pageLink.innerText = i;
-				                            (function(pageNumber) {
-				                                pageLink.addEventListener('click', function(event) {
-				                                    event.preventDefault();
-				                                    loadPage7(pageNumber);
-				                                });
-				                            })(i);
-				
-				                            if (i === page) {
+				                            pageLink.addEventListener('click', function(event) {
+				                                event.preventDefault();
+				                                loadPage7(i);
+				                            });
+	
+				                            if (i === data.currentPage) {
 				                                pageItem.classList.add('active');
 				                            } else {
 				                                pageItem.classList.remove('active');
 				                            }
-				                            pageItem.append(pageLink);
+											pageItem.append(pageLink)		
 				                            pagination.append(pageItem);
 				                        }
 				                    }
@@ -1462,8 +1467,8 @@
 				            }
 				        });
 				    }
-				
-				    loadPage7(currentPage);
+	
+				    loadPage7(currentPage); 
 				});
 		 
 			 

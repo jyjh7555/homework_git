@@ -382,8 +382,11 @@ public class AdminController {
 		Member m = aService.adminSelectMember(memberNo);	
 		ArrayList<Pay> pay = aService.adminSelectPay(memberNo);
 		
+		ArrayList<Board> b = aService.adminSelectVolunteer(memberNo);
+		
 		session.setAttribute("m", m);
 		session.setAttribute("pay", pay);
+		session.setAttribute("b", b);
 		
 		
 		return "adminMemberDetail";
@@ -417,6 +420,9 @@ public class AdminController {
 		int globalAmount = aService.globalAmount();
 		int totalAmount = globalAmount + domesticAmount; 
 		int volunteerApplicant = aService.volunteerApplicant();
+		int startVolunteer = aService.startVolunteer();
+		int endVolunteer = aService.endVolunteer();
+		int proceedingVolunteer = totalBoard-startVolunteer-endVolunteer; 
 		
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson = gb.create();
@@ -431,6 +437,9 @@ public class AdminController {
 	    result.put("domesticAmount", domesticAmount);
 	    result.put("globalAmount", globalAmount);
 	    result.put("volunteerApplicant", volunteerApplicant);
+	    result.put("proceedingVolunteer", proceedingVolunteer);
+	    result.put("startVolunteer", startVolunteer);
+	    result.put("endVolunteer", endVolunteer);
 	    
 		try {
 			gson.toJson(result, response.getWriter());
@@ -449,7 +458,6 @@ public class AdminController {
 							    ) {
 	    
 		int listCount = aService.getListCountVolunteer();
-		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
 		
 		ArrayList<Volunteer> list = aService.adminVolunteerList(pi);
@@ -460,7 +468,6 @@ public class AdminController {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 	    result.put("volunteer", list);
 	    result.put("maxPage", pi.getMaxPage()); 
-	    result.put("currentPage", pi.getCurrentPage());
 	    result.put("currentPage", pi.getCurrentPage());
 		try {
 			gson.toJson(result, response.getWriter());
@@ -479,11 +486,13 @@ public class AdminController {
 							    ) {
 	    
 		int listCount = aService.getListCountVolunteerY();
-		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
+		
+		System.out.println(pi);
 		
 		ArrayList<Volunteer> list = aService.adminApproveVolunteerList(pi);
 		System.out.println(list);
+		
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson = gb.create();
 		response.setContentType("application/json; charset=UTF-8");
@@ -491,7 +500,6 @@ public class AdminController {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 	    result.put("volunteer", list);
 	    result.put("maxPage", pi.getMaxPage()); 
-	    result.put("currentPage", pi.getCurrentPage());
 	    result.put("currentPage", pi.getCurrentPage());
 		try {
 			gson.toJson(result, response.getWriter());
@@ -510,7 +518,6 @@ public class AdminController {
 							    ) {
 	    
 		int listCount = aService.getListCountVolunteerN();
-		System.out.println(listCount);
 		PageInfo pi = Pagination.getPageInfo(page, listCount, 5);
 		
 		ArrayList<Volunteer> list = aService.adminRafusalVolunteerList(pi);
@@ -522,7 +529,6 @@ public class AdminController {
 		HashMap<String, Object> result = new HashMap<String, Object>();
 	    result.put("volunteer", list);
 	    result.put("maxPage", pi.getMaxPage()); 
-	    result.put("currentPage", pi.getCurrentPage());
 	    result.put("currentPage", pi.getCurrentPage());
 		try {
 			gson.toJson(result, response.getWriter());

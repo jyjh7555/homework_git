@@ -195,7 +195,7 @@ public class AdminDAO {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("adminMapper.adminApproveVolunteerList");
+		return (ArrayList)sqlSession.selectList("adminMapper.adminApproveVolunteerList", null, rowBounds);
 	}
 
 	public int getListCountVolunteerN(SqlSessionTemplate sqlSession) {
@@ -206,7 +206,19 @@ public class AdminDAO {
 		int offset = (pi.getCurrentPage() - 1) * pi.getBoardLimit();
 		RowBounds rowBounds = new RowBounds(offset,pi.getBoardLimit());
 		
-		return (ArrayList)sqlSession.selectList("adminMapper.adminRafusalVolunteerList");
+		return (ArrayList)sqlSession.selectList("adminMapper.adminRafusalVolunteerList", null, rowBounds);
+	}
+
+	public ArrayList<Board> adminSelectVolunteer(SqlSessionTemplate sqlSession, int memberNo) {
+		return (ArrayList)sqlSession.selectList("adminMapper.adminSelectVolunteer", memberNo);
+	}
+
+	public int startVolunteer(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.startVolunteer");
+	}
+
+	public int endVolunteer(SqlSessionTemplate sqlSession) {
+		return sqlSession.selectOne("adminMapper.endVolunteer");
 	}
 
 	
