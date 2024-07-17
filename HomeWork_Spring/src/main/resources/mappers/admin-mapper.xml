@@ -367,7 +367,7 @@
  		select
     	count(board_no)
 		from volunteer_detail
-		where sysdate > start_date
+		where sysdate <![CDATA[<]]> start_date
  	</select>
  	
  	<select id="endVolunteer" resultType="_int">
