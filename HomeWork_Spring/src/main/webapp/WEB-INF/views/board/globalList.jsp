@@ -142,39 +142,41 @@
 			        	</table>
 	       			</div>
 
-				<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
-						<div  align="center" class="d-flex flex-row align-items-center justify-content-center mb-3  w-50 mt-3 " style="width:1400px;">
-				       		<ul class="pagination">
-					            <li class="page-item">
-					            	<c:url var="goBack" value="${ loc }">
-				        				<c:param name="page" value="${ pi.currentPage -1 }"/>
-				        			</c:url>
-					            	<a class="page-link" href="${ goBack }" aria-label="Previous">
-					            		<span aria-hidden="true">&laquo;</span>
-					              	</a>
-					            </li>
-					            <c:forEach begin="${pi.startPage }" end="${pi.endPage }" var="p">
-					            	<c:url var="goNum" value="${ loc }">
-					            		<c:param name="page" value="${ p }"/>
-					            	</c:url>
-					            	<li class="page-item"><a class="page-link" href="${ goNum }">${ p }</a></li>		            	
-					            </c:forEach>
-					            <li class="page-item">
-					            	<c:url var="goNext" value="${ loc }">
-					            		<c:param name="page" value="${ pi.currentPage +1 }"/>
-					            	</c:url>
-					            	<a class="page-link" href="${ goNext }" aria-label="Next">
-					            		<span aria-hidden="true">&raquo;</span>
-					            	</a>
-					            </li>
-				    		</ul>
-		      	  
-		
-							<c:if test="${ !empty loginUser }">
-					        	<button class="btn btn-sm btn-outline-success ms-3" style="margin-bottom:15px; width:70px; height:40px; border-radius:16px;font-size:12px;" type="button" onclick="location.href='${ contextPath }/writeBoard.bo'">글쓰기</button>
-					        </c:if>
-			 			</div>
-				 </div>
+					 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
+							<div class="d-flex flex-row justify-content-end mb-3  w-50 mt-3 " style="width:1400px;">
+					       		<ul align="center"class="pagination">
+						            <li class="page-item ${pi.currentPage == pi.startPage ? 'disabled' : '' }">
+						            	<c:url var="goBack" value="${ loc }">
+					        				<c:param name="page" value="${ pi.currentPage -1 }"/>
+					        			</c:url>
+						            	<a class="page-link" href="${ goBack }" aria-label="Previous">
+						            		<span aria-hidden="true">&laquo;</span>
+						              	</a>
+						            </li>
+						            <c:forEach begin="${pi.startPage }" end="${pi.endPage }" var="p">
+						            	<c:url var="goNum" value="${ loc }">
+						            		<c:param name="page" value="${ p }"/>
+						            	</c:url>
+						            	<li class="page-item ${p == pi.currentPage ? 'active' : '' }"><a class="page-link" href="${ goNum }">${ p }</a></li>		            	
+						            </c:forEach>
+						            <li class="page-item ${ pi.currentPage == pi.endPage ? 'disabled' : '' }">
+						            	<c:url var="goNext" value="${ loc }">
+						            		<c:param name="page" value="${ pi.currentPage +1 }"/>
+						            	</c:url>
+						            	<a class="page-link" href="${ goNext }" aria-label="Next">
+						            		<span aria-hidden="true">&raquo;</span>
+						            	</a>
+						            </li>
+					    		</ul>
+					    		
+			      	  
+			      	  
+			
+								<c:if test="${ !empty loginUser }">
+						        	<button class="btn btn-sm btn-outline-success ms-3" style="width:70px; height:40px; border-radius:16px;font-size:12px;" type="button" onclick="location.href='${ contextPath }/writeBoard.bo'">글 작성</button>
+						        </c:if>
+				 			</div>
+					 	</div>
 				 	
 				 	
  			</div>
@@ -282,58 +284,60 @@
 		    }
 		}
 		
-		function updatePagination(pi2, region) {
-		    const paginationContainer = document.querySelector('.d-flex.justify-content-center.align-items-center.vh-30.row-gap-3');
+	      function updatePagination(pi2, region) {
+	          const paginationContainer = document.querySelector('.d-flex.justify-content-center.align-items-center.vh-30.row-gap-3');
 
-	        
-		    if (paginationContainer) {
-		    	console.log(pi2.currentPage);
-		    	console.log(pi2.startPage);
-		    	console.log(pi2.maxPage);
-		    	if(pi2.currentPage == pi2.startPage){
-		    		console.log(true);
-		    	} else {
-		    		console.log(false);
-		    	}
-		    	
+	           
+	          if (paginationContainer) {
+	             if(pi2.currentPage == pi2.startPage){
+	                console.log(true);
+	             } else {
+	                console.log(false);
+	             }
+	             
+	               let paginationHTML = `
+	                  <div class="d-flex flex-row justify-content-end mb-3 w-50 mt-3" style="width:1400px;">
+	                      <ul align="center" class="pagination">`;
+	             
+	                         paginationHTML += '<li class="page-item ' + (pi2.currentPage == 1 ? 'disabled' : '') + '">';
+	                         
+	                         paginationHTML += `<a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{pi2.currentPage - 1}')"aria-label="Previous">
+	                                  <span aria-hidden="true">&laquo;</span>
+	                              </a>
+	                          </li>`;
+	                             
 
-               let paginationHTML = `
-         			<div class="d-flex flex-row justify-content-center mb-3 w-50 mt-3" style="width:1400px;">
-             			<ul align="center" class="pagination">`;
-             
-             				paginationHTML += '<li class="page-item ' + (pi2.currentPage == 1 ? 'disabled' : '') + '">';
-             				
-             				paginationHTML += `<a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{pi2.currentPage - 1}')"aria-label="Previous">
-                         			<span aria-hidden="true">&laquo;</span>
-                    			 </a>
-                 			</li>`;
-                    			
-                 			
-                 			
-		        for (let p = pi2.startPage; p <= pi2.endPage; p++) {
-		            paginationHTML += `
-		                <li class="page-item ${p == pi2.currentPage ? 'active' : ''}">
-		            		<a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{p}')">${'$'}{p}</a> 
-		                </li>`;
-		            
-		        }
-		        
-		       	    paginationHTML += '<li class="page-item ' + (pi2.currentPage == pi2.maxPage ? 'disabled' : '') + '">';
-					paginationHTML += `
-		                        <a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{pi2.currentPage + 1}')" aria-label="Next">
-		                            <span aria-hidden="true">&raquo;</span>
-		                        </a>
-		                    </li>
-		                </ul>
-		            </div>`;
-				
-		        paginationContainer.innerHTML = paginationHTML;
-		        console.log('Pagination HTML:', paginationHTML);
-				
-		        
-		        
-		    }
-		}
+	               
+	                          
+	                          
+	                          
+	                          
+	              for (let p = pi2.startPage; p <= pi2.endPage; p++) {
+	            	  paginationHTML += '<li class="page-item ' + (p == pi2.currentPage  ? 'active' : '') + '">';
+	                  paginationHTML += `<a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{p}')">${'$'}{p}</a> </li>`;
+	                  
+	              }
+	              
+	                    paginationHTML += '<li class="page-item ' + (pi2.currentPage == pi2.maxPage ? 'disabled' : '') + '">';
+	               		paginationHTML += `
+	                              <a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{pi2.currentPage + 1}')" aria-label="Next">
+	                                  <span aria-hidden="true">&raquo;</span>
+	                              </a>
+	                          </li>
+	                      </ul>
+	                  </div>`;
+	            
+	              paginationContainer.innerHTML = paginationHTML;
+	            
+	            
+	              
+	              
+	              
+	              
+	            
+	              
+	          }
+	      }
 		
 			
 		

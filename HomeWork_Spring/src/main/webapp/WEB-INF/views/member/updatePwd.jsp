@@ -41,6 +41,23 @@
 	    
 	}
 	
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
+	
+	.container {
+		font-family: 'Pretendard-Regular';
+	}
+	
+	.inner-container {
+		max-width:1000px;
+		width:500px;
+		
+	}
+	
 	#voulnteer2 {
 		height: 200px;
 	}
@@ -64,9 +81,9 @@
 	<div class="container w-100 mt-5 d-flex justify-content-center">
 		<main>
 				<div class="col-md-6 d-flex justify-content-center w-100">
-					<div class="h-100 w-100 p-5 bg-light ">
+					<div class="inner-container h-100 p-5 bg-light border border-2 ">
 						<form action="${ contextPath }/updatePwd.me" method="post">
-							<h2 id="pwdH2">비밀번호 변경</h2>
+							<h2 id="pwdH2" class="mb-3">비밀번호 변경</h2>
 							<div class="col-12">
 								<label for="currentPwd" class="form-label">현재 비밀번호</label>
 								<input type="password" class="form-control" id="currentPwd" name="currentPwd" required>
@@ -82,7 +99,8 @@
 								<input type="password" class="form-control" id="newPwdConfirm" required>
 							</div>
 							<br>
-							<button class="btn btn-outline-secondary">UPDATE MY PWD</button>
+							<div class="d-flex jusrify-content-center mt-3"></div>
+							<button class="btn btn-outline-success w-100">변경하기</button>
 						</form>
 					</div>
 				</div>
