@@ -181,8 +181,8 @@
 				            </thead>
 				            <tbody>
 				                <tr>
-				                    <td>총 회원 수</td>
-				                    <td id="totalMembers"></td>
+				                    <th>총 회원 수</th>
+				                    <th id="totalMembers"></th>
 				                </tr>
 				                <tr>
 				                    <td>활동 중인 회원 수</td>
@@ -193,8 +193,8 @@
 				                    <td id="inactiveMembers"></td>
 				                </tr>
 				                <tr>
-				                    <td>총 봉사활동 수</td>
-				                    <td id="totalBoard"></td>
+				                    <th>총 봉사활동 수</th>
+				                    <th id="totalBoard"></th>
 				                </tr>
 				                <tr>
 				                    <td>대기중인 봉사활동 수</td>
@@ -210,8 +210,8 @@
 				                </tr>
 				                
 				                <tr>
-				                    <td>총 후원액</td>
-				                    <td id="totalAmount"></td>
+				                    <th>총 후원액</th>
+				                    <th id="totalAmount"></th>
 				                </tr>
 				                <tr>
 				                	<td>국내 후원액</td>
