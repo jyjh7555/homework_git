@@ -143,12 +143,15 @@
 			</div>
             <div class="mapAndBoard d-flex flex-row h-75 align-items-center">
 	             <div class="w-25">
-	               <img src="resources/image/korMapGood.png" alt="한국 지도"  usemap="#menuMap" /> 
+	               <img style="margin-top:-80px; margin-left:30px"src="resources/image/korMapLast3.png" alt="한국 지도"  usemap="#menuMap" /> 
 	               <map name="menuMap" id="menuMap"> 
-	                    <area shape="poly" coords="225,63,238,49,256,65,240,99" alt="서울" data-region="서울" onclick="showTarget(event)"/>
-	                   <area shape="poly" coords="309,61,324,46,338,60,323,96" alt="강원도" data-region="강원도" onclick="showTarget(event)"/>
-	                   <area shape="poly" coords="255,125,270,112,285,126,270,158" alt="충청도" data-region="충청도" onclick="showTarget(event)"/>
-	                   <area shape="poly" coords="292,224,307,208,323,224,307,258" alt="경상도" data-region="경상도" onclick="showTarget(event)"/>   
+	                    <area shape="rect" coords="63,38,112,62" alt="서울" data-region="서울" onclick="showTarget(event)"/>
+	                    <area shape="rect" coords="34,109,79,133" alt="인천" data-region="인천" onclick="showTarget(event)"/>
+	                    <area shape="rect" coords="123,114,168,129" alt="경기도" data-region="경기도" onclick="showTarget(event)"/>
+	                    <area shape="rect" coords="187,82,231,97" alt="강원도" data-region="강원도" onclick="showTarget(event)"/>
+	                    <area shape="rect" coords="123,168,168,184" alt="충청도" data-region="충청도" onclick="showTarget(event)"/>
+	                    <area shape="rect" coords="111,270,155,286" alt="전라도" data-region="전라도" onclick="showTarget(event)"/>
+	                    <area shape="rect" coords="205,183,250,198" alt="경기도" data-region="경기도" onclick="showTarget(event)"/>
 	               </map> 
 	            </div>
 	               
