@@ -250,7 +250,7 @@
 	            	<a class="border border-2" href="updatePwdPage.me">비밀번호 수정</a>
 	            </div>
 	        </div>
-       		<div align="center"class="item-center recent-activity-section">
+       		<div align="center"class="item-center recent-activity-section" style="overflow:hidden">
 	            <h5 class="d-block activity-title">신청 대기 중인 봉사활동 내역</h5>
 	            <table class="activity-table">
 			        <thead>

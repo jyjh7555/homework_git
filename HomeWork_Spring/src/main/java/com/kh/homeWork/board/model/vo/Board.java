@@ -29,4 +29,6 @@ public class Board {
 	private int nowCount;
 	private Date recruitStart;
 	private Date recruitEnd;
+	private boolean dateCheckEnd;
+	private boolean dateCheckStart;
 }

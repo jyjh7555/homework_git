@@ -192,7 +192,17 @@
 	                                 <td>${b.nowCount} / ${b.fullCount}</td>
 	                                 <td>${b.recruitStart} ~ ${b.recruitEnd}</td>
 	                                 <td>${b.boardCount }</td>
-	                                 <td><a class="btn btn-secondary" href="${ contextPath }/insertVolunteer.vo?boardNo=${b.boardNo}">신청하기</a></td>
+	                                 <c:if test="${!b.dateCheckEnd && b.dateCheckStart}">
+		                                 <c:if test="${b.nowCount < b.fullCount }">
+		                                 	<td><a class="btn btn-success" href="${ contextPath }/insertVolunteer.vo?boardNo=${b.boardNo}">신청하기</a></td>
+		                                 </c:if>
+		                                 <c:if test="${b.nowCount >= b.fullCount }">
+		                                 	<td><button class="btn btn-secondary" >신청마감</button></td>
+		                                 </c:if>
+	                                 </c:if>
+	                                 <c:if test="${b.dateCheckEnd || !b.dateCheckStart}">
+	                                 	<td><button class="btn btn-secondary" >기간아님</button></td>
+	                                 </c:if>
 	                               </tr>
 	                           </c:forEach>
 	                         </tbody>
@@ -311,15 +321,32 @@
               tr.appendChild(createTd(b.location));
               tr.appendChild(createTd(b.title));
               tr.appendChild(createTd(b.nowCount + " / " + b.fullCount));
-              tr.appendChild(createTd(b.updateDate));
+              tr.appendChild(createTd(b.recruitStart + '~' + b.recruitEnd));
               tr.appendChild(createTd(b.boardCount));
               const applyTd = document.createElement('td');
-              const applyButton = document.createElement('a');
-              applyButton.className = 'btn btn-success';
-              applyButton.textContent = '신청하기';
-              applyTd.appendChild(applyButton);
-              tr.appendChild(applyTd);
-              applyButton.href = `${contextPath}/insertVolunteer.vo?boardNo=${b.boardNo}`;
+          	  const applyButton = document.createElement('a');
+          	  const applyButton2 = document.createElement('button');
+          	  if(!b.dateCheckEnd && b.dateCheckStart){
+          		  
+          		  if(b.nowCount < b.fullCount){
+		              applyButton.className = 'btn btn-success';
+		              applyButton.textContent = '신청하기';
+		              applyTd.appendChild(applyButton);
+		              tr.appendChild(applyTd);
+			          applyButton.href = `${contextPath}/insertVolunteer.vo?boardNo=${b.boardNo}`;
+          		  }else if(b.nowCount >= b.fullCount){
+          			  applyButton2.className = 'btn btn-secondary';
+		              applyButton2.textContent = '마감';
+		              applyTd.appendChild(applyButton2);
+		              tr.appendChild(applyTd);
+          		  }
+          	  }else{
+          		  applyButton2.className = 'btn btn-secondary';
+	              applyButton2.textContent = '기간아님';
+	              applyTd.appendChild(applyButton2);
+	              tr.appendChild(applyTd);
+          	  }
+          	  
               tbody.appendChild(tr);
           }
       }

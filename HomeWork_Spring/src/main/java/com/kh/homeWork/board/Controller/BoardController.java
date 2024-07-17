@@ -90,10 +90,16 @@ public class BoardController {
 			int vNum = vd.getVolunteerNo();
 			int nowCount = vService.getVolunteerCount(vNum);
 			b.setRecruitStart(vd.getRecruitStart());
-			b.setRecruitEnd(vd.getRecruitEnd());
+			b.setRecruitEnd(vd.getRecruitEnd());	//리스트에 vd의 모집기간 가져옴
 			
-			b.setFullCount(vd.getMemberCount());
+			b.setFullCount(vd.getMemberCount()); //리스트에 vd의 모집인원 가져옴
 			b.setNowCount(nowCount);
+			
+//			LocalDate.now().isAfter(vd.getRecruitEnd().toLocalDate())
+			//리스트 기간이 해당되는는지 boolean
+			b.setDateCheckEnd(LocalDate.now().isAfter(vd.getRecruitEnd().toLocalDate()));
+			b.setDateCheckStart(LocalDate.now().isAfter(vd.getRecruitStart().toLocalDate()));
+			
 			}
 			
 			}
@@ -184,7 +190,17 @@ public class BoardController {
 			v.setBoardNo(bNo);
 			int result2 = bService.insertVolunteer(v);
 		}
-		return "redirect:domestic.bo";
+		
+		switch (b.getBoardType()) {
+		case 1:
+			return "redirect:domestic.bo";
+		case 2:
+			return "redirect:global.bo";
+		case 3:
+			return "redirect:review.bo";
+		}
+		
+		throw new BoardException("게시글 작성을 실패하였습니다");
 	}
 
 	@RequestMapping("editBoard.bo")
@@ -276,6 +292,8 @@ public class BoardController {
 	            b.setRecruitEnd(vd.getRecruitEnd());
 	            b.setFullCount(vd.getMemberCount());
 	            b.setNowCount(nowCount);
+	            b.setDateCheckEnd(LocalDate.now().isAfter(vd.getRecruitEnd().toLocalDate()));
+				b.setDateCheckStart(LocalDate.now().isAfter(vd.getRecruitStart().toLocalDate()));
           	}	
   		}
 	
