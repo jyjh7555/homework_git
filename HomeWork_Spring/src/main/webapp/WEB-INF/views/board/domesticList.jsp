@@ -150,10 +150,15 @@
           </div>
          <div id="d-container"class="border border-2">
             <div class="region-title-container mt-4 mb-2">
+            		
 			    <div class="title-wrapper">
+  				
 			        <button type="button" class="domestic-btn border border-1 mt-5 mb-n3" onclick="location.href='${contextPath}/domestic.bo'">전체 보기</button>
-			        <span id="region-title">국내 전체</span>
+			        <input type="checkbox" name="checkApply" class="border border-1 ml-n3 mt-5 mb-n3"  id="btncheck1" autocomplete="off">
+			        <label style="width:200px"class="border-1 mt-5 mb-n3"for="btncheck1">신청가능만</label>
+			        <span id="region-title" style="width:350px">국내 전체</span>
 			    </div>
+			    
 			</div>
             <div class="mapAndBoard d-flex flex-row h-75 align-items-center">
 	             <div class="w-25">
@@ -263,6 +268,14 @@
       window.onload = ()=>{
             selectBoard();   
       }
+      
+      
+      const checkApply = document.getElementById('btncheck1');
+      
+      checkApply.addEventListener('change',()=>{
+    	  location.href = "${contextPath}/domestic.bo?checkApply="+checkApply.checked;
+      })
+      
       
       function selectBoard(){
          const tbody = document.querySelector('tbody');

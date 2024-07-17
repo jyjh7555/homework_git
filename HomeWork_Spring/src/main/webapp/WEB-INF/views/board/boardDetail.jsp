@@ -70,10 +70,11 @@
 			            <table class="table" >
 			            	<tr>
 			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">봉사구분</td>
-			            		<td width="">${b.title }</td>
+			            		<td width="">${v.category }</td>
 			            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">국내/해외</td>
 			            		<td>
 				            		<c:if test="${b.boardType == 1 }">국내</c:if>
+				            		
 				            		<c:if test="${b.boardType == 2 }">해외</c:if>
 			            		</td>
 			            	</tr>

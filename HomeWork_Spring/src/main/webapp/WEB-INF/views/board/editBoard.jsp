@@ -77,9 +77,9 @@
 		            		<td width="35%">
 			            		<select class="form-control" id="category"name="category">
 			            		
-			            			<option value="집짓기"<c:if test="${v.category=='집짓기'}">checked</c:if> >집짓기</option>
-			            			<option value="환경개선"<c:if test="${v.category=='환경개선'}">checked</c:if>>환경개선</option>
-			            			<option value="긴급/재난"<c:if test="${v.category=='긴급/재난'}">checked</c:if>>긴급/재난</option>
+			            			<option value="집짓기"<c:if test="${v.category=='집짓기'}">selected</c:if> >집짓기</option>
+			            			<option value="환경개선"<c:if test="${v.category=='환경개선'}">selected</c:if>>환경개선</option>
+			            			<option value="긴급/재난"<c:if test="${v.category=='긴급/재난'}">selected</c:if>>긴급/재난</option>
 			            		</select>
 		            		</td>
 		            		<td style="border-bottom:1px solid white;background:#E3E3E3;width:120px">국내/해외</td>
@@ -90,29 +90,30 @@
 			            				<option  value="2"<c:if test="${b.boardType == '2' }">selected</c:if>>해외</option>
 			            				<option style="display:none" value="3">후기</option>
 			            			</select>
-			            			<select class="col-4 form-control" id="locationNo"name="locationNo"style="display:inline; width:100px">
-			            			<c:if test="${b.boardType=='1' }">
-			            				<option value="10" <c:if test="${b.locationNo =='10' }">checked</c:if>>서울</option>
-			            				<option value="20" <c:if test="${b.locationNo =='20' }">checked</c:if>>인천</option>
-			            				<option value="30" <c:if test="${b.locationNo =='30' }">checked</c:if>>경기도</option>
-			            				<option value="40" <c:if test="${b.locationNo =='40' }">checked</c:if>>강원도</option>
-			            				<option value="50" <c:if test="${b.locationNo =='50' }">checked</c:if>>충청도</option>
-			            				<option value="60" <c:if test="${b.locationNo =='60' }">checked</c:if>>전라도</option>
-			            				<option value="70" <c:if test="${b.locationNo =='70' }">checked</c:if>>경상도</option>
-			            			</c:if>
-			            			<c:if test="${b.boardType=='2' }">
-			            				<option value="10" <c:if test="${b.locationNo =='210' }">checked</c:if>>아시아</option>
-			            				<option value="20" <c:if test="${b.locationNo =='220' }">checked</c:if>>아메리카</option>
-			            				<option value="30" <c:if test="${b.locationNo =='230' }">checked</c:if>>북아메리카</option>
-			            				<option value="40" <c:if test="${b.locationNo =='240' }">checked</c:if>>남아메리카</option>
-			            				<option value="50" <c:if test="${b.locationNo =='250' }">checked</c:if>>중동</option>
-			            				<option value="60" <c:if test="${b.locationNo =='260' }">checked</c:if>>오세아니아</option>
-			            				<option value="70" <c:if test="${b.locationNo =='270' }">checked</c:if>>유럽</option>
-			            			</c:if>
-			            			<c:if test="${b.boardType=='3' }">
-			            				<option value="1000" selected>-</option>
-			            			</c:if>
-			            			</select>
+			            				<select class="col-4 form-control" id="locationNo"name="locationNo"style="display:inline; width:100px">
+					            			<c:if test="${b.boardType=='1' }">
+					            				<option value="10" <c:if test="${b.locationNo =='10' }"> selected </c:if>>서울</option>
+					            				<option value="20" <c:if test="${b.locationNo =='20' }"> selected </c:if>>인천</option>
+					            				<option value="30" <c:if test="${b.locationNo =='30' }"> selected </c:if>>경기도</option>
+					            				<option value="40" <c:if test="${b.locationNo =='40' }"> selected </c:if>>강원도</option>
+					            				<option value="50" <c:if test="${b.locationNo =='50' }"> selected </c:if>>충청도</option>
+					            				<option value="60" <c:if test="${b.locationNo =='60' }"> selected </c:if>>전라도</option>
+					            				<option value="70" <c:if test="${b.locationNo =='70' }"> selected </c:if>>경상도</option>
+					            			</c:if>
+					            			<c:if test="${b.boardType=='2' }">
+					            				<option value="210" <c:if test="${b.locationNo =='210' }">selected</c:if>>아시아</option>
+					            				<option value="220" <c:if test="${b.locationNo =='220' }">selected</c:if>>아메리카</option>
+					            				<option value="230" <c:if test="${b.locationNo =='230' }">selected</c:if>>북아메리카</option>
+					            				<option value="240" <c:if test="${b.locationNo =='240' }">selected</c:if>>남아메리카</option>
+					            				<option value="250" <c:if test="${b.locationNo =='250' }">selected</c:if>>중동</option>
+					            				<option value="260" <c:if test="${b.locationNo =='260' }">selected</c:if>>오세아니아</option>
+					            				<option value="270" <c:if test="${b.locationNo =='270' }">selected</c:if>>유럽</option>
+					            			</c:if>
+					            				
+					            			<c:if test="${b.boardType=='3' }">
+						            			<option value="1000" selected>-</option>
+					            			</c:if>
+				            			</select>
 			            		</div>
 		            		</td>
 		            	</tr>
@@ -545,7 +546,6 @@
 		
 		
 		const form = document.getElementById('form')
-		document.getElementsByName('locationNo')[0].value = '1000';
 		console.log(document.getElementsByName('locationNo')[0]);
 		function updateBoard(){
 			form.action = '${contextPath}/updateBoard.bo';

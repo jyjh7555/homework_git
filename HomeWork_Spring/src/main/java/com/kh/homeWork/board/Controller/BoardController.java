@@ -46,6 +46,7 @@ public class BoardController {
 	@RequestMapping("{boardType}.bo")
 	public String selectDomesticBoardList(@PathVariable String boardType,
 			@RequestParam(value = "page", defaultValue = "1") int currentPage, Model model,
+			@RequestParam(value = "checkApply", defaultValue="false") boolean checkApply,
 			HttpServletRequest request) {
 		// 변수명에 따라 url명이 달라진다.
 		int boardTypeNum;
@@ -69,7 +70,9 @@ public class BoardController {
 		}
 
 		int listCount = bService.getListCount(boardTypeNum);
-		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 5);		
+		PageInfo pi = Pagination.getPageInfo(currentPage, listCount, 5);
+		
+		
 		ArrayList<Board> list = bService.selectBoardList(pi,boardTypeNum);
 
 		
@@ -142,6 +145,7 @@ public class BoardController {
 				boolean dateCheck = LocalDate.now().isAfter(v.getEndDate().toLocalDate());
 				model.addAttribute("dateCheck", dateCheck);
 				v.setAddress(v.getAddress().replace(",", " "));
+				System.out.println(b.getLocationNo());
 	
 			}
 			model.addAttribute("v", v);
