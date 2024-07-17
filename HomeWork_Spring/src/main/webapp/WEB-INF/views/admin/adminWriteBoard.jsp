@@ -613,6 +613,9 @@
 	            }
 	        }).open();
 	    }
+		function goBack() {
+            location.href="admin.me";
+        }
 	
 	</script>
 	
