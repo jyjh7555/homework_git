@@ -31,12 +31,10 @@
   
         .container {
        		font-family: 'Pretendard-Regular';
-            width: 1200px;
-            max-width: 1200px;
             padding: 20px;
             background-color: #ffffff;
-            border-radius: 8px;
-            border:8px solid #E3E3E3;
+            border-radius: 5px;
+            
             /* box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); */
         }
         .container input[type="text"], .container input[type="password"], .container input[type="number"] {
@@ -52,18 +50,18 @@
             padding: 10px;
             margin: 10px 0;
             text-align: center;
-            background-color: #007bff;
-            color: #E3E3E3;
-            border: none;
+            border: solid 1px;
             border-radius: 4px;
             text-decoration: none;
         }
-        .container button:hover, .container a:hover {
-            background-color: #0056b3;
+        
+        #inner-container {
+        	width:800px;
+        	max-width:1200px;
+        	height:500px;
+        	border:3px solid #E3E3E3;
         }
-        .qr-code {
-            text-align: center;
-        }
+
     </style>
 </head>
 <body>
@@ -81,14 +79,19 @@
 
 	<div align="center">
 	    <div class="container mt-5" id="main-page">
-	        <label style="margin:20px; margin-left:15px; font-size:48px;"><b>L O G I N</b> </label>
-	        <form action="loginCheck.me" method="post">
-		        <input type="text" name="memberId" id="id" style="width:400px" placeholder="아이디"><br><br>
-		        <input type="password" name="memberPwd" style="width:400px" id="login-password" placeholder="패스워드">
-		        <button style="width:400px">로그인</button>
-	        </form>
-	        <button  style="width:400px" onclick="findId()">아이디 찾기</button>
-	        <button  style="width:400px" onclick="findPwd()">비밀번호 찾기</button>
+	    	<div id="inner-container">
+	    		<div class="mt-3">
+		    		<label style="margin:20px; margin-left:15px; font-size:36px;"><b>로그인</b> </label>
+			        <form action="loginCheck.me" method="post">
+				        <input type="text" name="memberId" id="id" style="width:400px" placeholder="아이디"><br><br>
+				        <input type="password" name="memberPwd" style="width:400px" id="login-password" placeholder="패스워드">
+				        <button class="btn btn-outline-success" style="width:400px">로그인</button>
+			        </form>
+			        <button  class="btn btn-outline-success" style="width:400px" onclick="findId()">아이디 찾기</button>
+			        <button  class="btn btn-outline-success" style="width:400px" onclick="findPwd()">비밀번호 찾기</button>
+	    		</div>
+		    	
+	    	</div>
 	    </div>
 	    
 	

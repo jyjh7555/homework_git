@@ -137,7 +137,10 @@
 					<input name="address" class="form-control w-50 m-4 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_detailAddress" placeholder="상세주소">
 					
 		        </div>
-		        <button class="btn btn-secondary btn-lg w-25 m-4 btn-primary">가입하기</button>
+		        <div class="d-flex justify-content-center">
+		       	 <button class="btn btn-outline-success w-100 m-4">가입하기</button>
+		        </div>
+		        
 	        </form>
 		</div>	        
 	</div>

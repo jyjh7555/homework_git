@@ -92,7 +92,7 @@
 	 <div id="navbar-section">
             <div class="logo">
                 <div class="logo-container">
-                    <a href="${ contextPath }"><img style="filter:invert(1); color:white; width:130px; height:130px;"id="logo-image" src="resources/image/newLogo.png" alt="로고"></a>
+                    <a href="${ contextPath }/home.do"><img style="filter:invert(1); color:white; width:130px; height:130px;"id="logo-image" src="resources/image/newLogo.png" alt="로고"></a>
                 </div>
                 <a href="${contextPath}/surpport.su"><b>후원하기</b></a>
             </div>

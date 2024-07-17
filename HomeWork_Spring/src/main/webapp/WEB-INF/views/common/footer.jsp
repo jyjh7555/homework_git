@@ -7,114 +7,117 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <style>
-	#footer-section {
-		display:flex;
-		background-color: #F1F7F7;
-        width: 100%;
-        text-align: center;
-        padding: 10px 0;
-        height:200px;
-        flex-direction:row;
-        align-items: flex-start;
-        margin-right:0;
-        margin-left:0;
-        margin-top:30px;
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
 	}
 	
-	#footer-logo {
-		width:200px;
-		height:200px;
-		margin:0px 100px 0px 80px;
-	}
-	.inner {
+    #footer-section {
+        background-color: #f8f9fa;
+        color: #333;
+        padding: 40px 0;
+        font-family: 'Pretendard-Regular';
+    }
+    
+    .inner {
         display: flex;
         flex-wrap: wrap;
-        justify-content: space-around;
         max-width: 1200px;
         margin: 0 auto;
+        justify-content: space-between;
     }
+    
+    .footer-logo {
+        flex: 0 0 200px;
+        margin-bottom: 20px;
+        margin-right:150px;
+    }
+    
+    #footer-logo {
+        width: 200px;
+        height: 200px;
+    }
+    
     .footer-column {
         flex: 1;
-        margin: 10 10 30 10px;
+        margin: 0 15px 20px;
         min-width: 200px;
     }
-    .footer-column h4 {
-        border-bottom: 2px solid #777;
+    
+    .footer-column h3 {
+        color: black;
+        border-bottom: 2px solid skyblue;
         padding-bottom: 10px;
-        margin-bottom: 10px;
+        font-size: 25px;
+        font-weight:bold;
     }
-    .footer-column ul {
-        list-style: none;
-        padding: 0;
+    
+     .footer-column h4 {
+     	margin-left:70px;
+       	margin-bottom:30px;
+       	margin-top:30px
     }
-    .footer-column ul li {
-        margin: 5px 0;
-    }
-    .footer-column ul li a {
-        color: black;
-        text-decoration: none;
-        transition: color 0.3s;
-    }
-    .footer-column ul li a:hover {
-        color: #aaa;
-    }
-    .footer-social {
-        margin: 20px 0;
-    }
-    .footer-social a {
-        margin: 0 10px;
-        color: black;
-        text-decoration: none;
-        font-size: 20px;
-    }
-    .footer-social a:hover {
-        color: #aaa;
-    }
-    .footer-bottom {
-        margin-top: 20px;
-        border-top: 1px solid #777;
-        padding-top: 10px;
-        text-align:center;
-    }
-	
-	
 
+
+    .footer-column p {
+    	margin:0;
+    	text-decoration:underline;
+    }
+    
+   	.footer-column h6 {
+	   	font-size:18px;
+	   	white-space: nowrap;
+		margin-bottom:20px;
+       	margin-top:20px
+	   	
+    }
+    
+    .footer-bottom {
+        width: 100%;
+        text-align: center;
+        margin-top: 30px;
+        padding-top: 20px;
+        border-top: 1px solid #ddd;
+        font-size: 20px;
+        color: #777;
+    }
+    
 </style>
 </head>
 <body>
-	<div id="footer-section">
-            <div class="inner">
-                <div class="footer-logo">
-                    <a href="${ contextPath }"><img src="resources/image/newLogo.png" alt="로고" id="footer-logo"></a>
-                </div>
-                <div class="footer-column">
-                <h4>Company</h4>
-                <p>HomeWork</p>               
-                <p>Phone: 010-0000-0000</p>
-                <p>Email: rlarlfyd1258@naver.com</p>
+    <div id="footer-section">
+        <div class="inner">
+            <div class="footer-logo">
+                <a href="${ contextPath }/home.do"><img src="resources/image/newLogo.png" alt="로고" id="footer-logo"></a>
             </div>
             <div class="footer-column">
-                <h4>Quick Links</h4>
-                <ul>
-                    <li><a href="/about">About Us</a></li>
-                    <li><a href="/services">Services</a></li>
-                    <li><a href="/blog">Blog</a></li>
-                    <li><a href="/contact">Contact</a></li>
-                </ul>
+                <h3>Project</h3>
+                <p>Title</p>
+                <h5>HomeWork</h5> 
+                <p>Tell</p>              
+                <h5>02-6959-2159</h5>
+                <p>Address</p>
+                <h5>서울특별시 중구 남대문로 120</h5>
             </div>
             <div class="footer-column">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="/faq">FAQ</a></li>
-                    <li><a href="/support">Support</a></li>
-                    <li><a href="/terms">Terms of Service</a></li>
-                    <li><a href="/privacy">Privacy Policy</a></li>
-                </ul>
-            </div>            
-            </div>          
-     </div>
-     <div class="footer-bottom">
-         <p>&copy; 2024 HomeWork. All rights reserved.</p>
-     </div>
+                <h3>Team Member</h3>
+                <h4>김종규</h4>               
+                <h4>이재영</h4>
+                <h4>김기룡</h4>  
+            </div>
+            <div class="footer-column">
+               <h3>Project Info</h3>
+			   <h6>KH정보교육원 JAVA개발자 양성 과정</h6>
+			   <h6>Semi Project</h6>
+			   <h6>2024.07.04 - 2024.07.19</h6>
+			   <h6>Java, Spring, Oracle, JavaScript</h6>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 HomeWork. All rights reserved.</p>
+        </div>             
+    </div>
 </body>
 </html>
