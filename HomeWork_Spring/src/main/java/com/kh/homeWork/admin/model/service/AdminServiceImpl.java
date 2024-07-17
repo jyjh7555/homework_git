@@ -256,6 +256,11 @@ public class AdminServiceImpl implements AdminService {
 		return aDAO.endVolunteer(sqlSession);
 	}
 
+	@Override
+	public int getVolunteerCount(int vNum) {
+		return aDAO.getVolunteerCount(sqlSession, vNum);
+	}
+
 
 	
 

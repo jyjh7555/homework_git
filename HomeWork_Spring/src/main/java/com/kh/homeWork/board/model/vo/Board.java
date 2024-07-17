@@ -29,9 +29,9 @@ public class Board {
 	private int nowCount;
 	private Date recruitStart;
 	private Date recruitEnd;
+	private boolean dateCheckEnd;
+	private boolean dateCheckStart;
 	private String category;
 	private Date startDate;
 	private Date endDate;
-	private boolean dateCheckEnd;
-	private boolean dateCheckStart;
 }

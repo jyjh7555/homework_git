@@ -221,6 +221,10 @@ public class AdminDAO {
 		return sqlSession.selectOne("adminMapper.endVolunteer");
 	}
 
+	public int getVolunteerCount(SqlSessionTemplate sqlSession, int vNum) {
+		return sqlSession.selectOne("adminGetVolunteerCount", vNum);
+	}
+
 	
 
 	

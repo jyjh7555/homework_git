@@ -1280,7 +1280,7 @@
 				                        const btnTd = document.createElement('td');
 				                        const approveBtn = document.createElement('button');
 				                        approveBtn.textContent = '승인';
-				                        approveBtn.className = 'btn btn-success';
+				                        approveBtn.className = 'btn btn-success hidden';
 				                        approveBtn.name = 'volunteerStatusButton';
 				                        approveBtn.id = 'approveBtn';
 				                        approveBtn.addEventListener('click', function() {
@@ -1416,7 +1416,7 @@
 				
 				                        const refusalBtn = document.createElement('button');
 				                        refusalBtn.textContent = '거부';
-				                        refusalBtn.className = 'btn btn-danger';
+				                        refusalBtn.className = 'btn btn-danger hidden';
 				                        refusalBtn.name = 'volunteerStatusButton';
 				                        refusalBtn.id = `refusalBtn`
 				                        refusalBtn.addEventListener('click', function() {

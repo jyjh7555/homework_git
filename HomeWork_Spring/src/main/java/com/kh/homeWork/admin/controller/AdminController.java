@@ -1,6 +1,7 @@
 package com.kh.homeWork.admin.controller;
 
 import java.io.IOException;
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.HashMap;
@@ -233,11 +234,24 @@ public class AdminController {
 		}
 		
 		Board b = aService.selectBoard(bId,memberNo);	
-		VolunteerDetail v = aService.adminBoardDetail(bId);
 		model.addAttribute("b",b);
-		model.addAttribute("v",v);
 		model.addAttribute("page",page);
+		if(b.getBoardType() !=3 ) {
+			VolunteerDetail v = aService.adminBoardDetail(bId);
+			int vNum = v.getVolunteerNo();
+			int nowCount = aService.getVolunteerCount(vNum);
+			b.setFullCount(v.getMemberCount());
+			b.setNowCount(nowCount);
 		
+	
+			if (v != null) {
+				boolean dateCheck = LocalDate.now().isAfter(v.getEndDate().toLocalDate());
+				model.addAttribute("dateCheck", dateCheck);
+				v.setAddress(v.getAddress().replace(",", " "));
+	
+			}
+			model.addAttribute("v", v);
+		}
 		//댓글
 		if(b.getBoardType()==3) {
 			ArrayList<Reply> list = aService.selectReply(bId);
@@ -294,10 +308,12 @@ public class AdminController {
 	public String editBoard(@RequestParam("boardNo") int bId,@RequestParam("page")int page,Model model) {
 		Board b = aService.selectBoard(bId, 0);
 		VolunteerDetail v = aService.adminSlectVolunteerDetail(bId);
-		String[] address = v.getAddress().split(",");
+		if(v !=null) {
+			String[] address = v.getAddress().split(",");
+			model.addAttribute("address",address);
+		}
 		model.addAttribute("b",b);
 		model.addAttribute("v",v);
-		model.addAttribute("address",address);
 		model.addAttribute("page",page);
 		
 		return "adminEditBoard";
@@ -306,11 +322,11 @@ public class AdminController {
 	@RequestMapping("adminUpdateBoard.ad")
 	public String updateBoard(@ModelAttribute Board b, @ModelAttribute VolunteerDetail v,@RequestParam("page") int page) {
 		int result1 = aService.adminUpdateBoard(b);
-		System.out.println(result1); 
-		int result2 = aService.adminUpdateVolunteerDetail(v);
-		System.out.println(result2); 
-		
-		if(result1>0 && result2>0) {
+
+		if(b.getBoardType() !=3) {
+			aService.adminUpdateVolunteerDetail(v);
+		}
+		if(result1>0 ) {
 			switch(b.getBoardType()) {
 			case 1: return "redirect:admindomestic.ad?page="+page;
 			case 2: return "redirect:adminglobal.ad?page="+page;

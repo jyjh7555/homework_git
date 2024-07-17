@@ -84,23 +84,23 @@ public class BoardController {
 
 		for (Board b : list) {
 			if(b.getBoardType()!=3) {
-			VolunteerDetail vd = bService.selectVolunteerDetail(b.getBoardNo());
-			if(vd !=null) {
+				VolunteerDetail vd = bService.selectVolunteerDetail(b.getBoardNo());
+				if(vd !=null) {
 			
-			int vNum = vd.getVolunteerNo();
-			int nowCount = vService.getVolunteerCount(vNum);
-			b.setRecruitStart(vd.getRecruitStart());
-			b.setRecruitEnd(vd.getRecruitEnd());	//리스트에 vd의 모집기간 가져옴
+					int vNum = vd.getVolunteerNo();
+					int nowCount = vService.getVolunteerCount(vNum);
+					b.setRecruitStart(vd.getRecruitStart());
+					b.setRecruitEnd(vd.getRecruitEnd());	//리스트에 vd의 모집기간 가져옴
+					
+					b.setFullCount(vd.getMemberCount()); //리스트에 vd의 모집인원 가져옴
+					b.setNowCount(nowCount);
+					
+		//			LocalDate.now().isAfter(vd.getRecruitEnd().toLocalDate())
+					//리스트 기간이 해당되는는지 boolean
+					b.setDateCheckEnd(LocalDate.now().isAfter(vd.getRecruitEnd().toLocalDate()));
+					b.setDateCheckStart(LocalDate.now().isAfter(vd.getRecruitStart().toLocalDate()));
 			
-			b.setFullCount(vd.getMemberCount()); //리스트에 vd의 모집인원 가져옴
-			b.setNowCount(nowCount);
-			
-//			LocalDate.now().isAfter(vd.getRecruitEnd().toLocalDate())
-			//리스트 기간이 해당되는는지 boolean
-			b.setDateCheckEnd(LocalDate.now().isAfter(vd.getRecruitEnd().toLocalDate()));
-			b.setDateCheckStart(LocalDate.now().isAfter(vd.getRecruitStart().toLocalDate()));
-			
-			}
+				}	
 			
 			}
 		}

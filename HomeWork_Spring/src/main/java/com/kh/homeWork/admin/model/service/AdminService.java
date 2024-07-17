@@ -101,6 +101,8 @@ public interface AdminService {
 
 	int endVolunteer();
 
+	int getVolunteerCount(int vNum);
+
 	
 
 

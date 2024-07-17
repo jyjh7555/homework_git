@@ -121,7 +121,7 @@
  	<select id="adminBoardDetail" resultType="VolunteerDetail">
  		select *
  		from volunteer_detail
- 		where member_no = #{bId}
+ 		where board_no = #{bId}
  	</select>
  	
  	<insert id="adminInsertBoard">
@@ -377,5 +377,12 @@
     	count(board_no)
 		from volunteer_detail
 		where sysdate > end_date
+ 	</select>
+ 	
+ 	<select id="adminGetVolunteerCount" resultType="_int">
+ 	 SELECT COUNT(v.member_no)
+		FROM volunteer v
+		JOIN volunteer_detail vd ON v.volunteer_no = vd.volunteer_no
+		WHERE vd.volunteer_no = #{vNum} AND v.status IN ('W', 'Y')
  	</select>
 </mapper>

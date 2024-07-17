@@ -81,12 +81,20 @@
 	<h3 align="center">[게시판 관리]</h3>
 	
 	
+	<div id="container" class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
+		<div class="d-flex flex-column justify-content-center mb-3 border border-4 w-50 mt-3 ">
+				<div class="m-4 p-4"style="border-bottom: 1px solid gray; border-top: 5px solid black; ">
+					<b>${b.title }</b>
+				</div>	
+				</div>
+				</div>
     <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3">
         <div class="d-flex flex-column justify-content-center mb-3 border border-1 border-info w-50 mt-3" style="width:1600px;">
         <form method="post" id="admimVolunteerInfo">
         	<input type="hidden" name="boardNo" value="${b.boardNo }">
 			<input type="hidden" name="boardType" value="${b.boardType }">
 			<input type="hidden" name="page" value="${page}">
+			<c:if test="${v != null }">
             <table id="domesticBoardDetail">
 					<tr>
 	            		<td style="background:#E3E3E3;width:120px">봉사구분</td>
@@ -95,7 +103,6 @@
 	            		<td>
 		            		<c:if test="${b.boardType == 1 }">국내</c:if>
 		            		<c:if test="${b.boardType == 2 }">해외</c:if>
-		            		<c:if test="${b.boardType == 3 }">후기</c:if>
 	            		</td>
 	            	</tr>
 	            	<tr>
@@ -127,6 +134,7 @@
 	            		<td colspan="3">${v.address }</td>
 	            	</tr>
 	            </table>
+	            </c:if>
             	<div style="white-space: pre-wrap;">${b.content }</div>
 	            <div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
 	        		<button type="button" id="editButton" class ="btn btn-info m-5" style="width:150px; border-radius:16px;font-size:20px;">수정하기</button>
@@ -159,7 +167,7 @@
 								<input type="hidden" name="replyNo" value="${r.replyNo }"/>
 							</c:forEach>
 							
-						</table>						
+						</table>
 						</div>
 					</div>
 				</c:if>
