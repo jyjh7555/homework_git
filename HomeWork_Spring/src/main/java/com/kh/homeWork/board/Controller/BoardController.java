@@ -268,15 +268,17 @@ public class BoardController {
   
   		ArrayList<Board> list = bService.regionBoardList(region,pi2);
   		for (Board b : list) {
-    	  	VolunteerDetail vd = bService.selectVolunteerDetail(b.getBoardNo());
-          	if (vd != null) {
-	            int vNum = vd.getVolunteerNo();
-	            int nowCount = vService.getVolunteerCount(vNum);
-	            b.setRecruitStart(vd.getRecruitStart());
-	            b.setRecruitEnd(vd.getRecruitEnd());
-	            b.setFullCount(vd.getMemberCount());
-	            b.setNowCount(nowCount);
-          	}	
+  			if(b.getBoardType()!=3) {
+  				VolunteerDetail vd = bService.selectVolunteerDetail(b.getBoardNo());
+	          	if (vd != null) {
+		            int vNum = vd.getVolunteerNo();
+		            int nowCount = vService.getVolunteerCount(vNum);
+		            b.setRecruitStart(vd.getRecruitStart());
+		            b.setRecruitEnd(vd.getRecruitEnd());
+		            b.setFullCount(vd.getMemberCount());
+		            b.setNowCount(nowCount);
+	          	}	
+  			}
   		}
 	
 	

@@ -200,7 +200,7 @@
 					 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
 							<div class="d-flex flex-row justify-content-end mb-3  w-50 mt-3 " style="width:1400px;">
 					       		<ul align="center"class="pagination">
-						            <li class="page-item">
+						            <li class="page-item ${pi.currentPage == pi.startPage ? 'disabled' : '' }">
 						            	<c:url var="goBack" value="${ loc }">
 					        				<c:param name="page" value="${ pi.currentPage -1 }"/>
 					        			</c:url>
@@ -212,9 +212,9 @@
 						            	<c:url var="goNum" value="${ loc }">
 						            		<c:param name="page" value="${ p }"/>
 						            	</c:url>
-						            	<li class="page-item"><a class="page-link" href="${ goNum }">${ p }</a></li>		            	
+						            	<li class="page-item ${p == pi.currentPage ? 'active' : '' }"><a class="page-link" href="${ goNum }">${ p }</a></li>		            	
 						            </c:forEach>
-						            <li class="page-item">
+						            <li class="page-item ${ pi.currentPage == pi.endPage ? 'disabled' : '' }">
 						            	<c:url var="goNext" value="${ loc }">
 						            		<c:param name="page" value="${ pi.currentPage +1 }"/>
 						            	</c:url>
@@ -223,6 +223,7 @@
 						            	</a>
 						            </li>
 					    		</ul>
+					    		
 			      	  
 			      	  
 			
@@ -332,14 +333,6 @@
                 console.log(false);
              }
              
-/*               let paginationHTML = `
-                  <div class="d-flex flex-row justify-content-end mb-3 w-50 mt-3" style="width:1400px;">
-                      <ul align="center" class="pagination">
-                         <li class="page-item ${pi2.currentPage == 1 ? 'disabled' : ''}">
-                              <a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{pi2.currentPage - 1}')"aria-label="Previous">
-                                  <span aria-hidden="true">&laquo;</span>
-                              </a>
-                          </li>`; */
                let paginationHTML = `
                   <div class="d-flex flex-row justify-content-end mb-3 w-50 mt-3" style="width:1400px;">
                       <ul align="center" class="pagination">`;
@@ -357,17 +350,14 @@
                           
                           
                           
-                          
               for (let p = pi2.startPage; p <= pi2.endPage; p++) {
-                  paginationHTML += `
-                      <li class="page-item ${p == pi2.currentPage ? 'active' : ''}">
-                        <a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{p}')">${'$'}{p}</a> 
-                      </li>`;
+            	  paginationHTML += '<li class="page-item ' + (p == pi2.currentPage  ? 'active' : '') + '">';
+                  paginationHTML += `<a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{p}')">${'$'}{p}</a> </li>`;
                   
               }
               
                     paginationHTML += '<li class="page-item ' + (pi2.currentPage == pi2.maxPage ? 'disabled' : '') + '">';
-               paginationHTML += `
+               		paginationHTML += `
                               <a class="page-link" href="javascript:void(0)" onclick="loadRegionBoard('${'$'}{region}', '${'$'}{pi2.currentPage + 1}')" aria-label="Next">
                                   <span aria-hidden="true">&raquo;</span>
                               </a>

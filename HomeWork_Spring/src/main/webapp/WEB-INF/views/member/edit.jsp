@@ -38,6 +38,17 @@
 	    
 	}
 	
+	@font-face {
+	    font-family: 'Pretendard-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
+	    font-weight: 400;
+	    font-style: normal;
+	}
+	
+	.container {
+		font-family: 'Pretendard-Regular';
+	}
+	
 	#voulnteer2 {
 		height: 200px;
 	}
@@ -58,33 +69,42 @@
 			<jsp:include page="../common/volunteer.jsp"/>
 		</div>	
  	</div>
-	<div align="left" class="container border border-5 w-50 mt-5">
+	<div class="container border border-2 w-50 mt-5 d-flex justify-content-center bg-light">
 		<main>
-			<div align="left"><label style="margin:20px; margin-left:15px; font-size:48px;"><b>회원정보 수정</b> </label></div>
-			<div style="margin-left: 350px; margin-right: 350px;">
-				<form  class="needs-validation" action="${ contextPath }/updateMember.me" method="POST">
-					<div class="row g-3">
-						<div class="col-12 form-floating mb-3">
-							<input type="text" class="form-control" id="id" name="id" readonly value="${ loginUser.memberId }">
-							<label for="id" class="form-label">ID</label>
-						</div>
-												
-						<div class="col-12 form-floating mb-3">	
-							<input type="text" class="form-control" id="name" name="name" required value="${ loginUser.memberName }">
-							<label for="name" class="form-label">NAME</label>
+			<div class="d-flex justify-content-center">
+				<label style="margin:20px; margin-left:15px; font-size:36px;"><b>회원정보 수정</b></label>
+			</div>
+			<div class="d-flex justify-content-center">
+				<form  class="needs-validation w-75" action="${ contextPath }/updateMember.me" method="POST">
+					<div class="row g-2">
+						<div class="row g-2 d-flex justify-content-start">
+							<div class="col-12 form-floating mb-3">
+								<input type="text" class="form-control" id="id" name="id" readonly value="${ loginUser.memberId }">
+								<label for="id" class="form-label">ID</label>
+							</div>
 						</div>
 						
-						<div class="col-12 form-floating mb-3">
-							<input type="text" class="form-control" id="nickName" name="nickName" required value="${ loginUser.nickName }">
-							<label for="nickName" class="form-label">NICKNAME</label>
-						</div>
+						<div class="row g-2 d-flex justify-content-start" >
+							<div class="col-12 form-floating mb-3">	
+								<input type="text" class="form-control" id="name" name="name" required value="${ loginUser.memberName }">
+								<label for="name" class="form-label">NAME</label>
+							</div>
+						</div>						
+						
+						<div class="row g-2 d-flex justify-content-start">
+							<div class="col-12 form-floating mb-3">
+								<input type="text" class="form-control" id="nickName" name="nickName" required value="${ loginUser.nickName }">
+								<label for="nickName" class="form-label">NICKNAME</label>
+							</div>
+						</div>			
+						
 
-						<div class="col-12">
-							<label for="emailId" class="form-label">EMAIL</label>
+						<div class="row g-2 d-flex justify-content-start">
+							<label for="emailId" class="form-label fw-bold">EMAIL</label>
 							<c:set var="emailId" value="${ fn:split(loginUser.email, '@')[0] }"/>
 							<c:set var="emailDomain" value="${ fn:split(loginUser.email, '@')[1] }"/>
 							<div class="input-group">
-								<input type="text" class="form-control" id="emailId" name="emailId" value="${ emailId }"/>
+								<input type="text" class="form-control col-md-2" id="emailId" name="emailId" value="${ emailId }"/>
 								<span class="input-group-text">@</span>
 								<select name="emailDomain" style="width: 280px;">
 									<option <c:if test="${ emailDomain eq 'naver.com' }">selected</c:if>>naver.com</option>
@@ -94,36 +114,47 @@
 								</select>
 							</div>
 						</div>
-						
-						<div class="col-12">
-							<label class="form-label">GENDER</label><br>
-							<input type="radio" id="man" name="gender" value="M" <c:if test="${ loginUser.gender =='M' }">checked</c:if>> MAN &nbsp;&nbsp;&nbsp;&nbsp;
-							<input type="radio" id="woman" name="gender" value="F" <c:if test="${ loginUser.gender =='F' }">checked</c:if>> WOMAN
+						<div class="row g-2 d-flex justify-content-start">
+							<div class="col-12">
+								<label class="form-label fw-bold">GENDER</label><br>
+								<input type="radio" id="man" name="gender" value="M" <c:if test="${ loginUser.gender =='M' }">checked</c:if>> MAN &nbsp;&nbsp;&nbsp;&nbsp;
+								<input type="radio" id="woman" name="gender" value="F" <c:if test="${ loginUser.gender =='F' }">checked</c:if>> WOMAN
+							</div>
 						</div>
 						
-						<div class="col-12">
-							<label for="age" class="form-label">AGE</label>
-							<input type="number" class="form-control" id="age" name="age" min="0" max="100"  value="${ loginUser.age }">
+						<div class="row g-2 d-flex justify-content-start">
+							<div class="col col-xl-2">
+								<label for="age" class="form-label fw-bold">AGE</label>
+								<input type="number" class="form-control" id="age" name="age" min="0" max="100"  value="${ loginUser.age }">
+							</div>
 						</div>
+						
 
-						<div class="col-12">
-				        	<label style="margin-left:25px; ">휴대폰 번호 입력</label><br>
-				        	<input class="form-control m-4 mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" value="010" readonly >-
-				        	<input class="form-control m-3 mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" value="${fn:split(loginUser.phone, '-')[1]}"maxlength="4" placeholder="0000">-
-				        	<input class="form-control m-3 mt-1 mb-1" style="width:75px; display:inline-block;" type="text" name="phone" value="${fn:split(loginUser.phone, '-')[2]}"maxlength="4" placeholder="9999">
+						<div class="row g-2 d-flex justify-content-start">
+							<div>
+								<label class="fw-bold">휴대폰 번호 입력</label><br>
+							</div>
+				        	<div class="d-flex align-items-center">
+							  <input class="form-control me-2" style="width:100px;" type="text" name="phone1" value="010" readonly>
+							  <span class="me-2">-</span>
+							  <input class="form-control me-2" style="width:100px;" type="text" name="phone2" value="${fn:split(loginUser.phone, '-')[1]}" maxlength="4" placeholder="0000">
+							  <span class="me-2">-</span>
+							  <input class="form-control" style="width:100px;" type="text" name="phone3" value="${fn:split(loginUser.phone, '-')[2]}" maxlength="4" placeholder="9999">
+							</div>
 				        </div>
 						
-						<div class=col-12>
-					        <input name="address" class="form-control w-25 m-4 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_postcode" value="${fn:split(loginUser.address, ',')[0]}" placeholder="우편번호" readonly>
-					        <input class="btn btn-outline-secondary btn-sm" type="button" class="btn btn-outline-secondary btn-sm" style="display:inline-block;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
-					        <input name="address" class="form-control w-50 m-4 mt-1 mb-1" type="text"  id="sample6_address" placeholder="주소" value="${fn:split(loginUser.address, ',')[1]}" readonly>
-							<input name="address" class="form-control w-50 m-4 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_detailAddress" value="${fn:split(loginUser.address, ',')[2]}" placeholder="상세주소">
-							
-				        </div>
+						<div class="row g-2">
+							<div class=col-12>
+						        <input name="address" class="form-control w-25 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_postcode" value="${fn:split(loginUser.address, ',')[0]}" placeholder="우편번호" readonly>
+						        <input class="btn btn-outline-secondary btn-sm ms-2" type="button" class="btn btn-outline-secondary btn-sm" style="display:inline-block;" onclick="sample6_execDaumPostcode()" value="우편번호 찾기"><br>
+						        <input name="address" class="form-control w-75 mt-1 mb-1" type="text"  id="sample6_address" placeholder="주소" value="${fn:split(loginUser.address, ',')[1]}" readonly>
+								<input name="address" class="form-control w-75 mt-1 mb-1" type="text" style="display:inline-block;" id="sample6_detailAddress" value="${fn:split(loginUser.address, ',')[2]}" placeholder="상세주소">
+								
+					        </div>
+						</div>
 						
-						<br><br><br><br><br>
+						<div class="d-flex justify-content-center mt-5"><button class="w-100 btn btn-outline-success mb-5 fs-5">수정하기</button></div>
 						
-						<button class="w-100 btn btn-primary btn-lg mb-5">수정하기</button>
 					</div>
 				</form>
 			</div>
