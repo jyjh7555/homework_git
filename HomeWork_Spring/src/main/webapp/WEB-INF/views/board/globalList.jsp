@@ -199,7 +199,7 @@
 	       			</div>
 
 					 	<div class="d-flex justify-content-center align-items-center vh-30 row-gap-3" >
-							<div class="d-flex flex-row justify-content-end mb-3  w-50 mt-3 " style="width:1400px;">
+							<div class="d-flex flex-row justify-content-center mb-3  w-50 mt-3 " style="width:1400px;">
 					       		<ul align="center"class="pagination">
 						            <li class="page-item ${pi.currentPage == pi.startPage ? 'disabled' : '' }">
 						            	<c:url var="goBack" value="${ loc }">
@@ -261,7 +261,7 @@
 		const checkApply = document.getElementById('btncheck1');
 	      
 	      checkApply.addEventListener('change',()=>{
-	    	  location.href = "${contextPath}/domestic.bo?checkApply="+checkApply.checked;
+	    	  location.href = "${contextPath}/global.bo?checkApply="+checkApply.checked;
 	      })
 		
 		function selectBoard(){
@@ -293,10 +293,10 @@
 		    $.ajax({
 		        url: '${contextPath}/regionBoardList.bo',
 		        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
-		        data: { region: region, page: page },
+		        data: { region: region, page: page, checkApply: checkApply.checked },
 		        success: data => {
 		        	updateTable(data.list);	         
-		            updatePagination(data.pi2, region, checkApply: checkApply.checked);
+		            updatePagination(data.pi2, region);
 		            selectBoard();
 
 		        },
@@ -360,7 +360,7 @@
 	             }
 	             
 	               let paginationHTML = `
-	                  <div class="d-flex flex-row justify-content-end mb-3 w-50 mt-3" style="width:1400px;">
+	                  <div class="d-flex flex-row justify-content-center mb-3 w-50 mt-3" style="width:1400px;">
 	                      <ul align="center" class="pagination">`;
 	             
 	                         paginationHTML += '<li class="page-item ' + (pi2.currentPage == 1 ? 'disabled' : '') + '">';
