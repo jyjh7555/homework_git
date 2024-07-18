@@ -52,6 +52,55 @@
 		}
 	a{display:block; color:#555555; font-size: 17px; text-decoration: none;}
 	
+	.region-title-container {
+	    display: flex;
+	    justify-content: center;
+	    align-items: center;
+	    width: 100%;
+	}
+	
+	.title-wrapper {
+	    display: flex;
+	    align-items: center;
+	    width: 100%;
+	    max-width: 500px; 
+	    margin-left:100px;
+	   
+	}
+	
+	#region-title {
+	    font-size: 40px;
+	    font-weight: bold;
+	    color: #505050;
+	    padding: 5px 15px;
+	    display: inline-block;
+	    margin-left: 50px;
+	    margin-bottom:20px;
+	    
+	}
+	
+	.domestic-btn {
+	    width: 80px;  
+	    height: 30px; 
+	    display: flex;
+	    justify-content: center;
+	    align-items:center;
+	    text-align: center;
+	    line-height: 1.5; 
+	    padding: 0;
+	    font-size: 14px; 
+	    white-space: nowrap;
+	    border-radius:5px;
+	}
+	
+	.domestic-btn:hover {
+		background-color:#787878;
+		font-weight:bold;
+		color:white;
+	}
+	img {
+		margin:auto;
+	}
 	area{cursor: pointer;}
 </style>
 <title>Insert title here</title>
@@ -88,7 +137,6 @@
 	 			<li>건축봉사활동 특성상, 현장 상황에 따라 공사는 진행되어도 봉사자 모집은 없을 수 있습니다.</li>
 	 		</ul>
 	 		</div>
- 		
  			<div class="mapAndBoard border border-2 align-items-center ">
  				<div class="w-75">
 					<img src="resources/image/globalMap1.png" alt="대륙 지도"  usemap="#menuMap" /> 
@@ -100,6 +148,12 @@
 				     	<area shape="rect" coords="901,430,999,452" alt="오세아니아" data-region="오세아니아" onclick="showTarget(event)"/>
 				     	<area shape="rect" coords="605,186,670,206" alt="유럽" data-region="유럽" onclick="showTarget(event)"/>
 					</map> 
+				</div>
+		 		<div class="region-title-container mt-4 mb-2">
+				    <div class="title-wrapper">
+				        <button type="button" class="domestic-btn border border-1 mt-5 mb-n5" onclick="location.href='${contextPath}/global.bo'">전체 보기</button>
+				        <span id="region-title">해외 전체</span>
+				    </div>
 				</div>
 				
 				<div class="domestic-container container text-center me-5">
@@ -210,6 +264,10 @@
 
 		    event.preventDefault();
 		    const region = event.target.getAttribute('data-region');
+	          const regionTitle = document.getElementById('region-title');
+	          if (regionTitle) {
+	              regionTitle.innerText = region;
+	          }
 		    loadRegionBoard(region,1);  // 초기 페이지는 1로 설정
 		}
 
@@ -219,9 +277,7 @@
 		        contentType: 'application/x-www-form-urlencoded; charset=UTF-8',
 		        data: { region: region, page: page },
 		        success: data => {
-
-		        	updateTable(data.list);
-		         
+		        	updateTable(data.list);	         
 		            updatePagination(data.pi2, region);
 		            selectBoard();
 

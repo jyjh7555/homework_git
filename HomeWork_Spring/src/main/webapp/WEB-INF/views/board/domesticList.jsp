@@ -54,6 +54,7 @@
 	    justify-content: center;
 	    align-items: center;
 	    width: 100%;
+	    margin-right:100px;
 	}
 	
 	.title-wrapper {
@@ -71,6 +72,7 @@
 	    padding: 5px 15px;
 	    display: inline-block;
 	    margin-left: 190px;
+	    
 	    
 	}
 	
@@ -282,10 +284,7 @@
               url: '${contextPath}/regionBoardList.bo',
               data: { region: region, page: page },
               success: data => {
-                  console.log(data);
-                  updateTable(data.list);
-                  
-               
+                  updateTable(data.list);           
                   updatePagination(data.pi2, region);
                   selectBoard();
 
