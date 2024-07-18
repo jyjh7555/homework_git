@@ -110,7 +110,7 @@
 			            </table>
 					</c:if>
 		            <!-- <textarea style="width:100%; min-height:100%;  overflow-wrap: break-word;"> -->
-		            <div style="white-space: pre-wrap;">${b.content }${v.endDate }</div>
+		            <div style="white-space: pre-wrap;">${b.content }</div>
 					
 					
 				</div>

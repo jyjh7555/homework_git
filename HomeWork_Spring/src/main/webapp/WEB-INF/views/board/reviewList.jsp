@@ -63,7 +63,7 @@
 			<div id="second-container" class="mt-5 ms-0 me-0 ps-0 pe-0 w-100"align="center">
 				<ul>
 					<li class="categoryDomestic"><a style=" border-left:2px solid #EEEEEE; border-top:2px solid #EEEEEE;border-bottom:3px solid #00AFD7;" href="domestic.bo">국내봉사일정</a></li>
-					<li class="categoryDomestic"><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #00AFD7;border-bottom:3px solid #00AFD7;" href="global.bo">해외봉사일정</a></li>
+					<li class="categoryDomestic"><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #EEEEEE;border-bottom:3px solid #00AFD7;" href="global.bo">해외봉사일정</a></li>
 					<li class="categoryDomestic"><a style=" border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7;" href="review.bo">후기 게시판</a></li>
 				</ul>
 			</div>

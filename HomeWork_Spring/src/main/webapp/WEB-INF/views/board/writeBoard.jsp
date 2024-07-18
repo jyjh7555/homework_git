@@ -391,7 +391,7 @@
 				document.getElementById('globalAddress').style.display = 'block';
 			}else{
 				locationNo.innerHTML = '<option value="210">아시아</option>'+
-										 '<option value="220">아메리카</option>'+
+										 '<option value="220">아프리카</option>'+
 										 '<option value="230">북아메리카</option>'+
 										 '<option value="240">남아메리카</option>'+
 										 '<option value="250">중동</option>'+
