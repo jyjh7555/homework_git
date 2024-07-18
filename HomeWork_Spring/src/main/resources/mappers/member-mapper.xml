@@ -73,6 +73,10 @@
 		where member_id=#{id}
 	</update>
 	
+	<select id="findMember" resultType="Member">
+		select *
+		from member
+	</select>
 
 
 </mapper>
