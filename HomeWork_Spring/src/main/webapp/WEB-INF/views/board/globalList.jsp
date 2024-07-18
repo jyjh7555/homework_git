@@ -74,7 +74,7 @@
 	    padding: 5px 15px;
 	    display: inline-block;
 	    margin-left: 50px;
-	    margin-bottom:20px;
+	    margin-bottom:10px;
 	    
 	}
 	
@@ -146,13 +146,13 @@
 				     	<area shape="rect" coords="355,375,435,427" alt="남아메리카" data-region="남아메리카" onclick="showTarget(event)"/>
 				     	<area shape="rect" coords="901,430,999,452" alt="오세아니아" data-region="오세아니아" onclick="showTarget(event)"/>
 				     	<area shape="rect" coords="605,186,670,206" alt="유럽" data-region="유럽" onclick="showTarget(event)"/>
-					</map> 
+					</map>   
 				</div>
 		 		<div class="region-title-container mt-4 mb-2">
 				    <div class="title-wrapper" style="margin-left:-100px;">
-				        <button type="button" class="domestic-btn border border-1 mt-5 mb-n5" onclick="location.href='${contextPath}/global.bo'">전체 보기</button>
-					    <input type="checkbox" name="checkApply" class="border border-1 ml-n3 mt-5 mb-n3" <c:if test="${checkApply}">checked</c:if> id="btncheck1" autocomplete="off">
-				        <label style="width:200px"class="border-1 mt-5 mb-n3"for="btncheck1">신청가능만</label>
+				        <button type="button" class="domestic-btn border border-1 mt-5 mb-n5 p-2" onclick="location.href='${contextPath}/global.bo'">전체 보기</button>
+					    <input type="checkbox" name="checkApply" class="border border-1 ml-n3 ms-2 mt-5 mb-n3" <c:if test="${checkApply}">checked</c:if> id="btncheck1" autocomplete="off">
+				        <label style="width:200px"class="border-1 ms-1 mt-5 mb-n3"for="btncheck1">신청가능만</label>
 				        <span id="region-title" style="width:350px">해외 전체</span>
 				    </div>
 				</div>
@@ -238,7 +238,6 @@
 	  <jsp:include page="../common/fixedBtn.jsp"/>
    </div>
 	<script>
-	<script src="https://cdn.jsdelivr.net/npm/progressbar.js/dist/progressbar.min.js"></script>
 		window.onload = ()=>{
 				selectBoard();	
 		}
@@ -376,22 +375,11 @@
 	                      </ul>
 	                  </div>`;
 	            
-	              paginationContainer.innerHTML = paginationHTML;
-	            
-	            
-	              
-	              
-	              
-	              
-	            
-	              
+	              paginationContainer.innerHTML = paginationHTML;	        
 	          }
 	      }
-		
-			
-		
 	</script>
-	
+	<script src="https://cdn.jsdelivr.net/npm/progressbar.js/dist/progressbar.min.js"></script>
 	
 </body>
 </html>

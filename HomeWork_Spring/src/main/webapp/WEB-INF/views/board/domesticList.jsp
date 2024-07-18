@@ -60,7 +60,7 @@
 	    display: flex;
 	    align-items: center;
 	    width: 100%;
-	    margin-left:200px;
+	    margin-left:150px;
 	    max-width: 500px; 
 	}
 	
@@ -71,6 +71,8 @@
 	    padding: 5px 15px;
 	    display: inline-block;
 	    margin-left: 190px;
+	    white-space:nowrap;
+	   
 	    
 	    
 	}
@@ -112,6 +114,11 @@
 	
 	.domestic-container {
 		margin-right:50px;
+		margin-left:100px;
+	}
+	
+	.accept {
+		white-space:nowrap;
 	}
    
 </style>
@@ -153,10 +160,9 @@
             <div class="region-title-container mt-4 mb-2">
             		
 			    <div class="title-wrapper">
-  				
-			        <button type="button" class="domestic-btn border border-1 mt-5 mb-n3" onclick="location.href='${contextPath}/domestic.bo'">전체 보기</button>
-			        <input type="checkbox" name="checkApply" class="border border-1 ml-n3 mt-5 mb-n3" <c:if test="${checkApply}">checked</c:if> id="btncheck1" autocomplete="off">
-			        <label style="width:200px"class="border-1 mt-5 mb-n3"for="btncheck1">신청가능만</label>
+			        <button type="button" class="domestic-btn border border-1 mt-5 mb-n3 p-1" onclick="location.href='${contextPath}/domestic.bo'">전체 보기</button>
+			        <input type="checkbox" name="checkApply" class="border border-1 ms-2 ml-n3 mt-5 mb-n3" <c:if test="${checkApply}">checked</c:if> id="btncheck1" autocomplete="off">
+			        <label style="width:200px"class="accept border-1mt-5 ms-1 mt-5 mb-n3"for="btncheck1">신청가능만</label>
 			        <span id="region-title" style="width:350px">국내 전체</span>
 			    </div>
 			    
@@ -175,7 +181,7 @@
 	               </map> 
 	            </div>
 	               
-	             <div class="domestic-container container text-center w-50">
+	             <div class="domestic-container container text-center w-75">
 	                <div class="bd-example">
 	                  <table class="table table-hover">
 	                     <thead>
@@ -267,7 +273,7 @@
 	  <jsp:include page="../common/fixedBtn.jsp"/>
    </div>	
    <script>
-   <script src="https://cdn.jsdelivr.net/npm/progressbar.js/dist/progressbar.min.js"></script>
+   
       window.onload = ()=>{
             selectBoard();   
       }
@@ -416,7 +422,7 @@
          
       
    </script>
-   
+   <script src="https://cdn.jsdelivr.net/npm/progressbar.js/dist/progressbar.min.js"></script>
    
    
    
