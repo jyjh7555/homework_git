@@ -51,9 +51,8 @@
 	  <h2 id="heart-text">
 	    후원하기
 	  </h2>
-
 	</div>	
-    <script src="https://cdn.jsdelivr.net/npm/progressbar.js/dist/progressbar.min.js"></script>;
+    <script src="https://cdn.jsdelivr.net/npm/progressbar.js/dist/progressbar.min.js"></script>
 	<script>
 	  window.onload = () => {
 		   	  var bar = new ProgressBar.Path('#heart-path', {

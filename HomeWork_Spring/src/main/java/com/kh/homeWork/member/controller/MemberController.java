@@ -82,7 +82,7 @@ public class MemberController {
 	    if (session != null) {
 	        session.invalidate(); 
 	    }
-	    return "redirect:index.jsp";
+	    return "redirect:home.do";
 	}
 	
 	@RequestMapping("signUp.me")

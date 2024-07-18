@@ -198,25 +198,7 @@
 						해비타트 주택이 완성됩니다.</p>
 				 </div>
 			</div>
-			
-			
-			
 			<jsp:include page="../common/volunteerBanner.jsp"/>
-			<!-- <div class ="volunteerBanner" align="center" >
-				<a href="volunteer.do"style="margin:-10px; text-decoration: none;">
-					<br><br>
-					<span style="color: white; font-size:48px; font-weight:bold;">봉사 활동 신청/목록 보기</span>
-					<br><br>
-					<span style="border-bottom:2px solid white; color:white;">More view</span>
-					
-					
-			
-				</a>
-			</div> -->
-			
-			
-			
-			
 		</div>
 		
 	</div>

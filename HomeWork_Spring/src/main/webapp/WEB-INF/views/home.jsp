@@ -17,11 +17,11 @@
   		font-style: normal;
 	}
 	
-		@font-face {
-    font-family: 'GowunBatang-Regular';
-    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
-    font-weight: normal;
-    font-style: normal;
+	@font-face {
+	    font-family: 'GowunBatang-Regular';
+	    src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
+	    font-weight: normal;
+	    font-style: normal;
 	}
 	
 	#topAndNavbar {
@@ -42,7 +42,7 @@
 	
 	#container {
 		font-family: 'GowunBatang-Regular';
-		line-height:2;
+	
 	}
 	
 
@@ -64,6 +64,7 @@
 		font-size:30px;
 		color:skyblue;
 		font-weight:bold;
+		
 	}
 	
 	.introduce1 h3 {
@@ -120,12 +121,12 @@
 	}
 	
 	#introduce3>h3 {
-		font-size: 40px;
+		font-size: 30px;
 		margin-top:30px;
 	}
 	
 	#introduce3>em{
-		font-size:30px;
+		font-size:25px;
 		color:skyblue;
 		font-weight:bold;
 	}
@@ -139,7 +140,7 @@
 	}
 	
 	#introduce4>h3 {
-		font-size: 40px;
+		font-size: 30px;
 		margin-top:30px;
 	}
 	
@@ -185,6 +186,14 @@
 		 
 	}
 	
+	#introduce5-1 P {
+		margin-top:20px;
+	}
+	
+	#introduce5-2 P {
+		margin-top:20px;
+	}
+	
 	#introduce5-2 {
 		 list-style-type: none;
 		 text-align: center;
@@ -196,6 +205,7 @@
 		font-size:35px;
 		color:skyblue;
 		font-weight: bold;
+		
 	}
 	
 	#introduce5 p {		
@@ -207,6 +217,7 @@
   		font-style: normal;
   		line-height:2;
 	}
+	
 	
     
     

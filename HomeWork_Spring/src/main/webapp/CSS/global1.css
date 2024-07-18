@@ -1,5 +1,5 @@
 @charset "UTF-8";
-		body {
+	body {
 		font-family: "Nanum Gothic", sans-serif;
   		font-weight: 400;
   		font-style: normal;
@@ -26,6 +26,13 @@
 		font-family: 'Pretendard-Regular';
 	}
 	
+	.semi-title {
+		margin-top:10px;
+	}
+	
+	.text-center{
+		margin-top:20px;
+	}
 	
 	
 	.categoryDomestic{display: inline-block;  margin-right: 2px; 
@@ -56,6 +63,10 @@
 	.semi-title {
 		text-decoration: underline;
 		text-underline-offset: 15px;
+	}
+	
+	.sub-tit {
+		margin-top:10px;
 	}
 
 	.global-image1{

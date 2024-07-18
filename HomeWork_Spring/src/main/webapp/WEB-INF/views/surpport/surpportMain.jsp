@@ -127,6 +127,9 @@
 	<div id="footer">
  			<jsp:include page="../common/footer.jsp"/>
 	</div>
+    <div id="fixedBtn">
+	  <jsp:include page="../common/fixedBtn.jsp"/>
+    </div>	
 	
 		
 	<script src="https://code.jquery.com/jquery-3.7.1.slim.min.js"></script>
