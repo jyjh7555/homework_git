@@ -119,7 +119,7 @@ body {
 	}
 	
 	.activity-table thead {
-	    position: sticky;
+	    
 	    top: 0;
 	    z-index: 2;
 	    background-color: #f8f9fa;
@@ -133,6 +133,7 @@ body {
 	}
 	
 	.activity-table tbody td { /* td에서 tbody td로 변경 */
+		position: sticky;
 	    padding: 12px;
 	    text-align: center;
 	    border-bottom: 1px solid #ddd;
@@ -173,20 +174,20 @@ body {
 	}
 	
 	/* 스크롤바 스타일링 (선택사항) */
-	.recent-activity-section div::-webkit-scrollbar {
+	.activity-table tbody td div::-webkit-scrollbar {
 	    width: 8px;
 	}
 	
-	.recent-activity-section div::-webkit-scrollbar-track {
+	.activity-table tbody td div::-webkit-scrollbar-track {
 	    background: #f1f1f1;
 	}
 	
-	.recent-activity-section div::-webkit-scrollbar-thumb {
+	.activity-table tbody td div::-webkit-scrollbar-thumb {
 	    background: #888;
 	    border-radius: 4px;
 	}
 	
-	.recent-activity-section div::-webkit-scrollbar-thumb:hover {
+	.activity-table tbody td div::-webkit-scrollbar-thumb:hover {
 	    background: #555;
 	}
 </style>

@@ -17,7 +17,7 @@
   		font-style: normal;
 	}
 	
-	@font-face {
+		@font-face {
     font-family: 'GowunBatang-Regular';
     src: url('https://fastly.jsdelivr.net/gh/projectnoonnu/noonfonts_2108@1.1/GowunBatang-Regular.woff') format('woff');
     font-weight: normal;
@@ -40,7 +40,12 @@
 		height: 200px;
 	}
 	
+	#container {
+		font-family: 'GowunBatang-Regular';
+		line-height:2;
+	}
 	
+
 	#content {
 		margin-top:70px;
 		display:flex;
@@ -49,7 +54,6 @@
 	}
 	
 	.introduce1 {
-		font-family: 'GowunBatang-Regular';
 		text-align:center;
 		line-height:2;
 		
@@ -173,6 +177,7 @@
 	     flex-direction:column;
 	}
 	#introduce5-1 {
+		 font-family: 'GowunBatang-Regular';
 		 list-style-type: none;
 		 border-bottom: 0.5px solid lightgray;
 		 text-align: center;
@@ -197,13 +202,11 @@
 		font-size:23px;
 		color:black;
 		width: 100%;
-		font-family: "Nanum Gothic", sans-serif;
+		font-family: 'GowunBatang-Regular';
   		font-weight: 400;
   		font-style: normal;
   		line-height:2;
 	}
-	
-
 	
     
     
@@ -338,10 +341,7 @@
 	</div>
 	
 	<script>
-	window.onload =() =>{
-		const logoImage = document.getElementById('logo-image');
-		logoImage.style.filter = "invert(1)";
-	}
+		
 	 function changeBackground() {
 	        const navbarSection = document.getElementById('navbar-section');
 	        navbarSection.style.backgroundColor = "white";
