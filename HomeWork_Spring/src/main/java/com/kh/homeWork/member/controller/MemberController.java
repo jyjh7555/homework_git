@@ -57,6 +57,7 @@ public class MemberController {
 		Member loginUser = mService.loginCheck(m);
 		System.out.println(loginUser);
 		
+		if(loginUser !=null) {
 			if(bcrypt.matches(m.getMemberPwd(), loginUser.getMemberPwd())) {
 				session.setAttribute("loginUser", loginUser);			
 				return "redirect:home.do";				
@@ -64,7 +65,8 @@ public class MemberController {
 				throw new MemberException("로그인을 실패했습니다.");
 			
 			}
-		
+		}
+		throw new MemberException("아이디 또는 비밀번호가 틀렸습니다");
 	}
 	
 	
@@ -227,22 +229,39 @@ public class MemberController {
 						 @RequestParam("findName") String findName,
 						 @RequestParam("findEmail") String findEmail,
 						 @RequestParam("findPhone") String findPhone,
-						 Member m, Model model) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("findId", findId);
-		map.put("findName", findName);
-		map.put("findEmail", findEmail);
-		map.put("findPhone", findPhone);
+						 Model model) {
+		ArrayList<Member> memberList = mService.findMember();
 		
-		String temp = RandomPassword(10);	// 임시 비밀번호
+		Member foundMember = null;
+		for (Member member : memberList) {
+	        if (member.getMemberId().equals(findId) && member.getMemberName().equals(findName) && member.getEmail().equals(findEmail) && member.getPhone().equals(findPhone)) {
+	            foundMember = member;
+	            break;
+	        }
+	    }
 		
-		map.put("tempPwd", bcrypt.encode(temp));
-		int result = mService.updateTempPwd(map); // 현재 비밀번호 임시 비밀번호로 변경
+		if (foundMember != null) {
+	        HashMap<String, String> map = new HashMap<>();
+	        map.put("findId", findId);
+	        map.put("findName", findName);
+	        map.put("findEmail", findEmail);
+	        map.put("findPhone", findPhone);
+
+	        String temp = RandomPassword(10);    // 임시 비밀번호 생성
+	        map.put("tempPwd", bcrypt.encode(temp));
+	        int result = mService.updateTempPwd(map); // 현재 비밀번호를 임시 비밀번호로 변경
+
+	        model.addAttribute("findName", findName);
+	        model.addAttribute("tempPwd", temp);
+	        model.addAttribute("type", 2);
+	        return "findResult"; 
+	        
+		} else {
+			throw new MemberException("입력하신 정보가 일치하지않습니다.");
+		}
 		
-		model.addAttribute("findName", findName);
-		model.addAttribute("tempPwd", temp);
-		model.addAttribute("type", 2);
-		return "findResult";
+		
+		
 	}
 	
 	

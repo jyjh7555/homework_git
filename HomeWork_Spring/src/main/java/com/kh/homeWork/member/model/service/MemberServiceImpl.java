@@ -1,5 +1,6 @@
 package com.kh.homeWork.member.model.service;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 
 import org.mybatis.spring.SqlSessionTemplate;
@@ -56,6 +57,11 @@ public class MemberServiceImpl implements MemberService {
 	@Override
 	public int updatePassword(HashMap<String, String> map) {
 		return mDAO.updatePassword(sqlSession,map);
+	}
+
+	@Override
+	public ArrayList findMember() {
+		return mDAO.findMember(sqlSession);
 	}
 	
 

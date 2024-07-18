@@ -57,12 +57,6 @@
 	}
 
 	#container{display:flex; flex-wrap: wrap; width:100%;}
-	table{
-		text-align: center;
-	}
-	th {
-        border-bottom: 1px solid black;
-    }
     @font-face {
 	    font-family: 'Pretendard-Regular';
 	    src: url('https://fastly.jsdelivr.net/gh/Project-Noonnu/noonfonts_2107@1.1/Pretendard-Regular.woff') format('woff');
@@ -77,6 +71,14 @@
             display: flex;
             justify-content: flex-end;
         }
+        
+    #editDiv {
+    width: 100%;
+    min-height: 500px;
+    max-height: 600px;
+    overflow-y: auto;
+    box-sizing: border-box;
+}
         
 </style>
 <title>관리자게시판</title>

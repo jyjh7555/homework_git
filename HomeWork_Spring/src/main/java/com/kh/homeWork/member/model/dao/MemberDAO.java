@@ -48,6 +48,10 @@ public class MemberDAO {
 		return sqlSession.update("memberMapper.updatePassWord",map);
 	}
 
+	public ArrayList findMember(SqlSessionTemplate sqlSession) {
+		return (ArrayList)sqlSession.selectList("memberMapper.findMember");
+	}
+
 
 
 

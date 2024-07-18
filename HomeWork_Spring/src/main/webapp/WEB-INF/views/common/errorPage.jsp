@@ -40,15 +40,17 @@
             <img src="${contextPath}/resources/image/newLogo.png" alt="Error Image">
         </div>
         <h1>정상 동작하지 못했습니다.</h1>
-        <p class="lead">${ requestScope['javax.servlet.error.message']}</p>
+        <p id="errorMSG"></p>
         
-        <div class="image-placeholder">
-            <img src="	sign1.png" alt="Error Image">
-        </div>
+        
         <div class="buttons">
             <a href="${contextPath }/home.do" class="main">메인으로</a>
             <a href="javascript:history.back()" class="back">BACK</a>
         </div>
     </div>
+    <script>
+    	const errorMSG = "${ requestScope['javax.servlet.error.message']}";
+    	document.getElementById('errorMSG').innerText = errorMSG.split(":")[1];
+    </script>
 </body>
 </html>

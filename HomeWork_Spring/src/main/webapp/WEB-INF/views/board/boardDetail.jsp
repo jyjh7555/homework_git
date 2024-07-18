@@ -195,7 +195,7 @@
 								console.log(r.replyNo);
 								console.log('여기위가 내가체크하려는거임');
 								if(r.memberNo == ${loginUser.memberNo}){
-									check ='<td width="150px"><a class="fs-6">수정</a>/<a class="fs-6">삭제</a></td>'; 
+									check ='<a class="fs-6">수정</a>/<a class="fs-6">삭제</a>'; 
 								}else{
 									check = '';
 								}
