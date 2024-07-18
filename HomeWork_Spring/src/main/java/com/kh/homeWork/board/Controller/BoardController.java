@@ -46,7 +46,7 @@ public class BoardController {
 	@RequestMapping("{boardType}.bo")
 	public String selectDomesticBoardList(@PathVariable String boardType,
 			@RequestParam(value = "page", defaultValue = "1") int currentPage, Model model,
-			@RequestParam(value = "checkApply", defaultValue="false") boolean checkApply,
+			@RequestParam(value = "checkApply", defaultValue = "false") boolean checkApply,
 			HttpServletRequest request) {
 		// 변수명에 따라 url명이 달라진다.
 		int boardTypeNum;
@@ -68,55 +68,53 @@ public class BoardController {
 		default:
 			return "errorPage";
 		}
-		
-		int listCount= 0;
-		PageInfo pi= null;
-		if(checkApply) {
+
+		int listCount = 0;
+		PageInfo pi = null;
+		if (checkApply) {
 			listCount = bService.getListCountCheckApply(boardTypeNum);
 			pi = Pagination.getPageInfo(currentPage, listCount, 5);
-		}else {
+		} else {
 			listCount = bService.getListCount(boardTypeNum);
 			pi = Pagination.getPageInfo(currentPage, listCount, 5);
 		}
-		
-		
+
 		ArrayList<Board> list = null;
-		if(checkApply) {
-			list = bService.selectBoardListCheckApply(pi,boardTypeNum);
+		if (checkApply) {
+			list = bService.selectBoardListCheckApply(pi, boardTypeNum);
 			model.addAttribute("checkApply", checkApply);
- 		}else {
-			list = bService.selectBoardList(pi,boardTypeNum);
+		} else {
+			list = bService.selectBoardList(pi, boardTypeNum);
 		}
-		
-		if(list !=null) {
-			model.addAttribute("list",list);
-			model.addAttribute("pi",pi);
+
+		if (list != null) {
+			model.addAttribute("list", list);
+			model.addAttribute("pi", pi);
 		}
-		
-		
+
 		// ArrayList<Volunteer> volunteerCount =
 		// vService.getVolunteerCount(boardTypeNum); //현재인원
 
 		for (Board b : list) {
-			if(b.getBoardType()!=3) {
+			if (b.getBoardType() != 3) {
 				VolunteerDetail vd = bService.selectVolunteerDetail(b.getBoardNo());
-				if(vd !=null) {
-			
+				if (vd != null) {
+
 					int vNum = vd.getVolunteerNo();
 					int nowCount = vService.getVolunteerCount(vNum);
 					b.setRecruitStart(vd.getRecruitStart());
-					b.setRecruitEnd(vd.getRecruitEnd());	//리스트에 vd의 모집기간 가져옴
-					
-					b.setFullCount(vd.getMemberCount()); //리스트에 vd의 모집인원 가져옴
+					b.setRecruitEnd(vd.getRecruitEnd()); // 리스트에 vd의 모집기간 가져옴
+
+					b.setFullCount(vd.getMemberCount()); // 리스트에 vd의 모집인원 가져옴
 					b.setNowCount(nowCount);
-					
-		//			LocalDate.now().isAfter(vd.getRecruitEnd().toLocalDate())
-					//리스트 기간이 해당되는는지 boolean
+
+					// LocalDate.now().isAfter(vd.getRecruitEnd().toLocalDate())
+					// 리스트 기간이 해당되는는지 boolean
 					b.setDateCheckEnd(LocalDate.now().isAfter(vd.getRecruitEnd().toLocalDate()));
 					b.setDateCheckStart(LocalDate.now().isAfter(vd.getRecruitStart().toLocalDate()));
-			
-				}	
-			
+
+				}
+
 			}
 		}
 
@@ -131,7 +129,7 @@ public class BoardController {
 
 	@RequestMapping("volunteer.bo")
 	public String test() {
-		return "korMap";
+		return "domesticList";
 	}
 
 	@RequestMapping("selectBoard.bo")
@@ -145,20 +143,19 @@ public class BoardController {
 		}
 
 		Board b = bService.selectBoard(bId, memberNo); // 조회수 해결했는데?
-		if(b.getBoardType() !=3 ) {
+		if (b.getBoardType() != 3) {
 			VolunteerDetail v = bService.selectVolunteerDetail(bId);
 			int vNum = v.getVolunteerNo();
 			int nowCount = vService.getVolunteerCount(vNum);
 			b.setFullCount(v.getMemberCount());
 			b.setNowCount(nowCount);
-		
-	
+
 			if (v != null) {
 				boolean dateCheck = LocalDate.now().isAfter(v.getEndDate().toLocalDate());
 				model.addAttribute("dateCheck", dateCheck);
 				v.setAddress(v.getAddress().replace(",", " "));
 				System.out.println(b.getLocationNo());
-	
+
 			}
 			model.addAttribute("v", v);
 		}
@@ -206,7 +203,7 @@ public class BoardController {
 			v.setBoardNo(bNo);
 			int result2 = bService.insertVolunteer(v);
 		}
-		
+
 		switch (b.getBoardType()) {
 		case 1:
 			return "redirect:domestic.bo";
@@ -215,7 +212,7 @@ public class BoardController {
 		case 3:
 			return "redirect:review.bo";
 		}
-		
+
 		throw new BoardException("게시글 작성을 실패하였습니다");
 	}
 
@@ -223,15 +220,15 @@ public class BoardController {
 	public String editBoard(@RequestParam("bId") int bId, @RequestParam("page") int page, Model model) {
 		Board b = bService.selectBoard(bId, 0);
 		VolunteerDetail v = bService.selectVolunteerDetail(bId);
-		
-		if(v != null) {
+
+		if (v != null) {
 			String[] address = v.getAddress().split(",");
-			model.addAttribute("address",address);
+			model.addAttribute("address", address);
 		}
-		model.addAttribute("b",b);
-		model.addAttribute("v",v);
-		model.addAttribute("page",page);
-		
+		model.addAttribute("b", b);
+		model.addAttribute("v", v);
+		model.addAttribute("page", page);
+
 		model.addAttribute("b", b);
 		model.addAttribute("v", v);
 		model.addAttribute("page", page);
@@ -244,8 +241,8 @@ public class BoardController {
 			@RequestParam("page") int page) {
 
 		int result1 = bService.updateBoard(b);
-		
-		if(b.getBoardType() !=3) {
+
+		if (b.getBoardType() != 3) {
 			bService.updateVolunteerDetail(v);
 		}
 		if (result1 > 0) {
@@ -278,8 +275,7 @@ public class BoardController {
 		}
 
 		throw new BoardException("게시글 삭제에 실패하였습니다");
-	}	
-		
+	}
 
 	@RequestMapping("test.bo")
 	public String test2(@RequestParam("startTime") String st, @RequestParam("endTime") String et) {
@@ -289,49 +285,46 @@ public class BoardController {
 
 	@RequestMapping("regionBoardList.bo")
 	public void regionBoardList(HttpServletResponse response,
-								@RequestParam(value = "region", required = false) String region,
-								@RequestParam(value = "page", defaultValue = "1") int currentPage,
-								@RequestParam(value = "checkApply", defaultValue="false") boolean checkApply) {
-		
+			@RequestParam(value = "region", required = false) String region,
+			@RequestParam(value = "page", defaultValue = "1") int currentPage,
+			@RequestParam(value = "checkApply", defaultValue = "false") boolean checkApply) {
+
 		System.out.println("첫부분");
-		
+
 		int listCount = 0;
 		PageInfo pi2 = null;
-		if(checkApply) {
+		if (checkApply) {
 			listCount = bService.getRegionListCountCheckApply(region);
-		    pi2 = Pagination.getPageInfo(currentPage, listCount,5);
-		}else {
+			pi2 = Pagination.getPageInfo(currentPage, listCount, 5);
+		} else {
 			listCount = bService.getRegionListCount(region);
-		    pi2 = Pagination.getPageInfo(currentPage, listCount,5);
+			pi2 = Pagination.getPageInfo(currentPage, listCount, 5);
 		}
-		
-  
-	    ArrayList<Board> list = null;
-	    if(checkApply) {
-	    	list = bService.regionBoardListCheckApply(region,pi2);
-	    }else {
-	    	list = bService.regionBoardList(region,pi2);
-	    }
-  		
-  		
-  		for (Board b : list) {
-    	  	VolunteerDetail vd = bService.selectVolunteerDetail(b.getBoardNo());
-          	if (vd != null) {
-	            int vNum = vd.getVolunteerNo();
-	            int nowCount = vService.getVolunteerCount(vNum);
-	            b.setRecruitStart(vd.getRecruitStart());
-	            b.setRecruitEnd(vd.getRecruitEnd());
-	            b.setFullCount(vd.getMemberCount());
-	            b.setNowCount(nowCount);
-	            b.setDateCheckEnd(LocalDate.now().isAfter(vd.getRecruitEnd().toLocalDate()));
+
+		ArrayList<Board> list = null;
+		if (checkApply) {
+			list = bService.regionBoardListCheckApply(region, pi2);
+		} else {
+			list = bService.regionBoardList(region, pi2);
+		}
+
+		for (Board b : list) {
+			VolunteerDetail vd = bService.selectVolunteerDetail(b.getBoardNo());
+			if (vd != null) {
+				int vNum = vd.getVolunteerNo();
+				int nowCount = vService.getVolunteerCount(vNum);
+				b.setRecruitStart(vd.getRecruitStart());
+				b.setRecruitEnd(vd.getRecruitEnd());
+				b.setFullCount(vd.getMemberCount());
+				b.setNowCount(nowCount);
+				b.setDateCheckEnd(LocalDate.now().isAfter(vd.getRecruitEnd().toLocalDate()));
 				b.setDateCheckStart(LocalDate.now().isAfter(vd.getRecruitStart().toLocalDate()));
-          	}	
-  		}
-	
-	
-	    Map<String, Object> resultMap = new HashMap<>();
-	    resultMap.put("list", list);
-	    resultMap.put("pi2", pi2);
+			}
+		}
+
+		Map<String, Object> resultMap = new HashMap<>();
+		resultMap.put("list", list);
+		resultMap.put("pi2", pi2);
 		GsonBuilder gb = new GsonBuilder().setDateFormat("yyyy-MM-dd");
 		Gson gson = gb.create();
 		response.setContentType("application/json; charset=UTF-8");
@@ -344,7 +337,6 @@ public class BoardController {
 		}
 
 	}
-
 
 	@RequestMapping("insertReply.bo")
 	@ResponseBody

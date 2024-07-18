@@ -116,7 +116,7 @@ public class MemberController {
 		m.setMemberPwd(bcrypt.encode(m.getMemberPwd()));	//�븫�샇�솕 �떆�옉
 		int result = mService.insertMember(m);
 		
-		return "redirect:index.jsp";
+		return "redirect:home.do";
 	}
 	@RequestMapping("findId.me")
 	public String findId() {

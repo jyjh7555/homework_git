@@ -282,7 +282,7 @@
       const checkApply = document.getElementById('btncheck1');
       
       checkApply.addEventListener('change',()=>{
-    	  location.href = "${contextPath}/domestic.bo?checkApply="+checkApply.checked;
+    	  location.href = "${contextPath}/domestic.bo?checkApply="+checkApply.checked
       })
       
       
