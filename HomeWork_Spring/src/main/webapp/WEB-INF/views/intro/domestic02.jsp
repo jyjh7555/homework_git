@@ -4,7 +4,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>기적을 짓는 봉사 - HomeWork</title>
 <link href="${ contextPath }/CSS/global1.css" rel="stylesheet" type="text/css">
 <style>
 	body {

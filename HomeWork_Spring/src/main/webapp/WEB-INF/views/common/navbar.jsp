@@ -7,7 +7,7 @@
 <head>
 
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>기적을 짓는 봉사 - HomeWork</title>
 <style>
 	   #navbar{
 	    color: white; 
