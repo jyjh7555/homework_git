@@ -115,7 +115,7 @@
 	}
    
 </style>
-<title>Insert title here</title>
+<title>기적을 짓는 봉사 - HomeWork</title>
 </head>
    <body>
          <div id=topAndNavbar>
@@ -335,7 +335,7 @@
               tr.appendChild(createTd(b.location));
               tr.appendChild(createTd(b.title));
               tr.appendChild(createTd(b.nowCount + " / " + b.fullCount));
-              tr.appendChild(createTd(b.recruitStart + '~' + b.recruitEnd));
+              tr.appendChild(createTd(b.recruitStart + ' ~ ' + b.recruitEnd));
               tr.appendChild(createTd(b.boardCount));
               const applyTd = document.createElement('td');
           	  const applyButton = document.createElement('a');
@@ -377,7 +377,7 @@
              }
              
                let paginationHTML = `
-                  <div class="d-flex flex-row justify-content-end mb-3 w-50 mt-3" style="width:1400px;">
+                  <div class="d-flex flex-row justify-content-center mb-3 w-50 mt-3" style="width:1400px;">
                       <ul align="center" class="pagination">`;
              
                          paginationHTML += '<li class="page-item ' + (pi2.currentPage == 1 ? 'disabled' : '') + '">';

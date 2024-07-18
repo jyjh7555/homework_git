@@ -3,7 +3,7 @@
 <html lang="ko">
 <head>
     
-    <title>404 Error</title>
+    <title>404 Error - Home Work</title>
     <style>
         body {
             font-family: Arial, sans-serif;

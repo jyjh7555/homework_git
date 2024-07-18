@@ -64,7 +64,7 @@
 	
 </style>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>기적을 짓는 봉사 - HomeWork</title>
 </head>
 <body>
 	<div id=topAndNavbar>

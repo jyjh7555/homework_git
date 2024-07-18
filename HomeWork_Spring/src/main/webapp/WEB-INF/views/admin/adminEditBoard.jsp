@@ -60,7 +60,7 @@
     box-sizing: border-box;
 }
 </style>
-<title>관리자게시판</title>
+<title>관리자게시판 - HomeWork</title>
 </head>
 <body>
 	<div class="logo">

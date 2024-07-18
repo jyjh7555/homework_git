@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta charset="UTF-8">
-<title>Insert title here</title>
+<title>기적을 짓는 봉사 - HomeWork</title>
 <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 <script src="//t1.daumcdn.net/mapjsapi/bundle/postcode/prod/postcode.v2.js"></script>
 <!-- 카카오지도 -->
@@ -102,7 +102,7 @@
 					            			</c:if>
 					            			<c:if test="${b.boardType=='2' }">
 					            				<option value="210" <c:if test="${b.locationNo =='210' }">selected</c:if>>아시아</option>
-					            				<option value="220" <c:if test="${b.locationNo =='220' }">selected</c:if>>아메리카</option>
+					            				<option value="220" <c:if test="${b.locationNo =='220' }">selected</c:if>>아프리카</option>
 					            				<option value="230" <c:if test="${b.locationNo =='230' }">selected</c:if>>북아메리카</option>
 					            				<option value="240" <c:if test="${b.locationNo =='240' }">selected</c:if>>남아메리카</option>
 					            				<option value="250" <c:if test="${b.locationNo =='250' }">selected</c:if>>중동</option>
