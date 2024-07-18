@@ -250,7 +250,7 @@ public class MemberController {
 	        String temp = RandomPassword(10);    // 임시 비밀번호 생성
 	        map.put("tempPwd", bcrypt.encode(temp));
 	        int result = mService.updateTempPwd(map); // 현재 비밀번호를 임시 비밀번호로 변경
-
+	        
 	        model.addAttribute("findName", findName);
 	        model.addAttribute("tempPwd", temp);
 	        model.addAttribute("type", 2);

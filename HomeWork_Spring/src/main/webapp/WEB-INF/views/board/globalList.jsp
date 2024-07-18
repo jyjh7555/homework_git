@@ -237,9 +237,8 @@
    <div id="fixedBtn">
 	  <jsp:include page="../common/fixedBtn.jsp"/>
    </div>
-
-	${pi.currentPage}
 	<script>
+	<script src="https://cdn.jsdelivr.net/npm/progressbar.js/dist/progressbar.min.js"></script>
 		window.onload = ()=>{
 				selectBoard();	
 		}
