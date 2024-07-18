@@ -88,7 +88,7 @@
 			            			<select class="col-4 form-control" id="boardType"name="boardType" style="display:inline; width:100px">
 			            				<option  value="1"<c:if test="${b.boardType == '1' }">selected</c:if>>국내</option>
 			            				<option  value="2"<c:if test="${b.boardType == '2' }">selected</c:if>>해외</option>
-			            				<option style="display:none" value="3">후기</option>
+			            				<option style="display:none" value="3" <c:if test="${b.boardType == '3' }">selected</c:if>>후기</option>
 			            			</select>
 			            				<select class="col-4 form-control" id="locationNo"name="locationNo"style="display:inline; width:100px">
 					            			<c:if test="${b.boardType=='1' }">

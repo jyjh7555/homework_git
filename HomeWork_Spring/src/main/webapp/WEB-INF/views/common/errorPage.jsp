@@ -37,13 +37,13 @@
 <body>
     <div class="error-container">
         <div class="image-placeholder">
-            <img src="newLogo.png" alt="Error Image">
+            <img src="${contextPath}/resources/image/newLogo.png" alt="Error Image">
         </div>
         <h1>정상 동작하지 못했습니다.</h1>
         <p class="lead">${ requestScope['javax.servlet.error.message']}</p>
         
         <div class="image-placeholder">
-            <img src="sign1.png" alt="Error Image">
+            <img src="	sign1.png" alt="Error Image">
         </div>
         <div class="buttons">
             <a href="${contextPath }/home.do" class="main">메인으로</a>

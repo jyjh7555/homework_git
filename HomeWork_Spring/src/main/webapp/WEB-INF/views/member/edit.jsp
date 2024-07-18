@@ -135,11 +135,11 @@
 								<label class="fw-bold">휴대폰 번호 입력</label><br>
 							</div>
 				        	<div class="d-flex align-items-center">
-							  <input class="form-control me-2" style="width:100px;" type="text" name="phone1" value="010" readonly>
+							  <input class="form-control me-2" style="width:100px;" type="text" name="phone" value="010" readonly>
 							  <span class="me-2">-</span>
-							  <input class="form-control me-2" style="width:100px;" type="text" name="phone2" value="${fn:split(loginUser.phone, '-')[1]}" maxlength="4" placeholder="0000">
+							  <input class="form-control me-2" style="width:100px;" type="text" name="phone" value="${fn:split(loginUser.phone, '-')[1]}" maxlength="4" placeholder="0000">
 							  <span class="me-2">-</span>
-							  <input class="form-control" style="width:100px;" type="text" name="phone3" value="${fn:split(loginUser.phone, '-')[2]}" maxlength="4" placeholder="9999">
+							  <input class="form-control" style="width:100px;" type="text" name="phone" value="${fn:split(loginUser.phone, '-')[2]}" maxlength="4" placeholder="9999">
 							</div>
 				        </div>
 						
