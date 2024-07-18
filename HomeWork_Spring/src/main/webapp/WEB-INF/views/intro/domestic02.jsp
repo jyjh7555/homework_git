@@ -137,28 +137,8 @@
 				<div class="imageDiv" align="center" >
 					<img src="resources/image/dome02Image02.png" style="width:550px; height:300px;"></img>
 				</div>
-			</div>
-			
-			
-			
-			
+			</div>	
 			<jsp:include page="../common/volunteerBanner.jsp"/>
-			<!-- <div class ="volunteerBanner" align="center" >
-				<a href="volunteer.do"style="margin:-10px; text-decoration: none;">
-					<br><br>
-					<span style="color: white; font-size:48px; font-weight:bold;">봉사 활동 신청/목록 보기</span>
-					<br><br>
-					<span style="border-bottom:2px solid white; color:white;">More view</span>
-					
-					<br><br>
-			
-				</a>
-			</div> -->
-			
-			
-			
-			
-			
 		</div>
 		
 	</div>

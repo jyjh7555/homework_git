@@ -29,7 +29,6 @@
    em{
       font-size:30px;
       color:skyblue;
-      font-weight:bold;
    }
    .checkList li{line-height:35px; list-style-color:skyblue;}
    
@@ -264,6 +263,9 @@
    <div id="footer">
       <jsp:include page="../common/footer.jsp"/>
    </div>
+   <div id="fixedBtn">
+	  <jsp:include page="../common/fixedBtn.jsp"/>
+   </div>	
 
    ${pi.currentPage}
    <script>

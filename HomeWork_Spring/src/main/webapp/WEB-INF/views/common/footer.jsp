@@ -19,6 +19,7 @@
         color: #333;
         padding: 40px 0;
         font-family: 'Pretendard-Regular';
+        height:400px;
     }
     
     .inner {
@@ -82,6 +83,7 @@
         border-top: 1px solid #ddd;
         font-size: 20px;
         color: #777;
+        background-color: #f8f9fa;
     }
     
 </style>
@@ -106,6 +108,7 @@
                 <h4>김종규</h4>               
                 <h4>이재영</h4>
                 <h4>김기룡</h4>  
+                <h4>유승우</h4>
             </div>
             <div class="footer-column">
                <h3>Project Info</h3>

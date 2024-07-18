@@ -46,13 +46,13 @@
 			<li class=categoryDomestic><a style="border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:3px solid #00AFD7; border-bottom:3px solid #00AFD7" href="global03.in">도시슬럼 지원</a></li>
 		</ul>
 	</div>
-	<div class="sub-tit text-center mt-5">
+	<div class="sub-tit text-center">
 		<h3 class="semi-title fs-1 fw-bold">식수위생</h3>
 		<br>
 	 	<h4>깨끗한 식수와 안전한 위생시설 그리고 위생습관에 대한 인식개선 교육을 제공합니다.</h4>
 	</div>
 	<div class="global-container"align="center">
-		<div class="global-image2-1 d-flex justify-content-center mt-5 " style="background-image:url('resources/image/global2-1.jpg');">
+		<div class="global-image2-1 d-flex justify-content-center mt-5" style="background-image:url('resources/image/global2-1.jpg');">
 			<h3 class="align-self-center lh-lg fw-semibold">식수위생시설은 콜레라와 같은 수인성 질병의 확산을 방지하고 <br> 건강한 삶을 유지하는데 필수적입니다</h3>
 		</div>
 	<div class="content">

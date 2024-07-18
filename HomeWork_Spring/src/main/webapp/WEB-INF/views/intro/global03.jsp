@@ -46,7 +46,7 @@
 			<li class=categoryDomestic><a style="border-top:3px solid #00AFD7; border-left:3px solid #00AFD7; border-right:3px solid #00AFD7" href="global03.in">도시슬럼 지원</a></li>
 		</ul>
 	</div>
-	<div class="sub-tit text-center mt-5">
+	<div class="sub-tit text-center">
 		<h3 class="semi-title fs-1 fw-bold">도시슬럼 지원</h3>
 		<br>
 	 	<h4>슬럼화된 도시의 주거환경을 안전하고 쾌적하게 보수하고, 공공 식수 시설과 화장실을 제공합니다.</h4>

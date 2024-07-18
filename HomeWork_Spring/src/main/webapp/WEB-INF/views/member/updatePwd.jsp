@@ -78,7 +78,7 @@
 			<jsp:include page="../common/volunteer.jsp"/>
 		</div>	
  	</div>
-	<div class="container w-100 mt-5 d-flex justify-content-center">
+	<div class="container w-100 mt-5 mb-5 d-flex justify-content-center">
 		<main>
 				<div class="col-md-6 d-flex justify-content-center w-100">
 					<div class="inner-container h-100 p-5 bg-light border border-2 ">

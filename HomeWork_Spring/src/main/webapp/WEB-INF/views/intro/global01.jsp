@@ -45,7 +45,7 @@
 			<li class=categoryDomestic><a style=" border-top:2px solid #EEEEEE; border-right:2px solid #EEEEEE;border-left:2px solid #EEEEEE;border-bottom:3px solid #00AFD7;" href="global03.in">도시슬럼 지원</a></li>
 		</ul>
 	</div>
-	<div class="sub-tit text-center mt-5">
+	<div class="sub-tit text-center">
 		<h3 class=" semi-title fs-1 fw-bold">주거환경 개선</h3>
 		<br>
 	 	<h4>소박하지만 안전한 주거환경에서 거주할 수 있도록 새로운 주택을 건축하거나,주택을 보수합니다.</h4>
